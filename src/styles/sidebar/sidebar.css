@@ -1,0 +1,281 @@
+.card {
+    width: 15%;
+    height: 600px;
+    margin-top: 5%;
+    margin-left: 2%;
+}
+
+.card-body {
+    position: absolute;
+    width: 214px;
+    height: 37.16px;
+    left: 52px;
+    /* top: 145px; */
+}
+
+.sidebar-logo {
+    position: absolute;
+    margin-top: 3%;
+    left: 3.66%;
+    right: 93.92%;
+    top: 15.26%;
+    bottom: 80.82%;
+}
+
+.sidebar-text {
+    position: absolute;
+    width: 185px;
+    height: 20px;
+    left: 90px;
+    top: 154px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    color: #2F2F2F;
+
+}
+
+.middleSectionCard2 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 24px;
+    width: 18%;
+    height: 500px;
+    margin-left: 3%;
+    margin-top: 8.5%;
+    background: #FFFFFF;
+    border: 1px solid #F3F3F3;
+    box-shadow: 2px 2px 15px rgba(188, 188, 188, 0.2);
+    border-radius: 6px;
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+.sidebar-line {
+    position: absolute;
+    width: 220px;
+    height: 0px;
+    left: 54px;
+    top: 214px;
+
+    opacity: 0.05;
+    border: 1px solid #000000;
+}
+
+.sidebar-item-1 {
+    position: absolute;
+    width: 112px;
+    height: 50px;
+    left: 54px;
+    top: 241px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 50px;
+    color: #2F2F2F;
+}
+
+.dashboard-text-icon {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 13%;
+    top: 257px;
+    opacity: 0.8;
+}
+
+
+.sidebar-item-2 {
+    position: absolute;
+    width: 179px;
+    height: 50px;
+    left: 53px;
+    top: 298px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #2F2F2F;
+    opacity: 0.8;
+}
+
+.add-student-text {
+    position: absolute;
+    width: 69px;
+    height: 50px;
+    left: 53px;
+    top: 320px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #2F2F2F;
+    opacity: 0.8;
+}
+
+.codersid-students-text-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 241px;
+    top: 313px;
+}
+
+.sidebar-item-3 {
+    position: absolute;
+    width: 69px;
+    height: 50px;
+    left: 53px;
+    top: 351px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #2F2F2F;
+    opacity: 0.8;
+}
+
+.master-text-icon {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 130px;
+    top: 367px;
+    opacity: 0.8;
+}
+
+.master-arrow-icon {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 15%;
+    top: 373px;
+    opacity: 0.5;
+}
+
+.add-batch-text {
+    position: absolute;
+    width: 75px;
+    height: 30px;
+    left: 73.74px;
+    top: 394.45px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 30px;
+    color: #2F2F2F;
+    opacity: 0.7;
+}
+
+.add-user-text {
+    position: absolute;
+    width: 65px;
+    height: 30px;
+    left: 73.74px;
+    top: 425.77px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
+    color: #2F2F2F;
+    opacity: 0.7;
+}
+
+.add-course-text {
+    position: absolute;
+    width: 82px;
+    height: 30px;
+    left: 73.74px;
+    top: 457.5px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
+    color: #2F2F2F;
+    opacity: 0.7;
+}
+
+.payment-text {
+    position: absolute;
+    width: 92px;
+    height: 50px;
+    left: 53px;
+    top: 500.04px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #2F2F2F;
+    opacity: 0.8;
+}
+
+.payment-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 150px;
+    top: 517px;
+    opacity: 0.8;
+}
+
+.payment-arrow-icon {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 15%;
+    top: 527px;
+    opacity: 0.5;
+}
+
+.payment-records {
+    position: absolute;
+    width: 127px;
+    height: 30px;
+    left: 73.74px;
+    top: 540px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 30px;
+    color: #2F2F2F;
+    opacity: 0.7;
+}
+
+.payfee {
+    position: absolute;
+    width: 69px;
+    height: 30px;
+    left: 73.74px;
+    top: 570px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
+    color: #2F2F2F;
+    opacity: 0.7;
+}

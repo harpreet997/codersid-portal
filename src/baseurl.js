@@ -1,0 +1,1 @@
+export const baseUrl = 'https://codersid-backend.vercel.app'

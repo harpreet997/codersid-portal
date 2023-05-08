@@ -1,0 +1,39 @@
+.add-student-heading-text {
+    position: absolute;
+    width: 275px;
+    height: 50px;
+    left: calc(67.5% - 275px/2 - 461.45px);
+    top: 120.88px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600px;
+    font-size: 30px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+input[type="email"] {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #000000;
+}
+
+select {
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+input:focus {
+    outline: none;
+}
+
+.input-box-width{
+    width: 330px;
+}

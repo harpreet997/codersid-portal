@@ -1,0 +1,8 @@
+.add-course-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 450px;
+    top: 146px;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+}

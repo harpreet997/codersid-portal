@@ -1,0 +1,40 @@
+.batch-table {
+    margin-top: 0px;
+}
+
+.add-batch-button {
+    box-sizing: border-box;
+    position: absolute;
+    width: 109px;
+    height: 37px;
+    left: 70%;
+    top: 240px;
+    background: #10D1E3;
+    border: 1px solid #AEF8FF;
+    border-radius: 21.5528px;
+}
+
+.add-batch-button-text {
+    position: absolute;
+    width: 57px;
+    height: 20px;
+    top: 8px;
+    margin-left: 15px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.add-batch-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 440px;
+    top: 146px;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+}
