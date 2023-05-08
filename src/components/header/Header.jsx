@@ -20,11 +20,11 @@ const Header = () => {
     return (
         <div className='header'>
             <img className='header-logo' src={CodersidLogo} alt="CodersidLogo" />
-            <div className=''>
+            {/* <div className=''>
                 <input className='search-box' type="text" name='search' placeholder='Search' />
                 <img className='search-icon' src={SearchIcon} alt="SearchIcon" />
-            </div>
-            <img className='calendar-icon' src={CalendarIcon} alt="CalendarIcon" />
+            </div> */}
+            {/* <img className='calendar-icon' src={CalendarIcon} alt="CalendarIcon" /> */}
             <div className='logout-icon-position'><img className='logout' src={Logout} alt="Logout" 
             onClick={logout}/></div>
         </div>

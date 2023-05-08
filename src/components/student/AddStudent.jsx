@@ -272,7 +272,9 @@ const AddStudent = () => {
                             onChange={handleThirdInstallmentDate} required />
                     </div>
                 </div>
-                <button className='btn btn-primary' type='submit'>Add Student</button>
+                <button className='add-student-form-button' type='submit'>
+                    <p className='add-student-form-button-text'>Submit</p>
+                    </button>
             </form>
 
         </div>
