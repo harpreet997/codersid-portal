@@ -94,84 +94,103 @@ const PaymentRecord = () => {
                 <img className='payment-records-icon' src={PaymentRecordLogo} alt="PaymentRecordLogo" />
             </div>
             <div className="row mt-5">
-                    <div className="col-sm-3">
-                        <p className="text-start ">Batch Name</p>
-                        <select className="form-select mb-2" name="batchName" style={{width: 210}} id="batchName" onChange={handleBatchSelect}>
+                <div className="col-sm-3">
+                    <p className="text-start ">Batch Name</p>
+                    <select className="form-select mb-2" name="batchName" style={{ width: 240 }} id="batchName" onChange={handleBatchSelect}>
                         <option value="All Batch">Select Batch</option>
-                            {batchlist.map((item) => {
-                                return (
-                                    <option value={item.batchName} >{item.batchName}</option>
-                                )
-
-                            })}
-                        </select>
-                    </div>
-                    <div className="col-sm-3">
-                        <p className="text-start">Student Name</p>
-                        <input type="text" className="form-control w-30" style={{width: 210}} id="studentname" name="studentname" placeholder="Search Student Name"
-                            onChange={(e) => setSearchStudentName(e.target.value)} />
-                    </div>
-                    <div className="col-sm-3">
-                        <p className="text-start">From Date</p>
-                        <input type="date" className="form-control w-30" style={{width: 210}} id="fromDate" name="fromDate" 
-                            onChange={handleFromDate} />
-                    </div>
-                    <div className="col-sm-3">
-                        <p className="text-start">To Date</p>
-                        <input type="date" className="form-control w-30" style={{width: 210}} id="toDate" name="toDate" 
-                            onChange={handleToDate} />
-                    </div>
-                </div>
-            <div className='scroll'>
-                <table className="table">
-                    {/* <div className='th-line-1'></div> */}
-                    <thead >
-                        <tr>
-                            <th scope="col">Receipt No.</th>
-                            <th scope="col">Receipt Date</th>
-                            <th scope="col">StudentID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Batch Name</th>
-                            <th scope="col">Course</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">GST - 18%</th>
-                            <th scope="col">Total Amount</th>
-                            <th scope="col">Action</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-                        {currentRecords.filter((val) => {
-                            if (studentName === "") {
-                                return val;
-                            }
-                            else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
-                                return val;
-                            }
-                        }).map((item, i) => {
+                        {batchlist.map((item) => {
                             return (
-                                <tr key={i}>
-                                    <td>{`CI/${item._id.slice(-3, -1)}`}</td>
-                                    <td>{item.createdAt.substring(0, 10)}</td>
-                                    <td>{`CODERSID-${item.id}`}</td>
-                                    <td>{item.StudentName}</td>
-                                    <td>{item.batchname}</td>
-                                    <td>{item.course}</td>
-                                    <td>{item.Amount - (item.Amount * 18) / 100}</td>
-                                    <td>{(item.Amount * 18) / 100}</td>
-                                    <td>{item.Amount}</td>
-                                    <td><button className='details-button'>
-                                        <p className='details-button-text'>Details</p>
-                                    </button></td>
-
-                                </tr>
+                                <option value={item.batchName} >{item.batchName}</option>
                             )
-                        })}
-                    </tbody>
 
-                </table>
+                        })}
+                    </select>
+                </div>
+                <div className="col-sm-3">
+                    <p className="text-start">Student Name</p>
+                    <input type="text" className="form-control w-30" style={{ width: 240 }} id="studentname" name="studentname" placeholder="Search Student Name"
+                        onChange={(e) => setSearchStudentName(e.target.value)} />
+                </div>
+                <div className="col-sm-3">
+                    <p className="text-start">From Date</p>
+                    <input type="date" className="form-control w-30" style={{ width: 240 }} id="fromDate" name="fromDate"
+                        onChange={handleFromDate} />
+                </div>
+                <div className="col-sm-3">
+                    <p className="text-start">To Date</p>
+                    <input type="date" className="form-control w-30" style={{ width: 240 }} id="toDate" name="toDate"
+                        onChange={handleToDate} />
+                </div>
             </div>
+
+            <table className="table">
+                {/* <div className='th-line-1'></div> */}
+                <thead >
+                    <tr>
+                        <th scope="col">Receipt No.</th>
+                        <th scope="col">Receipt Date</th>
+                        <th scope="col">StudentID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Batch Name</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">GST - 18%</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    {currentRecords.filter((val) => {
+                        if (studentName === "") {
+                            return val;
+                        }
+                        else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
+                            return val;
+                        }
+                    }).map((item, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{`CI/${item._id.slice(-3, -1)}`}</td>
+                                <td>{item.createdAt.substring(0, 10)}</td>
+                                <td>{`CODERSID-${item.id}`}</td>
+                                <td>{item.StudentName}</td>
+                                <td>{item.batchname}</td>
+                                <td>{item.course}</td>
+                                <td>{item.Amount - (item.Amount * 18) / 100}</td>
+                                <td>{(item.Amount * 18) / 100}</td>
+                                <td>{item.Amount}</td>
+                                <td><button className='details-button' onClick={() => {
+                                    handleModal(item._id)
+                                }}>
+                                    <p className='details-button-text'>Details</p>
+                                </button></td>
+                                <Modal show={modal === item._id ? true : false} onHide={handleClose} >
+                                    <PaymentReceipt data={item} id={item.id} index={i} handleClose={handleClose} nPages={nPages}
+                                        indexOfFirstRecord={indexOfFirstRecord} />
+                                </Modal>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+
+            </table>
+            {currentRecords.length === 0 ?
+                <div className='noRecordImage'>
+                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                </div>
+                : null}
+            {currentRecords.length > 0 ?
+                <div className="pagination-button">
+                    <Pagination
+                        nPages={nPages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
+                </div>
+
+                : null}
         </div>
 
 

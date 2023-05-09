@@ -9,6 +9,8 @@ import Payment from '../payment/Payment';
 import AddCourse from '../course/AddCourse';
 import PaymentRecord from '../paymentrecord/PaymentRecord';
 import StudentList from '../student/StudentList';
+import Login from '../login/Login';
+import AddExpense from '../expense/AddExpense';
 
 const MainRouter = () => {
     return (
@@ -21,11 +23,12 @@ const MainRouter = () => {
                     <Route path='/add-user' element={<AddUser />} />
                     <Route path='/add-batch' element={<AddBatch />} />
                     <Route path='/add-course' element={<AddCourse />} />
+                    <Route path='/add-expense' element={<AddExpense />} />
                     <Route path='/payment' element={<Payment />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />
                 </Route>
-                <Route path="/" element={<Signin />} />
+                <Route path="/" element={<Login />} />
             </Routes>
         </>
     )

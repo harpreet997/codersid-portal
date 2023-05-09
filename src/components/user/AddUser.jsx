@@ -136,54 +136,21 @@ const AddUser = () => {
                 </tbody>
 
             </table>
-            {/* </div> */}
-            {/* <div className='scroll'>
-                        <table className="table">
-                            <thead >
-                                <tr>
-                                    <th scope="col">StudentID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Batch Name</th>
-                                    <th scope="col">Course</th>
-                                    <th scope="col">Email ID</th>
-                                    <th scope="col">Contact Details</th>
-                                    <th scope="col">Admission Date</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                               
-                            </thead>
-                            
-                            <tbody>
-                                {currentRecords.filter((val) => {
-                                    if (studentName === "") {
-                                        return val;
-                                    }
-                                    else if (val.studentname.toLowerCase().includes(studentName.toLowerCase())) {
-                                        return val;
-                                    }
-                                }).map((item, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            <td>{`CODERSID-${item.id}`}</td>
-                                            <td>{item.studentname}</td>
-                                            <td>{item.batchname}</td>
-                                            <td>{item.course}</td>
-                                            <td>{item.emailid}</td>
-                                            <td>{item.contactdetails}</td>
-                                            <td>{item.createdAt.substring(0, 10)}</td>
-                                            <td><button className='details-button'>
-                                                <p className='details-button-text'>Details</p>
-                                                </button></td>
-                                            <Modal show={modal === item._id ? true : false} onHide={handleClose}>
-                                                <ViewStudentDetails data={item} id={i} nPages={nPages} indexOfFirstRecord={indexOfFirstRecord} />
-                                            </Modal>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
+            {currentRecords.length === 0 ?
+                <div className='noRecordImage'>
+                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                </div>
+                : null}
+            {currentRecords.length > 0 ?
+                <div className="pagination-button">
+                    <Pagination
+                        nPages={nPages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
+                </div>
 
-                        </table>
-                    </div> */}
+                : null}
         </div>
 
 

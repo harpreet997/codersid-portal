@@ -77,7 +77,7 @@ const AddBatch = () => {
     return (
         <div className="dashboardcard">
             <div className='mb-4'>
-                <p className='add-user-card-text'>Add Batch</p>
+                <p className='add-batch-card-text'>Add Batch</p>
                 <img className='add-batch-icon' src={AddBatchIcon} alt="AddBatchIcon" />
             </div>
 
@@ -85,7 +85,8 @@ const AddBatch = () => {
                 <div className='d-flex row'>
                     <div className="col-sm-6">
                         <p className="text-start">Batch Name</p>
-                        <input type="text" className="form-input-width form-control" style={{ width: 350 }} id="batchName" name="batchName"
+                        <input type="text" className="add-batch-input form-control"
+                            id="batchName" name="batchName"
                             placeholder="Enter Batch Name"
                             onChange={handleChange} required />
                     </div>
@@ -98,7 +99,7 @@ const AddBatch = () => {
                 </div>
             </form>
 
-            <table className="table batch-table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">Batch Name</th>
@@ -118,15 +119,22 @@ const AddBatch = () => {
                         )
                     })}
                 </tbody>
-                {/* {currentRecords.length > 0 ?
+            </table>
+            {currentRecords.length === 0 ?
+                <div className='noRecordImage'>
+                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                </div>
+                : null}
+            {currentRecords.length > 0 ?
+                <div className="pagination-button">
                     <Pagination
                         nPages={nPages}
                         currentPage={currentPage}
                         setCurrentPage={setCurrentPage}
                     />
-                    : null} */}
-            </table>
+                </div>
 
+                : null}
         </div>
 
 

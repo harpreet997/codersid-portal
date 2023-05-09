@@ -77,7 +77,7 @@ const Payment = () => {
             <div className="row mt-5">
                 <div className="col-sm-6">
                     <p className="text-start">Batch Name</p>
-                    <select className="form-select mb-2" name="batchName" style={{width: 410}} id="batchName" onChange={handleBatchSelect}>
+                    <select className="form-select mb-2" name="batchName" style={{ width: 500 }} id="batchName" onChange={handleBatchSelect}>
                         <option value="All Batch">Select Batch</option>
                         {batchlist.map((item) => {
                             return (
@@ -89,57 +89,75 @@ const Payment = () => {
                 </div>
                 <div className="col-sm-6">
                     <p className="text-start">Student Name</p>
-                    <input type="text" className="form-control w-30" style={{width: 410}} id="studentname" name="studentname" placeholder="Search Student Name"
+                    <input type="text" className="form-control w-30" style={{ width: 500 }} id="studentname" name="studentname" placeholder="Search Student Name"
                         onChange={(e) => setSearchStudentName(e.target.value)} />
                 </div>
 
             </div>
-            <div className='scroll'>
-                <table className="table">
-                    {/* <div className='th-line-1'></div> */}
-                    <thead >
-                        <tr>
-                            <th scope="col">StudentID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Batch Name</th>
-                            <th scope="col">Course</th>
-                            <th scope="col">Email ID</th>
-                            <th scope="col">Contact Details</th>
-                            <th scope="col">Admission Date</th>
-                            <th scope="col">Action</th>
-                        </tr>
 
-                    </thead>
+            <table className="table">
+                {/* <div className='th-line-1'></div> */}
+                <thead >
+                    <tr>
+                        <th scope="col">StudentID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Batch Name</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Email ID</th>
+                        <th scope="col">Contact Details</th>
+                        <th scope="col">Admission Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
 
-                    <tbody>
-                        {currentRecords.filter((val) => {
-                            if (studentName === "") {
-                                return val;
-                            }
-                            else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
-                                return val;
-                            }
-                        }).map((item, i) => {
-                            return (
-                                <tr key={i}>
-                                    <td>{`CODERSID-${item.id}`}</td>
-                                    <td>{item.studentname}</td>
-                                    <td>{item.batchname}</td>
-                                    <td>{item.course}</td>
-                                    <td>{item.emailid}</td>
-                                    <td>{item.contactdetails}</td>
-                                    <td>{item.createdAt.substring(0, 10)}</td>
-                                    <td><button className='details-button'>
-                                        <p className='details-button-text'>Details</p>
-                                    </button></td>
+                </thead>
 
-                                </tr>
-                            )
-                        })}
-                    </tbody>
+                <tbody>
+                    {currentRecords.filter((val) => {
+                        if (studentName === "") {
+                            return val;
+                        }
+                        else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
+                            return val;
+                        }
+                    }).map((item, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{`CODERSID-${item.id}`}</td>
+                                <td>{item.studentname}</td>
+                                <td>{item.batchname}</td>
+                                <td>{item.course}</td>
+                                <td>{item.emailid}</td>
+                                <td>{item.contactdetails}</td>
+                                <td>{item.createdAt.substring(0, 10)}</td>
+                                <td><button className='payfee-details-button' onClick={() => {
+                                    handleModal(item._id)
+                                }}>
+                                    <p className='payfee-details-button-text'>Payment</p>
+                                </button></td>
+                                <Modal show={modal === item._id ? true : false} onHide={handleClose}>
+                                    <PaymentStudentDetails data={item} id={item._id} handleClose={handleClose} />
+                                </Modal>
+                            </tr>
+                        )
+                    })}
+                </tbody>
 
-                </table>
-            </div>
+            </table>
+            {currentRecords.length === 0 ?
+                <div className='noRecordImage'>
+                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                </div>
+                : null}
+            {currentRecords.length > 0 ?
+                <div className="pagination-button">
+                    <Pagination
+                        nPages={nPages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
+                </div>
+
+                : null}
         </div>
 
 

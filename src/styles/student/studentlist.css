@@ -1,0 +1,235 @@
+.studentlistcard {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 24px;
+    width: 77.5%;
+    height: 800px;
+    margin-left: 22%;
+    margin-top: -37%;
+    background: #FFFFFF;
+    border: 1px solid #F3F3F3;
+    box-shadow: 2px 2px 15px rgba(188, 188, 188, 0.2);
+    border-radius: 6px;
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+.studentlist-card-text {
+    position: absolute;
+    width: 199px;
+    height: 50px;
+    left: 317.06px;
+    top: 132.5px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.studentlist-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 523px;
+    top: 146px;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.add-student-button-position {
+    position: absolute;
+    width: 148.62px;
+    height: 51.75px;
+    left: 1170px;
+    top: 130px;
+}
+
+.add-student-button {
+    box-sizing: border-box;
+    position: absolute;
+    width: 148.62px;
+    height: 32.62px;
+    background: #10D1E3;
+    border: 1px solid #AEF8FF;
+    border-radius: 17.3122px;
+}
+
+.add-student-button-text {
+    position: absolute;
+    left: 15px;
+    top: -10px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 50px;
+    display: flex;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.dashboard-table {
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.th-line-1 {
+    position: absolute;
+    width: 75%;
+    height: 0px;
+    left: 327px;
+    top: 209.52px;
+    opacity: 0.1;
+    border: 0.8px solid #000000;
+}
+
+.th-line-2 {
+    position: absolute;
+    width: 75%;
+    height: 0px;
+    left: 327px;
+    top: 249.52px;
+    opacity: 0.1;
+    border: 0.8px solid #000000;
+}
+
+th {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500px;
+    font-size: 14px;
+    line-height: 50px;
+    color: #000000;
+}
+
+td {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400px;
+    font-size: 14px;
+    line-height: 50px;
+    color: #000000;
+}
+
+
+.details-button {
+    box-sizing: border-box;
+    position: absolute;
+    width: 62.77px;
+    height: 23.69px;
+    background: #80B7FF;
+    opacity: 0.99;
+    border: 1px solid #80B7FF;
+    border-radius: 11.8428px;
+    margin-top: 12px;
+}
+
+.details-button-text {
+    position: absolute;
+    width: 40px;
+    height: 14.77px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-top: -7px;
+}
+
+.noRecordImage {
+    margin-left: 300px !important;
+}
+
+.pagination-button {
+    margin-left: 450px !important;
+}
+
+
+p {
+    font-family: 'Inter';
+    font-weight: 400px;
+}
+
+.student-list-input-width {
+    width: 500px;
+}
+
+@media screen and (max-width: 394px) {
+    .student-list-input-width {
+        width: 300px;
+    }
+
+    .scroll {
+        overflow-x: scroll !important;
+    }
+
+    .studentlist-card-text {
+        position: absolute;
+        width: 199px;
+        height: 50px;
+        left: 27.06px;
+        top: 670px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 50px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+
+    .studentlist-icon {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        left: 233px;
+        top: 680px;
+        transform: matrix(-1, 0, 0, 1, 0, 0);
+    }
+    
+    .add-student-button-position {
+        position: absolute;
+        width: 148.62px;
+        height: 51.75px;
+        left: 180px;
+        top: 710px;
+    }
+    
+    .add-student-button {
+        box-sizing: border-box;
+        position: absolute;
+        width: 148.62px;
+        height: 32.62px;
+        background: #10D1E3;
+        border: 1px solid #AEF8FF;
+        border-radius: 17.3122px;
+    }
+    
+    .add-student-button-text {
+        position: absolute;
+        left: 15px;
+        top: -10px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 50px;
+        display: flex;
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+}

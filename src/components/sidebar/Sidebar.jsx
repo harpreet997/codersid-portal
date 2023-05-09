@@ -27,8 +27,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className="middleSectionCard2">
-            <div>
+        <div className="sidebarCard">
                 <div className='sidebar-logo'>
                     <img src={SidebarLogo} alt="SidebarLogo" />
                 </div>
@@ -46,7 +45,7 @@ const Sidebar = () => {
                 {role === 'admin' ?
                     <>
                         <div>
-                            <p className='sidebar-item-3' style={{cursor: 'pointer'}} onClick={handleMaster}>Master</p>
+                            <p className='sidebar-item-3 mb-3' style={{cursor: 'pointer'}} >Master</p>
                             <img className='master-text-icon' src={MasterIcon} alt="MasterIcon" />
                             <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                         </div>
@@ -58,6 +57,7 @@ const Sidebar = () => {
                                         <NavLink to='/add-batch'><p className='add-batch-text'>Add Batch</p></NavLink>
                                         <NavLink to='/add-user'><p className='add-user-text'>Add User</p></NavLink>
                                         <NavLink to='/add-course'><p className='add-course-text'>Add Course</p></NavLink>
+                                        <NavLink to='/add-expense'><p className='add-expense-text'>Add Expense Category</p></NavLink>
                                     </>
                                     : null
                             }
@@ -65,7 +65,7 @@ const Sidebar = () => {
                     </>
                     : null}
                 <div>
-                    <p className='payment-text'>Payment</p>
+                    <p className='payment-text' style={{cursor: 'pointer'}}>Payment</p>
                     <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
                     <img className='payment-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                 </div>
@@ -73,8 +73,7 @@ const Sidebar = () => {
                 <NavLink to='/payment-records'><p className='payment-records'>Payment Records</p></NavLink>
                 <NavLink to='/payment'> <p className='payfee'>Pay Fee</p></NavLink>
 
-                </div>
-            </div>
+                </div>    
         </div>
     );
 }

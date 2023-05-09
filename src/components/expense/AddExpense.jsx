@@ -7,11 +7,13 @@ import NoRecord from '../../assets/NoRecord.png';
 import { headers } from '../../headers';
 import { deleteCourse } from '../../postdata/postdata';
 import AddCourseLogo from '../../assets/AddCourse.png';
+import ExpenseLogo from '../../assets/ExpenseIcon.png';
 import '../../styles/user/user.css';
 import '../../styles/batch/batch.css';
 import '../../styles/course/course.css';
+import '../../styles/expense/expense.css';
 
-const AddCourse = () => {
+const AddExpense = () => {
     const [courselist, setCourseList] = useState([])
     const [coursedata, setCoursedata] = useState({
         courseName: "",
@@ -78,8 +80,8 @@ const AddCourse = () => {
     return (
         <div className="dashboardcard">
             <div className='mb-4'>
-                <p className='add-user-card-text'>Add Course</p>
-                <img className='add-course-icon' src={AddCourseLogo} alt="AddCourseLogo" />
+                <p className='expense-card-text'>Add Expense Category</p>
+                <img className='expense-card-icon' src={ExpenseLogo} alt="ExpenseLogo" />
             </div>
 
             <form className='mt-4' onSubmit={AddCourse}>
@@ -139,4 +141,4 @@ const AddCourse = () => {
     );
 }
 
-export default AddCourse;
+export default AddExpense;
