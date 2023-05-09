@@ -14,17 +14,17 @@ const Sidebar = () => {
     const [showPayment, setShowPayment] = useState(false);
     const role = localStorage.getItem('role');
 
-    const handleManage = () => {
-        setShowManage(!showManage)
-    }
+    // const handleManage = () => {
+    //     setShowManage(!showManage)
+    // }
 
-    const handleMaster = () => {
-        setShowMaster(!showMaster)
-    }
+    // const handleMaster = () => {
+    //     setShowMaster(!showMaster)
+    // }
 
-    const handlePayment = () => {
-        setShowPayment(!showPayment)
-    }
+    // const handlePayment = () => {
+    //     setShowPayment(!showPayment)
+    // }
 
     return (
         <div className="sidebarCard">
