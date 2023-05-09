@@ -14,9 +14,9 @@ const Sidebar = () => {
     const [showPayment, setShowPayment] = useState(false);
     const role = localStorage.getItem('role');
 
-    // const handleManage = () => {
-    //     setShowManage(!showManage)
-    // }
+    const handleManage = () => {
+        setShowManage(!showManage)
+    }
 
     // const handleMaster = () => {
     //     setShowMaster(!showMaster)
