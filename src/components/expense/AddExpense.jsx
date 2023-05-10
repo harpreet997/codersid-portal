@@ -88,7 +88,7 @@ const AddExpense = () => {
                     <p className="text-start">Category Name</p>
                     <div className="d-inline-flex">
                         <div><input type="text" className="form-input-width form-control" style={{ width: 350 }}
-                            id="courseName" name="courseName" placeholder="Enter Category Name"
+                            id="categoryName" name="categoryName" placeholder="Enter Category Name"
                             onChange={handleChange} required /></div>
                         <button className='add-batch-button' type='submit'>
                             <p className='add-batch-button-text'>Submit</p>
