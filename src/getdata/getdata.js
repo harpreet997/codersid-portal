@@ -17,6 +17,11 @@ export const getAllCourses = (headers) => {
     return axios.get(`${baseUrl}/api/course`, {headers})
 }
 
+export const getAllCategories = (headers) => {
+    return axios.get(`${baseUrl}/api/category`, {headers})
+}
+
+
 export const getAllPayments = (headers) => {
     return axios.get(`${baseUrl}/api/payment`, {headers})
 }

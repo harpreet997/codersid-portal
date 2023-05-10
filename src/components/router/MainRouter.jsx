@@ -11,6 +11,8 @@ import PaymentRecord from '../paymentrecord/PaymentRecord';
 import StudentList from '../student/StudentList';
 import Login from '../login/Login';
 import AddExpense from '../expense/AddExpense';
+import PaymentReceipt from '../paymentrecord/PaymentReceipt';
+import ViewStudentDetails from '../student/ViewStudentDetails';
 
 const MainRouter = () => {
     return (
@@ -19,12 +21,14 @@ const MainRouter = () => {
                 <Route element={<ProtectedRoutes />}>
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='/students-list' element={<StudentList />} />
+                    <Route path='/students-details' element={<ViewStudentDetails />} />
                     <Route path='/add-student' element={<AddStudent />} />
                     <Route path='/add-user' element={<AddUser />} />
                     <Route path='/add-batch' element={<AddBatch />} />
                     <Route path='/add-course' element={<AddCourse />} />
                     <Route path='/add-expense' element={<AddExpense />} />
                     <Route path='/payment' element={<Payment />} />
+                    <Route path='/payment-receipt' element={<PaymentReceipt />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />
                 </Route>

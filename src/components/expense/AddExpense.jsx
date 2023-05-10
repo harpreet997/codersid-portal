@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { addCourse } from '../../postdata/postdata';
+import { addCategory } from '../../postdata/postdata';
 import { toast } from "react-toastify";
-import { getAllCourses } from '../../getdata/getdata';
+import { getAllCategories } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
 import { headers } from '../../headers';
-import { deleteCourse } from '../../postdata/postdata';
-import AddCourseLogo from '../../assets/AddCourse.png';
+import { deleteCategory } from '../../postdata/postdata';
 import ExpenseLogo from '../../assets/ExpenseIcon.png';
 import '../../styles/user/user.css';
 import '../../styles/batch/batch.css';
@@ -14,37 +13,37 @@ import '../../styles/course/course.css';
 import '../../styles/expense/expense.css';
 
 const AddExpense = () => {
-    const [courselist, setCourseList] = useState([])
-    const [coursedata, setCoursedata] = useState({
-        courseName: "",
+    const [categorylist, setCategoryList] = useState([])
+    const [categorydata, setCategorydata] = useState({
+        categoryName: "",
     });
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = courselist.slice(indexOfFirstRecord, indexOfLastRecord);
-    const nPages = Math.ceil(courselist.length / recordsPerPage)
+    const currentRecords = categorylist.slice(indexOfFirstRecord, indexOfLastRecord);
+    const nPages = Math.ceil(categorylist.length / recordsPerPage)
 
     useEffect(() => {
-        getAllCourses(headers)
+        getAllCategories(headers)
             .then((response) => {
-                setCourseList(response.data.Courses);
+                setCategoryList(response.data.Categories);
             })
             .catch((error) => {
                 console.log(error);
             })
-    }, [courselist]);
+    }, [categorylist]);
 
     const handleChange = (event) => {
-        setCoursedata({
-            ...coursedata,
+        setCategorydata({
+            ...categorydata,
             [event.target.name]: event.target.value
         })
     }
 
-    const AddCourse = (event) => {
+    const AddCategory = (event) => {
         event.preventDefault();
-        addCourse(coursedata)
+        addCategory(categorydata)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -61,8 +60,8 @@ const AddExpense = () => {
             })
     }
 
-    const DeleteCourse = (id) => {
-        deleteCourse(id)
+    const DeleteCategory = (id) => {
+        deleteCategory(id)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -84,12 +83,12 @@ const AddExpense = () => {
                 <img className='expense-card-icon' src={ExpenseLogo} alt="ExpenseLogo" />
             </div>
 
-            <form className='mt-4' onSubmit={AddCourse}>
+            <form className='mt-4' onSubmit={AddCategory}>
                 <div >
-                    <p className="text-start">Course Name</p>
+                    <p className="text-start">Category Name</p>
                     <div className="d-inline-flex">
                         <div><input type="text" className="form-input-width form-control" style={{ width: 350 }}
-                            id="courseName" name="courseName" placeholder="Enter Course Name"
+                            id="courseName" name="courseName" placeholder="Enter Category Name"
                             onChange={handleChange} required /></div>
                         <button className='add-batch-button' type='submit'>
                             <p className='add-batch-button-text'>Submit</p>
@@ -101,7 +100,7 @@ const AddExpense = () => {
             <table className="table batch-table">
                 <thead>
                     <tr>
-                        <th scope="col">Course Name</th>
+                        <th scope="col">Category Name</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -109,9 +108,9 @@ const AddExpense = () => {
                     {currentRecords.map((item, i) => {
                         return (
                             <tr key={i}>
-                                <td>{item.courseName}</td>
+                                <td>{item.categoryName}</td>
                                 <td>
-                                    <button className='delete-button' onClick={() => DeleteCourse(item._id)}>
+                                    <button className='delete-button' onClick={() => DeleteCategory(item._id)}>
                                         <p className='delete-button-text'>Delete</p>
                                     </button></td>
                             </tr>

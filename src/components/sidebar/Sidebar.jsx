@@ -74,6 +74,7 @@ const Sidebar = () => {
                 <NavLink to='/payment'> <p className='payfee'>Pay Fee</p></NavLink>
 
                 </div>    
+                <p className='expense-management' style={{cursor: 'pointer'}}>Expense Management</p>
         </div>
     );
 }

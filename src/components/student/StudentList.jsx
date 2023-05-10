@@ -24,6 +24,10 @@ const StudentList = () => {
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
     const navigate = useNavigate();
 
+    const handleNavigate = (item) => {
+        navigate('/students-details', {state:{item}})
+    }
+
     useEffect(() => {
         getAllStudents(headers)
             .then((response) => {
@@ -138,13 +142,13 @@ const StudentList = () => {
                                 <td>{item.contactdetails}</td>
                                 <td>{item.createdAt.substring(0, 10)}</td>
                                 <td><button className='details-button' onClick={() => {
-                                    handleModal(item._id)
+                                    handleNavigate(item)
                                 }}>
                                     <p className='details-button-text'>Details</p>
                                 </button></td>
-                                <Modal show={modal === item._id ? true : false} onHide={handleClose}>
+                                {/* <Modal show={modal === item._id ? true : false} onHide={handleClose}>
                                     <ViewStudentDetails data={item} id={i} nPages={nPages} indexOfFirstRecord={indexOfFirstRecord} />
-                                </Modal>
+                                </Modal> */}
                             </tr>
                         )
                     })}

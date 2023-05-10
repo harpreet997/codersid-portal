@@ -35,6 +35,14 @@ export const deleteCourse = (id) => {
     return axios.delete(`${baseUrl}/api/course/${id}`)
 } 
 
+export const addCategory = (categorydata) => {
+    return axios.post(`${baseUrl}/api/category`, categorydata)
+} 
+
+export const deleteCategory = (id) => {
+    return axios.delete(`${baseUrl}/api/category/${id}`)
+} 
+
 export const updatePaymentStatus = (id, paymentdata) => {
     return axios.patch(`${baseUrl}/api/students/${id}`, paymentdata)
 } 

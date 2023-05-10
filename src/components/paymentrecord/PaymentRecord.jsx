@@ -9,6 +9,7 @@ import { getAllBatches } from '../../getdata/getdata';
 import PaymentReceipt from './PaymentReceipt';
 import PaymentRecordLogo from '../../assets/PaymentRecordLogo.png';
 import '../../styles/paymentrecords/paymentrecords.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const PaymentRecord = () => {
@@ -23,6 +24,12 @@ const PaymentRecord = () => {
     const currentRecords = studentlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
     const [studentName, setSearchStudentName] = useState('');
+    const navigate = useNavigate();
+
+
+    const handleNavigate = (item) => {
+        navigate('/payment-receipt', {state:{item}})
+    }
 
 
     useEffect(() => {
@@ -162,14 +169,14 @@ const PaymentRecord = () => {
                                 <td>{(item.Amount * 18) / 100}</td>
                                 <td>{item.Amount}</td>
                                 <td><button className='details-button' onClick={() => {
-                                    handleModal(item._id)
+                                    handleNavigate(item)
                                 }}>
                                     <p className='details-button-text'>Details</p>
                                 </button></td>
-                                <Modal show={modal === item._id ? true : false} onHide={handleClose} >
+                                {/* <Modal show={modal === item._id ? true : false} onHide={handleClose} >
                                     <PaymentReceipt data={item} id={item.id} index={i} handleClose={handleClose} nPages={nPages}
                                         indexOfFirstRecord={indexOfFirstRecord} />
-                                </Modal>
+                                </Modal> */}
                             </tr>
                         )
                     })}

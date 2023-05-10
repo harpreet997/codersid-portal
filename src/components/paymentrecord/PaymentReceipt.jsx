@@ -1,111 +1,96 @@
-import { Modal } from "react-bootstrap";
-import '../../styles/studentdetails/studentdetails.css';
-import CodersID from '../../assets/Codersid.PNG';
-import Address from '../../assets/Address.PNG';
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { useLocation } from 'react-router-dom';
+import '../../styles/studentdetails/studentdetails.css';
+import '../../styles/payment-receipt/payment-receipt.css';
+import ReceiptHeader from '../../assets/ReceiptHeader.png';
+import ReceiptLogo from '../../assets/ReceiptLogo.png';
+import MailIcon from '../../assets/MailIcon.png';
+import PhoneIcon from '../../assets/PhoneIcon.png';
+import LocationIcon from '../../assets/CompanyAddressIcon.png';
 
+const PaymentReceipt = () => {
+    const location = useLocation();
+    const data = location.state.item;
+    const id = location.state.item.id;
 
-const PaymentReceipt = ({ data, id }) => {
     const gstAmount = (data.Amount * 18) / 100;
     const downloadPDF = () => {
-        const capture = document.querySelector(".actual-receipt");
+        const capture = document.querySelector(".dashboardcard");
         html2canvas(capture)
-        .then((canvas) => {
-            const imgData = canvas.toDataURL('img/png');
-            const doc = new jsPDF('p', 'mm', 'a4');
-            const componentWidth = doc.internal.pageSize.getWidth();
-            const componentHeight = doc.internal.pageSize.getHeight();
-            doc.addImage(imgData, 'PNG', 0, 0, componentWidth, componentHeight);
-            doc.save('payment-receipt.pdf');
-        })
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('img/png');
+                const doc = new jsPDF('p', 'mm', 'a4');
+                const componentWidth = doc.internal.pageSize.getWidth();
+                const componentHeight = doc.internal.pageSize.getHeight();
+                doc.addImage(imgData, 'PNG', 0, 0, componentWidth, componentHeight);
+                doc.save('payment-receipt.pdf');
+            })
     }
 
     return (
         <>
-            <Modal.Header closeButton>
-            </Modal.Header>
-            <Modal.Body className='border border-secondary m-1 borderWidth' >
-                <div className="actual-receipt">
-
-
-                    <div className="d-flex justify-content-start">
-                        <img src={CodersID} alt="CodersIDLogo" width={150} height={50} />
-                        <div className="ms-4 mb-4 me-1 mt-4 vr"></div>
-                        <img src={Address} alt="CodersIDLogo" className='address-image' />
-                    </div>
-
-                    <div className="scroll">
-                        <table className="table table-striped">
-                            {/* <i className="ms-2 fw-bold">* Date Format : yyyy-mm-dd</i> */}
-                            <div className="d-flex justify-content-end ms-2 me-2  mt-4 mb-4">
-                                <tr>
-                                    <th>Date of Receipt:</th>
-                                    <td>{data.createdAt.substring(0, 10)}</td>
-                                </tr>
-                            </div>
-                            <div className="ms-2 me-2  mt-4 mb-4">
-                                <tr>
-                                    <th style={{ width: "20%" }}>Receipt No :</th>
-                                    <td style={{ width: "20%" }}>CI/{data._id.slice(-3, -1)}</td>
-                                    <th style={{ width: "50%" }}>Student ID :</th>
-                                    <td style={{ width: "60%" }}>{`CODERSID-${id}`}</td>
-                                </tr>
-                            </div>
-
-                            <div className="ms-2 me-2 mt-4 mb-4">
-                                <tr>
-                                    <th style={{ width: "40%" }}>Name :</th>
-                                    <td style={{ width: "40%" }}>{data.StudentName}</td>
-                                    <th style={{ width: "40%" }}>Contact No.</th>
-                                    <td style={{ width: "40%" }}>{data.contactdetails}</td>
-                                </tr>
-                            </div>
-                            <div className="ms-2 me-2 mt-4 mb-4">
-                                <tr>
-                                    <th style={{ width: "40%" }}>Type of Payment :</th>
-                                    <td style={{ width: "40%" }}>{data.PaymentType}</td>
-                                    <th style={{ width: "40%" }}>Mode of Payment :</th>
-                                    <td style={{ width: "40%" }}>{data.PaymentMode}</td>
-                                </tr>
-                            </div>
-                            <div className="ms-2 me-2 mt-4 mb-4">
-                                <tr>
-                                    <th style={{ width: "100%" }}>Email Address :</th>
-                                    <td style={{ width: "100%" }}>{data.Email}</td>
-                                </tr>
-                            </div>
-                            <div className="ms-2 mt-4 me-2">
-                                <tr>
-                                    <th colspan={3}>Description</th>
-                                    <th style={{ width: "1%" }}>Amount</th>
-                                </tr>
-                                <tr>
-                                    <th >Course Name</th>
-                                    <td>{data.course}</td>
-                                    <th>Amount</th>
-                                    <td>{data.Amount - gstAmount}</td>
-                                </tr>
-                                <tr>
-                                    <th >Batch Name</th>
-                                    <td>{data.batchname}</td>
-                                    <th>GST - 18%</th>
-                                    <td>{gstAmount}</td>
-                                </tr>
-                                <tr>
-                                    <th colspan={3}>Total Amount</th>
-                                    <td className="fw-bold">&#8377; {data.Amount}</td>
-                                </tr>
-                            </div>
-
-
-                        </table>
-                    </div>
-                    <p className="ms-2 text-justify"><i>This document contains confidential information. If you are not the intended recipient, you are not authorized
-                        to use or disclose it in any form.If you have received this in error, please destroy it along with any copies and
-                        notify the sender immediately. </i></p>
+            <div className="dashboardcard">
+                <img className='receipt-header-logo' src={ReceiptHeader} alt="ReceiptHeader" />
+                <img className='receipt-logo' src={ReceiptLogo} alt="ReceiptLogo" />
+                <p className="receipt-date-text">Date of Receipt:</p>
+                <p className="receipt-date-body">{data.createdAt.substring(0, 10)}</p>
+                <div className="first-receipt-box">
+                    <p className="receipt-no">Receipt No</p>
+                    <p className="receipt-value">CI/{data._id.slice(-3, -1)}</p>
+                    <div className="receipt-vertical-line-1"></div>
+                    <p className="student-id">Student ID</p>
+                    <p className="student-id-value">{`CODERSID-${id}`}</p>
+                    <div className="receipt-horizontal-line-1"></div>
+                    <p className="receipt-student-name">Name</p>
+                    <p className="receipt-student-value">{data.StudentName}</p>
+                    <div className="receipt-vertical-line-2"></div>
+                    <p className="contact-number">Contact No.</p>
+                    <p className="contact-number-value">{data.contactdetails}</p>
                 </div>
-            </Modal.Body>
+                <div className="second-receipt-box">
+                    <p className="receipt-payment-mode">Mode of Payment :</p>
+                    <div className="receipt-horizontal-line-2"></div>
+                    <p className="receipt-payment-type">Type of Payment :</p>
+                    <div className="receipt-vertical-line-3"></div>
+                    <p className="receipt-payment-mode-value">{data.PaymentMode}</p>
+                    <p className="receipt-payment-type-value">{data.PaymentType}</p>
+                </div>
+                <div className="third-receipt-box">
+                    <p className="receipt-email-address">Email Address :</p>
+                    <p className="receipt-email-address-value">{data.Email}</p>
+                </div>
+                <div className="fourth-receipt-box">
+                    <p className="receipt-description">Description</p>
+                    <p className="receipt-amount">Amount</p>
+                    <div className="receipt-horizontal-line-3"></div>
+                    <p className="receipt-course-name">Course Name</p>
+                    <div className="receipt-horizontal-line-4"></div>
+                    <div className="receipt-vertical-line-4"></div>
+                    <p className="receipt-course-value">{data.course}</p>
+                    <p className="receipt-batch-name">Batch Name</p>
+                    <div className="receipt-horizontal-line-5"></div>
+                    <p className="receipt-batch-value">{data.batchname}</p>
+                    <div className="receipt-vertical-line-5"></div>
+                    <div className="receipt-vertical-line-6"></div>
+                    <p className="receipt-amount-2">Amount</p>
+                    <p className="receipt-gst">GST - 18%</p>
+                    <p className="receipt-total-amount-2">{data.Amount - gstAmount}</p>
+                    <p className="receipt-gst-value">{gstAmount}</p>
+                    <p className="receipt-total-amount">Total Amount</p>
+                    <p className="receipt-actual-amount">&#8377;{gstAmount}</p>
+                </div>
+                <p className="receipt-note">
+                    This document contains confidential information. If you are not the intended recipient,
+                    you are not authorized to use or disclose it in any form.If you have received this in error,
+                    please destroy it along with any copies and notify the sender immediately.</p>
+                <img className='mail-icon' src={MailIcon} alt="MailIcon" />
+                <p className="placement-email">Placement@codersid.com</p>
+                <img className='phone-icon' src={PhoneIcon} alt="PhoneIcon" />
+                <p className="phone-details">+91 910919221</p>
+                <img className='location-icon' src={LocationIcon} alt="LocationIcon" />
+                <p className="location-details">Address: 716 Shekhar Central Palasia, Square, Manorama Ganj, Indore, Madhya Pradesh 452010,</p>
+            </div>
             <div className="text-center">
                 <button className="mt-2 mb-2 btn btn-primary" onClick={downloadPDF}>Print Receipt</button>
             </div>

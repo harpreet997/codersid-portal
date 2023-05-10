@@ -221,7 +221,7 @@
     width: 92px;
     height: 50px;
     left: 53px;
-    top: 500.04px;
+    top: 510.04px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
@@ -238,7 +238,7 @@
     width: 20px;
     height: 20px;
     left: 150px;
-    top: 517px;
+    top: 527px;
     opacity: 0.8;
 }
 
@@ -247,7 +247,7 @@
     width: 10px;
     height: 10px;
     left: 15%;
-    top: 527px;
+    top: 533px;
     opacity: 0.5;
 }
 
@@ -256,7 +256,7 @@
     width: 127px;
     height: 30px;
     left: 73.74px;
-    top: 540px;
+    top: 548px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -271,7 +271,7 @@
     width: 69px;
     height: 30px;
     left: 73.74px;
-    top: 570px;
+    top: 578px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
@@ -279,6 +279,23 @@
     line-height: 30px;
     color: #2F2F2F;
     opacity: 0.7;
+}
+
+.expense-management {
+    position: absolute;
+    width: 205px;
+    height: 50px;
+    left: 53px;
+    top: 593px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #2F2F2F;
+    opacity: 0.8;
 }
 
 
