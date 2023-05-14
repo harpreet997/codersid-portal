@@ -1,9 +1,4 @@
 .payment-records-card-text {
-    position: absolute;
-    width: 199px;
-    height: 50px;
-    left: 318px;
-    top: 132.5px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -15,12 +10,10 @@
 }
 
 .payment-records-icon {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    left: 530px;
-    top: 146px;
-    transform: matrix(1, 0, 0, 1, 0, 0);
+    width: 28px;
+    height: 28px;
+    margin-left: 4.94px;
+    margin-top: 14px;
 }
 
 .form-input-width {

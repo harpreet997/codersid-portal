@@ -1,8 +1,93 @@
+.add-course-input {
+    width: 350px;
+}
+
+.add-course-card-text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
 .add-course-icon {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    left: 450px;
-    top: 146px;
-    transform: matrix(1, 0, 0, 1, 0, 0);
+    width: 28px;
+    height: 28px;
+    margin-left: 4.94px;
+    margin-top: 14px;
+}
+
+.add-course-button {
+    box-sizing: border-box;
+    width: 109px;
+    height: 37px;
+    background: #10D1E3;
+    border: 1px solid #AEF8FF;
+    border-radius: 21.5528px;
+    margin-left: 250px;
+    margin-top: 40px;
+}
+
+.add-course-button-text {
+    width: 57px;
+    height: 20px;
+    margin-left: 18px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin-top: 7px;
+}
+
+
+@media screen and (max-width: 394px) {
+    .add-course-input {
+        width: 320px;
+    }
+
+    .add-course-card-text {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 50px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+
+    .add-course-button {
+        box-sizing: border-box;
+        width: 109px;
+        height: 37px;
+        background: #10D1E3;
+        border: 1px solid #AEF8FF;
+        border-radius: 21.5528px;
+        margin-left: -120px;
+        margin-top: 100px;
+
+    }
+
+    .add-course-button-text {
+        width: 57px;
+        height: 20px;
+        margin-left: 18px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+        margin-top: 7px;
+    }
+
 }

@@ -2,21 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
 import { getAllPayments } from '../../getdata/getdata';
-import { Modal } from 'react-bootstrap';
 import { headers } from '../../headers';
 import '../../styles/dashboard/dashboard.css';
 import { getAllBatches } from '../../getdata/getdata';
-import PaymentReceipt from './PaymentReceipt';
 import PaymentRecordLogo from '../../assets/PaymentRecordLogo.png';
 import '../../styles/paymentrecords/paymentrecords.css';
 import { useNavigate } from 'react-router-dom';
-
 
 const PaymentRecord = () => {
     const [studentlist, setStudentList] = useState([]);
     const [allstudentlist, setAllStudentList] = useState([]);
     const [batchlist, setBatchList] = useState([])
-    const [modal, setModal] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
@@ -51,12 +47,6 @@ const PaymentRecord = () => {
             })
     }, []);
 
-
-    const handleModal = (id) => {
-        setModal(id)
-    };
-
-    const handleClose = () => setModal(false);
 
     const handleBatchSelect = (event) => {
         const batchName = event.target.value;
@@ -96,11 +86,11 @@ const PaymentRecord = () => {
 
     return (
         <div className="dashboardcard">
-            <div>
+            <div className='d-flex'>
                 <p className='payment-records-card-text'>Payment Records</p>
                 <img className='payment-records-icon' src={PaymentRecordLogo} alt="PaymentRecordLogo" />
             </div>
-            <div className="row mt-5">
+            <div className="row">
                 <div className="col-sm-3">
                     <p className="text-start ">Batch Name</p>
                     <select className="form-select mb-2" name="batchName" style={{ width: 240 }} id="batchName" onChange={handleBatchSelect}>
@@ -131,7 +121,6 @@ const PaymentRecord = () => {
             </div>
 
             <table className="table">
-                {/* <div className='th-line-1'></div> */}
                 <thead >
                     <tr>
                         <th scope="col">Receipt No.</th>
@@ -169,12 +158,12 @@ const PaymentRecord = () => {
                                 <td>{(item.Amount * 18) / 100}</td>
                                 <td>{item.Amount}</td>
                                 <td><button className='details-button' onClick={() => {
-                                    handleNavigate(item)
-                                }}>
+                                                        handleNavigate(item)
+                                                    }}>
                                     <p className='details-button-text'>Details</p>
                                 </button></td>
                                 {/* <Modal show={modal === item._id ? true : false} onHide={handleClose} >
-                                    <PaymentReceipt data={item} id={item.id} index={i} handleClose={handleClose} nPages={nPages}
+                                    <MainPaymentReceipt data={item} id={item.id} index={i} handleClose={handleClose} nPages={nPages}
                                         indexOfFirstRecord={indexOfFirstRecord} />
                                 </Modal> */}
                             </tr>

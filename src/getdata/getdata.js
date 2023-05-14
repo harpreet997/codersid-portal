@@ -21,6 +21,9 @@ export const getAllCategories = (headers) => {
     return axios.get(`${baseUrl}/api/category`, {headers})
 }
 
+export const getAllExpenses = (headers) => {
+    return axios.get(`${baseUrl}/api/expense`, {headers})
+}
 
 export const getAllPayments = (headers) => {
     return axios.get(`${baseUrl}/api/payment`, {headers})

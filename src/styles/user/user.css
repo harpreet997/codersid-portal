@@ -1,9 +1,4 @@
 .add-user-card-text {
-    position: absolute;
-    width: 199px;
-    height: 50px;
-    left: 317.06px;
-    top: 132.5px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -15,37 +10,10 @@
 }
 
 .add-user-icon {
-    position: absolute;
     width: 24px;
     height: 24px;
-    left: 430px;
-    top: 146px;
-    transform: matrix(1, 0, 0, 1, 0, 0);
-}
-
-.name-input {
-    position: absolute;
-    width: 200.42px;
-    height: 19.37px;
-    left: 367.06px;
-    top: 209.59px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 50px;
-    display: flex;
-    align-items: center;
-    color: #000000;
-    opacity: 0.5;
-}
-
-.name-input-box {
-    position: absolute;
-    width: 302.94px;
-    height: 36.39px;
-    left: 367.06px;
-    top: 209.59px;
+    margin-left: 6.94px;
+    margin-top: 14px;
 }
 
 .form-input-box {
@@ -54,21 +22,17 @@
 
 .add-user-button {
     box-sizing: border-box;
-    position: absolute;
     width: 109px;
     height: 37px;
-    left: 315px;
-    top: 273px;
+    margin-top: 27px;
     background: #10D1E3;
     border: 1px solid #AEF8FF;
     border-radius: 21.5528px;
 }
 
 .add-user-button-text {
-    position: absolute;
     width: 57px;
     height: 20px;
-    top: 8px;
     margin-left: 15px;
     font-family: 'Montserrat';
     font-style: normal;
@@ -78,6 +42,7 @@
     display: flex;
     align-items: center;
     color: #FFFFFF;
+    margin-top: 7px;
 }
 
 .user-list-card {

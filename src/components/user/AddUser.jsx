@@ -78,33 +78,33 @@ const AddUser = () => {
 
     return (
         <div className="dashboardcard">
-            <div className='mb-4'>
+            <div className='d-flex'>
                 <p className='add-user-card-text'>Add User</p>
                 <img className='add-user-icon' src={AddUserLogo} alt="AddUserLogo" />
             </div>
 
-            <form className='mt-4' onSubmit={AddUser}>
-                <div className="row">
-                    <div className="col-sm-4 mb-3">
+            <form onSubmit={AddUser}>
+                <div className="row mb-2">
+                    <div className="col-sm-4">
                         <p className="text-start">Name</p>
                         <input type="text" className="form-input-box form-control w-80" id="name" name="name"
                             placeholder="Enter Name"
                             onChange={handleChange} required />
                     </div>
-                    <div className="col-sm-4 mb-3">
+                    <div className="col-sm-4">
                         <p className="text-start">Email Address</p>
                         <input type="email" className="form-input-box form-control w-80" id="email" name="email"
                             placeholder="Enter Email Address"
                             onChange={handleChange} required />
                     </div>
-                    <div className="col-sm-4 mb-3">
+                    <div className="col-sm-4">
                         <p className="text-start">Password</p>
                         <input type="password" className="form-input-box form-control w-80" id="password" name="password"
                             placeholder="Enter Password"
                             onChange={handleChange} required />
                     </div>
                 </div>
-                <button className='mt-4 add-user-button' type='submit'>
+                <button className='add-user-button' type='submit'>
                     <p className='add-user-button-text'>Submit
                     </p></button>
 

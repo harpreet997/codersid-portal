@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
 import { getAllStudents } from '../../getdata/getdata';
@@ -22,6 +23,12 @@ const Payment = () => {
     const currentRecords = studentlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
     const [studentName, setSearchStudentName] = useState('');
+    const navigate = useNavigate();
+
+    const handleNavigate = (item) => {
+        navigate('/make-payment', {state:{item}})
+    }
+
 
     useEffect(() => {
         getAllStudents(headers)
@@ -70,14 +77,14 @@ const Payment = () => {
 
     return (
         <div className="dashboardcard">
-            <div>
+            <div className='d-flex'>
                 <p className='payfee-card-text'>Pay Fee</p>
                 <img className='payfee-icon' src={PayFee} alt="PayFee" />
             </div>
-            <div className="row mt-5">
+            <div className="row">
                 <div className="col-sm-6">
                     <p className="text-start">Batch Name</p>
-                    <select className="form-select mb-2" name="batchName" style={{ width: 500 }} id="batchName" onChange={handleBatchSelect}>
+                    <select className="pay-fee-input-width form-select mb-2" name="batchName" id="batchName" onChange={handleBatchSelect}>
                         <option value="All Batch">Select Batch</option>
                         {batchlist.map((item) => {
                             return (
@@ -89,7 +96,7 @@ const Payment = () => {
                 </div>
                 <div className="col-sm-6">
                     <p className="text-start">Student Name</p>
-                    <input type="text" className="form-control w-30" style={{ width: 500 }} id="studentname" name="studentname" placeholder="Search Student Name"
+                    <input type="text" className="pay-fee-input-width form-control" id="studentname" name="studentname" placeholder="Search Student Name"
                         onChange={(e) => setSearchStudentName(e.target.value)} />
                 </div>
 
@@ -129,10 +136,10 @@ const Payment = () => {
                                 <td>{item.emailid}</td>
                                 <td>{item.contactdetails}</td>
                                 <td>{item.createdAt.substring(0, 10)}</td>
-                                <td><button className='payfee-details-button' onClick={() => {
-                                    handleModal(item._id)
+                                <td><button className='payfee-payment-button' onClick={() => {
+                                    handleNavigate(item)
                                 }}>
-                                    <p className='payfee-details-button-text'>Payment</p>
+                                    <p className='payfee-payment-button-text'>Make Payment</p>
                                 </button></td>
                                 <Modal show={modal === item._id ? true : false} onHide={handleClose}>
                                     <PaymentStudentDetails data={item} id={item._id} handleClose={handleClose} />

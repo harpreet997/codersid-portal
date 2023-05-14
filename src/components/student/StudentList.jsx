@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
 import { getAllStudents } from '../../getdata/getdata';
-import { Modal } from 'react-bootstrap';
-import ViewStudentDetails from '../student/ViewStudentDetails';
 import { headers } from '../../headers';
-import '../../styles/student/studentlist.css';
 import { getAllBatches } from '../../getdata/getdata';
 import StudentIcon from '../../assets/Studentlist.png';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/student/studentlist.css';
 
 const StudentList = () => {
     const [studentlist, setStudentList] = useState([]);
     const [allstudentlist, setAllStudentList] = useState([]);
     const [batchlist, setBatchList] = useState([]);
     const [studentName, setSearchStudentName] = useState('');
-    const [modal, setModal] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
@@ -46,12 +43,6 @@ const StudentList = () => {
             })
     }, []);
 
-    const handleModal = (id) => {
-        setModal(id)
-    };
-
-    const handleClose = () => setModal(false);
-
     const handleBatchSelect = (event) => {
         const batchName = event.target.value;
         console.log(batchName)
@@ -78,16 +69,16 @@ const StudentList = () => {
 
     return (
         <div className="dashboardcard">
-            <div>
+             <div className='d-flex'>
                 <p className='studentlist-card-text'>CodersID Student</p>
                 <img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" />
-                <div className='add-student-button-position'>
-                    <button className='add-student-button' onClick={handleStudent}>
-                        <p className='add-student-button-text'>Add Students +</p>
+                <div className='d-flex'>
+                    <button className='add-student-button ml-auto' onClick={handleStudent}>
+                        <p className='add-student-button-text'>Add Student + </p>
                     </button>
                 </div>
             </div>
-            <div className="row mt-5">
+            <div className="row mt-3">
                 <div className="col-sm-6">
                     <p className="text-start">Batch Name</p>
                     <select className="student-list-input-width form-select mb-2" name="batchName" id="batchName" onChange={handleBatchSelect}>
@@ -146,14 +137,10 @@ const StudentList = () => {
                                 }}>
                                     <p className='details-button-text'>Details</p>
                                 </button></td>
-                                {/* <Modal show={modal === item._id ? true : false} onHide={handleClose}>
-                                    <ViewStudentDetails data={item} id={i} nPages={nPages} indexOfFirstRecord={indexOfFirstRecord} />
-                                </Modal> */}
                             </tr>
                         )
                     })}
                 </tbody>
-
             </table>
 
             {currentRecords.length === 0 ?

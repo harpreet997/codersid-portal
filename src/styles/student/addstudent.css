@@ -41,7 +41,6 @@ input:focus {
 
 .add-student-form-button {
     box-sizing: border-box;
-    position: absolute;
     width: 143px;
     height: 44px;
     left: 312px;
@@ -52,17 +51,11 @@ input:focus {
 }
 
 .add-student-form-button-text {
-    position: absolute;
-    width: 150.25px;
-    height: 70.87px;
-    left: 30px;
-    top: -12px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
-    line-height: 50px;
-    display: flex;
-    align-items: center;
+    line-height: 40px;
+    text-align: center;
     color: #FFFFFF;
 }

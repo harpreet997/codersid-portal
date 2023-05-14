@@ -1,46 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { addBatch } from '../../postdata/postdata';
+import { addCategory } from '../../postdata/postdata';
 import { toast } from "react-toastify";
-import { getAllBatches } from '../../getdata/getdata';
+import { getAllCategories } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
 import { headers } from '../../headers';
-import { deleteBatch } from '../../postdata/postdata';
-import AddBatchIcon from '../../assets/AddBatch.png'
-import '../../styles/batch/batch.css';
+import { deleteCategory } from '../../postdata/postdata';
+import ExpenseLogo from '../../assets/ExpenseIcon.png';
+import '../../styles/expense/expense.css';
 
-const AddBatch = () => {
-    const [batchlist, setBatchList] = useState([])
-    const [batchdata, setBatchdata] = useState({
-        batchName: "",
+const AddExpenseCategory = () => {
+    const [categorylist, setCategoryList] = useState([])
+    const [categorydata, setCategorydata] = useState({
+        categoryName: "",
     });
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = batchlist.slice(indexOfFirstRecord, indexOfLastRecord);
-    const nPages = Math.ceil(batchlist.length / recordsPerPage)
+    const currentRecords = categorylist.slice(indexOfFirstRecord, indexOfLastRecord);
+    const nPages = Math.ceil(categorylist.length / recordsPerPage)
 
     useEffect(() => {
-        getAllBatches(headers)
+        getAllCategories(headers)
             .then((response) => {
-                setBatchList(response.data.Batches);
+                setCategoryList(response.data.Categories);
             })
             .catch((error) => {
                 console.log(error);
             })
-    }, [batchlist]);
+    }, [categorylist]);
 
     const handleChange = (event) => {
-        setBatchdata({
-            ...batchdata,
+        setCategorydata({
+            ...categorydata,
             [event.target.name]: event.target.value
         })
     }
 
-    const AddBatch = (event) => {
+    const AddCategory = (event) => {
         event.preventDefault();
-        addBatch(batchdata)
+        addCategory(categorydata)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -57,8 +57,8 @@ const AddBatch = () => {
             })
     }
 
-    const DeleteBatch = (id) => {
-        deleteBatch(id)
+    const DeleteCategory = (id) => {
+        deleteCategory(id)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -76,17 +76,17 @@ const AddBatch = () => {
     return (
         <div className="dashboardcard">
             <div className='d-flex'>
-                <p className='add-batch-card-text'>Add Batch</p>
-                <img className='add-batch-icon' src={AddBatchIcon} alt="AddBatchIcon" />
+                <p className='expense-card-text'>Add Expense Category</p>
+                <img className='expense-card-icon' src={ExpenseLogo} alt="ExpenseLogo" />
             </div>
 
-            <form onSubmit={AddBatch}>
+            <form onSubmit={AddCategory}>
                 <div className='d-flex'>
                     <div>
-                        <p className="text-start">Batch Name</p>
-                        <input type="text" className="add-batch-input form-control"
-                            id="batchName" name="batchName"
-                            placeholder="Enter Batch Name"
+                        <p className="text-start">Category Name</p>
+
+                        <input type="text" className="add-expense-input form-control"
+                            id="categoryName" name="categoryName" placeholder="Enter Category Name"
                             onChange={handleChange} required />
                     </div>
                     <div>
@@ -95,12 +95,12 @@ const AddBatch = () => {
                         </button>
                     </div>
                 </div>
-            </form>
+            </form >
 
-            <table className="table">
+            <table className="table batch-table">
                 <thead>
                     <tr>
-                        <th scope="col">Batch Name</th>
+                        <th scope="col">Category Name</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -108,35 +108,40 @@ const AddBatch = () => {
                     {currentRecords.map((item, i) => {
                         return (
                             <tr key={i}>
-                                <td>{item.batchName}</td>
+                                <td>{item.categoryName}</td>
                                 <td>
-                                    <button className='delete-button' onClick={() => DeleteBatch(item._id)}>
+                                    <button className='delete-button' onClick={() => DeleteCategory(item._id)}>
                                         <p className='delete-button-text'>Delete</p>
                                     </button></td>
                             </tr>
                         )
                     })}
                 </tbody>
-            </table>
-            {currentRecords.length === 0 ?
-                <div className='noRecordImage'>
-                    <img src={NoRecord} alt='NoRecord' className='w-10' />
-                </div>
-                : null}
-            {currentRecords.length > 0 ?
-                <div className="pagination-button">
-                    <Pagination
-                        nPages={nPages}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                    />
-                </div>
 
-                : null}
-        </div>
+            </table>
+            {
+                currentRecords.length === 0 ?
+                    <div className='noRecordImage'>
+                        <img src={NoRecord} alt='NoRecord' className='w-10' />
+                    </div>
+                    : null
+            }
+            {
+                currentRecords.length > 0 ?
+                    <div className="pagination-button">
+                        <Pagination
+                            nPages={nPages}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    </div>
+
+                    : null
+            }
+        </div >
 
 
     );
 }
 
-export default AddBatch;
+export default AddExpenseCategory;

@@ -39,6 +39,10 @@ export const addCategory = (categorydata) => {
     return axios.post(`${baseUrl}/api/category`, categorydata)
 } 
 
+export const addExpense = (expensedata) => {
+    return axios.post(`${baseUrl}/api/expense`, expensedata)
+} 
+
 export const deleteCategory = (id) => {
     return axios.delete(`${baseUrl}/api/category/${id}`)
 } 

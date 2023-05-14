@@ -11,8 +11,12 @@ import PaymentRecord from '../paymentrecord/PaymentRecord';
 import StudentList from '../student/StudentList';
 import Login from '../login/Login';
 import AddExpense from '../expense/AddExpense';
+import AddExpenseCategory from '../expense/AddExpenseCategory';
 import PaymentReceipt from '../paymentrecord/PaymentReceipt';
 import ViewStudentDetails from '../student/ViewStudentDetails';
+import MakePayment from '../payment/MakePayment';
+import MainPaymentReceipt from '../paymentrecord/MainPaymentReceipt';
+import ExpenseManagement from '../expense/ExpenseManagement';
 
 const MainRouter = () => {
     return (
@@ -26,9 +30,12 @@ const MainRouter = () => {
                     <Route path='/add-user' element={<AddUser />} />
                     <Route path='/add-batch' element={<AddBatch />} />
                     <Route path='/add-course' element={<AddCourse />} />
+                    <Route path='/add-expense-category' element={<AddExpenseCategory />} />
+                    <Route path='/manage-expense' element={<ExpenseManagement />} />
                     <Route path='/add-expense' element={<AddExpense />} />
                     <Route path='/payment' element={<Payment />} />
-                    <Route path='/payment-receipt' element={<PaymentReceipt />} />
+                    <Route path='/make-payment' element={<MakePayment />} />
+                    <Route path='/payment-receipt' element={<MainPaymentReceipt />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />
                 </Route>
