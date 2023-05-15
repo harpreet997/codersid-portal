@@ -179,15 +179,15 @@ const AddStudent = () => {
             <form onSubmit={AddStudent}>
                 <div className='mt-5 row'>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Student Name</p>
-                        <input type="text" className="input-box-width form-control w-60" id="studentname" name="studentname"
-                            placeholder="Enter Student Name"
+                        <p className="text-start input-field-label">Student Name</p>
+                        <input type="text" className="input-box-width" id="studentname" name="studentname"
+                            
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Select Batch</p>
-                        <select className="input-box-width form-select w-60" name="batchname" onChange={handleChange} required>
-                            <option value="">Select Batch</option>
+                        <p className="text-start select-field-label">Select Batch</p>
+                        <select className="input-box-width" name="batchname" onChange={handleChange} required>
+                            <option value=""></option>
                             {batchlist.map((item) => {
                                 return (
                                     <option value={item.batchName}>{item.batchName}</option>
@@ -196,9 +196,9 @@ const AddStudent = () => {
                         </select>
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Course Name</p>
-                        <select className="input-box-width form-select w-60" name="course" onChange={handleChange} required>
-                            <option value="">Select Course</option>
+                        <p className="text-start select-field-label">Course Name</p>
+                        <select className="input-box-width" name="course" onChange={handleChange} required>
+                            <option value=""></option>
                             {courselist.map((item) => {
                                 return (
                                     <option value={item.courseName}>{item.courseName}</option>
@@ -207,67 +207,67 @@ const AddStudent = () => {
                         </select>
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Email Address</p>
-                        <input type="email" className="input-box-width form-control w-60" id="emailid" name="emailid"
-                            placeholder="Enter Email Address"
+                        <p className="text-start input-field-label">Enter Email Address</p>
+                        <input type="email" className="input-box-width" id="emailid" name="emailid"
+                            
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Contact Number</p>
-                        <input type="tel" className="input-box-width form-control w-60" id="contactdetails" name="contactdetails"
-                            placeholder="Enter Contact Number"
+                        <p className="text-start input-field-label">Enter Contact Number</p>
+                        <input type="tel" className="input-box-width" id="contactdetails" name="contactdetails"
+                            
                             pattern="[0-9]{3}[0-9]{4}[0-9]{3}" onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Address</p>
-                        <input type="text" className="input-box-width form-control w-60" id="address" name="address"
-                            placeholder="Enter Address"
+                        <p className="text-start input-field-label">Enter Address</p>
+                        <input type="text" className="input-box-width" id="address" name="address"
+                            
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Total Fees</p>
-                        <input type="number" className="input-box-width form-control w-60" min={1} id="totalfees" name="totalfees"
-                            placeholder='Enter Total Fees'
+                        <p className="text-start input-field-label">Enter Total Fees</p>
+                        <input type="number" className="input-box-width" min={1} id="totalfees" name="totalfees"
+                            
                             onChange={handleTotalFees} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Registration Fees</p>
-                        <input type="number" className="input-box-width form-control w-60"
+                        <p className="text-start input-field-label">Enter Registration Fees</p>
+                        <input type="number" className="input-box-width"
                             value={studentdata.registration.registrationfees} max={studentdata.totalfees}
                             id="registrationfees" name="registrationfees"
-                            placeholder='Enter Registration Fees' onChange={handleRegistrationFees} required />
+                            onChange={handleRegistrationFees} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">Registration Date</p>
-                        <input type="date" className="input-box-width form-control w-60" min={mindate} id="registrationDate"
+                        <p className="text-start input-field-label">Enter Registration Date</p>
+                        <input type="date" className="input-box-width" min={mindate} id="registrationDate"
                             name="registrationDate"
                             onChange={handleRegistrationDate} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">1st Installment Fees</p>
-                        <input type="number" className="input-box-width form-control w-60"
+                        <p className="text-start input-field-label">Enter 1st Installment Fees</p>
+                        <input type="number" className="input-box-width"
                             value={studentdata.secondInstallment.secondInstallmentfees}
                             min={studentdata.registration.registrationfees}
                             max={studentdata.totalfees} id="secondInstallmentfees" name="secondInstallmentfees"
-                            placeholder='Enter 1st Installment Fees' onChange={handleSecondInstallmentFees} required />
+                             onChange={handleSecondInstallmentFees} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">1st Installment Date</p>
-                        <input type="date" className="input-box-width form-control w-60" min={mindate} id="secondfeesDate"
+                        <p className="text-start input-field-label">Enter 1st Installment Date</p>
+                        <input type="date" className="input-box-width" min={mindate} id="secondfeesDate"
                             name="secondfeesDate"
                             onChange={handleSecondInstallmentDate} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">2nd Installment Fees</p>
-                        <input type="number" className="input-box-width form-control w-60"
+                        <p className="text-start input-field-label">Enter 2nd Installment Fees</p>
+                        <input type="number" className="input-box-width"
                             value={studentdata.thirdInstallment.thirdInstallmentfees}
                             min={studentdata.registration.registrationfees}
                             max={studentdata.totalfees} id="thirdInstallmentfees" name="thirdInstallmentfees"
-                            placeholder='Enter 2nd Installment Fees' onChange={handleThirdInstallmentFees} required />
+                            onChange={handleThirdInstallmentFees} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start">2nd Installment Date</p>
-                        <input type="date" className="input-box-width form-control w-60" min={mindate} id="thirdfeesDate"
+                        <p className="text-start input-field-label">Enter 2nd Installment Date</p>
+                        <input type="date" className="input-box-width" min={mindate} id="thirdfeesDate"
                             name="thirdfeesDate"
                             onChange={handleThirdInstallmentDate} required />
                     </div>

@@ -119,6 +119,9 @@ p {
 
 .student-list-input-width {
     width: 500px;
+    border: none !important;
+    opacity: 0.5;
+    border-bottom: 1px solid #000000 !important;
 }
 
 @media screen and (max-width: 394px) {

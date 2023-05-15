@@ -78,11 +78,12 @@ const StudentList = () => {
                     </button>
                 </div>
             </div>
+            {/* <div className='expense-line-1'></div> */}
             <div className="row mt-3">
                 <div className="col-sm-6">
-                    <p className="text-start">Batch Name</p>
-                    <select className="student-list-input-width form-select mb-2" name="batchName" id="batchName" onChange={handleBatchSelect}>
-                        <option value="All Batch">Select Batch</option>
+                    <p className="text-start select-field-label">Select Batch</p>
+                    <select className="student-list-input-width mb-2" name="batchName" id="batchName" onChange={handleBatchSelect}>
+                        <option value="All Batch"></option>
                         {batchlist.map((item) => {
                             return (
                                 <option value={item.batchName} >{item.batchName}</option>
@@ -92,8 +93,8 @@ const StudentList = () => {
                     </select>
                 </div>
                 <div className="col-sm-6">
-                    <p className="text-start">Student Name</p>
-                    <input type="text" className="student-list-input-width form-control w-30" id="studentname" name="studentname" placeholder="Search Student Name"
+                    <p className="text-start input-field-label">Student Name</p>
+                    <input type="text" className="student-list-input-width" id="studentname" name="studentname"
                         onChange={(e) => setSearchStudentName(e.target.value)} />
                 </div>
 

@@ -1,0 +1,105 @@
+.view-student-details-heading {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.view-student-details-primary-box {
+    width: 490px;
+    margin-left: 10px;
+    margin-top: 0px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+}
+
+.view-student-details-middle-box {
+    width: 990px;
+    margin-left: 10px;
+    margin-top: 0px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+}
+
+.view-student-details-secondary-box {
+    width: 490px;
+    margin-left: 10px;
+    margin-top: 0px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+}
+
+.view-student-details-list-heading-1 {
+    margin-left: 23px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.8;
+}
+
+.view-student-details-middle-heading {
+    margin-left: 400px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.8;
+}
+
+.view-student-details-list-heading-2 {
+    margin-left: 63px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.8;
+}
+
+.view-line1 {
+    margin-top: 25px;
+    margin-left: 60px;
+    width: 28px;
+    height: 0px;
+    opacity: 0.1;
+    border: 2px solid #000000;
+}
+
+.student-details-horizontal-line {
+    width: 480px;
+    height: 0px;
+    opacity: 0.05;
+    border: 1px solid #000000;
+}
+
+.studentid-value {
+    margin-left: 60px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.5;
+}

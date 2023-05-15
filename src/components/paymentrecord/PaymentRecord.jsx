@@ -3,11 +3,10 @@ import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
 import { getAllPayments } from '../../getdata/getdata';
 import { headers } from '../../headers';
-import '../../styles/dashboard/dashboard.css';
 import { getAllBatches } from '../../getdata/getdata';
 import PaymentRecordLogo from '../../assets/PaymentRecordLogo.png';
-import '../../styles/paymentrecords/paymentrecords.css';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/paymentrecords/paymentrecords.css';
 
 const PaymentRecord = () => {
     const [studentlist, setStudentList] = useState([]);
@@ -24,7 +23,7 @@ const PaymentRecord = () => {
 
 
     const handleNavigate = (item) => {
-        navigate('/payment-receipt', {state:{item}})
+        navigate('/payment-receipt', { state: { item } })
     }
 
 
@@ -92,9 +91,9 @@ const PaymentRecord = () => {
             </div>
             <div className="row">
                 <div className="col-sm-3">
-                    <p className="text-start ">Batch Name</p>
-                    <select className="form-select mb-2" name="batchName" style={{ width: 240 }} id="batchName" onChange={handleBatchSelect}>
-                        <option value="All Batch">Select Batch</option>
+                    <p className="text-start select-field-label">Select Batch</p>
+                    <select className="payment-records-input-width mb-2" name="batchName" id="batchName" onChange={handleBatchSelect}>
+                        <option value="All Batch"></option>
                         {batchlist.map((item) => {
                             return (
                                 <option value={item.batchName} >{item.batchName}</option>
@@ -104,18 +103,19 @@ const PaymentRecord = () => {
                     </select>
                 </div>
                 <div className="col-sm-3">
-                    <p className="text-start">Student Name</p>
-                    <input type="text" className="form-control w-30" style={{ width: 240 }} id="studentname" name="studentname" placeholder="Search Student Name"
+                    <p className="text-start input-field-label">Enter Student Name</p>
+                    <input type="text" className="payment-records-input-width" id="studentname" name="studentname"
+                        placeholder=""
                         onChange={(e) => setSearchStudentName(e.target.value)} />
                 </div>
                 <div className="col-sm-3">
-                    <p className="text-start">From Date</p>
-                    <input type="date" className="form-control w-30" style={{ width: 240 }} id="fromDate" name="fromDate"
+                    <p className="text-start input-field-label">Select From Date</p>
+                    <input type="date" className="payment-records-input-width" id="fromDate" name="fromDate"
                         onChange={handleFromDate} />
                 </div>
                 <div className="col-sm-3">
-                    <p className="text-start">To Date</p>
-                    <input type="date" className="form-control w-30" style={{ width: 240 }} id="toDate" name="toDate"
+                    <p className="text-start input-field-label">Select To Date</p>
+                    <input type="date" className="payment-records-input-width" id="toDate" name="toDate"
                         onChange={handleToDate} />
                 </div>
             </div>
@@ -158,8 +158,8 @@ const PaymentRecord = () => {
                                 <td>{(item.Amount * 18) / 100}</td>
                                 <td>{item.Amount}</td>
                                 <td><button className='details-button' onClick={() => {
-                                                        handleNavigate(item)
-                                                    }}>
+                                    handleNavigate(item)
+                                }}>
                                     <p className='details-button-text'>Details</p>
                                 </button></td>
                                 {/* <Modal show={modal === item._id ? true : false} onHide={handleClose} >

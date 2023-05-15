@@ -83,8 +83,8 @@ const AddCourse = () => {
             <form onSubmit={AddCourse}>
                 <div className='d-flex'>
                     <div>
-                        <p className="text-start">Course Name</p>
-                        <input type="text" className="add-course-input form-control"
+                        {/* <p className="text-start">Course Name</p> */}
+                        <input type="text" className="add-course-input"
                             id="courseName" name="courseName" placeholder="Enter Course Name"
                             onChange={handleChange} required />
                     </div>
@@ -100,7 +100,7 @@ const AddCourse = () => {
             <table className="table batch-table">
                 <thead>
                     <tr>
-                        <th scope="col">Course Name</th>
+                        <th scope="col">Course List</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>

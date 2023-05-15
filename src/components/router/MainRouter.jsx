@@ -17,6 +17,8 @@ import ViewStudentDetails from '../student/ViewStudentDetails';
 import MakePayment from '../payment/MakePayment';
 import MainPaymentReceipt from '../paymentrecord/MainPaymentReceipt';
 import ExpenseManagement from '../expense/ExpenseManagement';
+import StudentDetails from '../student/StudentDetails';
+import ExpenseDetails from '../expense/ExpenseDetails';
 
 const MainRouter = () => {
     return (
@@ -25,7 +27,7 @@ const MainRouter = () => {
                 <Route element={<ProtectedRoutes />}>
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='/students-list' element={<StudentList />} />
-                    <Route path='/students-details' element={<ViewStudentDetails />} />
+                    <Route path='/students-details' element={<StudentDetails />} />
                     <Route path='/add-student' element={<AddStudent />} />
                     <Route path='/add-user' element={<AddUser />} />
                     <Route path='/add-batch' element={<AddBatch />} />
@@ -33,6 +35,7 @@ const MainRouter = () => {
                     <Route path='/add-expense-category' element={<AddExpenseCategory />} />
                     <Route path='/manage-expense' element={<ExpenseManagement />} />
                     <Route path='/add-expense' element={<AddExpense />} />
+                    <Route path='/expense-details' element={<ExpenseDetails />} />
                     <Route path='/payment' element={<Payment />} />
                     <Route path='/make-payment' element={<MakePayment />} />
                     <Route path='/payment-receipt' element={<MainPaymentReceipt />} />

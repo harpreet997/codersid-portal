@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
-import '../../styles/expense/expensemanagement.css';
 import { getAllExpenses } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/expense/expensemanagement.css';
 
 const ExpenseManagement = () => {
     const [expensedata, setExpenseData] = useState([]);
     const navigate = useNavigate();
+
+    const handleNavigate = (item) => {
+        navigate('/expense-details', {state:{item}})
+    }
 
     useEffect(() => {
         getAllExpenses(headers)
@@ -54,8 +58,10 @@ const ExpenseManagement = () => {
                                 <td>{item.expenseName}</td>
                                 <td>{item.vendor}</td>
                                 <td>{item.amount}</td>
-                                <td><button className='expense-download-button'>
-                                    <p className='expense-download-button-text'>Download</p>
+                                <td><button className='details-button' onClick={() => {
+                                    handleNavigate(item)
+                                }}>
+                                    <p className='details-button-text'>Details</p>
                                 </button></td>
                             </tr>
                         )

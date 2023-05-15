@@ -1,41 +1,49 @@
 .add-student-heading-text {
-    position: absolute;
-    width: 275px;
-    height: 50px;
-    left: calc(67.5% - 275px/2 - 461.45px);
-    top: 120.88px;
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 600px;
+    font-weight: 600;
     font-size: 30px;
-    line-height: 50px;
+    line-height: 20px;
     display: flex;
     align-items: center;
     color: #000000;
+    margin-top: 20px;
 }
 
-
-/* input[type="text"],
-input[type="password"],
-input[type="date"],
-input[type="number"],
-input[type="email"] {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #000000;
-}
-
-select {
-    border: none;
-    border-bottom: 1px solid #000000;
-}
 
 input:focus {
-    outline: none;
-} */
+    outline: none !important;
+} 
 
 .input-box-width {
     width: 330px;
+    border: none !important;
+    opacity: 0.4;
+    border-bottom: 1px solid #000000 !important;
+}
+
+.input-field-label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.select-field-label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.5;
 }
 
 
@@ -48,6 +56,7 @@ input:focus {
     background: #10D1E3;
     border: 1px solid #AAF8FF;
     border-radius: 22px;
+    margin-top: 30px;
 }
 
 .add-student-form-button-text {

@@ -38,8 +38,9 @@ const MainPaymentReceipt = () => {
         <>
             <div className="main-receipt-card">
                 <img className='receipt-header-logo' src={ReceiptHeader} alt="ReceiptHeader" />
-                <div className="d-flex">
+                <div className="d-flex flex-column">
                     <img className='receipt-logo' src={ReceiptLogo} alt="ReceiptLogo" />
+                    <p className="receipt-tag-line">A Unit of GraffersID</p>
                     {/* {showdownload ? <div className="download-container">
                         <button className="download-button" onClick={downloadPDF}>
                             <p className="download-button-text">Download</p>
@@ -129,7 +130,7 @@ const MainPaymentReceipt = () => {
                     <img className='main-receipt-phone-icon' src={PhoneIcon} alt="PhoneIcon" />
                     <p className="ms-2 main-receipt-phone-value">+91 910919221</p>
                     <img className='main-receipt-location-icon' src={LocationIcon} alt="LocationIcon" />
-                    <p className="ms-2 main-receipt-location-value">Address: 716 Shekhar Central Palasia, Square, Manorama Ganj,
+                    <p className="ms-2 main-receipt-location-value">716 Shekhar Central Palasia, Square, Manorama Ganj,
                         Indore, Madhya Pradesh 452010,</p>
                 </div>
                 <img className='receipt-header-logo' src={ReceiptFooterLogo} alt="ReceiptFooterLogo" />

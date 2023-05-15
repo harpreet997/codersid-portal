@@ -1,6 +1,10 @@
 .add-expense-input {
     width: 350px;
+    border: none !important;
+    opacity: 0.5;
+    border-bottom: 1px solid #000000 !important;
 }
+
 
 .expense-card-text {
     font-family: 'Montserrat';
@@ -18,6 +22,32 @@
     height: 28px;
     margin-left: 4.94px;
     margin-top: 14px;
+}
+
+.add-expense-category-button {
+    box-sizing: border-box;
+    width: 109px;
+    height: 37px;
+    background: #10D1E3;
+    border: 1px solid #AEF8FF;
+    border-radius: 21.5528px;
+    margin-left: 320px;
+
+}
+
+.add-expense-category-button-text {
+    width: 57px;
+    height: 20px;
+    margin-left: 18px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin-top: 7px;
 }
 
 @media screen and (max-width: 394px) {

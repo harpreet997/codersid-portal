@@ -16,9 +16,6 @@
     margin-top: 14px;
 }
 
-.form-input-width {
-    width: 450px;
-}
 
 .payfee-payment-button {
     box-sizing: border-box;
@@ -46,6 +43,9 @@
 
 .pay-fee-input-width {
     width: 500px;
+    border: none !important;
+    opacity: 0.5;
+    border-bottom: 1px solid #000000 !important;
 }
 
 @media screen and (max-width: 394px) {

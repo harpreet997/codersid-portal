@@ -1,5 +1,8 @@
 .add-course-input {
     width: 350px;
+    border: none !important;
+    opacity: 0.5;
+    border-bottom: 1px solid #000000 !important;
 }
 
 .add-course-card-text {
@@ -27,8 +30,8 @@
     background: #10D1E3;
     border: 1px solid #AEF8FF;
     border-radius: 21.5528px;
-    margin-left: 250px;
-    margin-top: 40px;
+    margin-left: 280px;
+    /* margin-top: 40px; */
 }
 
 .add-course-button-text {

@@ -16,6 +16,9 @@
     margin-top: 14px;
 }
 
-.form-input-width {
-    width: 210px;
+.payment-records-input-width {
+    width: 240px;
+    border: none !important;
+    opacity: 0.5;
+    border-bottom: 1px solid #000000 !important;
 }

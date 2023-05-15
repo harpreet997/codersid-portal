@@ -16,8 +16,12 @@
     margin-top: 14px;
 }
 
-.form-input-box {
+.add-user-input {
     width: 310px;
+    border: none !important;
+    opacity: 0.5;
+    border-bottom: 1px solid #000000 !important;
+
 }
 
 .add-user-button {

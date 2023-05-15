@@ -83,8 +83,8 @@ const AddBatch = () => {
             <form onSubmit={AddBatch}>
                 <div className='d-flex'>
                     <div>
-                        <p className="text-start">Batch Name</p>
-                        <input type="text" className="add-batch-input form-control"
+                        {/* <p className="text-start">Batch Name</p> */}
+                        <input type="text" className="add-batch-input"
                             id="batchName" name="batchName"
                             placeholder="Enter Batch Name"
                             onChange={handleChange} required />
@@ -96,11 +96,11 @@ const AddBatch = () => {
                     </div>
                 </div>
             </form>
-
+            
             <table className="table">
                 <thead>
                     <tr>
-                        <th scope="col">Batch Name</th>
+                        <th scope="col">Batch List</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -118,6 +118,7 @@ const AddBatch = () => {
                     })}
                 </tbody>
             </table>
+            
             {currentRecords.length === 0 ?
                 <div className='noRecordImage'>
                     <img src={NoRecord} alt='NoRecord' className='w-10' />

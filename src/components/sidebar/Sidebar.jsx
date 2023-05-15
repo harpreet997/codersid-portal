@@ -78,16 +78,16 @@ const Sidebar = () => {
             </div>
             {
                 showPayment ?
-                    <div>
+                    <>
                         <div className="d-flex">
                             <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
                             <NavLink className='payment-records' to='/payment-records'>Payment Records</NavLink>
                         </div>
                         <div className="d-flex">
-                            <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                            <img className='list-icon-6' src={ListIcon} alt="ListIcon" />
                             <NavLink className='payfee' to='/payment'>Pay Fee</NavLink>
                         </div>
-                    </div>
+                    </>
                     : null
             }
             <NavLink className='expense-management' to='/manage-expense'><p style={{ cursor: 'pointer' }}>Expense Management</p></NavLink>

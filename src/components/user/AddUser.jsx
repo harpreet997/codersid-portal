@@ -86,20 +86,20 @@ const AddUser = () => {
             <form onSubmit={AddUser}>
                 <div className="row mb-2">
                     <div className="col-sm-4">
-                        <p className="text-start">Name</p>
-                        <input type="text" className="form-input-box form-control w-80" id="name" name="name"
+                        {/* <p className="text-start">Name</p> */}
+                        <input type="text" className="add-user-input" id="name" name="name"
                             placeholder="Enter Name"
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4">
-                        <p className="text-start">Email Address</p>
-                        <input type="email" className="form-input-box form-control w-80" id="email" name="email"
+                        {/* <p className="text-start">Email Address</p> */}
+                        <input type="email" className="add-user-input" id="email" name="email"
                             placeholder="Enter Email Address"
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4">
-                        <p className="text-start">Password</p>
-                        <input type="password" className="form-input-box form-control w-80" id="password" name="password"
+                        {/* <p className="text-start">Password</p> */}
+                        <input type="password" className="add-user-input" id="password" name="password"
                             placeholder="Enter Password"
                             onChange={handleChange} required />
                     </div>
@@ -110,7 +110,7 @@ const AddUser = () => {
 
             </form>
             {/* <div className='user-list-card'> */}
-            <table className="table user-table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>

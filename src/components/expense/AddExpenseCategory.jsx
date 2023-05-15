@@ -83,15 +83,15 @@ const AddExpenseCategory = () => {
             <form onSubmit={AddCategory}>
                 <div className='d-flex'>
                     <div>
-                        <p className="text-start">Category Name</p>
+                        {/* <p className="text-start">Category Name</p> */}
 
-                        <input type="text" className="add-expense-input form-control"
+                        <input type="text" className="add-expense-input"
                             id="categoryName" name="categoryName" placeholder="Enter Category Name"
                             onChange={handleChange} required />
                     </div>
                     <div>
-                        <button className='add-batch-button' type='submit'>
-                            <p className='add-batch-button-text'>Submit</p>
+                        <button className='add-expense-category-button' type='submit'>
+                            <p className='add-expense-category-button-text'>Submit</p>
                         </button>
                     </div>
                 </div>

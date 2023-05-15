@@ -54,7 +54,7 @@ const AddExpense = () => {
     }
 
     return (
-        <div className='make-payment-card'>
+        <div className='dashboardcard'>
             <p className='make-payment-title'>Expense Details</p>
             <form onSubmit={AddExpense}>
                 <div className="row">
@@ -73,21 +73,21 @@ const AddExpense = () => {
                     <div className="col-sm-6">
                         <p className='make-payment-student-name'>Name of Expense</p>
                         <input className='student-name-input-field form-control' type="text" name="expenseName"
-                            onChange={handleChange} required />
+                            placeholder='Enter Expense Name' onChange={handleChange} required />
                     </div>
                     <div className="col-sm-6">
                         <p className='make-payment-email-address'>Vendor</p>
                         <input className='student-name-input-field form-control' type="email" name="vendor" required
-                            onChange={handleChange} />
+                           placeholder='Enter Vendor Email' onChange={handleChange} />
                     </div>
                     <div className="col-sm-6">
                         <p className='make-payment-email-address'>Amount</p>
                         <input className='student-name-input-field form-control' min={1} type="number" name="amount" required
-                            onChange={handleChange} />
+                           placeholder='Enter Amount' onChange={handleChange} />
                     </div>
                     <div className="col-sm-6">
-                        <p className='make-payment-email-address'>Amount</p>
-                        <input className='student-name-input-field form-control' min={1} type="number" name="amount" required
+                        <p className='make-payment-email-address'>Upload bill</p>
+                        <input className='student-name-input-field form-control' min={1} type="file" name="bill" required
                             onChange={handleChange} />
                     </div>
                 </div>
