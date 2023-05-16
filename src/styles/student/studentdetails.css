@@ -50,7 +50,7 @@
 }
 
 .view-student-details-middle-heading {
-    margin-left: 400px;
+    margin-left: 23px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -77,7 +77,7 @@
 
 .view-line1 {
     margin-top: 25px;
-    margin-left: 60px;
+    /* margin-left: 60px; */
     width: 28px;
     height: 0px;
     opacity: 0.1;
@@ -92,7 +92,8 @@
 }
 
 .studentid-value {
-    margin-left: 60px;
+    /* margin-left: 60px; */
+    margin-right: 20px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;

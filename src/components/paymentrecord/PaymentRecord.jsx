@@ -119,59 +119,60 @@ const PaymentRecord = () => {
                         onChange={handleToDate} />
                 </div>
             </div>
+            
+                <table className="table">
+                    <thead >
+                        <tr>
+                            <th scope="col">Receipt No.</th>
+                            <th scope="col">Receipt Date</th>
+                            <th scope="col">StudentID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Batch Name</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">GST - 18%</th>
+                            <th scope="col">Total Amount</th>
+                            <th scope="col">Action</th>
+                        </tr>
 
-            <table className="table">
-                <thead >
-                    <tr>
-                        <th scope="col">Receipt No.</th>
-                        <th scope="col">Receipt Date</th>
-                        <th scope="col">StudentID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Batch Name</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">GST - 18%</th>
-                        <th scope="col">Total Amount</th>
-                        <th scope="col">Action</th>
-                    </tr>
+                    </thead>
 
-                </thead>
-
-                <tbody>
-                    {currentRecords.filter((val) => {
-                        if (studentName === "") {
-                            return val;
-                        }
-                        else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
-                            return val;
-                        }
-                    }).map((item, i) => {
-                        return (
-                            <tr key={i}>
-                                <td>{`CI/${item._id.slice(-3, -1)}`}</td>
-                                <td>{item.createdAt.substring(0, 10)}</td>
-                                <td>{`CODERSID-${item.id}`}</td>
-                                <td>{item.StudentName}</td>
-                                <td>{item.batchname}</td>
-                                <td>{item.course}</td>
-                                <td>{item.Amount - (item.Amount * 18) / 100}</td>
-                                <td>{(item.Amount * 18) / 100}</td>
-                                <td>{item.Amount}</td>
-                                <td><button className='details-button' onClick={() => {
-                                    handleNavigate(item)
-                                }}>
-                                    <p className='details-button-text'>Details</p>
-                                </button></td>
-                                {/* <Modal show={modal === item._id ? true : false} onHide={handleClose} >
+                    <tbody>
+                        {currentRecords.filter((val) => {
+                            if (studentName === "") {
+                                return val;
+                            }
+                            else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
+                                return val;
+                            }
+                        }).map((item, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td>{`CI/${item._id.slice(-3, -1)}`}</td>
+                                    <td>{item.createdAt.substring(0, 10)}</td>
+                                    <td>{`CODERSID-${item.id}`}</td>
+                                    <td>{item.StudentName}</td>
+                                    <td>{item.batchname}</td>
+                                    <td>{item.course}</td>
+                                    <td>{item.Amount - (item.Amount * 18) / 100}</td>
+                                    <td>{(item.Amount * 18) / 100}</td>
+                                    <td>{item.Amount}</td>
+                                    <td><button className='details-button' onClick={() => {
+                                        handleNavigate(item)
+                                    }}>
+                                        <p className='details-button-text'>Details</p>
+                                    </button></td>
+                                    {/* <Modal show={modal === item._id ? true : false} onHide={handleClose} >
                                     <MainPaymentReceipt data={item} id={item.id} index={i} handleClose={handleClose} nPages={nPages}
                                         indexOfFirstRecord={indexOfFirstRecord} />
                                 </Modal> */}
-                            </tr>
-                        )
-                    })}
-                </tbody>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
 
-            </table>
+                </table>
+            
             {currentRecords.length === 0 ?
                 <div className='noRecordImage'>
                     <img src={NoRecord} alt='NoRecord' className='w-10' />

@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import Dashboard from '../dashboard/Dashboard';
 import AddStudent from '../student/AddStudent';
 import ProtectedRoutes from '../protectedroutes/ProtectedRoutes';
-import Signin from '../signin/Signin';
 import AddUser from '../user/AddUser';
 import AddBatch from '../batch/AddBatch';
 import Payment from '../payment/Payment';
@@ -19,6 +18,7 @@ import MainPaymentReceipt from '../paymentrecord/MainPaymentReceipt';
 import ExpenseManagement from '../expense/ExpenseManagement';
 import StudentDetails from '../student/StudentDetails';
 import ExpenseDetails from '../expense/ExpenseDetails';
+import SignIn from '../login/SignIn';
 
 const MainRouter = () => {
     return (
@@ -42,7 +42,7 @@ const MainRouter = () => {
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />
                 </Route>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<SignIn />} />
             </Routes>
         </>
     )
