@@ -23,8 +23,8 @@ const Dashboard = () => {
     }, []);
 
     const images = [
-        { url: FirstImage },
         { url: SecondImage },
+        { url: FirstImage },
         { url: ThirdImage },
         { url: FourthImage },
         { url: FifthImage },

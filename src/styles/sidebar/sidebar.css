@@ -284,6 +284,16 @@
     color: #2F2F2F;
     opacity: 0.8;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.sidebar-expense-manage-icon {
+    margin-top: 20px;
+    margin-left: 3px;
+    width: 15px;
+    height: 15px;
+    opacity: 0.8;
+    color: #2F2F2F;
 }
 
 

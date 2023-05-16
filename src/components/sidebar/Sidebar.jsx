@@ -7,6 +7,7 @@ import MasterIcon from '../../assets/MasterIcon.png';
 import MasterArrowIcon from '../../assets/MasterArrowIcon.png';
 import ListIcon from '../../assets/ListIcon.png';
 import PaymentIcon from '../../assets/PaymentIcon.png';
+import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
 import '../../styles/sidebar/sidebar.css';
 
 const Sidebar = () => {
@@ -90,7 +91,10 @@ const Sidebar = () => {
                     </>
                     : null
             }
-            <NavLink className='expense-management' to='/manage-expense'><p style={{ cursor: 'pointer' }}>Expense Management</p></NavLink>
+            <div className="d-flex">
+            <NavLink className='expense-management' to='/manage-expense'>Expense Management</NavLink>
+            <img className='sidebar-expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" />
+            </div>
         </div>
     );
 }
