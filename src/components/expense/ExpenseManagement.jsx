@@ -29,7 +29,7 @@ const ExpenseManagement = () => {
             .catch((error) => {
                 console.log(error);
             })
-    })
+    }, [])
 
     const handleAddExpense = () => {
         navigate("/add-expense")
@@ -54,7 +54,6 @@ const ExpenseManagement = () => {
                         <th scope="col">Name of Expense</th>
                         <th scope="col">Vendor</th>
                         <th scope="col">Amount</th>
-                        <th scope="col">Bill</th>
                         <th scope="col">Action</th>
                     </tr>
 
@@ -67,7 +66,6 @@ const ExpenseManagement = () => {
                                 <td>{item.expenseName}</td>
                                 <td>{item.vendor}</td>
                                 <td>{item.amount}</td>
-                                <td><img src={item.bill} alt={"Bill"} /></td>
                                 <td><button className='details-button' onClick={() => {
                                     handleNavigate(item)
                                 }}>

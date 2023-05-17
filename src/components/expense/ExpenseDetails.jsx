@@ -41,6 +41,7 @@ const ExpenseDetails = () => {
                 </div>
 
             </div>
+            {/* <img src={data.bill.url} alt="" /> */}
         </div>
     );
 }

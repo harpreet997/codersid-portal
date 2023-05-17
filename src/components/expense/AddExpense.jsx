@@ -5,6 +5,7 @@ import { headers } from '../../headers';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 
+
 const AddExpense = () => {
     const [categorydata, setCategoryData] = useState([]);
     const [expensedata, setExpenseData] = useState({
@@ -34,6 +35,7 @@ const AddExpense = () => {
         })
     }
 
+
     const setFileToBase = (file) =>{
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -45,6 +47,27 @@ const AddExpense = () => {
         }
     }
 
+    // const fileObj = ['application/pdf'];
+    // const handleImage = (e) => {
+    //     let selectedFile = e.target.files[0];
+    //     if (selectedFile) {
+    //         if (selectedFile && fileObj.includes(selectedFile.type)) {
+    //             let reader = new FileReader();
+    //             reader.readAsDataURL(selectedFile);
+    //             reader.onloadend = (e) => {
+    //                 setExpenseData({
+    //                     ...expensedata,
+    //                     bill: reader.result 
+    //                 })
+    //             }
+    //         }
+    //         else {
+                
+    //         }
+    //     }
+        
+    // }
+
     const handleImage = (event) => {
         const file = event.target.files[0];
         setFileToBase(file);
@@ -54,12 +77,12 @@ const AddExpense = () => {
 
     const AddExpense = (event) => {
         event.preventDefault();
-        formdata.append('categoryName', expensedata.categoryName)
-        formdata.append('expenseName', expensedata.expenseName)
-        formdata.append('vendor', expensedata.vendor)
-        formdata.append('amount', expensedata.amount)
-        formdata.append('bill', expensedata.bill)
-        addExpense(formdata)
+        // formdata.append('categoryName', expensedata.categoryName)
+        // formdata.append('expenseName', expensedata.expenseName)
+        // formdata.append('vendor', expensedata.vendor)
+        // formdata.append('amount', expensedata.amount)
+        // formdata.append('bill', expensedata.bill)
+        addExpense(expensedata)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
