@@ -74,7 +74,7 @@ const AddBatch = () => {
     }
 
     return (
-        <div className="dashboardcard">
+        <div className="card">
             <div className='d-flex'>
                 <p className='add-batch-card-text'>Add Batch</p>
                 <img className='add-batch-icon' src={AddBatchIcon} alt="AddBatchIcon" />
@@ -125,7 +125,7 @@ const AddBatch = () => {
                 </div>
                 : null}
             {currentRecords.length > 0 ?
-                <div className="pagination-button">
+                <div className="text-center">
                     <Pagination
                         nPages={nPages}
                         currentPage={currentPage}

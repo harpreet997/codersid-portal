@@ -13,10 +13,10 @@ const AddExpense = () => {
         expenseName: "",
         vendor: "",
         amount: "",
-        bill: "",
+        invoiceNumber: "",
     })
     const navigate = useNavigate();
-    const formdata = new FormData();
+    // const formdata = new FormData();
 
     useEffect(() => {
         getAllCategories(headers)
@@ -36,16 +36,16 @@ const AddExpense = () => {
     }
 
 
-    const setFileToBase = (file) =>{
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () =>{
-            setExpenseData({
-                ...expensedata,
-                bill: reader.result 
-            })
-        }
-    }
+    // const setFileToBase = (file) =>{
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onloadend = () =>{
+    //         setExpenseData({
+    //             ...expensedata,
+    //             bill: reader.result 
+    //         })
+    //     }
+    // }
 
     // const fileObj = ['application/pdf'];
     // const handleImage = (e) => {
@@ -68,11 +68,11 @@ const AddExpense = () => {
         
     // }
 
-    const handleImage = (event) => {
-        const file = event.target.files[0];
-        setFileToBase(file);
-        console.log(file);
-    }
+    // const handleImage = (event) => {
+    //     const file = event.target.files[0];
+    //     setFileToBase(file);
+    //     console.log(file);
+    // }
 
 
     const AddExpense = (event) => {
@@ -101,8 +101,8 @@ const AddExpense = () => {
     }
 
     return (
-        <div className='dashboardcard'>
-            <p className='make-payment-title'>Expense Details</p>
+        <div className='card'>
+            <p className='make-payment-title'>Add Expense</p>
             <form onSubmit={AddExpense}>
                 <div className="row">
                     <div className="col-sm-6">
@@ -133,9 +133,9 @@ const AddExpense = () => {
                             placeholder='Enter Amount' onChange={handleChange} />
                     </div>
                     <div className="col-sm-6">
-                        <p className='make-payment-email-address'>Upload bill</p>
-                        <input className='student-name-input-field form-control' min={1} type="file" name="bill" required
-                            onChange={handleImage} />
+                        <p className='make-payment-email-address'>Invoice Number</p>
+                        <input className='student-name-input-field form-control' min={1} type="text" name="invoiceNumber" required
+                            placeholder='Enter Invoice Number' onChange={handleChange} />
                     </div>
                 </div>
                 <button className='add-expense-submit-button' type='submit'>

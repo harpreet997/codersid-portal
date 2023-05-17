@@ -4,10 +4,10 @@ import '../../styles/student/studentdetails.css';
 const StudentDetails = () => {
     const location = useLocation();
     const data = location.state.item;
-    const id = location.state.item.id;
+    
 
     return (
-        <div className="dashboardcard" >
+        <div className="card" >
             <p className='view-student-details-heading'>CodersID Students Details</p>
             <div className="d-flex">
                 <div className='view-student-details-primary-box'>

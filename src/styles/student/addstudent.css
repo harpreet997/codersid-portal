@@ -16,7 +16,7 @@ input:focus {
 } 
 
 .input-box-width {
-    width: 330px;
+    /* width: 330px; */
     border: none !important;
     opacity: 0.4;
     border-bottom: 1px solid #000000 !important;

@@ -22,7 +22,7 @@ const StudentList = () => {
     const navigate = useNavigate();
 
     const handleNavigate = (item) => {
-        navigate('/students-details', {state:{item}})
+        navigate('/students-details', { state: { item } })
     }
 
     useEffect(() => {
@@ -68,89 +68,90 @@ const StudentList = () => {
     }
 
     return (
-        <div className="dashboardcard">
-             <div className='d-flex'>
+        <div className="card">
+            <div className='d-flex'>
                 <p className='studentlist-card-text'>CodersID Student</p>
                 <img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" />
-                <div className='d-flex'>
-                    <button className='add-student-button ml-auto' onClick={handleStudent}>
+                    <button className='add-student-button' onClick={handleStudent}>
                         <p className='add-student-button-text'>Add Student + </p>
                     </button>
-                </div>
+                
             </div>
-            {/* <div className='expense-line-1'></div> */}
-            <div className="row mt-3">
-                <div className="col-sm-6">
-                    <p className="text-start select-field-label">Select Batch</p>
-                    <select className="student-list-input-width mb-2" name="batchName" id="batchName" onChange={handleBatchSelect}>
-                        <option value="All Batch"></option>
-                        {batchlist.map((item) => {
+                <div className="row mt-3">
+                    <div className="col-sm-6">
+                        <p className="text-start select-field-label">Select Batch</p>
+                        <select className="student-list-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
+                            <option value="All Batch"></option>
+                            {batchlist.map((item) => {
+                                return (
+                                    <option value={item.batchName} >{item.batchName}</option>
+                                )
+
+                            })}
+                        </select>
+                    </div>
+                    <div className="col-sm-6">
+                        <p className="text-start input-field-label">Student Name</p>
+                        <input type="text" className="student-list-input-width w-100" id="studentname" name="studentname"
+                            onChange={(e) => setSearchStudentName(e.target.value)} />
+                    </div>
+
+                </div>
+            
+            <div className='scroll'>
+                <table className="table">
+                    <thead >
+                        <tr>
+                            <th scope="col">StudentID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Batch Name</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Email ID</th>
+                            <th scope="col">Contact Details</th>
+                            <th scope="col">Admission Date</th>
+                            <th scope="col">Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        {currentRecords.filter((val) => {
+                            if (studentName === "") {
+                                return val;
+                            }
+                            else if (val.studentname.toLowerCase().includes(studentName.toLowerCase())) {
+                                return val;
+                            }
+                        }).map((item, i) => {
                             return (
-                                <option value={item.batchName} >{item.batchName}</option>
+                                <tr key={i}>
+                                    <td>{`CODERSID-${item.id}`}</td>
+                                    <td>{item.studentname}</td>
+                                    <td>{item.batchname}</td>
+                                    <td>{item.course}</td>
+                                    <td>{item.emailid}</td>
+                                    <td>{item.contactdetails}</td>
+                                    <td>{item.createdAt.substring(0, 10)}</td>
+                                    <td><button className='details-button' onClick={() => {
+                                        handleNavigate(item)
+                                    }}>
+                                        <p className='details-button-text'>Details</p>
+                                    </button></td>
+                                </tr>
                             )
-
                         })}
-                    </select>
-                </div>
-                <div className="col-sm-6">
-                    <p className="text-start input-field-label">Student Name</p>
-                    <input type="text" className="student-list-input-width" id="studentname" name="studentname"
-                        onChange={(e) => setSearchStudentName(e.target.value)} />
-                </div>
+                    </tbody>
+                </table>
+
+                {currentRecords.length === 0 ?
+                    <div className='noRecordImage'>
+                        <img src={NoRecord} alt='NoRecord' className='w-10' />
+                    </div>
+                    : null}
 
             </div>
-
-            <table className="table">
-                <thead >
-                    <tr>
-                        <th scope="col">StudentID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Batch Name</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Email ID</th>
-                        <th scope="col">Contact Details</th>
-                        <th scope="col">Admission Date</th>
-                        <th scope="col">Action</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-                    {currentRecords.filter((val) => {
-                        if (studentName === "") {
-                            return val;
-                        }
-                        else if (val.studentname.toLowerCase().includes(studentName.toLowerCase())) {
-                            return val;
-                        }
-                    }).map((item, i) => {
-                        return (
-                            <tr key={i}>
-                                <td>{`CODERSID-${item.id}`}</td>
-                                <td>{item.studentname}</td>
-                                <td>{item.batchname}</td>
-                                <td>{item.course}</td>
-                                <td>{item.emailid}</td>
-                                <td>{item.contactdetails}</td>
-                                <td>{item.createdAt.substring(0, 10)}</td>
-                                <td><button className='details-button' onClick={() => {
-                                    handleNavigate(item)
-                                }}>
-                                    <p className='details-button-text'>Details</p>
-                                </button></td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-
-            {currentRecords.length === 0 ?
-                <div className='noRecordImage'>
-                    <img src={NoRecord} alt='NoRecord' className='w-10' />
-                </div>
-                : null}
             {currentRecords.length > 0 ?
-                <div className="pagination-button">
+                <div className="text-center">
                     <Pagination
                         nPages={nPages}
                         currentPage={currentPage}

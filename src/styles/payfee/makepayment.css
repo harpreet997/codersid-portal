@@ -13,7 +13,7 @@
 
 .make-payment-title {
     padding-top: 22.88px;
-    margin-left: 24.05px;
+    margin-left: 0px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -23,7 +23,7 @@
 }
 
 .make-payment-student-name {
-    padding-left: 35px;
+    padding-left: 0;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -34,18 +34,18 @@
 }
 
 .student-name-input-field {
-    margin-left: 35px;
+    margin-left: 0;
     background: #FFFFFF;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    width: 280px;
+    /* width: 280px; */
     height: 50px;
 }
 
 
 .make-payment-email-address {
     margin-top: 12px;
-    padding-left: 35px;
+    padding-left: 0px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;

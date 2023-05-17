@@ -24,7 +24,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className="sidebarCard">
+        <div className="sidebar">
             <div className="d-flex">
                 <img className='sidebar-logo' src={SidebarLogo} alt="SidebarLogo" />
                 <p className='sidebar-text'>{role === 'admin' ? "Welcome Admin" : "Welcome User"}</p>
@@ -92,7 +92,7 @@ const Sidebar = () => {
                     : null
             }
             <div className="d-flex">
-            <NavLink className='expense-management' to='/manage-expense'>Expense Management</NavLink>
+            <NavLink className='expense-management' to='/manage-expense'>Manage Expense</NavLink>
             <img className='sidebar-expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" />
             </div>
         </div>

@@ -76,7 +76,7 @@ const Payment = () => {
     }
 
     return (
-        <div className="dashboardcard">
+        <div className="card">
             <div className='d-flex'>
                 <p className='payfee-card-text'>Pay Fee</p>
                 <img className='payfee-icon' src={PayFee} alt="PayFee" />
@@ -84,7 +84,7 @@ const Payment = () => {
             <div className="row">
                 <div className="col-sm-6">
                     <p className="text-start select-field-label">Select Batch</p>
-                    <select className="pay-fee-input-width mb-2" name="batchName" id="batchName" onChange={handleBatchSelect}>
+                    <select className="pay-fee-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
                         <option value="All Batch"></option>
                         {batchlist.map((item) => {
                             return (
@@ -96,7 +96,7 @@ const Payment = () => {
                 </div>
                 <div className="col-sm-6">
                     <p className="text-start input-field-label">Student Name</p>
-                    <input type="text" className="pay-fee-input-width" id="studentname" name="studentname"
+                    <input type="text" className="pay-fee-input-width w-100" id="studentname" name="studentname"
                         onChange={(e) => setSearchStudentName(e.target.value)} />
                 </div>
 
@@ -156,7 +156,7 @@ const Payment = () => {
                 </div>
                 : null}
             {currentRecords.length > 0 ?
-                <div className="pagination-button">
+                <div className="text-center">
                     <Pagination
                         nPages={nPages}
                         currentPage={currentPage}

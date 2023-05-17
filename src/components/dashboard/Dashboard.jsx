@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import FirstImage from '../../assets/Dashboard1.png';
 import SecondImage from '../../assets/Dashboard2.png';
 import ThirdImage from '../../assets/Dashboard3.png';
@@ -8,20 +7,10 @@ import SixthImage from '../../assets/Dashboard6.png';
 import SimpleImageSlider from "react-simple-image-slider";
 import '../../styles/dashboard/dashboard.css';
 
-const getCurrentDimension = () => {
-    return {
-          width: window.innerWidth,
-          height: window.innerHeight
-    }
-}
-
 const Dashboard = () => {
-    const [screenSize, setScreenSize] = useState(getCurrentDimension());
+    const screenSize = window.innerWidth
 
-    useEffect(() => {
-        getCurrentDimension()
-    }, []);
-
+    console.log(screenSize);
     const images = [
         { url: SecondImage },
         { url: FirstImage },
@@ -31,9 +20,9 @@ const Dashboard = () => {
         { url: SixthImage },
     ];
     return (
-        <div className="dashboardcard">
+        <div className="card dashboardcard">
             <SimpleImageSlider
-                width={screenSize.width === 393 ? 300: 1000}
+                width={screenSize === 393 ? 300: 1000}
                 height={600}
                 images={images}
                 showBullets={true}

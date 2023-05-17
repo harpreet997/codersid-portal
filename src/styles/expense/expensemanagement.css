@@ -84,10 +84,6 @@
 
 
 @media screen and (max-width: 394px) {
-    .scroll {
-        overflow-x: scroll !important;
-    }
-
     .expense-management-text {
         font-family: 'Montserrat';
         font-style: normal;

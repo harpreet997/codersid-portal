@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
+import ExpenseDetails from '../../components/expense/ExpenseDetails';
 import NoRecord from '../../assets/NoRecord.png';
 import Pagination from '../pagination/Pagination';
 import { getAllExpenses } from '../../getdata/getdata';
@@ -11,14 +13,22 @@ const ExpenseManagement = () => {
     const [expensedata, setExpenseData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
+    const [modal, setModal] = useState(false);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = expensedata.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(expensedata.length / recordsPerPage)
+
     const navigate = useNavigate();
 
+    const handleModal = (id) => {
+        setModal(id)
+    };
+
+    const handleClose = () => setModal(false);
+
     const handleNavigate = (item) => {
-        navigate('/expense-details', {state:{item}})
+        navigate('/expense-details', { state: { item } })
     }
 
     useEffect(() => {
@@ -34,9 +44,9 @@ const ExpenseManagement = () => {
     const handleAddExpense = () => {
         navigate("/add-expense")
     }
-    
+
     return (
-        <div className='dashboardcard'>
+        <div className='card'>
             <div className='d-flex'>
                 <p className='expense-management-text'>Expense Management</p>
                 <img className='expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" />
@@ -54,6 +64,7 @@ const ExpenseManagement = () => {
                         <th scope="col">Name of Expense</th>
                         <th scope="col">Vendor</th>
                         <th scope="col">Amount</th>
+                        <th scope="col">Invoice Number</th>
                         <th scope="col">Action</th>
                     </tr>
 
@@ -66,11 +77,15 @@ const ExpenseManagement = () => {
                                 <td>{item.expenseName}</td>
                                 <td>{item.vendor}</td>
                                 <td>{item.amount}</td>
+                                <td>{item.invoiceNumber}</td>
                                 <td><button className='details-button' onClick={() => {
-                                    handleNavigate(item)
+                                    handleModal(item._id)
                                 }}>
                                     <p className='details-button-text'>Details</p>
                                 </button></td>
+                                <Modal show={modal === item._id ? true : false} onHide={handleClose}>
+                                    <ExpenseDetails data={item} />
+                                </Modal>
                             </tr>
                         )
                     })}
@@ -83,7 +98,7 @@ const ExpenseManagement = () => {
                 </div>
                 : null}
             {currentRecords.length > 0 ?
-                <div className="pagination-button">
+                <div className="text-center">
                     <Pagination
                         nPages={nPages}
                         currentPage={currentPage}

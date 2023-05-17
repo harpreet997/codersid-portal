@@ -4,7 +4,7 @@ import '../../styles/studentdetails/studentdetails.css';
 const ViewStudentDetails = () => {
     const location = useLocation();
     const data = location.state.item;
-    const id = location.state.item.id;
+    
 
     return (
         < div className="dashboardcard" >

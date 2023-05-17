@@ -84,7 +84,7 @@ const PaymentRecord = () => {
     }
 
     return (
-        <div className="dashboardcard">
+        <div className="card">
             <div className='d-flex'>
                 <p className='payment-records-card-text'>Payment Records</p>
                 <img className='payment-records-icon' src={PaymentRecordLogo} alt="PaymentRecordLogo" />
@@ -92,7 +92,7 @@ const PaymentRecord = () => {
             <div className="row">
                 <div className="col-sm-3">
                     <p className="text-start select-field-label">Select Batch</p>
-                    <select className="payment-records-input-width mb-2" name="batchName" id="batchName" onChange={handleBatchSelect}>
+                    <select className="payment-records-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
                         <option value="All Batch"></option>
                         {batchlist.map((item) => {
                             return (
@@ -104,18 +104,18 @@ const PaymentRecord = () => {
                 </div>
                 <div className="col-sm-3">
                     <p className="text-start input-field-label">Enter Student Name</p>
-                    <input type="text" className="payment-records-input-width" id="studentname" name="studentname"
+                    <input type="text" className="payment-records-input-width w-100" id="studentname" name="studentname"
                         placeholder=""
                         onChange={(e) => setSearchStudentName(e.target.value)} />
                 </div>
                 <div className="col-sm-3">
                     <p className="text-start input-field-label">Select From Date</p>
-                    <input type="date" className="payment-records-input-width" id="fromDate" name="fromDate"
+                    <input type="date" className="payment-records-input-width w-100" id="fromDate" name="fromDate"
                         onChange={handleFromDate} />
                 </div>
                 <div className="col-sm-3">
                     <p className="text-start input-field-label">Select To Date</p>
-                    <input type="date" className="payment-records-input-width" id="toDate" name="toDate"
+                    <input type="date" className="payment-records-input-width w-100" id="toDate" name="toDate"
                         onChange={handleToDate} />
                 </div>
             </div>
@@ -179,7 +179,7 @@ const PaymentRecord = () => {
                 </div>
                 : null}
             {currentRecords.length > 0 ?
-                <div className="pagination-button">
+                <div className="text-center">
                     <Pagination
                         nPages={nPages}
                         currentPage={currentPage}

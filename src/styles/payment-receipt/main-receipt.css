@@ -2,7 +2,8 @@
     box-sizing: border-box;
     width: 647px;
     align-items: center;
-    margin-left: 22%;
+    margin-left: 20px;
+    /* margin-top: 8.5%; */
     background: #FFFFFF;
     /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15); */
     border: 1px solid grey;
@@ -10,9 +11,7 @@
     margin-bottom: 20px;
 }
 
-.modal-content {
-    width: 647px !important;
-}
+
 
 .receipt-header-logo {
     width: 100%;

@@ -35,7 +35,7 @@ const MainPaymentReceipt = () => {
     }
 
     return (
-        <>
+        <div className="card">
             <div className="main-receipt-card">
                 <img className='receipt-header-logo' src={ReceiptHeader} alt="ReceiptHeader" />
                 <div className="d-flex flex-column">
@@ -134,12 +134,12 @@ const MainPaymentReceipt = () => {
                         Indore, Madhya Pradesh 452010,</p>
                 </div>
                 <img className='receipt-header-logo' src={ReceiptFooterLogo} alt="ReceiptFooterLogo" />
-
+                {/* <button className="mt-2 mb-2 btn btn-primary" onClick={downloadPDF}>Print Receipt</button> */}
             </div>
             <div className="text-center">
                 <button className="mt-2 mb-2 btn btn-primary" onClick={downloadPDF}>Print Receipt</button>
             </div>
-        </>
+        </div>
     );
 }
 

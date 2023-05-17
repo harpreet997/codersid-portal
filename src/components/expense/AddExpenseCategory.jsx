@@ -74,7 +74,7 @@ const AddExpenseCategory = () => {
     }
 
     return (
-        <div className="dashboardcard">
+        <div className="card">
             <div className='d-flex'>
                 <p className='expense-card-text'>Add Expense Category</p>
                 <img className='expense-card-icon' src={ExpenseLogo} alt="ExpenseLogo" />
@@ -128,7 +128,7 @@ const AddExpenseCategory = () => {
             }
             {
                 currentRecords.length > 0 ?
-                    <div className="pagination-button">
+                    <div className="text-center">
                         <Pagination
                             nPages={nPages}
                             currentPage={currentPage}

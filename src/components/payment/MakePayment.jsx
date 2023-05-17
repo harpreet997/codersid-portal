@@ -182,7 +182,7 @@ const MakePayment = () => {
                 position: "top-center",
                 autoClose: 2000
             })
-
+            window.location.reload(false);
         }
         else if (paymentdata.registration.registrationPaymentStatus === "Not Paid" &&
             paymentdata.secondInstallment.secondInstallmentPaymentStatus === "Paid") {
@@ -190,7 +190,7 @@ const MakePayment = () => {
                 position: "top-center",
                 autoClose: 2000
             })
-
+            window.location.reload(false);
         }
         else if (paymentdata.registration.registrationPaymentStatus === "Not Paid" &&
             paymentdata.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") {
@@ -198,7 +198,7 @@ const MakePayment = () => {
                 position: "top-center",
                 autoClose: 2000
             })
-
+            window.location.reload(false);
         }
         else {
             if (thirdfees < data.thirdInstallment.thirdInstallmentfees) {
@@ -280,24 +280,24 @@ const MakePayment = () => {
     }
 
     return (
-        <div className='dashboardcard'>
+        <div className='card'>
             <p className='make-payment-title'>Payment Details</p>
             <form onSubmit={handlePayment}>
                 <div className="row">
                     <div className="col-sm-4">
                         <p className='make-payment-student-name'>Student Name</p>
-                        <input className='student-name-input-field form-control' type="text" id="studentname" name="studentname"
+                        <input className='student-name-input-field form-control w-100' type="text" id="studentname" name="studentname"
                             value={data.studentname} readOnly />
                     </div>
                     <div className="col-sm-4">
                         <p className='make-payment-student-name'>Select Batch</p>
-                        <select className="student-name-input-field form-select" name="batchname" readOnly>
+                        <select className="student-name-input-field form-select w-100" name="batchname" readOnly>
                             <option value={data.batchname}>{data.batchname}</option>
                         </select>
                     </div>
                     <div className="col-sm-4">
                         <p className='make-payment-student-name'>Course Name</p>
-                        <select className="student-name-input-field form-select" name="course" readOnly>
+                        <select className="student-name-input-field form-select w-100" name="course" readOnly>
                             <option value={data.course}>{data.course}</option>
                         </select>
                     </div>

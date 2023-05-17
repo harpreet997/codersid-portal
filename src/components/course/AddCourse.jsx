@@ -74,7 +74,7 @@ const AddCourse = () => {
     }
 
     return (
-        <div className="dashboardcard">
+        <div className="card">
             <div className='d-flex'>
                 <p className='add-course-card-text'>Add Course</p>
                 <img className='add-course-icon' src={AddCourseLogo} alt="AddCourseLogo" />
@@ -128,7 +128,7 @@ const AddCourse = () => {
             }
             {
                 currentRecords.length > 0 ?
-                    <div className="pagination-button">
+                    <div className="text-center">
                         <Pagination
                             nPages={nPages}
                             currentPage={currentPage}

@@ -1,48 +1,57 @@
-import { useLocation } from 'react-router-dom';
+import { Modal } from "react-bootstrap";
 import '../../styles/expense/expensedetails.css';
 
-const ExpenseDetails = () => {
-    const location = useLocation();
-    const data = location.state.item;
-
+const ExpenseDetails = ({ data }) => {
 
     return (
-        <div className="dashboardcard">
-            <p className='view-student-details-heading'>Expense Details</p>
-            <div className="d-flex ">
-                <div className='view-student-details-primary-box'>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>
-                            Expense Category</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.categoryName}</p>
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Name of Expense</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.expenseName}</p>
+        <>
+            <Modal.Header closeButton>
+                <Modal.Title className="text-white"><p className='view-student-details-heading'>Expense Details</p></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                
+                    {/* <p className='view-student-details-heading'>Expense Details</p> */}
+                    <div className="d-flex ">
+                        <div className='view-expense-details-modal-box'>
+                            <div className="d-flex justify-content-between">
+                                <p className='view-student-details-list-heading-1'>
+                                    Expense Category</p>
+                                <div className='view-line1'></div>
+                                <p className='studentid-value'>{data.categoryName}</p>
+                            </div>
+                            <div className='student-details-horizontal-line'></div>
+                            <div className="d-flex justify-content-between">
+                                <p className='view-student-details-list-heading-1'>Name of Expense</p>
+                                <div className='view-line1'></div>
+                                <p className='studentid-value'>{data.expenseName}</p>
 
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Vendor</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.vendor}</p>
+                            </div>
+                            <div className='student-details-horizontal-line'></div>
+                            <div className="d-flex justify-content-between">
+                                <p className='view-student-details-list-heading-1'>Vendor</p>
+                                <div className='view-line1'></div>
+                                <p className='studentid-value'>{data.vendor}</p>
 
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Amount</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.amount}</p>
+                            </div>
+                            <div className='student-details-horizontal-line'></div>
+                            <div className="d-flex justify-content-between">
+                                <p className='view-student-details-list-heading-1'>Amount</p>
+                                <div className='view-line1'></div>
+                                <p className='studentid-value'>{data.amount}</p>
 
-                    </div>
-                </div>
+                            </div>
+                            <div className='student-details-horizontal-line'></div>
+                            <div className="d-flex justify-content-between">
+                                <p className='view-student-details-list-heading-1'>Invoie Number</p>
+                                <div className='view-line1'></div>
+                                <p className='studentid-value'>{data.invoiceNumber}</p>
 
-            </div>
-            {/* <img src={data.bill.url} alt="" /> */}
-        </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </Modal.Body>
+        </>
     );
 }
 
