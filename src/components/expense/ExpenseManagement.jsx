@@ -27,10 +27,6 @@ const ExpenseManagement = () => {
 
     const handleClose = () => setModal(false);
 
-    const handleNavigate = (item) => {
-        navigate('/expense-details', { state: { item } })
-    }
-
     useEffect(() => {
         getAllExpenses(headers)
             .then((response) => {

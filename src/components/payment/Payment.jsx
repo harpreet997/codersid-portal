@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
 import { getAllStudents } from '../../getdata/getdata';
-import { Modal } from 'react-bootstrap';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
-import PaymentStudentDetails from './PaymentStudentDetails';
 import { BallTriangle } from 'react-loader-spinner';
 import PayFee from '../../assets/PayFee.png';
 import '../../styles/payfee/payfee.css';
@@ -15,7 +13,6 @@ const Payment = () => {
     const [studentlist, setStudentList] = useState([]);
     const [allstudentlist, setAllStudentList] = useState([]);
     const [batchlist, setBatchList] = useState([])
-    const [modal, setModal] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
@@ -48,12 +45,6 @@ const Payment = () => {
                 console.log(error);
             })
     }, []);
-
-    const handleModal = (id) => {
-        setModal(id)
-    };
-
-    const handleClose = () => setModal(false);
 
     const handleBatchSelect = (event) => {
         const batchName = event.target.value;
@@ -140,9 +131,6 @@ const Payment = () => {
                                     }}>
                                         <p className='payfee-payment-button-text'>Make Payment</p>
                                     </button></td>
-                                    <Modal show={modal === item._id ? true : false} onHide={handleClose}>
-                                        <PaymentStudentDetails data={item} id={item._id} handleClose={handleClose} />
-                                    </Modal>
                                 </tr>
                             )
                         })}
@@ -151,17 +139,17 @@ const Payment = () => {
                 </table>
                 {currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
-                        <BallTriangle
-                            height={300}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
-                    </div>
+                    <BallTriangle
+                        height={300}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                </div>
                     : null}
 
             </div>

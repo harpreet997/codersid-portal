@@ -22,7 +22,7 @@ const Dashboard = () => {
     return (
         <div className="card">
             <SimpleImageSlider
-                width={screenSize === 393 ? 300: "99%"}
+                width={screenSize === 393 ? "99%": "99%"}
                 height={590}
                 images={images}
                 showBullets={true}

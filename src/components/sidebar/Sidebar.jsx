@@ -24,7 +24,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className="sidebar">
+        <div className="sidebar ">
             <div className="d-flex">
                 <img className='sidebar-logo' src={SidebarLogo} alt="SidebarLogo" />
                 <p className='sidebar-text'>{role === 'admin' ? "Welcome Admin" : "Welcome User"}</p>

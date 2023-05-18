@@ -1,5 +1,3 @@
-import { Modal } from "react-bootstrap";
-import { useState } from "react";
 import ReceiptHeader from '../../assets/ReceiptHeader.png';
 import ReceiptFooterLogo from '../../assets/ReceiptFooterLogo.png';
 import ReceiptLogo from '../../assets/ReceiptLogo.png';
@@ -7,11 +5,9 @@ import MailIcon from '../../assets/MailIcon.png';
 import PhoneIcon from '../../assets/PhoneIcon.png';
 import LocationIcon from '../../assets/CompanyAddressIcon.png';
 import html2canvas from "html2canvas";
+import { useLocation, useNavigate } from 'react-router-dom';
 import jsPDF from "jspdf";
 import '../../styles/payment-receipt/main-receipt.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-
-
 
 const MainPaymentReceipt = () => {
     const location = useLocation();

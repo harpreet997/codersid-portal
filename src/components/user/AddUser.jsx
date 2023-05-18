@@ -109,47 +109,48 @@ const AddUser = () => {
                     </p></button>
 
             </form>
-            {/* <div className='user-list-card'> */}
-            <table className="table">
-                <thead className='text-center'>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody className='text-center'>
-                    {currentRecords.map((item, i) => {
-                        return (
-                            <tr key={i}>
-                                <td>{item.name}</td>
-                                <td>{item.email}</td>
-                                <td>{item.password}</td>
-                                <td>
-                                    <button className='delete-button' onClick={() => DeleteUser(item._id)}>
-                                        <p className='delete-button-text'>Delete</p>
-                                    </button></td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
+            <div className="scroll">
+                <table className="table">
+                    <thead className='text-center'>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className='text-center'>
+                        {currentRecords.map((item, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td>{item.name}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.password}</td>
+                                    <td>
+                                        <button className='delete-button' onClick={() => DeleteUser(item._id)}>
+                                            <p className='delete-button-text'>Delete</p>
+                                        </button></td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
 
-            </table>
-            {currentRecords.length === 0 ?
-                <div className='d-flex justify-content-center'>
-                    <BallTriangle
-                        height={300}
-                        width={300}
-                        radius={5}
-                        color="#10D1E3"
-                        ariaLabel="ball-triangle-loading"
-                        wrapperClassName=''
-                        wrapperStyle=""
-                        visible={true}
-                    />
-                </div>
-                : null}
+                </table>
+                {currentRecords.length === 0 ?
+                    <div className='d-flex justify-content-center'>
+                        <BallTriangle
+                            height={300}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
+                    </div>
+                    : null}
+            </div>
             {currentRecords.length > 0 ?
                 <div className="text-center">
                     <Pagination
