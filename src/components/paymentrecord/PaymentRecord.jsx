@@ -4,7 +4,7 @@ import { getAllPayments } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
 import PaymentRecordLogo from '../../assets/PaymentRecordLogo.png';
-import LoadingImage from '../../assets/LoadingImage.gif';
+import { BallTriangle } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/paymentrecords/paymentrecords.css';
 
@@ -162,22 +162,27 @@ const PaymentRecord = () => {
                                     }}>
                                         <p className='details-button-text'>Details</p>
                                     </button></td>
-                                    {/* <Modal show={modal === item._id ? true : false} onHide={handleClose} >
-                                    <MainPaymentReceipt data={item} id={item.id} index={i} handleClose={handleClose} nPages={nPages}
-                                        indexOfFirstRecord={indexOfFirstRecord} />
-                                </Modal> */}
                                 </tr>
                             )
                         })}
                     </tbody>
 
                 </table>
-            
-            {currentRecords.length === 0 ?
-                <div className='text-center'>
-                    <img src={LoadingImage} alt='LoadingImage'  />
-                </div>
-                : null}
+
+                {currentRecords.length === 0 ?
+                    <div className='d-flex justify-content-center'>
+                        <BallTriangle
+                            height={300}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
+                    </div>
+                    : null}
             </div>
             {currentRecords.length > 0 ?
                 <div className="text-center">

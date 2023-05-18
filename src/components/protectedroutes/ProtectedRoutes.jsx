@@ -9,7 +9,7 @@ const ProtectedRoutes = () => {
         token !== null ?
             <>
                 <Header />
-                {screenWidth === 393 ?
+                {screenWidth < 500 ?
                     <>
                         <Sidebar />
                         <Outlet />

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
 import ExpenseDetails from '../../components/expense/ExpenseDetails';
-import LoadingImage from '../../assets/LoadingImage.gif';
+import { BallTriangle } from 'react-loader-spinner';
 import Pagination from '../pagination/Pagination';
 import { getAllExpenses } from '../../getdata/getdata';
 import { headers } from '../../headers';
@@ -49,10 +49,10 @@ const ExpenseManagement = () => {
         <div className='card'>
             <div className='d-flex justify-content-between'>
                 <p className='expense-management-text'>Expense Management
-                <img className='expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" /></p>
+                    <img className='expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" /></p>
                 <button className='add-expense-button ml-auto' onClick={handleAddExpense}>
-                        <p className='add-expense-button-text'>Add Expense + </p>
-                    </button>
+                    <p className='add-expense-button-text'>Add Expense + </p>
+                </button>
             </div>
             <div className='expense-line-1'></div>
             <div className="scroll">
@@ -92,8 +92,17 @@ const ExpenseManagement = () => {
                 </table>
 
                 {currentRecords.length === 0 ?
-                    <div className='text-center'>
-                        <img src={LoadingImage} alt='LoadingImage'  />
+                    <div className='d-flex justify-content-center'>
+                        <BallTriangle
+                            height={300}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
                     </div>
                     : null}
 

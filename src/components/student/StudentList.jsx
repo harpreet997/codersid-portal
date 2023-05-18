@@ -4,8 +4,8 @@ import { getAllStudents } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
 import StudentIcon from '../../assets/Studentlist.png';
-import LoadingImage from '../../assets/LoadingImage.gif';
 import { useNavigate } from 'react-router-dom';
+import { BallTriangle } from 'react-loader-spinner';
 import '../../styles/student/studentlist.css';
 
 const StudentList = () => {
@@ -20,12 +20,12 @@ const StudentList = () => {
     const currentRecords = studentlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
     const navigate = useNavigate();
-
+    
     const handleNavigate = (item) => {
         navigate('/students-details', { state: { item } })
     }
 
-    useEffect(() => {
+    useEffect(() => { 
         getAllStudents(headers)
             .then((response) => {
                 setStudentList(response.data.Students);
@@ -41,6 +41,7 @@ const StudentList = () => {
             .catch((error) => {
                 console.log(error);
             })
+        
     }, []);
 
     const handleBatchSelect = (event) => {
@@ -146,8 +147,17 @@ const StudentList = () => {
                 </table>
 
                 {currentRecords.length === 0 ?
-                    <div className='text-center'>
-                        <img src={LoadingImage} alt='NoRecord' />
+                    <div className='d-flex justify-content-center'>
+                        <BallTriangle
+                            height={300}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
                     </div>
                     : null}
 

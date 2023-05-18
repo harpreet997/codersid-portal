@@ -3,8 +3,7 @@ import { addBatch } from '../../postdata/postdata';
 import { toast } from "react-toastify";
 import { getAllBatches } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
-import NoRecord from '../../assets/NoRecord.png';
-import LoadingImage from '../../assets/LoadingImage.gif';
+import { BallTriangle } from 'react-loader-spinner';
 import { headers } from '../../headers';
 import { deleteBatch } from '../../postdata/postdata';
 import AddBatchIcon from '../../assets/AddBatch.png'
@@ -87,7 +86,7 @@ const AddBatch = () => {
                         <p className="text-start">Batch Name</p>
                         <input type="text" className="add-batch-input"
                             id="batchName" name="batchName"
-                            
+
                             onChange={handleChange} required />
                     </div>
                     <div>
@@ -97,7 +96,7 @@ const AddBatch = () => {
                     </div>
                 </div>
             </form>
-            
+
             <table className="table">
                 <thead >
                     <tr>
@@ -119,10 +118,19 @@ const AddBatch = () => {
                     })}
                 </tbody>
             </table>
-            
+
             {currentRecords.length === 0 ?
-                <div className='text-center'>
-                    <img src={LoadingImage} alt='LoadingImage'  />
+                <div className='d-flex justify-content-center'>
+                    <BallTriangle
+                        height={300}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
                 </div>
                 : null}
             {currentRecords.length > 0 ?

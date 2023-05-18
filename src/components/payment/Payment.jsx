@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
-import NoRecord from '../../assets/NoRecord.png';
 import { getAllStudents } from '../../getdata/getdata';
 import { Modal } from 'react-bootstrap';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
 import PaymentStudentDetails from './PaymentStudentDetails';
-import LoadingImage from '../../assets/LoadingImage.gif';
+import { BallTriangle } from 'react-loader-spinner';
 import PayFee from '../../assets/PayFee.png';
 import '../../styles/payfee/payfee.css';
 
@@ -151,8 +150,17 @@ const Payment = () => {
 
                 </table>
                 {currentRecords.length === 0 ?
-                    <div className='text-center'>
-                        <img src={LoadingImage} alt='LoadingImage' />
+                    <div className='d-flex justify-content-center'>
+                        <BallTriangle
+                            height={300}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
                     </div>
                     : null}
 

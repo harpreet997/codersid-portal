@@ -3,7 +3,7 @@ import { addUser } from '../../postdata/postdata';
 import { toast } from "react-toastify";
 import { getAllUsers } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
-import LoadingImage from '../../assets/LoadingImage.gif';
+import { BallTriangle } from 'react-loader-spinner';
 import { headers } from '../../headers';
 import { deleteUser } from '../../postdata/postdata';
 import AddUserLogo from '../../assets/AddUser.png'
@@ -88,19 +88,19 @@ const AddUser = () => {
                     <div className="col-sm-4">
                         <p className="text-start">Name</p>
                         <input type="text" className="add-user-input w-100" id="name" name="name"
-                            
+
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4">
                         <p className="text-start">Email Address</p>
                         <input type="email" className="add-user-input w-100" id="email" name="email"
-                           
+
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4">
                         <p className="text-start">Password</p>
                         <input type="password" className="add-user-input w-100" id="password" name="password"
-                            
+
                             onChange={handleChange} required />
                     </div>
                 </div>
@@ -137,8 +137,17 @@ const AddUser = () => {
 
             </table>
             {currentRecords.length === 0 ?
-                <div className='text-center'>
-                    <img src={LoadingImage} alt='NoRecord'  />
+                <div className='d-flex justify-content-center'>
+                    <BallTriangle
+                        height={300}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
                 </div>
                 : null}
             {currentRecords.length > 0 ?
