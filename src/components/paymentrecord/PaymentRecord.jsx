@@ -174,8 +174,8 @@ const PaymentRecord = () => {
                 </table>
             
             {currentRecords.length === 0 ?
-                <div className='noRecordImage'>
-                    <img src={LoadingImage} alt='NoRecord' className='w-10' />
+                <div className='text-center'>
+                    <img src={LoadingImage} alt='LoadingImage'  />
                 </div>
                 : null}
             </div>
