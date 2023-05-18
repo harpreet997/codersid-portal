@@ -19,7 +19,9 @@ const PaymentRecord = () => {
     const currentRecords = studentlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
     const [studentName, setSearchStudentName] = useState('');
+    const [fromdate, setfromDate] = useState();
     const navigate = useNavigate();
+
 
 
     const handleNavigate = (item) => {
@@ -69,6 +71,7 @@ const PaymentRecord = () => {
 
     const handleFromDate = (event) => {
         const fromDate = event.target.value
+        setfromDate(fromDate)
         let data = allstudentlist.filter((item, i) => {
             return item.createdAt.substring(0, 10) >= fromDate;
         })
@@ -78,7 +81,7 @@ const PaymentRecord = () => {
     const handleToDate = (event) => {
         const toDate = event.target.value
         let data = allstudentlist.filter((item, i) => {
-            return item.createdAt.substring(0, 10) <= toDate;
+            return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate;
         })
         setStudentList(data);
     }
