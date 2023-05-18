@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Pagination from '../pagination/Pagination';
-import NoRecord from '../../assets/NoRecord.png';
 import { getAllStudents } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
 import StudentIcon from '../../assets/Studentlist.png';
+import LoadingImage from '../../assets/LoadingImage.gif';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/student/studentlist.css';
 
@@ -69,38 +69,40 @@ const StudentList = () => {
 
     return (
         <div className="card">
-            <div className='d-flex'>
-                <p className='studentlist-card-text'>CodersID Student</p>
-                <img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" />
-                    <button className='add-student-button' onClick={handleStudent}>
-                        <p className='add-student-button-text'>Add Student + </p>
-                    </button>
-                
+            <div className='d-flex justify-content-between'>
+                <p className='studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" /></p>
+                <button className='add-student-button' onClick={handleStudent}>
+                    <p className='add-student-button-text'>Add Student + </p>
+                </button>
             </div>
-                <div className="row mt-3">
-                    <div className="col-sm-6">
-                        <p className="text-start select-field-label">Select Batch</p>
-                        <select className="student-list-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
-                            <option value="All Batch"></option>
-                            {batchlist.map((item) => {
-                                return (
-                                    <option value={item.batchName} >{item.batchName}</option>
-                                )
+            {/* <div className="d-flex justify-content-center">
+                
+            </div> */}
 
-                            })}
-                        </select>
-                    </div>
-                    <div className="col-sm-6">
-                        <p className="text-start input-field-label">Student Name</p>
-                        <input type="text" className="student-list-input-width w-100" id="studentname" name="studentname"
-                            onChange={(e) => setSearchStudentName(e.target.value)} />
-                    </div>
+            <div className="row mt-3">
+                <div className="col-sm-6">
+                    <p className="text-start select-field-label">Select Batch</p>
+                    <select className="student-list-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
+                        <option value="All Batch">All Batch</option>
+                        {batchlist.map((item) => {
+                            return (
+                                <option value={item.batchName} >{item.batchName}</option>
+                            )
 
+                        })}
+                    </select>
                 </div>
-            
+                <div className="col-sm-6">
+                    <p className="text-start input-field-label">Student Name</p>
+                    <input type="text" className="student-list-input-width w-100" id="studentname" name="studentname"
+                        onChange={(e) => setSearchStudentName(e.target.value)} />
+                </div>
+
+            </div>
+
             <div className='scroll'>
                 <table className="table">
-                    <thead >
+                    <thead className='text-center'>
                         <tr>
                             <th scope="col">StudentID</th>
                             <th scope="col">Name</th>
@@ -114,7 +116,7 @@ const StudentList = () => {
 
                     </thead>
 
-                    <tbody>
+                    <tbody className='text-center'>
                         {currentRecords.filter((val) => {
                             if (studentName === "") {
                                 return val;
@@ -145,7 +147,7 @@ const StudentList = () => {
 
                 {currentRecords.length === 0 ?
                     <div className='noRecordImage'>
-                        <img src={NoRecord} alt='NoRecord' className='w-10' />
+                        <img src={LoadingImage} alt='NoRecord' className='w-10' />
                     </div>
                     : null}
 

@@ -34,7 +34,7 @@
     width: 20px;
     height: 20px;
     margin-left: 11.94px;
-    margin-top: 14px;
+    margin-top: 0px;
 }
 
 .add-student-button {
@@ -118,7 +118,6 @@ p {
 }
 
 .student-list-input-width {
-    /* width: 500px; */
     border: none !important;
     opacity: 0.5;
     border-bottom: 1px solid #000000 !important;

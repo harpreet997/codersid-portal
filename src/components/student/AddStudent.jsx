@@ -187,7 +187,7 @@ const AddStudent = () => {
                     <div className="col-sm-4 mb-3">
                         <p className="text-start select-field-label">Select Batch</p>
                         <select className="input-box-width w-100" name="batchname" onChange={handleChange} required>
-                            <option value=""></option>
+                            <option value="">Select Batch</option>
                             {batchlist.map((item) => {
                                 return (
                                     <option value={item.batchName}>{item.batchName}</option>
@@ -198,7 +198,7 @@ const AddStudent = () => {
                     <div className="col-sm-4 mb-3">
                         <p className="text-start select-field-label">Course Name</p>
                         <select className="input-box-width w-100" name="course" onChange={handleChange} required>
-                            <option value=""></option>
+                            <option value="">Select Course</option>
                             {courselist.map((item) => {
                                 return (
                                     <option value={item.courseName}>{item.courseName}</option>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from '../pagination/Pagination';
-import NoRecord from '../../assets/NoRecord.png';
 import { getAllPayments } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
 import PaymentRecordLogo from '../../assets/PaymentRecordLogo.png';
+import LoadingImage from '../../assets/LoadingImage.gif';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/paymentrecords/paymentrecords.css';
 
@@ -93,7 +93,7 @@ const PaymentRecord = () => {
                 <div className="col-sm-3">
                     <p className="text-start select-field-label">Select Batch</p>
                     <select className="payment-records-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
-                        <option value="All Batch"></option>
+                        <option value="All Batch">All Batch</option>
                         {batchlist.map((item) => {
                             return (
                                 <option value={item.batchName} >{item.batchName}</option>
@@ -109,19 +109,19 @@ const PaymentRecord = () => {
                         onChange={(e) => setSearchStudentName(e.target.value)} />
                 </div>
                 <div className="col-sm-3">
-                    <p className="text-start input-field-label">Select From Date</p>
+                    <p className="text-start select-field-label">Select From Date</p>
                     <input type="date" className="payment-records-input-width w-100" id="fromDate" name="fromDate"
                         onChange={handleFromDate} />
                 </div>
                 <div className="col-sm-3">
-                    <p className="text-start input-field-label">Select To Date</p>
+                    <p className="text-start select-field-label">Select To Date</p>
                     <input type="date" className="payment-records-input-width w-100" id="toDate" name="toDate"
                         onChange={handleToDate} />
                 </div>
             </div>
-            
+            <div className="scroll">
                 <table className="table">
-                    <thead >
+                    <thead className='text-center'>
                         <tr>
                             <th scope="col">Receipt No.</th>
                             <th scope="col">Receipt Date</th>
@@ -137,7 +137,7 @@ const PaymentRecord = () => {
 
                     </thead>
 
-                    <tbody>
+                    <tbody className='text-center'>
                         {currentRecords.filter((val) => {
                             if (studentName === "") {
                                 return val;
@@ -175,9 +175,10 @@ const PaymentRecord = () => {
             
             {currentRecords.length === 0 ?
                 <div className='noRecordImage'>
-                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                    <img src={LoadingImage} alt='NoRecord' className='w-10' />
                 </div>
                 : null}
+            </div>
             {currentRecords.length > 0 ?
                 <div className="text-center">
                     <Pagination

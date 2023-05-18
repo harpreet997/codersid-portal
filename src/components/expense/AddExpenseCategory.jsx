@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getAllCategories } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
+import LoadingImage from '../../assets/LoadingImage.gif';
 import { headers } from '../../headers';
 import { deleteCategory } from '../../postdata/postdata';
 import ExpenseLogo from '../../assets/ExpenseIcon.png';
@@ -83,10 +84,9 @@ const AddExpenseCategory = () => {
             <form onSubmit={AddCategory}>
                 <div className='d-flex'>
                     <div>
-                        {/* <p className="text-start">Category Name</p> */}
-
+                        <p className="text-start">Category Name</p>
                         <input type="text" className="add-expense-input"
-                            id="categoryName" name="categoryName" placeholder="Enter Category Name"
+                            id="categoryName" name="categoryName"
                             onChange={handleChange} required />
                     </div>
                     <div>
@@ -101,14 +101,14 @@ const AddExpenseCategory = () => {
                 <thead>
                     <tr>
                         <th scope="col">Category Name</th>
-                        <th scope="col">Action</th>
+                        <th className='ps-3' scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentRecords.map((item, i) => {
                         return (
                             <tr key={i}>
-                                <td>{item.categoryName}</td>
+                                <td className='ps-3'>{item.categoryName}</td>
                                 <td>
                                     <button className='delete-button' onClick={() => DeleteCategory(item._id)}>
                                         <p className='delete-button-text'>Delete</p>
@@ -122,7 +122,7 @@ const AddExpenseCategory = () => {
             {
                 currentRecords.length === 0 ?
                     <div className='noRecordImage'>
-                        <img src={NoRecord} alt='NoRecord' className='w-10' />
+                        <img src={LoadingImage} alt='NoRecord' className='w-10' />
                     </div>
                     : null
             }

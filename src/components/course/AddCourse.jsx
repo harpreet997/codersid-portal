@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getAllCourses } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
+import LoadingImage from '../../assets/LoadingImage.gif';
 import { headers } from '../../headers';
 import { deleteCourse } from '../../postdata/postdata';
 import AddCourseLogo from '../../assets/AddCourse.png';
@@ -83,9 +84,9 @@ const AddCourse = () => {
             <form onSubmit={AddCourse}>
                 <div className='d-flex'>
                     <div>
-                        {/* <p className="text-start">Course Name</p> */}
+                    <p className="text-start">Course Name</p>
                         <input type="text" className="add-course-input"
-                            id="courseName" name="courseName" placeholder="Enter Course Name"
+                            id="courseName" name="courseName"
                             onChange={handleChange} required />
                     </div>
                     <div>
@@ -97,18 +98,18 @@ const AddCourse = () => {
 
             </form >
 
-            <table className="table batch-table">
+            <table className="table">
                 <thead>
                     <tr>
-                        <th scope="col">Course List</th>
-                        <th scope="col">Action</th>
+                        <th className='ps-3' scope="col">Course List</th>
+                        <th className='ps-3' scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentRecords.map((item, i) => {
                         return (
                             <tr key={i}>
-                                <td>{item.courseName}</td>
+                                <td className='ps-3'>{item.courseName}</td>
                                 <td>
                                     <button className='delete-button' onClick={() => DeleteCourse(item._id)}>
                                         <p className='delete-button-text'>Delete</p>
@@ -122,7 +123,7 @@ const AddCourse = () => {
             {
                 currentRecords.length === 0 ?
                     <div className='noRecordImage'>
-                        <img src={NoRecord} alt='NoRecord' className='w-10' />
+                        <img src={LoadingImage} alt='NoRecord' className='w-10' />
                     </div>
                     : null
             }

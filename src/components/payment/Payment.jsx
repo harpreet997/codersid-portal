@@ -7,6 +7,7 @@ import { Modal } from 'react-bootstrap';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
 import PaymentStudentDetails from './PaymentStudentDetails';
+import LoadingImage from '../../assets/LoadingImage.gif';
 import PayFee from '../../assets/PayFee.png';
 import '../../styles/payfee/payfee.css';
 
@@ -101,60 +102,61 @@ const Payment = () => {
                 </div>
 
             </div>
+            <div className='scroll'>
+                <table className="table">
+                    <thead className='text-center'>
+                        <tr>
+                            <th scope="col">StudentID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Batch Name</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Email ID</th>
+                            <th scope="col">Contact Details</th>
+                            <th scope="col">Admission Date</th>
+                            <th scope="col">Action</th>
+                        </tr>
 
-            <table className="table">
-                {/* <div className='th-line-1'></div> */}
-                <thead >
-                    <tr>
-                        <th scope="col">StudentID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Batch Name</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Email ID</th>
-                        <th scope="col">Contact Details</th>
-                        <th scope="col">Admission Date</th>
-                        <th scope="col">Action</th>
-                    </tr>
+                    </thead>
 
-                </thead>
+                    <tbody className='text-center'>
+                        {currentRecords.filter((val) => {
+                            if (studentName === "") {
+                                return val;
+                            }
+                            else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
+                                return val;
+                            }
+                        }).map((item, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td>{`CODERSID-${item.id}`}</td>
+                                    <td>{item.studentname}</td>
+                                    <td>{item.batchname}</td>
+                                    <td>{item.course}</td>
+                                    <td>{item.emailid}</td>
+                                    <td>{item.contactdetails}</td>
+                                    <td>{item.createdAt.substring(0, 10)}</td>
+                                    <td><button className='payfee-payment-button' onClick={() => {
+                                        handleNavigate(item)
+                                    }}>
+                                        <p className='payfee-payment-button-text'>Make Payment</p>
+                                    </button></td>
+                                    <Modal show={modal === item._id ? true : false} onHide={handleClose}>
+                                        <PaymentStudentDetails data={item} id={item._id} handleClose={handleClose} />
+                                    </Modal>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
 
-                <tbody>
-                    {currentRecords.filter((val) => {
-                        if (studentName === "") {
-                            return val;
-                        }
-                        else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
-                            return val;
-                        }
-                    }).map((item, i) => {
-                        return (
-                            <tr key={i}>
-                                <td>{`CODERSID-${item.id}`}</td>
-                                <td>{item.studentname}</td>
-                                <td>{item.batchname}</td>
-                                <td>{item.course}</td>
-                                <td>{item.emailid}</td>
-                                <td>{item.contactdetails}</td>
-                                <td>{item.createdAt.substring(0, 10)}</td>
-                                <td><button className='payfee-payment-button' onClick={() => {
-                                    handleNavigate(item)
-                                }}>
-                                    <p className='payfee-payment-button-text'>Make Payment</p>
-                                </button></td>
-                                <Modal show={modal === item._id ? true : false} onHide={handleClose}>
-                                    <PaymentStudentDetails data={item} id={item._id} handleClose={handleClose} />
-                                </Modal>
-                            </tr>
-                        )
-                    })}
-                </tbody>
+                </table>
+                {currentRecords.length === 0 ?
+                    <div className='noRecordImage'>
+                        <img src={LoadingImage} alt='NoRecord' className='w-10' />
+                    </div>
+                    : null}
 
-            </table>
-            {currentRecords.length === 0 ?
-                <div className='noRecordImage'>
-                    <img src={NoRecord} alt='NoRecord' className='w-10' />
-                </div>
-                : null}
+            </div>
             {currentRecords.length > 0 ?
                 <div className="text-center">
                     <Pagination

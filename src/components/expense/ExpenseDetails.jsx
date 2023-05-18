@@ -6,7 +6,11 @@ const ExpenseDetails = ({ data }) => {
     return (
         <>
             <Modal.Header closeButton>
-                <Modal.Title className="text-white"><p className='view-student-details-heading'>Expense Details</p></Modal.Title>
+                <Modal.Title className="text-black">
+                    <p className='view-expense-details-modal-heading'>
+                        Expense Details
+                    </p>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 

@@ -180,7 +180,7 @@ const MakePayment = () => {
                 && paymentdata.thirdInstallment.thirdInstallmentPaymentStatus === "Paid")) {
             toast.error("Pay Previous Installments first", {
                 position: "top-center",
-                autoClose: 2000
+                autoClose: 5000
             })
             window.location.reload(false);
         }
@@ -188,7 +188,7 @@ const MakePayment = () => {
             paymentdata.secondInstallment.secondInstallmentPaymentStatus === "Paid") {
             toast.error("Pay Previous Installments first", {
                 position: "top-center",
-                autoClose: 2000
+                autoClose: 5000
             })
             window.location.reload(false);
         }
@@ -196,7 +196,7 @@ const MakePayment = () => {
             paymentdata.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") {
             toast.error("Pay Previous Installments first", {
                 position: "top-center",
-                autoClose: 2000
+                autoClose: 5000
             })
             window.location.reload(false);
         }
@@ -303,12 +303,12 @@ const MakePayment = () => {
                     </div>
                     <div className="col-sm-4">
                         <p className='make-payment-email-address'>Email Address</p>
-                        <input className='student-name-input-field form-control' type="email" name="emailid" readOnly
+                        <input className='student-name-input-field form-control w-100' type="email" name="emailid" readOnly
                             value={data.emailid} />
                     </div>
                     <div className="col-sm-4">
                         <p className='make-payment-email-address'>Contact Number</p>
-                        <input className='student-name-input-field form-control' type="text"
+                        <input className='student-name-input-field form-control w-100' type="text"
                             name="contactdetails" value={data.contactdetails} readOnly />
                     </div>
                     <div className="col-sm-4">
@@ -351,7 +351,8 @@ const MakePayment = () => {
                             min={data.registration.registrationfees} max={data.totalfees} id="secondInstallmentfees"
                             name="secondInstallmentfees"
                             onChange={handleSecondInstallmentChange} placeholder='Enter 1st Installment Fees' required
-                            readOnly={data.secondInstallment.secondInstallmentPaymentStatus === "Paid" ? true : false} />
+                            readOnly={data.registration.registrationPaymentStatus === "Not Paid" ||
+                            data.secondInstallment.secondInstallmentPaymentStatus === "Paid" ? true : false} />
                     </div>
                     <div className="col-sm-4">
                         <p className='make-payment-email-address'>1st Installment Date</p>
@@ -363,7 +364,8 @@ const MakePayment = () => {
                         <p className='make-payment-email-address'>1st Installment Status</p>
                         <select className="student-name-input-field form-select" name="secondInstallmentPaymentStatus"
                             value={paymentdata.secondInstallment.secondInstallmentPaymentStatus} onChange={handlePaymentStatus}
-                            readOnly={data.registration.registrationPaymentStatus === "Paid" ? true : false}>
+                            readOnly={
+                            data.registration.registrationPaymentStatus === "Paid" ? true : false}>
                             <option value={paymentdata.secondInstallment.secondInstallmentPaymentStatus}>
                                 {paymentdata.secondInstallment.secondInstallmentPaymentStatus}
                             </option>
@@ -376,7 +378,9 @@ const MakePayment = () => {
                             value={paymentdata.thirdInstallment.thirdInstallmentfees} min={data.registration.registrationfees}
                             max={data.totalfees} id="thirdInstallmentfees" name="thirdInstallmentfees"
                             onChange={handleThirdInstallmentChange} placeholder='Enter 3rd Installment Fees' required
-                            readOnly={data.thirdInstallment.thirdInstallmentPaymentStatus === "Paid" ? true : false} />
+                            readOnly={data.registration.registrationPaymentStatus === "Not Paid" ||
+                            data.secondInstallment.secondInstallmentPaymentStatus === "Not Paid" ||
+                                data.thirdInstallment.thirdInstallmentPaymentStatus === "Paid" ? true : false} />
                     </div>
                     <div className="col-sm-4">
                         <p className='make-payment-email-address'>2nd Installment Date</p>
@@ -418,7 +422,7 @@ const MakePayment = () => {
                             </div>
                             <div className="col-sm-4">
                                 <p className='make-payment-email-address'>3rd Installment Status</p>
-                                <select className="make-payment-third-installment-status-input-field form-select"
+                                <select className="make-payment-third-installment-status-input-field form-select w-100"
                                     name="fourthInstallmentPaymentStatus"
                                     value={paymentdata.fourthInstallment.fourthInstallmentPaymentStatus}
                                     onChange={handlePaymentStatus}
@@ -437,18 +441,26 @@ const MakePayment = () => {
                         <>
                             <div className="col-sm-4">
                                 <p className='make-payment-email-address'>Payment Type</p>
-                                <select className="make-payment-third-installment-status-input-field form-select" name="PaymentType" required
+                                <select className="make-payment-third-installment-status-input-field form-select w-100" name="PaymentType" required
                                     onChange={handlePaymentType}>
                                     <option value="">Select Payment Type</option>
-                                    <option value="Registration fee">Registration fee</option>
-                                    <option value="Installment 1">Installment 1</option>
-                                    <option value="Installment 2">Installment 2</option>
+                                    {data.registration.registrationPaymentStatus === "Not Paid" ? 
+                                    <option value="Registration fee">Registration fee</option>: null}
+                                    {paymentdata.registration.registrationPaymentStatus === "Paid" && 
+                                    data.secondInstallment.secondInstallmentPaymentStatus === "Not Paid" &&
+                                    data.registration.registrationPaymentStatus === "Paid"?
+                                    
+                                    <option value="Installment 1">Installment 1</option>: null}
+                                    {paymentdata.registration.registrationPaymentStatus === "Paid" && 
+                                    data.secondInstallment.secondInstallmentPaymentStatus === "Paid" && 
+                                    data.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid"
+                                    ?<option value="Installment 2">Installment 2</option>: null}
                                     {paymentdata.BalanceAmount ? <option value="Installment 3">Installment 3</option> : null}
                                 </select>
                             </div>
                             <div className="col-sm-4">
                                 <p className='make-payment-email-address'>Payment Mode </p>
-                                <select className="make-payment-third-installment-status-input-field form-select" name="PaymentMode" required
+                                <select className="make-payment-third-installment-status-input-field form-select w-100" name="PaymentMode" required
                                     onChange={handlePaymentMode}>
                                     <option value="">Select Payment Mode</option>
                                     <option value="Online Payment">Online Payment</option>
@@ -467,69 +479,6 @@ const MakePayment = () => {
                         )}
                 </div>
             </form>
-            {/* <div className='make-payment-rectangular-box'>
-                <div className="d-flex">
-                    <p className='make-payment-total-fees'>Total Fees</p>
-                    <div className='make-payment-horizontal-line'></div>
-                    <p className='make-payment-total-fees-value'>25000</p>
-                </div>
-                <div className='make-payment-horizontal-line-2'></div>
-                <div className="d-flex">
-                    <p className='make-payment-registration-fees'>Registration Fees</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>25000</p>
-                    <p className='make-payment-registration-fees'>Registration Date</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>2023-05-09</p>
-                    <p className='make-payment-registration-fees'>Registration Payment Status</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>Paid</p>
-                </div>
-                <div className="d-flex">
-                    <p className='make-payment-registration-fees'>1st Installment Fees</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>25000</p>
-                    <p className='make-payment-registration-fees'>1st Installment Date</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>2023-05-09</p>
-                    <p className='make-payment-registration-fees'>1st Installment Payment Status</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>Paid</p>
-                </div>
-                <div className="d-flex">
-                    <p className='make-payment-registration-fees'>2nd Installment Fees</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>25000</p>
-                    <p className='make-payment-registration-fees'>2nd Installment Date</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>2023-05-09</p>
-                    <p className='make-payment-registration-fees'>2nd Installment Payment Status</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>Paid</p>
-                </div>
-                <div className="d-flex">
-                    <p className='make-payment-registration-fees'>Registration Fees</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>25000</p>
-                    <p className='make-payment-registration-fees'>Registration Date</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>2023-05-09</p>
-                    <p className='make-payment-registration-fees'>Registration Payment Status</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>Paid</p>
-                </div>
-                <div className="d-flex">
-                    <p className='make-payment-registration-fees'>Registration Fees</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>25000</p>
-                    <p className='make-payment-registration-fees'>Registration Date</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>2023-05-09</p>
-                    <p className='make-payment-registration-fees'>Registration Payment Status</p>
-                    <div className='make-payment-horizontal-line-3'></div>
-                    <p className='make-payment-registration-fees-value'>Paid</p>
-                </div>
-            </div> */}
         </div>
     )
 }

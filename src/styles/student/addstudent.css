@@ -31,7 +31,6 @@ input:focus {
     display: flex;
     align-items: center;
     color: #000000;
-    opacity: 0.5;
 }
 
 .select-field-label {
@@ -39,11 +38,10 @@ input:focus {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
-    line-height: 24px;
+    line-height: 23px;
     display: flex;
     align-items: center;
     color: #000000;
-    opacity: 0.5;
 }
 
 

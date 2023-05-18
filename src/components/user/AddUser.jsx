@@ -3,7 +3,7 @@ import { addUser } from '../../postdata/postdata';
 import { toast } from "react-toastify";
 import { getAllUsers } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
-import NoRecord from '../../assets/NoRecord.png';
+import LoadingImage from '../../assets/LoadingImage.gif';
 import { headers } from '../../headers';
 import { deleteUser } from '../../postdata/postdata';
 import AddUserLogo from '../../assets/AddUser.png'
@@ -86,21 +86,21 @@ const AddUser = () => {
             <form onSubmit={AddUser}>
                 <div className="row mb-2">
                     <div className="col-sm-4">
-                        {/* <p className="text-start">Name</p> */}
-                        <input type="text" className="add-user-input" id="name" name="name"
-                            placeholder="Enter Name"
+                        <p className="text-start">Name</p>
+                        <input type="text" className="add-user-input w-100" id="name" name="name"
+                            
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4">
-                        {/* <p className="text-start">Email Address</p> */}
-                        <input type="email" className="add-user-input" id="email" name="email"
-                            placeholder="Enter Email Address"
+                        <p className="text-start">Email Address</p>
+                        <input type="email" className="add-user-input w-100" id="email" name="email"
+                           
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4">
-                        {/* <p className="text-start">Password</p> */}
-                        <input type="password" className="add-user-input" id="password" name="password"
-                            placeholder="Enter Password"
+                        <p className="text-start">Password</p>
+                        <input type="password" className="add-user-input w-100" id="password" name="password"
+                            
                             onChange={handleChange} required />
                     </div>
                 </div>
@@ -111,7 +111,7 @@ const AddUser = () => {
             </form>
             {/* <div className='user-list-card'> */}
             <table className="table">
-                <thead>
+                <thead className='text-center'>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
@@ -119,7 +119,7 @@ const AddUser = () => {
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='text-center'>
                     {currentRecords.map((item, i) => {
                         return (
                             <tr key={i}>
@@ -138,7 +138,7 @@ const AddUser = () => {
             </table>
             {currentRecords.length === 0 ?
                 <div className='noRecordImage'>
-                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                    <img src={LoadingImage} alt='NoRecord' className='w-10' />
                 </div>
                 : null}
             {currentRecords.length > 0 ?

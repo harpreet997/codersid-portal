@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getAllBatches } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
+import LoadingImage from '../../assets/LoadingImage.gif';
 import { headers } from '../../headers';
 import { deleteBatch } from '../../postdata/postdata';
 import AddBatchIcon from '../../assets/AddBatch.png'
@@ -83,10 +84,10 @@ const AddBatch = () => {
             <form onSubmit={AddBatch}>
                 <div className='d-flex'>
                     <div>
-                        {/* <p className="text-start">Batch Name</p> */}
+                        <p className="text-start">Batch Name</p>
                         <input type="text" className="add-batch-input"
                             id="batchName" name="batchName"
-                            placeholder="Enter Batch Name"
+                            
                             onChange={handleChange} required />
                     </div>
                     <div>
@@ -98,17 +99,17 @@ const AddBatch = () => {
             </form>
             
             <table className="table">
-                <thead>
+                <thead >
                     <tr>
                         <th scope="col">Batch List</th>
-                        <th scope="col">Action</th>
+                        <th className='ps-3' scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentRecords.map((item, i) => {
                         return (
                             <tr key={i}>
-                                <td>{item.batchName}</td>
+                                <td className='ps-3'>{item.batchName}</td>
                                 <td>
                                     <button className='delete-button' onClick={() => DeleteBatch(item._id)}>
                                         <p className='delete-button-text'>Delete</p>
@@ -121,7 +122,7 @@ const AddBatch = () => {
             
             {currentRecords.length === 0 ?
                 <div className='noRecordImage'>
-                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                    <img src={LoadingImage} alt='NoRecord' className='w-10' />
                 </div>
                 : null}
             {currentRecords.length > 0 ?

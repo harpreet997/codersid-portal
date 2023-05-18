@@ -10,10 +10,10 @@
 }
 
 .add-user-icon {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 20px;
     margin-left: 6.94px;
-    margin-top: 14px;
+    margin-top: 16px;
 }
 
 .add-user-input {
@@ -68,7 +68,7 @@
 
 .delete-button {
     box-sizing: border-box;
-    position: absolute;
+    
     width: 62.77px;
     height: 23.69px;
     background: #80B7FF;
@@ -79,17 +79,14 @@
 }
 
 .delete-button-text {
-    position: absolute;
-    width: 34px;
-    height: 16px;
+    margin-top: 0px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
     font-size: 10px;
-    line-height: 50px;
+    line-height: 20px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     color: #FFFFFF;
-    margin-top: -7px;
     margin-left: 6px;
 }

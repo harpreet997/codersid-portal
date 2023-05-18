@@ -8,8 +8,8 @@ const StudentDetails = () => {
 
     return (
         <div className="card" >
-            <p className='view-student-details-heading'>CodersID Students Details</p>
-            <div className="d-flex">
+            <p className='view-student-details-heading ps-2'>CodersID Students Details</p>
+            <div className="d-flex scroll">
                 <div className='view-student-details-primary-box'>
                     <div className="d-flex justify-content-between">
                         <p className='view-student-details-list-heading-1'>Student ID</p>
@@ -76,7 +76,7 @@ const StudentDetails = () => {
                 </div>
             </div>
 
-            <div className="d-flex">
+            <div className="d-flex scroll">
                 <div className='view-student-details-secondary-box'>
                     <div className="d-flex justify-content-between">
                         <p className='view-student-details-list-heading-1'>Registration Fees</p>
@@ -102,22 +102,11 @@ const StudentDetails = () => {
                     <div className="d-flex justify-content-between">
                         <p className='view-student-details-list-heading-1'>3rd Installment Fees</p>
                         <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentfees : "Not Applicable"}</p>
+                        <p className='studentid-value'>{data.BalanceAmount ? `${data.fourthInstallment.fourthInstallmentfees}/-` : "NA"}</p>
                     </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Registration Status</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.registration.registrationPaymentStatus}</p>
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>1st Installment Status</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.secondInstallment.secondInstallmentPaymentStatus}</p>
-                    </div>
+                    
                 </div>
-                <div className='view-student-details-primary-box'>
+                <div className='view-student-details-secondary-box'>
                     <div className="d-flex justify-content-between">
                         <p className='view-student-details-list-heading-1'>Registration Date</p>
                         <div className='view-line1'></div>
@@ -142,8 +131,26 @@ const StudentDetails = () => {
                     <div className="d-flex justify-content-between">
                         <p className='view-student-details-list-heading-1'>3rd Installment Date</p>
                         <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "Not Applicable"}</p>
+                        <p className='studentid-value'>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}</p>
                     </div>
+                    <div className='student-details-horizontal-line'></div>
+                    
+
+                </div>
+                <div className='view-student-details-secondary-box'>
+                <div className='student-details-horizontal-line'></div>
+                    <div className="d-flex justify-content-between">
+                        <p className='view-student-details-list-heading-1'>Registration Status</p>
+                        <div className='view-line1'></div>
+                        <p className='studentid-value'>{data.registration.registrationPaymentStatus}</p>
+                    </div>
+                    <div className='student-details-horizontal-line'></div>
+                    <div className="d-flex justify-content-between">
+                        <p className='view-student-details-list-heading-1'>1st Installment Status</p>
+                        <div className='view-line1'></div>
+                        <p className='studentid-value'>{data.secondInstallment.secondInstallmentPaymentStatus}</p>
+                    </div>
+                    
                     <div className='student-details-horizontal-line'></div>
                     <div className="d-flex justify-content-between">
                         <p className='view-student-details-list-heading-1'>2nd Installment Status</p>
@@ -154,7 +161,7 @@ const StudentDetails = () => {
                     <div className="d-flex justify-content-between">
                         <p className='view-student-details-list-heading-1'>3rd Installment Status</p>
                         <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentPaymentStatus : "Not Applicable"}</p>
+                        <p className='studentid-value'>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentPaymentStatus : "NA"}</p>
                     </div>
 
                 </div>

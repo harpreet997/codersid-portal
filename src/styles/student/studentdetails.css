@@ -10,7 +10,7 @@
 }
 
 .view-student-details-primary-box {
-    width: 490px;
+    width: 49%;
     margin-left: 10px;
     margin-top: 0px;
     background: #FFFFFF;
@@ -28,7 +28,7 @@
 }
 
 .view-student-details-secondary-box {
-    width: 490px;
+    width: 32.4%;
     margin-left: 10px;
     margin-top: 0px;
     background: #FFFFFF;
@@ -75,17 +75,16 @@
     opacity: 0.8;
 }
 
-.view-line1 {
+/* .view-line1 {
     margin-top: 25px;
-    /* margin-left: 60px; */
     width: 28px;
     height: 0px;
     opacity: 0.1;
     border: 2px solid #000000;
-}
+} */
 
 .student-details-horizontal-line {
-    width: 480px;
+    width: 100%;
     height: 0px;
     opacity: 0.05;
     border: 1px solid #000000;

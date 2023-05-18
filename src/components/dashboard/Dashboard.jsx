@@ -20,10 +20,10 @@ const Dashboard = () => {
         { url: SixthImage },
     ];
     return (
-        <div className="card dashboardcard">
+        <div className="card">
             <SimpleImageSlider
-                width={screenSize === 393 ? 300: 1000}
-                height={600}
+                width={screenSize === 393 ? 300: "99%"}
+                height={590}
                 images={images}
                 showBullets={true}
                 showNavs={true}
