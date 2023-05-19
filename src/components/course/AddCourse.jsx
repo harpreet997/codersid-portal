@@ -86,13 +86,13 @@ const AddCourse = () => {
                 <div className='row'>
                     <div className='col-sm-4'>
                         <p className="text-start">Course Name</p>
-                        <input type="text" className="add-course-input"
+                        <input type="text" className="add-course-input w-100"
                             id="courseName" name="courseName"
                             onChange={handleChange} required />
                     </div>
                     <div className='col-sm-4'>
                         <p className="text-start">Course Price</p>
-                        <input type="text" className="add-course-input"
+                        <input type="text" className="add-course-input w-100"
                             id="coursePrice" name="coursePrice"
                             onChange={handleChange} required />
                     </div>
