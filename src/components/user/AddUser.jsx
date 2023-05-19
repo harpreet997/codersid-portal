@@ -32,7 +32,7 @@ const AddUser = () => {
             .catch((error) => {
                 console.log(error);
             })
-    }, [userlist]);
+    }, []);
 
     const handleChange = (event) => {
         setUserdata({

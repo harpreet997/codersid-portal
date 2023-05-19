@@ -29,7 +29,7 @@ const AddBatch = () => {
             .catch((error) => {
                 console.log(error);
             })
-    }, [batchlist]);
+    }, []);
 
     const handleChange = (event) => {
         setBatchdata({

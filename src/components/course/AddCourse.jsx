@@ -29,7 +29,7 @@ const AddCourse = () => {
             .catch((error) => {
                 console.log(error);
             })
-    }, [courselist]);
+    }, []);
 
     const handleChange = (event) => {
         setCoursedata({

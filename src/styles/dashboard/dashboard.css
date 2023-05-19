@@ -1,22 +1,5 @@
-/* .dashboardcard {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: flex-start;
-    padding: 16px;
-    gap: 24px;
-    width: 77.5%;
-    margin-left: 22%;
-    background: #FFFFFF;
-    border: 1px solid #F3F3F3;
-    box-shadow: 2px 2px 15px rgba(188, 188, 188, 0.2);
-    border-radius: 6px;
-} */
-
 .card {
     padding: 5px;
-    /* margin-left: 22%; */
     margin-left: 20px;
     margin-top: 8.5%;
     width: 100%;
@@ -30,7 +13,6 @@
 @media screen and (max-width: 394px) {
     .card {
         padding: 8px;
-        /* margin-left: 22%; */
         margin-left: 0px;
         margin-top: 8.5%;
         width: 100%;

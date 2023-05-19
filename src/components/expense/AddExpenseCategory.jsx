@@ -29,7 +29,7 @@ const AddExpenseCategory = () => {
             .catch((error) => {
                 console.log(error);
             })
-    }, [categorylist]);
+    }, []);
 
     const handleChange = (event) => {
         setCategorydata({
