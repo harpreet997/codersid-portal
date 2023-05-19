@@ -31,6 +31,7 @@ const AddBatch = () => {
             })
     }, []);
 
+
     const handleChange = (event) => {
         setBatchdata({
             ...batchdata,
@@ -64,6 +65,7 @@ const AddBatch = () => {
                     position: "top-center",
                     autoClose: 2000
                 })
+                window.location.reload(false);
             })
             .catch((error) => {
                 toast.error(error.response.data.msg, {
@@ -86,7 +88,6 @@ const AddBatch = () => {
                         <p className="text-start">Batch Name</p>
                         <input type="text" className="add-batch-input"
                             id="batchName" name="batchName"
-
                             onChange={handleChange} required />
                     </div>
                     <div>

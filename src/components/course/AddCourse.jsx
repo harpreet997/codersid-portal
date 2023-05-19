@@ -13,6 +13,7 @@ const AddCourse = () => {
     const [courselist, setCourseList] = useState([])
     const [coursedata, setCoursedata] = useState({
         courseName: "",
+        coursePrice: ""
     });
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
@@ -64,6 +65,7 @@ const AddCourse = () => {
                     position: "top-center",
                     autoClose: 2000
                 })
+                window.location.reload(false);
             })
             .catch((error) => {
                 toast.error(error.response.data.msg, {
@@ -81,14 +83,20 @@ const AddCourse = () => {
             </div>
 
             <form onSubmit={AddCourse}>
-                <div className='d-flex'>
-                    <div>
+                <div className='row'>
+                    <div className='col-sm-4'>
                         <p className="text-start">Course Name</p>
                         <input type="text" className="add-course-input"
                             id="courseName" name="courseName"
                             onChange={handleChange} required />
                     </div>
-                    <div>
+                    <div className='col-sm-4'>
+                        <p className="text-start">Course Price</p>
+                        <input type="text" className="add-course-input"
+                            id="coursePrice" name="coursePrice"
+                            onChange={handleChange} required />
+                    </div>
+                    <div className='col-sm-4'>
                         <button className='add-course-button' type='submit'>
                             <p className='add-course-button-text'>Submit</p>
                         </button>
@@ -101,6 +109,7 @@ const AddCourse = () => {
                 <thead>
                     <tr>
                         <th className='ps-3' scope="col">Course List</th>
+                        <th className='ps-3' scope="col">Course Price</th>
                         <th className='ps-3' scope="col">Action</th>
                     </tr>
                 </thead>
@@ -109,6 +118,7 @@ const AddCourse = () => {
                         return (
                             <tr key={i}>
                                 <td className='ps-3'>{item.courseName}</td>
+                                <td className='ps-4'>{item.coursePrice}</td>
                                 <td>
                                     <button className='delete-button' onClick={() => DeleteCourse(item._id)}>
                                         <p className='delete-button-text'>Delete</p>

@@ -64,6 +64,7 @@ const AddExpenseCategory = () => {
                     position: "top-center",
                     autoClose: 2000
                 })
+                window.location.reload(false);
             })
             .catch((error) => {
                 toast.error(error.response.data.msg, {

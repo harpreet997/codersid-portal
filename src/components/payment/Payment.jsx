@@ -151,7 +151,8 @@ const Payment = () => {
                                 wrapperClassName=''
                                 wrapperStyle=""
                                 visible={true}
-                            />}
+                            />
+                        }
                     </div>
                     : null}
 

@@ -56,6 +56,29 @@ const AddStudent = () => {
             })
     }, [])
 
+    const handleCourse = (event) => {
+        const course = event.target.value;
+        if (course === 'Select Course') {
+            window.location.reload(false);
+        }
+        else {
+            let data = courselist.filter((item, i) => {
+                return item.courseName === course;
+            })
+            studentdata.totalfees = data[0].coursePrice
+            let registrationfees = (studentdata.totalfees * 25) / 100
+            let secondfees = (studentdata.totalfees * 75 / 2) / 100
+            let thirdfees = (studentdata.totalfees * 75 / 2) / 100
+            studentdata.registration.registrationfees = registrationfees
+            studentdata.secondInstallment.secondInstallmentfees = secondfees
+            studentdata.thirdInstallment.thirdInstallmentfees = thirdfees
+            setStudentdata({
+                ...studentdata,
+                [event.target.name]: course
+            })
+        }
+    }
+
     const handleTotalFees = (event) => {
         const totalfees = event.target.value
         setTotalfees(totalfees)
@@ -70,6 +93,8 @@ const AddStudent = () => {
             [event.target.name]: totalfees
         })
     }
+
+
 
     const handleChange = (event) => {
         setStudentdata({
@@ -181,7 +206,7 @@ const AddStudent = () => {
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Student Name</p>
                         <input type="text" className="input-box-width w-100" id="studentname" name="studentname"
-                            
+
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
@@ -197,8 +222,8 @@ const AddStudent = () => {
                     </div>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start select-field-label">Course Name</p>
-                        <select className="input-box-width w-100" name="course" onChange={handleChange} required>
-                            <option value="">Select Course</option>
+                        <select className="input-box-width w-100" name="course" onChange={handleCourse} required>
+                            <option value="Select Course">Select Course</option>
                             {courselist.map((item) => {
                                 return (
                                     <option value={item.courseName}>{item.courseName}</option>
@@ -209,25 +234,26 @@ const AddStudent = () => {
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Enter Email Address</p>
                         <input type="email" className="input-box-width w-100" id="emailid" name="emailid"
-                            
+
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Enter Contact Number</p>
                         <input type="tel" className="input-box-width w-100" id="contactdetails" name="contactdetails"
-                            
+
                             pattern="[0-9]{3}[0-9]{4}[0-9]{3}" onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Enter Address</p>
                         <input type="text" className="input-box-width w-100" id="address" name="address"
-                            
+
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Enter Total Fees</p>
-                        <input type="number" className="input-box-width w-100" min={1} id="totalfees" name="totalfees"
-                            
+                        <input type="number" className="input-box-width w-100" min={1} max={studentdata.totalfees}
+                            id="totalfees" name="totalfees"
+                            value={studentdata.totalfees}
                             onChange={handleTotalFees} required />
                     </div>
                     <div className="col-sm-4 mb-3">
@@ -249,7 +275,7 @@ const AddStudent = () => {
                             value={studentdata.secondInstallment.secondInstallmentfees}
                             min={studentdata.registration.registrationfees}
                             max={studentdata.totalfees} id="secondInstallmentfees" name="secondInstallmentfees"
-                             onChange={handleSecondInstallmentFees} required />
+                            onChange={handleSecondInstallmentFees} required />
                     </div>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Enter 1st Installment Date</p>
@@ -274,7 +300,7 @@ const AddStudent = () => {
                 </div>
                 <button className='add-student-form-button' type='submit'>
                     <p className='add-student-form-button-text'>Submit</p>
-                    </button>
+                </button>
             </form>
 
         </div>
