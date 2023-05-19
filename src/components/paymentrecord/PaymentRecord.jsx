@@ -174,16 +174,19 @@ const PaymentRecord = () => {
 
                 {currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
-                        <BallTriangle
-                            height={300}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
+                        {allstudentlist.length !== 0 ?
+                            <p className='fs-4'>No Data Found</p>
+                            :
+                            <BallTriangle
+                                height={300}
+                                width={300}
+                                radius={5}
+                                color="#10D1E3"
+                                ariaLabel="ball-triangle-loading"
+                                wrapperClassName=''
+                                wrapperStyle=""
+                                visible={true}
+                            />}
                     </div>
                     : null}
             </div>

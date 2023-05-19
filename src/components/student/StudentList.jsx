@@ -20,12 +20,12 @@ const StudentList = () => {
     const currentRecords = studentlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
     const navigate = useNavigate();
-    
+
     const handleNavigate = (item) => {
         navigate('/students-details', { state: { item } })
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         getAllStudents(headers)
             .then((response) => {
                 setStudentList(response.data.Students);
@@ -41,7 +41,7 @@ const StudentList = () => {
             .catch((error) => {
                 console.log(error);
             })
-        
+
     }, []);
 
     const handleBatchSelect = (event) => {
@@ -148,16 +148,20 @@ const StudentList = () => {
 
                 {currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
-                        <BallTriangle
-                            height={300}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
+                        {allstudentlist.length !== 0 ?
+                            <p className='fs-4'>No Data Found</p>
+                            :
+                            <BallTriangle
+                                height={300}
+                                width={300}
+                                radius={5}
+                                color="#10D1E3"
+                                ariaLabel="ball-triangle-loading"
+                                wrapperClassName=''
+                                wrapperStyle=""
+                                visible={true}
+                            />
+                        }
                     </div>
                     : null}
 

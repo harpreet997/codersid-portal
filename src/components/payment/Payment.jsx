@@ -76,7 +76,7 @@ const Payment = () => {
                 <div className="col-sm-6">
                     <p className="text-start select-field-label">Select Batch</p>
                     <select className="pay-fee-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
-                        <option value="All Batch"></option>
+                        <option value="All Batch">All Batch</option>
                         {batchlist.map((item) => {
                             return (
                                 <option value={item.batchName} >{item.batchName}</option>
@@ -139,17 +139,20 @@ const Payment = () => {
                 </table>
                 {currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
-                    <BallTriangle
-                        height={300}
-                        width={300}
-                        radius={5}
-                        color="#10D1E3"
-                        ariaLabel="ball-triangle-loading"
-                        wrapperClassName=''
-                        wrapperStyle=""
-                        visible={true}
-                    />
-                </div>
+                        {allstudentlist.length !== 0 ?
+                            <p className='fs-4'>No Data Found</p>
+                            :
+                            <BallTriangle
+                                height={300}
+                                width={300}
+                                radius={5}
+                                color="#10D1E3"
+                                ariaLabel="ball-triangle-loading"
+                                wrapperClassName=''
+                                wrapperStyle=""
+                                visible={true}
+                            />}
+                    </div>
                     : null}
 
             </div>
