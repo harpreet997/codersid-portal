@@ -6,6 +6,7 @@ import { getAllBatches } from '../../getdata/getdata';
 import StudentIcon from '../../assets/Studentlist.png';
 import { useNavigate } from 'react-router-dom';
 import { BallTriangle } from 'react-loader-spinner';
+import { CSVLink } from "react-csv";
 import '../../styles/student/studentlist.css';
 
 const StudentList = () => {
@@ -71,7 +72,8 @@ const StudentList = () => {
     return (
         <div className="card">
             <div className='d-flex justify-content-between'>
-                <p className='studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" /></p>
+                <p className='studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" />
+                <button className='ms-4 btn btn-primary'><CSVLink data={studentlist} className='text-white text-decoration-none'>Export Data</CSVLink></button></p>
                 <button className='add-student-button' onClick={handleStudent}>
                     <p className='add-student-button-text'>Add Student + </p>
                 </button>

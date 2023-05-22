@@ -6,6 +6,7 @@ import { getAllBatches } from '../../getdata/getdata';
 import PaymentRecordLogo from '../../assets/PaymentRecordLogo.png';
 import { BallTriangle } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
+import { CSVLink } from "react-csv";
 import '../../styles/paymentrecords/paymentrecords.css';
 
 const PaymentRecord = () => {
@@ -95,10 +96,12 @@ const PaymentRecord = () => {
     return (
         <div className="card">
             <div className='d-flex'>
-                <p className='payment-records-card-text'>Payment Records</p>
+                <p className='payment-records-card-text'>Payment Records
                 <img className='payment-records-icon' src={PaymentRecordLogo} alt="PaymentRecordLogo" />
+                <button className='ms-4 btn btn-primary'><CSVLink data={studentlist} className='text-white text-decoration-none'>Export Data</CSVLink></button>
+                </p>
             </div>
-            <div className="row">
+            <div className="row mt-4">
                 <div className="col-sm-3">
                     <p className="text-start select-field-label">Select Batch</p>
                     <select className="payment-records-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
@@ -128,6 +131,7 @@ const PaymentRecord = () => {
                         onChange={handleToDate} />
                 </div>
             </div>
+
             <div className="scroll">
                 <table className="table">
                     <thead className='text-center'>
