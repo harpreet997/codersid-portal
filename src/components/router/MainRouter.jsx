@@ -32,7 +32,7 @@ const [studentdata, setStudentData] = useState([]);
             .catch((error) => {
                 console.log(error);
             })
-        },[]);
+        }, []);
 
 
     return (

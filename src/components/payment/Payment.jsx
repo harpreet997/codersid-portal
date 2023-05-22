@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
-import { getAllStudents } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
 import { BallTriangle } from 'react-loader-spinner';
@@ -10,9 +9,7 @@ import '../../styles/payfee/payfee.css';
 
 
 const Payment = ({ studentdata }) => {
-    const [studentlist, setStudentList] = useState([]);
-    const [allstudentlist, setAllStudentList] = useState([]);
-    const [paymentlist, setPaymentList] = useState([]);
+    const [paymentlist, setPaymentList] = useState(studentdata);
     const [allpaymentlist, setAllPaymentList] = useState([]);
     const [batchlist, setBatchList] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
@@ -30,29 +27,16 @@ const Payment = ({ studentdata }) => {
 
     const handlePayment = () => {
         const paymentList = studentdata.filter((item) => {
-            // return item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid" || 
-            // item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid"
             return item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid" ||
                 item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid"
 
         })
-        console.log(paymentList);
-        //setPaymentList(paymentList)
         setPaymentList(paymentList)
         setAllPaymentList(paymentList)
     }
 
 
     useEffect(() => {
-        // getAllStudents(headers)
-        //     .then((response) => {
-        //         setPaymentList(response.data.Students)
-        //         // setStudentList(response.data.Students);
-        //         // setAllStudentList(response.data.Students)
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     })
         handlePayment();
         getAllBatches(headers)
             .then((response) => {
@@ -133,7 +117,7 @@ const Payment = ({ studentdata }) => {
                             if (studentName === "") {
                                 return val;
                             }
-                            else if (val.StudentName.toLowerCase().includes(studentName.toLowerCase())) {
+                            else if (val.studentname.toLowerCase().includes(studentName.toLowerCase())) {
                                 return val;
                             }
                         }).map((item, i) => {

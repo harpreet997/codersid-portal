@@ -21,7 +21,12 @@ const PaymentRecord = () => {
     const [studentName, setSearchStudentName] = useState('');
     const [fromdate, setfromDate] = useState();
     const navigate = useNavigate();
+    let total = 0;
+    const totalsum = allstudentlist.map((item, i) => {
+        return total = total + parseInt(item.Amount);
 
+    })
+    const grandtotal = totalsum[allstudentlist.length - 1]
 
 
     const handleNavigate = (item) => {
@@ -46,6 +51,7 @@ const PaymentRecord = () => {
             .catch((error) => {
                 console.log(error);
             })
+        
     }, []);
 
 
@@ -171,7 +177,10 @@ const PaymentRecord = () => {
                     </tbody>
 
                 </table>
-
+                <div className='d-flex justify-content-between'>
+                    <p className='ps-4'>Total Amount</p>
+                    <p className='pe-4'>{grandtotal}/-</p>
+                </div>
                 {currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
                         {allstudentlist.length !== 0 ?
