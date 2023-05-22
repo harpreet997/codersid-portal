@@ -4,7 +4,7 @@ import Header from "../header/Header";
 const ProtectedRoutes = () => {
     const token = localStorage.getItem('token')
     const screenWidth = window.innerWidth;
-    console.log(screenWidth)
+    
     return (
         token !== null ?
             <>

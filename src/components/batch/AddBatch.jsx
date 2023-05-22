@@ -126,7 +126,7 @@ const AddBatch = () => {
                         <p className='fs-4'>No Data Found</p>
                         :
                         <BallTriangle
-                            height={300}
+                            height={250}
                             width={300}
                             radius={5}
                             color="#10D1E3"

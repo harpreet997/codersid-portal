@@ -10,14 +10,31 @@ import PaymentRecord from '../paymentrecord/PaymentRecord';
 import StudentList from '../student/StudentList';
 import AddExpense from '../expense/AddExpense';
 import AddExpenseCategory from '../expense/AddExpenseCategory';
-import MakePayment from '../payment/MakePayment';
 import MainPaymentReceipt from '../paymentrecord/MainPaymentReceipt';
 import ExpenseManagement from '../expense/ExpenseManagement';
 import StudentDetails from '../student/StudentDetails';
 import ExpenseDetails from '../expense/ExpenseDetails';
 import SignIn from '../login/SignIn';
+import FinalMakePayment from '../payment/FinalMakePayment';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { getAllStudents } from '../../getdata/getdata';
+import { headers } from '../../headers';
 
 const MainRouter = () => {
+const [studentdata, setStudentData] = useState([]);
+
+    useEffect(() => {
+        getAllStudents(headers)
+            .then((response) => {
+                setStudentData(response.data.Students)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        },[]);
+
+
     return (
         <>
             <Routes>
@@ -33,8 +50,8 @@ const MainRouter = () => {
                     <Route path='/manage-expense' element={<ExpenseManagement />} />
                     <Route path='/add-expense' element={<AddExpense />} />
                     <Route path='/expense-details' element={<ExpenseDetails />} />
-                    <Route path='/payment' element={<Payment />} />
-                    <Route path='/make-payment' element={<MakePayment />} />
+                    <Route path='/payment' element={<Payment studentdata={studentdata}/>} />
+                    <Route path='/make-payment' element={<FinalMakePayment />} />
                     <Route path='/payment-receipt' element={<MainPaymentReceipt />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />

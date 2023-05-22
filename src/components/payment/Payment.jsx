@@ -9,16 +9,18 @@ import PayFee from '../../assets/PayFee.png';
 import '../../styles/payfee/payfee.css';
 
 
-const Payment = () => {
+const Payment = ({ studentdata }) => {
     const [studentlist, setStudentList] = useState([]);
     const [allstudentlist, setAllStudentList] = useState([]);
+    const [paymentlist, setPaymentList] = useState([]);
+    const [allpaymentlist, setAllPaymentList] = useState([]);
     const [batchlist, setBatchList] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = studentlist.slice(indexOfFirstRecord, indexOfLastRecord);
-    const nPages = Math.ceil(studentlist.length / recordsPerPage)
+    const currentRecords = paymentlist.slice(indexOfFirstRecord, indexOfLastRecord);
+    const nPages = Math.ceil(paymentlist.length / recordsPerPage)
     const [studentName, setSearchStudentName] = useState('');
     const navigate = useNavigate();
 
@@ -26,17 +28,32 @@ const Payment = () => {
         navigate('/make-payment', { state: { item } })
     }
 
+    const handlePayment = () => {
+        const paymentList = studentdata.filter((item) => {
+            // return item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid" || 
+            // item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid"
+            return item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid" ||
+                item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid"
+
+        })
+        console.log(paymentList);
+        //setPaymentList(paymentList)
+        setPaymentList(paymentList)
+        setAllPaymentList(paymentList)
+    }
+
 
     useEffect(() => {
-        getAllStudents(headers)
-            .then((response) => {
-                setStudentList(response.data.Students);
-                setAllStudentList(response.data.Students)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-
+        // getAllStudents(headers)
+        //     .then((response) => {
+        //         setPaymentList(response.data.Students)
+        //         // setStudentList(response.data.Students);
+        //         // setAllStudentList(response.data.Students)
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     })
+        handlePayment();
         getAllBatches(headers)
             .then((response) => {
                 setBatchList(response.data.Batches);
@@ -44,24 +61,27 @@ const Payment = () => {
             .catch((error) => {
                 console.log(error);
             })
+
     }, []);
 
     const handleBatchSelect = (event) => {
         const batchName = event.target.value;
         console.log(batchName)
         if (batchName === 'All Batch') {
-            setStudentList(allstudentlist);
+            setPaymentList(allpaymentlist);
+            console.log(paymentlist)
         }
         else {
-            let data = allstudentlist.filter((item, i) => {
+            let data = allpaymentlist.filter((item, i) => {
                 return item.batchname === batchName;
             })
             console.log(data);
             if (data.length > 0) {
-                setStudentList(data);
+                setPaymentList(data);
             }
             else {
-                setStudentList([])
+                setPaymentList([])
+                
             }
         }
     }
@@ -139,7 +159,7 @@ const Payment = () => {
                 </table>
                 {currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
-                        {allstudentlist.length !== 0 ?
+                        {paymentlist.length === 0 ?
                             <p className='fs-4'>No Data Found</p>
                             :
                             <BallTriangle
