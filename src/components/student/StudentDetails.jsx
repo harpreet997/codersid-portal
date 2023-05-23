@@ -1,25 +1,47 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/student/studentdetails.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const StudentDetails = () => {
     const location = useLocation();
     const data = location.state.item;
     const navigate = useNavigate();
+    const [date, setDate] = useState();
+    const disableDates = () => {
+        var today, dd, mm, yyyy;
+        today = new Date();
+        dd = today.getDate();
+        mm = today.getMonth() + 1;
+        yyyy = today.getFullYear();
+        if (dd < 10) {
+            setDate(`${yyyy}-0${mm}-0${dd}`);
+        }
+        else {
+            setDate(`${yyyy}-0${mm}-${dd}`);
+        }
+    }
+
+
+    useEffect(() => {
+        disableDates()
+    }, [])
 
     const handleBack = () => {
         navigate('/students-list');
     }
 
 
+
     return (
         <div className="card">
             <div className="d-flex justify-content-between">
-            <p className='view-student-details-heading ps-2'>CodersID Students Details</p>
-            <button className='view-student-details-back-button me-2' onClick={handleBack}>
-                <p className='view-student-details-back-button-text'>Back</p>
-            </button>
+                <p className='view-student-details-heading ps-2'>CodersID Students Details</p>
+                <button className='view-student-details-back-button me-2' onClick={handleBack}>
+                    <p className='view-student-details-back-button-text'>Back</p>
+                </button>
             </div>
-            
+
             <div className="d-flex scroll">
                 <div className='view-student-details-primary-box'>
                     <div className="d-flex justify-content-between">
@@ -191,25 +213,34 @@ const StudentDetails = () => {
                     <tbody className='text-center'>
                         <tr>
                             <td>Registration Fees</td>
-                            <td>{data.registration.registrationDate}</td>
+                            {(data.registration.registrationDate < date && data.registration.registrationPaymentStatus === "Not Paid") ?
+                                <td style={{ backgroundColor: "orange" }}>{data.registration.registrationDate}</td>
+                                : <td>{data.registration.registrationDate}</td>}
                             <td>{data.registration.registrationPaymentStatus}</td>
                             <td>{data.registration.registrationfees}/-</td>
                         </tr>
                         <tr>
                             <td>1st Installment Fees</td>
-                            <td>{data.secondInstallment.secondInstallmentDate}</td>
+                            {(data.secondInstallment.secondInstallmentDate < date && data.secondInstallment.secondInstallmentPaymentStatus === "Not Paid") ?
+                                <td style={{ backgroundColor: "orange" }}>{data.secondInstallment.secondInstallmentDate}</td>
+                                : <td>{data.secondInstallment.secondInstallmentDate}</td>}
                             <td>{data.secondInstallment.secondInstallmentPaymentStatus}</td>
                             <td>{data.secondInstallment.secondInstallmentfees}/-</td>
                         </tr>
                         <tr>
                             <td>2nd Installment Fees</td>
-                            <td>{data.thirdInstallment.thirdInstallmentDate}</td>
+                            {(data.secondInstallment.secondInstallmentDate < date && data.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") ?
+                                <td style={{ backgroundColor: "orange" }}>{data.thirdInstallment.thirdInstallmentDate}</td>
+                                : <td>{data.thirdInstallment.thirdInstallmentDate}</td>}
                             <td>{data.thirdInstallment.thirdInstallmentPaymentStatus}</td>
                             <td>{data.thirdInstallment.thirdInstallmentfees}/-</td>
                         </tr>
                         <tr>
                             <td>3rd Installment Fees</td>
-                            <td>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}</td>
+                            {(data.secondInstallment.secondInstallmentDate < date && data.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ?
+                                <td style={{ backgroundColor: "orange" }}>
+                                    {data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}</td>
+                                : <td>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}</td>}
                             <td>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentPaymentStatus : "NA"}</td>
                             <td>{data.BalanceAmount ? `${data.fourthInstallment.fourthInstallmentfees}/-` : "NA"}</td>
                         </tr>

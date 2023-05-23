@@ -24,14 +24,15 @@ const ExpenseManagement = () => {
 
     })
     const grandtotal = totalsum[expensedata.length - 1]
+    const role = localStorage.getItem('role');
 
-    console.log(grandtotal)
 
     const navigate = useNavigate();
 
     const handleModal = (id) => {
         setModal(id)
     };
+
 
     const handleClose = () => setModal(false);
 
@@ -47,6 +48,10 @@ const ExpenseManagement = () => {
 
     const handleAddExpense = () => {
         navigate("/add-expense")
+    }
+
+    const handleUpdateExpense = (item) => {
+        navigate('/update-expense', { state: { item } })
     }
 
     return (
@@ -85,7 +90,13 @@ const ExpenseManagement = () => {
                                         handleModal(item._id)
                                     }}>
                                         <p className='details-button-text'>Details</p>
-                                    </button></td>
+                                    </button>
+                                        {role === "admin" ? <button className='ms-2 details-button' onClick={() => {
+                                            handleUpdateExpense(item)
+                                        }}>
+                                            <p className='details-button-text'>Update</p>
+                                        </button> : null}
+                                    </td>
                                     <Modal show={modal === item._id ? true : false} onHide={handleClose}>
                                         <ExpenseDetails data={item} />
                                     </Modal>

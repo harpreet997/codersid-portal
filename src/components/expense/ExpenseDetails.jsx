@@ -41,7 +41,7 @@ const ExpenseDetails = ({ data }) => {
                             <div className="d-flex justify-content-between">
                                 <p className='view-student-details-list-heading-1'>Amount</p>
                                 <div className='view-line1'></div>
-                                <p className='studentid-value'>{data.amount}</p>
+                                <p className='studentid-value'>{data.Amount}/-</p>
 
                             </div>
                             <div className='student-details-horizontal-line'></div>

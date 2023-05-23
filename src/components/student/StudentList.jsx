@@ -21,9 +21,14 @@ const StudentList = () => {
     const currentRecords = studentlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
     const navigate = useNavigate();
+    const role = localStorage.getItem('role');
 
-    const handleNavigate = (item) => {
+    const handleDetails = (item) => {
         navigate('/students-details', { state: { item } })
+    }
+
+    const handleUpdate = (item) => {
+        navigate('/update-student', { state: { item } })
     }
 
     useEffect(() => {
@@ -110,7 +115,7 @@ const StudentList = () => {
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button me-1'>
                         <CSVLink data={studentlist} headers={headers1} filename='Student_Records.csv'
-                        className='add-student-button-text text-decoration-none'>Export Data</CSVLink>
+                            className='add-student-button-text text-decoration-none'>Export Data</CSVLink>
                     </button>
                     <button className='add-student-button' onClick={handleStudent}>
                         <p className='add-student-button-text'>Add Student + </p>
@@ -174,10 +179,16 @@ const StudentList = () => {
                                     <td>{item.contactdetails}</td>
                                     <td>{item.createdAt.substring(0, 10)}</td>
                                     <td><button className='details-button' onClick={() => {
-                                        handleNavigate(item)
+                                        handleDetails(item)
                                     }}>
                                         <p className='details-button-text'>Details</p>
-                                    </button></td>
+                                    </button>
+                                        {role === "admin" ? <button className='ms-2 details-button' onClick={() => {
+                                            handleUpdate(item)
+                                        }}>
+                                            <p className='details-button-text'>Update</p>
+                                        </button>: null}
+                                    </td>
                                 </tr>
                             )
                         })}

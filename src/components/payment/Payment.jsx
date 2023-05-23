@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
 import { headers } from '../../headers';
 import { getAllBatches } from '../../getdata/getdata';
@@ -13,6 +12,13 @@ import ModalMakePayment from './ModalMakePayment';
 const Payment = ({ studentdata }) => {
     const [paymentlist, setPaymentList] = useState(studentdata);
     const [allpaymentlist, setAllPaymentList] = useState([]);
+    const paymentList = studentdata.filter((item) => {
+        return (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") ||
+            (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "") ||
+            (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ||
+            (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "NA")
+
+    })
     const [batchlist, setBatchList] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
@@ -22,11 +28,7 @@ const Payment = ({ studentdata }) => {
     const currentRecords = paymentlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(paymentlist.length / recordsPerPage)
     const [studentName, setSearchStudentName] = useState('');
-    const navigate = useNavigate();
 
-    const handleNavigate = (item) => {
-        navigate('/make-payment', { state: { item } })
-    }
 
     const handleModal = (id) => {
         setModal(id)
@@ -35,13 +37,7 @@ const Payment = ({ studentdata }) => {
     const handleClose = () => setModal(false);
 
     const handlePayment = () => {
-        const paymentList = studentdata.filter((item) => {
-            return item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid" ||
-            item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "" ||
-                item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid" ||
-                item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "NA"
 
-        })
         setPaymentList(paymentList)
         setAllPaymentList(paymentList)
     }
@@ -76,7 +72,7 @@ const Payment = ({ studentdata }) => {
             }
             else {
                 setPaymentList([])
-                
+
             }
         }
     }

@@ -10,6 +10,10 @@ export const addStudent = (leavedata) => {
     return axios.post(`${baseUrl}/api/students`, leavedata)
 } 
 
+export const updateStudent = (id, studentdata) => {
+    return axios.patch(`${baseUrl}/api/students/${id}`, studentdata)
+}
+
 export const addUser = (userdata) => {
     return axios.post(`${baseUrl}/api/user`, userdata)
 } 
@@ -41,6 +45,10 @@ export const addCategory = (categorydata) => {
 
 export const addExpense = (expensedata) => {
     return axios.post(`${baseUrl}/api/expense`, expensedata)
+} 
+
+export const updateExpense = (id, expensedata) => {
+    return axios.patch(`${baseUrl}/api/expense/${id}`, expensedata)
 } 
 
 export const deleteCategory = (id) => {
