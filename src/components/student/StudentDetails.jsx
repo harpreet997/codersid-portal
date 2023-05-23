@@ -178,7 +178,7 @@ const StudentDetails = () => {
                 </div>
             </div> */}
 
-            <div className="scroll">
+            <div className="scroll view-student-details-table-box">
                 <table className="table">
                     <thead className='text-center'>
                         <tr>
