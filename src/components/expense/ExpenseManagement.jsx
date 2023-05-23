@@ -18,6 +18,14 @@ const ExpenseManagement = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = expensedata.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(expensedata.length / recordsPerPage)
+    let total = 0;
+    const totalsum = expensedata.map((item, i) => {
+        return total = total + parseInt(item.amount);
+
+    })
+    const grandtotal = totalsum[expensedata.length - 1]
+
+    console.log(grandtotal)
 
     const navigate = useNavigate();
 
@@ -86,7 +94,12 @@ const ExpenseManagement = () => {
                         })}
                     </tbody>
                 </table>
-
+                {currentRecords.length === 0 ? null :
+                    <div className='d-flex justify-content-between'>
+                        <p className='ps-4'>Total Amount</p>
+                        <p className='pe-4'>{grandtotal}/-</p>
+                    </div>
+                }
                 {currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
                         <BallTriangle
