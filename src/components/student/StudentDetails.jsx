@@ -1,14 +1,25 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/student/studentdetails.css';
 
 const StudentDetails = () => {
     const location = useLocation();
     const data = location.state.item;
-    
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate('/students-list');
+    }
+
 
     return (
-        <div className="card" >
+        <div className="card">
+            <div className="d-flex justify-content-between">
             <p className='view-student-details-heading ps-2'>CodersID Students Details</p>
+            <button className='view-student-details-back-button me-2' onClick={handleBack}>
+                <p className='view-student-details-back-button-text'>Back</p>
+            </button>
+            </div>
+            
             <div className="d-flex scroll">
                 <div className='view-student-details-primary-box'>
                     <div className="d-flex justify-content-between">
@@ -69,14 +80,14 @@ const StudentDetails = () => {
             </div>
 
             <div className="view-student-details-middle-box">
-                <div className="d-flex justify-content-between">
-                <p className='view-student-details-middle-heading'>Total Fees</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.totalfees}/-</p>
+                <div className="d-flex justify-content-center mt-2">
+                    <p className='view-student-details-middle-heading me-4 '>Total Fees</p>
+                    <div className='view-line1'></div>
+                    <p className='ms-2 studentid-value'>{data.totalfees}/-</p>
                 </div>
             </div>
 
-            <div className="d-flex scroll">
+            {/* <div className="d-flex scroll">
                 <div className='view-student-details-secondary-box'>
                     <div className="d-flex justify-content-between">
                         <p className='view-student-details-list-heading-1'>Registration Fees</p>
@@ -165,13 +176,47 @@ const StudentDetails = () => {
                     </div>
 
                 </div>
+            </div> */}
+
+            <div className="scroll">
+                <table className="table">
+                    <thead className='text-center'>
+                        <tr>
+                            <th>Details</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody className='text-center'>
+                        <tr>
+                            <td>Registration Fees</td>
+                            <td>{data.registration.registrationDate}</td>
+                            <td>{data.registration.registrationPaymentStatus}</td>
+                            <td>{data.registration.registrationfees}/-</td>
+                        </tr>
+                        <tr>
+                            <td>1st Installment Fees</td>
+                            <td>{data.secondInstallment.secondInstallmentDate}</td>
+                            <td>{data.secondInstallment.secondInstallmentPaymentStatus}</td>
+                            <td>{data.secondInstallment.secondInstallmentfees}/-</td>
+                        </tr>
+                        <tr>
+                            <td>2nd Installment Fees</td>
+                            <td>{data.thirdInstallment.thirdInstallmentDate}</td>
+                            <td>{data.thirdInstallment.thirdInstallmentPaymentStatus}</td>
+                            <td>{data.thirdInstallment.thirdInstallmentfees}/-</td>
+                        </tr>
+                        <tr>
+                            <td>3rd Installment Fees</td>
+                            <td>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}</td>
+                            <td>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentPaymentStatus : "NA"}</td>
+                            <td>{data.BalanceAmount ? `${data.fourthInstallment.fourthInstallmentfees}/-` : "NA"}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-        </div >
-
-
-
-
+        </div>
 
     );
 }

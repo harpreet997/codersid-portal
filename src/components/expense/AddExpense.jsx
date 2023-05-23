@@ -35,6 +35,10 @@ const AddExpense = () => {
         })
     }
 
+    const handleBack = () => {
+        navigate('/manage-expense')
+    }
+
 
     // const setFileToBase = (file) =>{
     //     const reader = new FileReader();
@@ -138,8 +142,11 @@ const AddExpense = () => {
                             placeholder='Enter Invoice Number' onChange={handleChange} />
                     </div>
                 </div>
+                <button className='add-expense-submit-button me-2' type='button' onClick={handleBack}>
+                    <p className='add-student-form-button-text'>Back</p>
+                </button>
                 <button className='add-expense-submit-button' type='submit'>
-                    <p className='add-expense-submit-button-text'>Submit</p>
+                    <p className='add-student-form-button-text'>Submit</p>
                 </button>
             </form>
         </div>

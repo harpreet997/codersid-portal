@@ -52,7 +52,7 @@ const PaymentRecord = () => {
             .catch((error) => {
                 console.log(error);
             })
-        
+
     }, []);
 
 
@@ -93,13 +93,26 @@ const PaymentRecord = () => {
         setStudentList(data);
     }
 
+    const headers1 = [
+        { label: "Student ID", key: 'id' },
+        { label: "Student Name", key: 'StudentName' },
+        { label: "Batch", key: 'batchname' },
+        { label: "Course", key: 'course' },
+        { label: "Amount", key: 'Amount' },
+        { label: "Email Address", key: 'Email' },
+        { label: "Contact Details", key: 'contactdetails' },
+        { label: "Payment Type", key: 'PaymentType' },
+        { label: "Payment Mode", key: 'PaymentMode' },
+    ]
+
     return (
         <div className="card">
-            <div className='d-flex'>
+            <div className='d-flex justify-content-between'>
                 <p className='payment-records-card-text'>Payment Records
-                <img className='payment-records-icon' src={PaymentRecordLogo} alt="PaymentRecordLogo" />
-                <button className='ms-4 btn btn-primary'><CSVLink data={studentlist} className='text-white text-decoration-none'>Export Data</CSVLink></button>
+                    <img className='payment-records-icon' src={PaymentRecordLogo} alt="PaymentRecordLogo" />
                 </p>
+                <button className='add-student-button'><CSVLink headers={headers1} data={studentlist} filename='Payment_Records.csv'
+                        className='add-student-button-text text-decoration-none'>Export Data</CSVLink></button>
             </div>
             <div className="row mt-4">
                 <div className="col-sm-3">
@@ -181,10 +194,12 @@ const PaymentRecord = () => {
                     </tbody>
 
                 </table>
-                <div className='d-flex justify-content-between'>
-                    <p className='ps-4'>Total Amount</p>
-                    <p className='pe-4'>{grandtotal}/-</p>
-                </div>
+                {currentRecords.length === 0 ? null :
+                    <div className='d-flex justify-content-between'>
+                        <p className='ps-4'>Total Amount</p>
+                        <p className='pe-4'>{grandtotal}/-</p>
+                    </div>
+                }
                 {currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
                         {allstudentlist.length !== 0 ?

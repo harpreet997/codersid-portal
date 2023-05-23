@@ -69,18 +69,54 @@ const StudentList = () => {
         navigate("/add-student")
     }
 
+    const headers1 = [
+        { label: "Student ID", key: 'id' },
+        { label: "Student Name", key: 'studentname' },
+        { label: "Batch", key: 'batchname' },
+        { label: "Course", key: 'course' },
+        { label: "Email Address", key: 'emailid' },
+        { label: "Contact Details", key: 'contactdetails' },
+        { label: "Address", key: 'address' },
+        // {label: "Admission Date", key: 'createdAt'},
+        { label: "Registration Fees", key: 'registration.registrationfees' },
+        { label: "Registration Payment Status", key: 'registration.registrationPaymentStatus' },
+        { label: "Registration Date", key: 'registration.registrationDate' },
+        { label: "1st Installment Fees", key: 'secondInstallment.secondInstallmentfees' },
+        { label: "1st Installment Payment Status", key: 'secondInstallment.secondInstallmentPaymentStatus' },
+        { label: "1st Installment Date", key: 'secondInstallment.secondInstallmentDate' },
+        { label: "2nd Installment Fees", key: 'thirdInstallment.thirdInstallmentfees' },
+        { label: "2nd Installment Payment Status", key: 'thirdInstallment.thirdInstallmentPaymentStatus' },
+        { label: "2nd Installment Payment Status", key: 'thirdInstallment.thirdInstallmentDate' },
+        { label: "3rd Installment Fees", key: 'fourthInstallment.fourthInstallmentfees' },
+        { label: "3rd Installment Payment Status", key: 'fourthInstallment.fourthInstallmentPaymentStatus' },
+        { label: "3rd Installment Date", key: 'fourthInstallment.fourthInstallmentDate' },
+    ]
+
     return (
         <div className="card">
-            <div className='d-flex justify-content-between'>
+            {/* <div className='d-flex justify-content-between'>
                 <p className='studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" />
-                <button className='ms-4 btn btn-primary'><CSVLink data={studentlist} className='text-white text-decoration-none'>Export Data</CSVLink></button></p>
+                    <button className='ms-4 add-student-button'>
+                        <CSVLink data={studentlist} headers={headers1} filename='Student_Records.csv'
+                            className='text-white text-decoration-none add-student-button-text'>Export Data</CSVLink></button></p>
                 <button className='add-student-button' onClick={handleStudent}>
                     <p className='add-student-button-text'>Add Student + </p>
                 </button>
-            </div>
-            {/* <div className="d-flex justify-content-center">
-                
             </div> */}
+            <div className="d-flex align-items-start justify-content-between">
+                <div className="d-flex justify-content-start">
+                    <p className='studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" /></p>
+                </div>
+                <div className="d-flex justify-content-end">
+                    <button className='add-student-button me-1'>
+                        <CSVLink data={studentlist} headers={headers1} filename='Student_Records.csv'
+                        className='add-student-button-text text-decoration-none'>Export Data</CSVLink>
+                    </button>
+                    <button className='add-student-button' onClick={handleStudent}>
+                        <p className='add-student-button-text'>Add Student + </p>
+                    </button>
+                </div>
+            </div>
 
             <div className="row mt-3">
                 <div className="col-sm-6">

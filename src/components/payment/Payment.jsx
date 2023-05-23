@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
 import { headers } from '../../headers';
@@ -6,6 +7,7 @@ import { getAllBatches } from '../../getdata/getdata';
 import { BallTriangle } from 'react-loader-spinner';
 import PayFee from '../../assets/PayFee.png';
 import '../../styles/payfee/payfee.css';
+import ModalMakePayment from './ModalMakePayment';
 
 
 const Payment = ({ studentdata }) => {
@@ -14,6 +16,7 @@ const Payment = ({ studentdata }) => {
     const [batchlist, setBatchList] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
+    const [modal, setModal] = useState(false);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = paymentlist.slice(indexOfFirstRecord, indexOfLastRecord);
@@ -25,10 +28,18 @@ const Payment = ({ studentdata }) => {
         navigate('/make-payment', { state: { item } })
     }
 
+    const handleModal = (id) => {
+        setModal(id)
+    };
+
+    const handleClose = () => setModal(false);
+
     const handlePayment = () => {
         const paymentList = studentdata.filter((item) => {
             return item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid" ||
-                item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid"
+            item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "" ||
+                item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid" ||
+                item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "NA"
 
         })
         setPaymentList(paymentList)
@@ -131,10 +142,13 @@ const Payment = ({ studentdata }) => {
                                     <td>{item.contactdetails}</td>
                                     <td>{item.createdAt.substring(0, 10)}</td>
                                     <td><button className='payfee-payment-button' onClick={() => {
-                                        handleNavigate(item)
+                                        handleModal(item._id)
                                     }}>
                                         <p className='payfee-payment-button-text'>Make Payment</p>
                                     </button></td>
+                                    <Modal show={modal === item._id ? true : false} onHide={handleClose}>
+                                        <ModalMakePayment data={item} />
+                                    </Modal>
                                 </tr>
                             )
                         })}

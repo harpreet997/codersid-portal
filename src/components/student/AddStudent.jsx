@@ -54,7 +54,11 @@ const AddStudent = () => {
             .catch((error) => {
                 console.log(error);
             })
-    }, [])
+    }, []);
+
+    const handleBack = () => {
+        navigate("/students-list");
+    }
 
     const handleCourse = (event) => {
         const course = event.target.value;
@@ -298,6 +302,9 @@ const AddStudent = () => {
                             onChange={handleThirdInstallmentDate} required />
                     </div>
                 </div>
+                <button className='add-student-form-button me-2' type='button' onClick={handleBack}>
+                    <p className='add-student-form-button-text'>Back</p>
+                </button>
                 <button className='add-student-form-button' type='submit'>
                     <p className='add-student-form-button-text'>Submit</p>
                 </button>
