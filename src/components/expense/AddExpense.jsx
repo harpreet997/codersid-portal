@@ -12,7 +12,7 @@ const AddExpense = () => {
         categoryName: "",
         expenseName: "",
         vendor: "",
-        amount: "",
+        Amount: "",
         invoiceNumber: "",
     })
     const navigate = useNavigate();
@@ -133,7 +133,7 @@ const AddExpense = () => {
                     </div>
                     <div className="col-sm-6">
                         <p className='make-payment-email-address'>Amount</p>
-                        <input className='student-name-input-field form-control' min={1} type="number" name="amount" required
+                        <input className='student-name-input-field form-control' min={1} type="number" name="Amount" required
                             placeholder='Enter Amount' onChange={handleChange} />
                     </div>
                     <div className="col-sm-6">

@@ -20,7 +20,7 @@ const ExpenseManagement = () => {
     const nPages = Math.ceil(expensedata.length / recordsPerPage)
     let total = 0;
     const totalsum = expensedata.map((item, i) => {
-        return total = total + parseInt(item.amount);
+        return total = total + parseInt(item.Amount);
 
     })
     const grandtotal = totalsum[expensedata.length - 1]
@@ -79,7 +79,7 @@ const ExpenseManagement = () => {
                                     <td>{item.categoryName}</td>
                                     <td>{item.expenseName}</td>
                                     <td>{item.vendor}</td>
-                                    <td>{item.amount}</td>
+                                    <td>{item.Amount}</td>
                                     <td>{item.invoiceNumber}</td>
                                     <td><button className='details-button' onClick={() => {
                                         handleModal(item._id)
