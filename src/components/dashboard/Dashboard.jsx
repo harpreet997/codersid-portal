@@ -10,7 +10,6 @@ import '../../styles/dashboard/dashboard.css';
 const Dashboard = () => {
     const screenSize = window.innerWidth
 
-    console.log(screenSize);
     const images = [
         { url: SecondImage },
         { url: FirstImage },

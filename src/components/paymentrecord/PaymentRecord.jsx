@@ -23,7 +23,7 @@ const PaymentRecord = () => {
     const [fromdate, setfromDate] = useState();
     const navigate = useNavigate();
     let total = 0;
-    const totalsum = studentlist.map((item, i) => {
+    const totalsum = studentlist.map((item) => {
         return total = total + parseInt(item.Amount);
 
     })

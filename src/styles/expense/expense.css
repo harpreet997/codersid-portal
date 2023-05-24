@@ -88,7 +88,7 @@
 
 .add-expense-submit-button {
     box-sizing: border-box;
-    width: 143px;
+    width: 100px;
     height: 44px;
     background: #10D1E3;
     border: 1px solid #AAF8FF;
@@ -113,6 +113,7 @@
 .modal-header {
     background-color: #10D1E3;;
     color: #fff;
+    height: 70px;
 }
 
 .view-expense-details-modal-box {

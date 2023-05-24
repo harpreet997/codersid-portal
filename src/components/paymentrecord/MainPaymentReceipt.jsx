@@ -40,12 +40,18 @@ const handleBack = () => {
         <div className="card scroll">
             <div className="main-receipt-card">
                 <img className='receipt-header-logo' src={ReceiptHeader} alt="ReceiptHeader" />
-                <div className="d-flex flex-column">
+                <div className="d-flex justify-content-between">
                     <img className='receipt-logo' src={ReceiptLogo} alt="ReceiptLogo" />
-                    <p className="receipt-tag-line">A Unit of GraffersID</p>
+                    <div className="ms-4 me-4 mt-2 vr" style={{color: "#43C4D8", width: 5, height: 80}}></div>
+                    <div>
+                    <p className='fw-bold'>A unit of GraffersID | GST : 23AATFG1858K1ZY</p>
+                    <p className='fw-bold'>815 Shekhar Central Palasia Square
+                        Indore, Madhya Pradesh 452018 India</p>
+                    </div>
+                    
                 </div>
                 <div className="d-flex justify-content-end pe-4">
-                    <p className="main-receipt-date-text">Date of Receipt:</p>
+                    <p className="main-receipt-date-text">Date of Invoice:</p>
                     <p className="main-receipt-date-value">{data.createdAt.substring(0, 10)}</p>
                 </div>
                 <div className="main-first-receipt-box">

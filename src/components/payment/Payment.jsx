@@ -2,23 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import Pagination from '../pagination/Pagination';
 import { headers } from '../../headers';
-import { getAllBatches } from '../../getdata/getdata';
+import { getAllBatches, getAllStudents } from '../../getdata/getdata';
 import { BallTriangle } from 'react-loader-spinner';
 import PayFee from '../../assets/PayFee.png';
 import '../../styles/payfee/payfee.css';
 import ModalMakePayment from './ModalMakePayment';
 
 
-const Payment = ({ studentdata }) => {
-    const [paymentlist, setPaymentList] = useState(studentdata);
+const Payment = () => {
+    const [paymentlist, setPaymentList] = useState([]);
     const [allpaymentlist, setAllPaymentList] = useState([]);
-    const paymentList = studentdata.filter((item) => {
-        return (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") ||
-            (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "") ||
-            (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ||
-            (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "NA")
-
-    })
     const [batchlist, setBatchList] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
@@ -37,14 +30,29 @@ const Payment = ({ studentdata }) => {
     const handleClose = () => setModal(false);
 
     const handlePayment = () => {
-
-        setPaymentList(paymentList)
-        setAllPaymentList(paymentList)
+        
+        
     }
 
 
     useEffect(() => {
         handlePayment();
+        getAllStudents(headers)
+        .then((response) => {
+            const paymentList = response.data.Students.filter((item) => {
+                return (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") ||
+                    (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "") ||
+                    (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ||
+                    (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "NA")
+        
+            })
+            setPaymentList(paymentList)
+            setAllPaymentList(paymentList)
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    
         getAllBatches(headers)
             .then((response) => {
                 setBatchList(response.data.Batches);

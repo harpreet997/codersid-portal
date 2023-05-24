@@ -214,7 +214,8 @@ const StudentDetails = () => {
                         <tr>
                             <td>Registration Fees</td>
                             {(data.registration.registrationDate < date && data.registration.registrationPaymentStatus === "Not Paid") ?
-                                <td style={{ backgroundColor: "orange" }}>{data.registration.registrationDate}</td>
+                                <td style={{ backgroundColor: "orange" }}>{data.registration.registrationDate}
+                                    <span className='fs-6 fw-bold ms-2'>(Overdue)</span></td>
                                 : <td>{data.registration.registrationDate}</td>}
                             <td>{data.registration.registrationPaymentStatus}</td>
                             <td>{data.registration.registrationfees}/-</td>
@@ -222,7 +223,8 @@ const StudentDetails = () => {
                         <tr>
                             <td>1st Installment Fees</td>
                             {(data.secondInstallment.secondInstallmentDate < date && data.secondInstallment.secondInstallmentPaymentStatus === "Not Paid") ?
-                                <td style={{ backgroundColor: "orange" }}>{data.secondInstallment.secondInstallmentDate}</td>
+                                <td style={{ backgroundColor: "orange" }}>{data.secondInstallment.secondInstallmentDate}
+                                    <span className='fs-6 fw-bold ms-2'>(Overdue)</span></td>
                                 : <td>{data.secondInstallment.secondInstallmentDate}</td>}
                             <td>{data.secondInstallment.secondInstallmentPaymentStatus}</td>
                             <td>{data.secondInstallment.secondInstallmentfees}/-</td>
@@ -230,7 +232,8 @@ const StudentDetails = () => {
                         <tr>
                             <td>2nd Installment Fees</td>
                             {(data.secondInstallment.secondInstallmentDate < date && data.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") ?
-                                <td style={{ backgroundColor: "orange" }}>{data.thirdInstallment.thirdInstallmentDate}</td>
+                                <td style={{ backgroundColor: "orange" }}>{data.thirdInstallment.thirdInstallmentDate}
+                                    <span className='fs-6 fw-bold ms-2'>(Overdue)</span></td>
                                 : <td>{data.thirdInstallment.thirdInstallmentDate}</td>}
                             <td>{data.thirdInstallment.thirdInstallmentPaymentStatus}</td>
                             <td>{data.thirdInstallment.thirdInstallmentfees}/-</td>
@@ -239,7 +242,8 @@ const StudentDetails = () => {
                             <td>3rd Installment Fees</td>
                             {(data.secondInstallment.secondInstallmentDate < date && data.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ?
                                 <td style={{ backgroundColor: "orange" }}>
-                                    {data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}</td>
+                                    {data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}
+                                    <span className='fs-6 fw-bold ms-2'>(Overdue)</span></td>
                                 : <td>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}</td>}
                             <td>{data.BalanceAmount ? data.fourthInstallment.fourthInstallmentPaymentStatus : "NA"}</td>
                             <td>{data.BalanceAmount ? `${data.fourthInstallment.fourthInstallmentfees}/-` : "NA"}</td>

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Dashboard from '../dashboard/Dashboard';
 import AddStudent from '../student/AddStudent';
@@ -18,24 +17,11 @@ import ExpenseDetails from '../expense/ExpenseDetails';
 import SignIn from '../login/SignIn';
 import FinalMakePayment from '../payment/FinalMakePayment';
 import UpdateStudent from '../student/UpdateStudent';
-import { getAllStudents } from '../../getdata/getdata';
-import { headers } from '../../headers';
 import UpdateExpense from '../expense/UpdateExpense';
+import Finance from '../finance/Finance';
+import FinanceRecord from '../finance/FinanceRecord';
 
 const MainRouter = () => {
-const [studentdata, setStudentData] = useState([]);
-
-    useEffect(() => {
-        getAllStudents(headers)
-            .then((response) => {
-                setStudentData(response.data.Students)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-        }, [studentdata]);
-
-
     return (
         <>
             <Routes>
@@ -53,11 +39,12 @@ const [studentdata, setStudentData] = useState([]);
                     <Route path='/add-expense' element={<AddExpense />} />
                     <Route path='/update-expense' element={<UpdateExpense />} />
                     <Route path='/expense-details' element={<ExpenseDetails />} />
-                    <Route path='/payment' element={<Payment studentdata={studentdata}/>} />
+                    <Route path='/payment' element={<Payment/>} />
                     <Route path='/make-payment' element={<FinalMakePayment />} />
                     <Route path='/payment-receipt' element={<MainPaymentReceipt />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />
+                    <Route path='/finance' element={<FinanceRecord />} />
                 </Route>
                 <Route path="/" element={<SignIn />} />
             </Routes>
