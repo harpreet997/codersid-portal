@@ -105,6 +105,8 @@ const FinanceRecord = () => {
     const [series, setSeries] = useState([])
     const [studentlist, setStudentList] = useState([]);
     const [expensedata, setExpenseData] = useState([]);
+    const [allstudentlist, setAllStudentList] = useState([]);
+    const [allexpensedata, setAllExpenseData] = useState([]);
     const [fromdate, setfromDate] = useState();
     const [salesvalue, setSalesRecords] = useState();
     const [expensevalue, setExpenseRecords] = useState();
@@ -151,7 +153,9 @@ const FinanceRecord = () => {
     useEffect(() => {
         axios.get("https://codersid-backend.vercel.app/api/paymentrecords").then((res) => {
             setStudentList(res.data.Payments)
+            setAllStudentList(res.data.Payments)
             setExpenseData(res.data.Expenses)
+            setAllExpenseData(res.data.Expenses)
             let sale = dataprocess("sale", res.data.Payments)
             console.log(sale)
             let expenses = dataprocess("Expenses", res.data.Expenses)
@@ -221,10 +225,10 @@ const FinanceRecord = () => {
     const handleFromDate = (event) => {
         const fromDate = event.target.value
         setfromDate(fromDate)
-        let salesdata = studentlist.filter((item, i) => {
+        let salesdata = allstudentlist.filter((item, i) => {
             return item.createdAt.substring(0, 10) >= fromDate;
         })
-        let expenserecords = expensedata.filter((item, i) => {
+        let expenserecords = allexpensedata.filter((item, i) => {
             return item.createdAt.substring(0, 10) >= fromDate;
         })
 
@@ -251,10 +255,11 @@ const FinanceRecord = () => {
 
     const handleToDate = (event) => {
         const toDate = event.target.value
-        let salesdata = studentlist.filter((item, i) => {
-            return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate;
+        alert(toDate)
+        let salesdata = allstudentlist.filter((item, i) => {
+            return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate 
         })
-        let expenserecords = expensedata.filter((item, i) => {
+        let expenserecords = allexpensedata.filter((item, i) => {
             return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate;
         })
         if (salesdata.length === 0) {
