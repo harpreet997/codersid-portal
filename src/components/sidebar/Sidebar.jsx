@@ -92,13 +92,13 @@ const Sidebar = () => {
                     : null
             }
             <div className="d-flex">
-            <NavLink className='expense-management' to='/manage-expense'>Manage Expense</NavLink>
-            <img className='sidebar-expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" />
+                <NavLink className='expense-management' to='/manage-expense'>Manage Expense</NavLink>
+                <img className='sidebar-expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" />
             </div>
-            <div className="d-flex">
-            <NavLink className='expense-management' to='/finance'>Finance</NavLink>
-            {/* <img className='sidebar-expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" /> */}
-            </div>
+            {role === "admin" ?
+                <div className="d-flex">
+                    <NavLink className='expense-management' to='/finance'>Finance</NavLink>
+                </div> : null}
         </div>
     );
 }

@@ -47,7 +47,7 @@ let options = {
         y: {
             formatter: function (y) {
                 if (typeof y !== "undefined") {
-                    return y.toFixed(0) + " points";
+                    return "<span>&#x20B9; </span>" + y.toFixed(0) + " /-";
                 }
                 return y;
 
@@ -106,19 +106,47 @@ const FinanceRecord = () => {
     const [studentlist, setStudentList] = useState([]);
     const [expensedata, setExpenseData] = useState([]);
     const [fromdate, setfromDate] = useState();
+    const [salesvalue, setSalesRecords] = useState();
+    const [expensevalue, setExpenseRecords] = useState();
+
     let sales = 0;
     let expenses = 0;
     const totalSales = studentlist.map((item) => {
         return sales = sales + parseInt(item.Amount);
 
     })
-    const grandtotalSales = totalSales[studentlist.length - 1]
+    
+    let grandtotalSales = totalSales[studentlist.length - 1]
+    if(studentlist.length === 0 )
+    {
+        grandtotalSales = 0
+    }
+    
     const totalExpenses = expensedata.map((item) => {
         return expenses = expenses + parseInt(item.Amount);
 
     })
-    const grandtotalExpenses = totalExpenses[expensedata.length - 1];
-    const profit = grandtotalSales - grandtotalExpenses;
+    let grandtotalExpenses = totalExpenses[expensedata.length - 1];
+    if(expensedata.length === 0 )
+    {
+        grandtotalExpenses = 0
+    }
+    console.log(grandtotalExpenses)
+
+
+    const calculateProfit = () => {
+        if (salesvalue === 0) {
+            return grandtotalSales - salesvalue
+        }
+        else if (expensevalue === 0 ) {
+            return grandtotalSales - expensevalue
+        }
+        else {
+            return grandtotalSales - grandtotalExpenses
+        }
+    }
+
+    const profit = calculateProfit();
 
     useEffect(() => {
         axios.get("https://codersid-backend.vercel.app/api/paymentrecords").then((res) => {
@@ -133,6 +161,7 @@ const FinanceRecord = () => {
             }
             let seriesData = [sale, expenses, { name: "profit/loss", data: [...profitData], type: 'line', }]
             console.log(seriesData)
+            console.log(seriesData[0].data[4])
             setSeries(seriesData)
 
 
@@ -156,8 +185,10 @@ const FinanceRecord = () => {
             monthly[obj[i]].forEach(v => {
                 total += v.Amount
             })
+            console.log(total)
             monthlyTotal.push(total)
         }
+        console.log(monthlyTotal)
         let seriesData =
             { name: type, data: [...monthlyTotal], type: "column" }
 
@@ -196,18 +227,25 @@ const FinanceRecord = () => {
         let expenserecords = expensedata.filter((item, i) => {
             return item.createdAt.substring(0, 10) >= fromDate;
         })
+
+        if (salesdata.length === 0) {
+            setSalesRecords(0)
+        }
+        if (expenserecords.length === 0) {
+            setExpenseRecords(0)
+        }
         setStudentList(salesdata);
         setExpenseData(expenserecords);
         let sale = dataprocess("sale", salesdata);
         let expenses = dataprocess("expenses", expenserecords);
         let profitData = []
-            for (let i = 0; i < sale.data.length; i++) {
-                profitData.push(sale.data[i] - expenses.data[i])
-            }
-            let seriesData = [sale, expenses, { name: "profit/loss", data: [...profitData], type: 'line', }]
-            console.log(seriesData)
-            setSeries(seriesData)
-        
+        for (let i = 0; i < sale.data.length; i++) {
+            profitData.push(sale.data[i] - expenses.data[i])
+        }
+        let seriesData = [sale, expenses, { name: "profit/loss", data: [...profitData], type: 'line', }]
+        console.log(seriesData)
+        setSeries(seriesData)
+
     }
 
 
@@ -219,17 +257,23 @@ const FinanceRecord = () => {
         let expenserecords = expensedata.filter((item, i) => {
             return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate;
         })
+        if (salesdata.length === 0) {
+            setSalesRecords(0)
+        }
+        if (expenserecords.length === 0) {
+            setExpenseRecords(0)
+        }
         setStudentList(salesdata);
         setExpenseData(expenserecords);
         let sale = dataprocess("sale", salesdata);
         let expenses = dataprocess("expenses", expenserecords);
         let profitData = []
-            for (let i = 0; i < sale.data.length; i++) {
-                profitData.push(sale.data[i] - expenses.data[i])
-            }
-            let seriesData = [sale, expenses, { name: "profit/loss", data: [...profitData], type: 'line', }]
-            console.log(seriesData)
-            setSeries(seriesData)
+        for (let i = 0; i < sale.data.length; i++) {
+            profitData.push(sale.data[i] - expenses.data[i])
+        }
+        let seriesData = [sale, expenses, { name: "profit/loss", data: [...profitData], type: 'line', }]
+        console.log(seriesData)
+        setSeries(seriesData)
     }
 
     const ClearFilter = () => {
@@ -259,19 +303,19 @@ const FinanceRecord = () => {
             <div className="d-flex">
                 <div className="finance-card">
                     <div className="card-body">
-                        <p className="fs-4 fw-bold">&#x20B9; {studentlist.length === 0 ? 0: grandtotalSales}/-</p>
+                        <p className="fs-4 fw-bold">&#x20B9; {studentlist.length === 0 ? salesvalue : grandtotalSales}/-</p>
                         <p className="fs-5">Sales</p>
                     </div>
                 </div>
                 <div className="finance-card">
                     <div className="card-body">
-                        <p className="fs-4 fw-bold">&#x20B9; {expensedata.length === 0 ? 0: grandtotalExpenses}/-</p>
+                        <p className="fs-4 fw-bold">&#x20B9; {expensedata.length === 0 ? expensevalue : grandtotalExpenses}/-</p>
                         <p className="fs-5">Expenses</p>
                     </div>
                 </div>
                 <div className="finance-card">
                     <div className="card-body">
-                        <p className="fs-4 fw-bold">&#x20B9; {studentlist.length === 0 || expensedata.length === 0 ? 0: profit}/-</p>
+                        <p className="fs-4 fw-bold">&#x20B9; {profit}/-</p>
                         <p className="fs-5">{profit < 0 ? "Loss" : "Profits"}</p>
                     </div>
                 </div>
