@@ -255,7 +255,6 @@ const FinanceRecord = () => {
 
     const handleToDate = (event) => {
         const toDate = event.target.value
-        alert(toDate)
         let salesdata = allstudentlist.filter((item, i) => {
             return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate 
         })
