@@ -33,11 +33,25 @@ let options = {
         size: 0
     },
     xaxis: {
-        // type: 'datetime'
+        title: {
+            text: 'Months',
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                fontFamily:  'Poppins',
+                color:  '#263238'
+              },
+        }
     },
     yaxis: {
         title: {
-            text: 'Points',
+            text: 'Rupees',
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                fontFamily:  'Poppins',
+                color:  '#263238'
+              },
         },
         min: 0
     },
@@ -51,48 +65,6 @@ let options = {
                 }
                 return y;
 
-            }
-        }
-    }
-}
-
-let optionPara = {
-    options: {
-        chart: {
-            type: 'bar',
-            height: 350
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        },
-        yaxis: {
-            title: {
-                text: 'Rs'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return "Rs " + val + "/-"
-                }
             }
         }
     }
