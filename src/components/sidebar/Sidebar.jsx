@@ -8,6 +8,7 @@ import MasterArrowIcon from '../../assets/MasterArrowIcon.png';
 import ListIcon from '../../assets/ListIcon.png';
 import PaymentIcon from '../../assets/PaymentIcon.png';
 import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
+import FinanceIcon from '../../assets/FinanceIcon.png';
 import '../../styles/sidebar/sidebar.css';
 
 const Sidebar = () => {
@@ -98,6 +99,7 @@ const Sidebar = () => {
             {role === "admin" ?
                 <div className="d-flex">
                     <NavLink className='expense-management' to='/finance'>Finance</NavLink>
+                    <img className='sidebar-expense-manage-icon' src={FinanceIcon} alt="FinanceIcon" />
                 </div> : null}
         </div>
     );
