@@ -63,3 +63,11 @@ export const addPaymentRecord = (paymentrecord) => {
     return axios.post(`${baseUrl}/api/payment`, paymentrecord)
 } 
 
+export const addLead = (leaddata) => {
+    return axios.post(`${baseUrl}/api/leads`, leaddata)
+} 
+
+export const editLead = (id, editleaddata) => {
+    return axios.patch(`${baseUrl}/api/leads/${id}`, editleaddata)
+} 
+

@@ -28,15 +28,8 @@ const Payment = () => {
     };
 
     const handleClose = () => setModal(false);
-
-    const handlePayment = () => {
-        
-        
-    }
-
-
+    
     useEffect(() => {
-        handlePayment();
         getAllStudents(headers)
         .then((response) => {
             const paymentList = response.data.Students.filter((item) => {

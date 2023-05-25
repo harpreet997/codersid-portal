@@ -14,6 +14,7 @@ import '../../styles/sidebar/sidebar.css';
 const Sidebar = () => {
     const [showMaster, setShowMaster] = useState(true);
     const [showPayment, setShowPayment] = useState(true);
+    const [showLeads, setShowLeads] = useState(true);
     const role = localStorage.getItem('role');
 
     const handleMaster = () => {
@@ -24,6 +25,10 @@ const Sidebar = () => {
         setShowPayment(!showPayment)
     }
 
+    const handleLeads = () => {
+        setShowLeads(!showLeads)
+    }
+
     return (
         <div className="sidebar ">
             <div className="d-flex">
@@ -32,19 +37,20 @@ const Sidebar = () => {
             </div>
             <div className='sidebar-line'></div>
             <div className='d-flex'>
-                <NavLink className='sidebar-item-1' to='/dashboard'>Dashboard</NavLink>
                 <img className='dashboard-text-icon' src={DashboardIcon} alt="DashboardIcon" />
+                <NavLink className='sidebar-item-1' to='/dashboard'>Dashboard</NavLink>
+
             </div>
             <div className='d-flex'>
-                <NavLink className='sidebar-item-2' to='/students-list'>CodersID Students</NavLink>
                 <img className='codersid-students-icon' src={StudentIcon} alt="StudentIcon" />
+                <NavLink className='sidebar-item-2' to='/students-list'>CodersID Students</NavLink>
             </div>
 
             {role === 'admin' ?
                 <>
                     <div className='d-flex'>
-                        <p className='sidebar-item-3' onClick={handleMaster}>Master</p>
                         <img className='master-text-icon' src={MasterIcon} alt="MasterIcon" />
+                        <p className='sidebar-item-3' onClick={handleMaster}>Master</p>
                         <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                     </div>
 
@@ -73,9 +79,44 @@ const Sidebar = () => {
 
                 </>
                 : null}
+
+           
+                <div className='d-flex'>
+                    <img className='master-text-icon' src={MasterIcon} alt="MasterIcon" />
+                    <p className='sidebar-item-3' onClick={handleLeads}>Leads</p>
+                    <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
+                </div>
+                {
+                    showLeads ?
+                        <>
+                            <div className="d-flex">
+                                <img className='list-icon' src={ListIcon} alt="ListIcon" />
+                                <NavLink className='add-batch-text' to='/all-leads'>All Leads</NavLink>
+                            </div>
+                            <div className="d-flex">
+                                <img className='list-icon-2' src={ListIcon} alt="ListIcon" />
+                                <NavLink className='add-user-text' to='/followup'>Followup</NavLink>
+                            </div>
+                            <div className="d-flex">
+                                <img className='list-icon-3' src={ListIcon} alt="ListIcon" />
+                                <NavLink className='add-course-text' to='/cold-reach-out'>Cold Reach out</NavLink>
+                            </div>
+                            <div className="d-flex">
+                                <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                                <NavLink className='add-expense-text' to='/convered-leads'>Converted</NavLink>
+                            </div>
+                            <div className="d-flex">
+                                <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                                <NavLink className='add-expense-text' to='/lost-leads'>Not Interested/ Permanently Lost.
+                                </NavLink>
+                            </div>
+                        </>
+                        : null
+                }
+
             <div className='d-flex'>
-                <p className='payment-text' onClick={handlePayment}>Payment</p>
                 <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
+                <p className='payment-text' onClick={handlePayment}>Payment</p>
                 <img className='payment-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
             </div>
             {
@@ -93,13 +134,13 @@ const Sidebar = () => {
                     : null
             }
             <div className="d-flex">
-                <NavLink className='expense-management' to='/manage-expense'>Manage Expense</NavLink>
                 <img className='sidebar-expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" />
+                <NavLink className='expense-management' to='/manage-expense'>Manage Expense</NavLink>
             </div>
             {role === "admin" ?
                 <div className="d-flex">
-                    <NavLink className='expense-management' to='/finance'>Finance</NavLink>
                     <img className='sidebar-expense-manage-icon' src={FinanceIcon} alt="FinanceIcon" />
+                    <NavLink className='expense-management' to='/finance'>Finance</NavLink>
                 </div> : null}
         </div>
     );

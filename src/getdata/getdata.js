@@ -28,3 +28,7 @@ export const getAllExpenses = (headers) => {
 export const getAllPayments = (headers) => {
     return axios.get(`${baseUrl}/api/payment`, {headers})
 }
+
+export const getAllLeads = (headers) => {
+    return axios.get(`${baseUrl}/api/leads`, {headers})
+}

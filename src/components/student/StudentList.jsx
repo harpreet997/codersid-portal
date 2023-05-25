@@ -99,15 +99,6 @@ const StudentList = () => {
 
     return (
         <div className="card">
-            {/* <div className='d-flex justify-content-between'>
-                <p className='studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" />
-                    <button className='ms-4 add-student-button'>
-                        <CSVLink data={studentlist} headers={headers1} filename='Student_Records.csv'
-                            className='text-white text-decoration-none add-student-button-text'>Export Data</CSVLink></button></p>
-                <button className='add-student-button' onClick={handleStudent}>
-                    <p className='add-student-button-text'>Add Student + </p>
-                </button>
-            </div> */}
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
                     <p className='studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" /></p>

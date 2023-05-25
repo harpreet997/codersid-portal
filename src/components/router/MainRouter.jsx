@@ -20,6 +20,11 @@ import UpdateStudent from '../student/UpdateStudent';
 import UpdateExpense from '../expense/UpdateExpense';
 import Finance from '../finance/Finance';
 import FinanceRecord from '../finance/FinanceRecord';
+import AllLeads from '../leads/AllLeads';
+import Followup from '../leads/Followup';
+import ColdReachOut from '../leads/ColdReachOut';
+import ConvertedLead from '../leads/ConvertedLead';
+import LostLead from '../leads/LostLead';
 
 const MainRouter = () => {
     return (
@@ -45,6 +50,11 @@ const MainRouter = () => {
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />
                     <Route path='/finance' element={<FinanceRecord />} />
+                    <Route path='/all-leads' element={<AllLeads />} />
+                    <Route path='/followup' element={<Followup />} />
+                    <Route path='/cold-reach-out' element={<ColdReachOut />} />
+                    <Route path='/convered-leads' element={<ConvertedLead />} />
+                    <Route path='/lost-leads' element={<LostLead />} />
                 </Route>
                 <Route path="/" element={<SignIn />} />
             </Routes>
