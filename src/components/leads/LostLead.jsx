@@ -78,7 +78,7 @@ const LostLead = () => {
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
                     <p className='studentlist-card-text'>Not Interested/ Permanently Lost Leads
-                        <img className='studentlist-icon' src={LeadImage} alt="LeadImage" /></p>
+                        <img className='leadlist-icon' src={LeadImage} alt="LeadImage" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button me-1'>

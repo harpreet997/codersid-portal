@@ -115,6 +115,14 @@
     margin-top: 28.27px;
 }
 
+.lead-icon {
+    margin-left: 5px;
+    margin-top: 22px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.8;
+}
+
 .list-icon {
     margin-left: 20px;
     margin-right: 13px;

@@ -83,7 +83,7 @@ const Sidebar = () => {
 
            
                 <div className='d-flex'>
-                    <img className='master-text-icon' src={LeadImage} alt="LeadImage" />
+                    <img className='lead-icon' src={LeadImage} alt="LeadImage" />
                     <p className='sidebar-item-3' onClick={handleLeads}>Leads</p>
                     <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                 </div>

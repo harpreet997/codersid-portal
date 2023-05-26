@@ -37,6 +37,7 @@
     margin-top: 0px;
 }
 
+
 .add-student-button {
     box-sizing: border-box;
     width: 156px;
@@ -83,7 +84,7 @@ td {
     height: 23.69px;
     background: #80B7FF;
     opacity: 0.99;
-    border: 1px solid #80B7FF;
+    border: 1px solid #506888;
     border-radius: 11.8428px;
     margin-top: 12px;
 }
