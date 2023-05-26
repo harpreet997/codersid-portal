@@ -11,6 +11,7 @@ import { BallTriangle } from 'react-loader-spinner';
 import { CSVLink } from "react-csv";
 import EditLead from './EditLead';
 import LeadDetails from './LeadDetails';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/student/studentlist.css';
 import '../../styles/leads/lead.css';
 
@@ -27,7 +28,7 @@ const DirectWalkIn = () => {
     const currentRecords = allleadList.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(allleadList.length / recordsPerPage);
     const [loader, setLoader] = useState(false);
-    
+    const navigate = useNavigate();
 
     const handleEditLeadModal = (id) => {
         setEditLeadModal(id)
@@ -38,6 +39,9 @@ const DirectWalkIn = () => {
         setLeadDetailsModal(id)
     };
 
+    const handleDetails = (item) => {
+        navigate('/lead-details', { state: { item } })
+    }
     
     const closeEditLeadModal = () => setEditLeadModal(false);
     const closeLeadDetailsModal = () => setLeadDetailsModal(false);
@@ -75,7 +79,7 @@ const DirectWalkIn = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Walk In
+                    <p className='studentlist-card-text'>Walk-Ins
                         <img className='studentlist-icon' src={LeadsIcon} alt="LeadsIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
@@ -123,7 +127,7 @@ const DirectWalkIn = () => {
                                                     <p className='details-button-text'>Update</p>
                                                 </button>
                                                 <button className='ms-2 details-button' onClick={() => {
-                                                    handleLeadDetailsModal(item._id)
+                                                    handleDetails(item)
                                                 }}>
                                                     <p className='details-button-text'>Details</p>
                                                 </button>

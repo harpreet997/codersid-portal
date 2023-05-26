@@ -19,6 +19,7 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
     })
 
     const [comment, setComment] = useState();
+    const [isComment, setIsComment] = useState(false);
 
     const Status = ['Followup', 'Cold Reach out', 'Converted', 'Not Interested/ Permanently Lost', 'Walk In']
 
@@ -32,23 +33,27 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
     // const previousdata = editleaddata.comments;
     // previousdata.push('test');
     // console.log(previousdata)
-
+console.log(editleaddata.comments[2]);
+console.log(data.comments[data.comments.length-1])
 
     const handleComment = (event) => {
         setComment(event.target.value)
+        setIsComment(true)
     }
 
     const handleUpdateLead = (event) => {
         event.preventDefault();
         // const previousdata = [editleaddata.comments]
-        // const payload = {
-        //     ...editleaddata,
-        //     comments: [...editleaddata.comments]
-        // }
-        // console.log(payload)
-        // console.log(editleaddata)
+        if(isComment === true)
+        {
+        const payload = {
+            ...editleaddata,
+            comments: [...editleaddata.comments, comment]
+        }
+        console.log(payload)
+        console.log(editleaddata)
 
-        editLead(id, editleaddata)
+        editLead(id, payload)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -64,6 +69,25 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
                     autoClose: 2000
                 })
             })
+        }
+        else {
+            editLead(id, editleaddata)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 3000
+                })
+                closeEditLeadModal();
+                window.location.reload(false);
+            }
+            )
+            .catch((error) => {
+                toast.error(error.response.data.msg, {
+                    position: "top-center",
+                    autoClose: 2000
+                })
+            })
+        }
     }
 
     return (
@@ -93,7 +117,7 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
                         <div className="mt-3">
                             <p className="text-start input-field-label">Comments</p>
                             <textarea className="input-box-width w-100" rows={5} cols={30} id="comments" name="comments"
-                                value={editleaddata.comments} onChange={handleChange}
+                                defaultValue={data.comments[data.comments.length-1]} onChange={handleComment}
                                 required />
                         </div>
                     </div>

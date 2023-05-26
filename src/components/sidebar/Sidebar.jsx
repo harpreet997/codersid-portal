@@ -112,7 +112,7 @@ const Sidebar = () => {
                             </div>
                             <div className="d-flex">
                                 <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
-                                <NavLink className='add-expense-text' to='/walk-in'>Walk In</NavLink>
+                                <NavLink className='add-expense-text' to='/walk-in'>Walk-Ins</NavLink>
                             </div>
                         </>
                         : null

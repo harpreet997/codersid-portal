@@ -1,7 +1,7 @@
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/student/studentdetails.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
+
 
 const StudentDetails = () => {
     const location = useLocation();

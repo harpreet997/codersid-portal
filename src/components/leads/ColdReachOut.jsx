@@ -11,8 +11,10 @@ import { BallTriangle } from 'react-loader-spinner';
 import { CSVLink } from "react-csv";
 import EditLead from './EditLead';
 import LeadDetails from './LeadDetails';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/student/studentlist.css';
 import '../../styles/leads/lead.css';
+
 
 
 const ColdReachOut = () => {
@@ -26,6 +28,7 @@ const ColdReachOut = () => {
     const currentRecords = leadList.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(leadList.length / recordsPerPage)
     const [loader, setLoader] = useState(false);
+    const navigate = useNavigate();
 
     const handleEditLeadModal = (id) => {
         setEditLeadModal(id)
@@ -34,6 +37,10 @@ const ColdReachOut = () => {
     const handleLeadDetailsModal = (id) => {
         setLeadDetailsModal(id)
     };
+
+    const handleDetails = (item) => {
+        navigate('/lead-details', { state: { item } })
+    }
 
     const closeLeadDetailsModal = () => setLeadDetailsModal(false);
     const closeEditLeadModal = () => setEditLeadModal(false);
@@ -108,7 +115,7 @@ const ColdReachOut = () => {
                                     <td>{item.source}</td>
                                     <td>
                                         <div className="d-flex ms-4">
-                                            <Tippy content={<span>{item.comments}</span>}>
+                                            <Tippy content={<span>{item.comments[item.comments.length-1]}</span>}>
                                                 <button className='info-button'>
                                                     <BsInfoCircle className='info-button-icon' />
                                                 </button>
@@ -119,7 +126,7 @@ const ColdReachOut = () => {
                                                 <p className='details-button-text'>Update</p>
                                             </button>
                                             <button className='ms-2 details-button' onClick={() => {
-                                                handleLeadDetailsModal(item._id)
+                                                handleDetails(item)
                                             }}>
                                                 <p className='details-button-text'>Details</p>
                                             </button>

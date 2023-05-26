@@ -25,7 +25,7 @@ import ColdReachOut from '../leads/ColdReachOut';
 import ConvertedLead from '../leads/ConvertedLead';
 import LostLead from '../leads/LostLead';
 import WalkIn from '../../components/leads/WalkIn';
-import LeadDetails from '../../components/leads/LeadDetails';
+import ViewLeadDetails from '../leads/ViewLeadDetails';
 
 const MainRouter = () => {
     return (
@@ -57,7 +57,7 @@ const MainRouter = () => {
                     <Route path='/convered-leads' element={<ConvertedLead />} />
                     <Route path='/lost-leads' element={<LostLead />} />
                     <Route path='/walk-in' element={<WalkIn />} />
-                    <Route path='/lead-details' element={<LeadDetails />} />
+                    <Route path='/lead-details' element={<ViewLeadDetails />} />
                 </Route>
                 <Route path="/" element={<SignIn />} />
             </Routes>
