@@ -15,11 +15,12 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
         employementStatus: data.employementStatus,
         comments: data.comments,
         status: data.status,
-        referralName: data.referralName
+        source: data.source
     })
 
-    const employmentStatus = ['Student', 'Employee', 'Job Seeker', 'Other'];
-    const Status = ['Followup', 'Cold Reach out', 'Converted', 'Not Interested/ Permanently Lost']
+    const [comment, setComment] = useState();
+
+    const Status = ['Followup', 'Cold Reach out', 'Converted', 'Not Interested/ Permanently Lost', 'Walk In']
 
     const handleChange = (event) => {
         setEditleadData({ ...editleaddata, [event.target.name]: event.target.value })
@@ -34,14 +35,19 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
 
 
     const handleComment = (event) => {
-        const previousdata = editleaddata.comments;
-        previousdata.push(event.target.value);
-        
+        setComment(event.target.value)
     }
 
     const handleUpdateLead = (event) => {
         event.preventDefault();
-        console.log(editleaddata)
+        // const previousdata = [editleaddata.comments]
+        // const payload = {
+        //     ...editleaddata,
+        //     comments: [...editleaddata.comments]
+        // }
+        // console.log(payload)
+        // console.log(editleaddata)
+
         editLead(id, editleaddata)
             .then((response) => {
                 toast.success(response.data.msg, {
@@ -71,61 +77,8 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleUpdateLead}>
-                    <div className='row'>
-                        <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">Name</p>
-                            <input type="text" className="input-box-width w-100" id="name" name="name"
-                                value={editleaddata.name} readOnly />
-                        </div>
-                        <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">Contact Number</p>
-                            <input type="tel" className="input-box-width w-100" id="contactdetails" name="contactdetails"
-                                pattern="[0-9]{3}[0-9]{4}[0-9]{3}" value={editleaddata.contactdetails} readOnly />
-                        </div>
-                        <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">Email Address</p>
-                            <input type="email" className="input-box-width w-100" id="emailid" name="emailid"
-                                value={editleaddata.emailid} readOnly />
-                        </div>
-                        <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">Address</p>
-                            <input type="text" className="input-box-width w-100" id="address" name="address"
-                                value={editleaddata.address} readOnly />
-                        </div>
-                        <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">City</p>
-                            <input type="text" className="input-box-width w-100" id="city" name="city"
-                                value={editleaddata.city} readOnly />
-                        </div>
-                        <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">Education Details</p>
-                            <input type="text" className="input-box-width w-100" id="education" name="education"
-                                value={editleaddata.education} readOnly />
-                        </div>
-                        <div className="col-sm-4 mb-3">
-                            <p className="text-start select-field-label">Employment Status</p>
-                            <select className="input-box-width w-100" name="employementStatus" readOnly
-                                value={editleaddata.employementStatus} >
-                                <option value="">Select Employment</option>
-                                {employmentStatus.map((item) => {
-                                    return (
-                                        <option value={item}>{item}</option>
-                                    )
-                                })}
-                            </select>
-                        </div>
-
-                        {editleaddata.employementStatus === "Other" ?
-
-                            <div className="col-sm-4 mb-3">
-                                <p className="text-start input-field-label">Employee Status</p>
-                                <input type="text" className="input-box-width w-100" id="employementStatus" name="employementStatus"
-                                    onChange={handleChange}
-                                    required />
-                            </div>
-                            : null}
-
-                        <div className="col-sm-4 mb-3">
+                    <div className=''>
+                        <div className="">
                             <p className="text-start select-field-label">Status</p>
                             <select className="input-box-width w-100" name="status" required
                                 value={editleaddata.status} onChange={handleChange}>
@@ -137,16 +90,9 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
                                 })}
                             </select>
                         </div>
-
-
-                        <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">Referral Name</p>
-                            <input type="text" className="input-box-width w-100" id="referralName" name="referralName"
-                                value={editleaddata.referralName} readOnly />
-                        </div>
-                        <div className="col-sm-4 mb-3">
+                        <div className="mt-3">
                             <p className="text-start input-field-label">Comments</p>
-                            <textarea className="input-box-width" rows={5} cols={30} id="comments" name="comments"
+                            <textarea className="input-box-width w-100" rows={5} cols={30} id="comments" name="comments"
                                 value={editleaddata.comments} onChange={handleChange}
                                 required />
                         </div>

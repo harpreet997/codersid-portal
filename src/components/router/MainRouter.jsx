@@ -18,13 +18,14 @@ import SignIn from '../login/SignIn';
 import FinalMakePayment from '../payment/FinalMakePayment';
 import UpdateStudent from '../student/UpdateStudent';
 import UpdateExpense from '../expense/UpdateExpense';
-import Finance from '../finance/Finance';
 import FinanceRecord from '../finance/FinanceRecord';
 import AllLeads from '../leads/AllLeads';
 import Followup from '../leads/Followup';
 import ColdReachOut from '../leads/ColdReachOut';
 import ConvertedLead from '../leads/ConvertedLead';
 import LostLead from '../leads/LostLead';
+import WalkIn from '../../components/leads/WalkIn';
+import LeadDetails from '../../components/leads/LeadDetails';
 
 const MainRouter = () => {
     return (
@@ -55,6 +56,8 @@ const MainRouter = () => {
                     <Route path='/cold-reach-out' element={<ColdReachOut />} />
                     <Route path='/convered-leads' element={<ConvertedLead />} />
                     <Route path='/lost-leads' element={<LostLead />} />
+                    <Route path='/walk-in' element={<WalkIn />} />
+                    <Route path='/lead-details' element={<LeadDetails />} />
                 </Route>
                 <Route path="/" element={<SignIn />} />
             </Routes>

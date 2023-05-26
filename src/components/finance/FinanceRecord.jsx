@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Chart from 'react-apexcharts'
+import Chart from 'react-apexcharts';
+import '../../styles/finance/finance.css';
 let options = {
     chart: {
         height: 350,

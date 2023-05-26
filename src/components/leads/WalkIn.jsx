@@ -15,37 +15,42 @@ import '../../styles/student/studentlist.css';
 import '../../styles/leads/lead.css';
 
 
-const ColdReachOut = () => {
+const DirectWalkIn = () => {
     const [leadList, setLeadList] = useState([]);
+    const [allleadList, setAllLeadList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const [editleadmodal, setEditLeadModal] = useState(false);
     const [leaddetailsmodal, setLeadDetailsModal] = useState(false);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = leadList.slice(indexOfFirstRecord, indexOfLastRecord);
-    const nPages = Math.ceil(leadList.length / recordsPerPage)
+    const currentRecords = allleadList.slice(indexOfFirstRecord, indexOfLastRecord);
+    const nPages = Math.ceil(allleadList.length / recordsPerPage);
     const [loader, setLoader] = useState(false);
+    
 
     const handleEditLeadModal = (id) => {
         setEditLeadModal(id)
     };
 
+
     const handleLeadDetailsModal = (id) => {
         setLeadDetailsModal(id)
     };
 
-    const closeLeadDetailsModal = () => setLeadDetailsModal(false);
+    
     const closeEditLeadModal = () => setEditLeadModal(false);
+    const closeLeadDetailsModal = () => setLeadDetailsModal(false);
 
     useEffect(() => {
         setLoader(true);
         getAllLeads(headers)
             .then((response) => {
-                const coldReachOut = response.data.Leads.filter((item) => {
-                    return item.status === "Cold Reach out"
+                const walkInLead = response.data.Leads.filter((item) => {
+                    return item.status === "Walk In"
                 })
-                setLeadList(coldReachOut);
+                // setLeadList(walkInLead);
+                setAllLeadList(walkInLead)
                 setLoader(false)
             })
             .catch((error) => {
@@ -70,12 +75,12 @@ const ColdReachOut = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Cold Reach Out Leads
-                    <img className='studentlist-icon' src={LeadsIcon} alt="LeadsIcon" /></p>
+                    <p className='studentlist-card-text'>Walk In
+                        <img className='studentlist-icon' src={LeadsIcon} alt="LeadsIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button me-1'>
-                        <CSVLink data={leadList} headers={headers1} filename='ColdReachOutLeads_Records.csv'
+                        <CSVLink data={leadList} headers={headers1} filename='WalkIn_Records.csv'
                             className='add-student-button-text text-decoration-none'>Export Data</CSVLink>
                     </button>
                 </div>
@@ -95,60 +100,60 @@ const ColdReachOut = () => {
                         </tr>
 
                     </thead>
-
-                    <tbody className='text-center'>
-                        {currentRecords.map((item, i) => {
-                            return (
-                                <tr key={item._id}>
-                                    <td>{item.name}</td>
-                                    <td>{item.contactdetails}</td>
-                                    <td>{item.emailid}</td>
-                                    <td>{item.city}</td>
-                                    <td>{item.status}</td>
-                                    <td>{item.source}</td>
-                                    <td>
-                                        <div className="d-flex ms-4">
-                                            <Tippy content={<span>{item.comments}</span>}>
-                                                <button className='info-button'>
-                                                    <BsInfoCircle className='info-button-icon' />
+                        <tbody className='text-center'>
+                            {currentRecords.map((item, i) => {
+                                return (
+                                    <tr key={item._id}>
+                                        <td>{item.name}</td>
+                                        <td>{item.contactdetails}</td>
+                                        <td>{item.emailid}</td>
+                                        <td>{item.city}</td>
+                                        <td>{item.status}</td>
+                                        <td>{item.source}</td>
+                                        <td>
+                                            <div className="d-flex">
+                                                <Tippy content={<span>{item.comments}</span>}>
+                                                    <button className='info-button'>
+                                                        <BsInfoCircle className='info-button-icon' />
+                                                    </button>
+                                                </Tippy>
+                                                <button className='ms-2 details-button' onClick={() => {
+                                                    handleEditLeadModal(item._id)
+                                                }}>
+                                                    <p className='details-button-text'>Update</p>
                                                 </button>
-                                            </Tippy>
-                                            <button className='ms-2 details-button' onClick={() => {
-                                                handleEditLeadModal(item._id)
-                                            }}>
-                                                <p className='details-button-text'>Update</p>
-                                            </button>
-                                            <button className='ms-2 details-button' onClick={() => {
-                                                handleLeadDetailsModal(item._id)
-                                            }}>
-                                                <p className='details-button-text'>Details</p>
-                                            </button>
-                                        </div>
-                                        <Modal show={editleadmodal === item._id ? true : false} onHide={closeEditLeadModal}>
-                                            <EditLead data={item} id={item._id} closeEditLeadModal={closeEditLeadModal} />
-                                        </Modal>
-                                        <Modal show={leaddetailsmodal === item._id ? true : false} onHide={closeLeadDetailsModal}>
+                                                <button className='ms-2 details-button' onClick={() => {
+                                                    handleLeadDetailsModal(item._id)
+                                                }}>
+                                                    <p className='details-button-text'>Details</p>
+                                                </button>
+                                            </div>
+                                            <Modal show={editleadmodal === item._id ? true : false} onHide={closeEditLeadModal}>
+                                                <EditLead data={item} id={item._id} closeEditLeadModal={closeEditLeadModal} />
+                                            </Modal>
+                                            <Modal show={leaddetailsmodal === item._id ? true : false} onHide={closeLeadDetailsModal}>
                                             <LeadDetails data={item} id={item._id} closeLeadDetailsModal={closeLeadDetailsModal} />
                                         </Modal>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
                 </table>
-                {loader ?
-                    <div className="d-flex justify-content-center">
-                        <BallTriangle
-                            height={250}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
-                    </div> : null}
+
+                {loader ? 
+                    <div className="d-flex justify-content-center">     
+                    <BallTriangle
+                        height={250}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                  </div>  : null}
 
                 {!loader && currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
@@ -172,4 +177,4 @@ const ColdReachOut = () => {
     );
 }
 
-export default ColdReachOut;
+export default DirectWalkIn;

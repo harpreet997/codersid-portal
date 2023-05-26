@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react';
 import Pagination from '../pagination/Pagination';
 import { getAllLeads } from '../../getdata/getdata';
 import { headers } from '../../headers';
-import StudentIcon from '../../assets/Studentlist.png';
+import LeadsIcon from '../../assets/LeadsIcon.png';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { BsInfoCircle } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
 import { Modal } from "react-bootstrap";
 import { BallTriangle } from 'react-loader-spinner';
 import { CSVLink } from "react-csv";
-import '../../styles/student/studentlist.css';
-import '../../styles/leads/lead.css';
 import AddLead from './AddLead';
 import EditLead from './EditLead';
+import LeadDetails from './LeadDetails';
+import '../../styles/student/studentlist.css';
+import '../../styles/leads/lead.css';
 
 const AllLeads = () => {
     const [leadList, setLeadList] = useState([]);
@@ -21,6 +21,7 @@ const AllLeads = () => {
     const [recordsPerPage] = useState(10);
     const [addleadmodal, setAddLeadModal] = useState(false);
     const [editleadmodal, setEditLeadModal] = useState(false);
+    const [leaddetailsmodal, setLeadDetailsModal] = useState(false);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = leadList.slice(indexOfFirstRecord, indexOfLastRecord);
@@ -35,8 +36,13 @@ const AllLeads = () => {
         setEditLeadModal(id)
     };
 
+    const handleLeadDetailsModal = (id) => {
+        setLeadDetailsModal(id)
+    };
+
     const closeAddLeadModal = () => setAddLeadModal(false);
     const closeEditLeadModal = () => setEditLeadModal(false);
+    const closeLeadDetailsModal = () => setLeadDetailsModal(false);
 
     useEffect(() => {
         setLoader(true);
@@ -53,21 +59,21 @@ const AllLeads = () => {
 
     const headers1 = [
         { label: "Name", key: 'name' },
-        { label: "Contact Details", key: 'contactdetails' },
-        { label: "Email ID", key: 'emailid' },
+        { label: "Contact", key: 'contactdetails' },
+        { label: "Email", key: 'emailid' },
         { label: "City", key: 'city' },
         { label: "Address", key: 'address' },
         { label: "Education", key: 'education' },
         { label: "Employment Status", key: 'employementStatus' },
         { label: "Status", key: 'status' },
-        { label: "Referral", key: 'referralName' },
+        { label: "Source", key: 'source' },
     ]
 
     return (
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Leads<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" /></p>
+                    <p className='studentlist-card-text'>Leads<img className='studentlist-icon' src={LeadsIcon} alt="LeadsIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button me-1'>
@@ -90,17 +96,13 @@ const AllLeads = () => {
                     <thead className='text-center'>
                         <tr>
                             <th scope="col">Name</th>
-                            <th scope="col">Contact Details</th>
-                            <th scope="col">Email ID</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Email</th>
                             <th scope="col">City</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Education</th>
-                            <th scope="col">Employment Status</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Referral</th>
+                            <th scope="col">Source</th>
                             <th scope="col">Action</th>
                         </tr>
-
                     </thead>
 
                     <tbody className='text-center'>
@@ -111,11 +113,8 @@ const AllLeads = () => {
                                     <td>{item.contactdetails}</td>
                                     <td>{item.emailid}</td>
                                     <td>{item.city}</td>
-                                    <td>{item.address}</td>
-                                    <td>{item.education}</td>
-                                    <td>{item.employementStatus}</td>
                                     <td>{item.status}</td>
-                                    <td>{item.referralName}</td>
+                                    <td>{item.source}</td>
                                     <td>
                                         <div className="d-flex ms-4">
                                             <Tippy content={<span>{item.comments}</span>}>
@@ -128,9 +127,17 @@ const AllLeads = () => {
                                             }}>
                                                 <p className='details-button-text'>Update</p>
                                             </button>
+                                            <button className='ms-2 details-button' onClick={() => {
+                                                handleLeadDetailsModal(item._id)
+                                            }}>
+                                                <p className='details-button-text'>Details</p>
+                                            </button>
                                         </div>
                                         <Modal show={editleadmodal === item._id ? true : false} onHide={closeEditLeadModal}>
                                             <EditLead data={item} id={item._id} closeEditLeadModal={closeEditLeadModal} />
+                                        </Modal>
+                                        <Modal show={leaddetailsmodal === item._id ? true : false} onHide={closeLeadDetailsModal}>
+                                            <LeadDetails data={item} id={item._id} closeLeadDetailsModal={closeLeadDetailsModal} />
                                         </Modal>
                                     </td>
                                 </tr>

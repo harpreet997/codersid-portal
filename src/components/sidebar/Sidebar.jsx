@@ -9,6 +9,7 @@ import ListIcon from '../../assets/ListIcon.png';
 import PaymentIcon from '../../assets/PaymentIcon.png';
 import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
 import FinanceIcon from '../../assets/FinanceIcon.png';
+import LeadsIcon from '../../assets/LeadsIcon.png';
 import '../../styles/sidebar/sidebar.css';
 
 const Sidebar = () => {
@@ -82,7 +83,7 @@ const Sidebar = () => {
 
            
                 <div className='d-flex'>
-                    <img className='master-text-icon' src={MasterIcon} alt="MasterIcon" />
+                    <img className='master-text-icon' src={LeadsIcon} alt="LeadsIcon" />
                     <p className='sidebar-item-3' onClick={handleLeads}>Leads</p>
                     <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                 </div>
@@ -107,8 +108,11 @@ const Sidebar = () => {
                             </div>
                             <div className="d-flex">
                                 <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
-                                <NavLink className='add-expense-text' to='/lost-leads'>Not Interested/ Permanently Lost.
-                                </NavLink>
+                                <NavLink className='add-expense-text' to='/lost-leads'>Not Interested/ Permanently Lost.</NavLink>
+                            </div>
+                            <div className="d-flex">
+                                <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                                <NavLink className='add-expense-text' to='/walk-in'>Walk In</NavLink>
                             </div>
                         </>
                         : null

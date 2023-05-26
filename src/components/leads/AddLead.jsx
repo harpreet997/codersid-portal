@@ -15,12 +15,14 @@ const AddLead = ({ closeAddLeadModal }) => {
         employementStatus: "",
         comments: "",
         status: "",
-        referralName: ""
+        source: ""
     })
 
     const [otherStatus, setOtherStatus] = useState();
+    const [referralName, setReferralName] = useState();
     const employmentStatus = ['Student', 'Employee', 'Job Seeker', 'Other'];
-    const Status = ['Followup', 'Cold Reach out', 'Converted', 'Not Interested/ Permanently Lost']
+    const Status = ['Followup', 'Cold Reach out', 'Converted', 'Not Interested/ Permanently Lost', 'Walk In'];
+    const Source = ['Direct Walk In', 'Google Ads', 'Meta Ads', 'Social Media', 'Referral']
 
     const handleChange = (event) => {
         setleadData({ ...leaddata, [event.target.name]: event.target.value })
@@ -28,20 +30,66 @@ const AddLead = ({ closeAddLeadModal }) => {
 
     const handleOtherStatus = (event) => {
         setOtherStatus(event.target.value)
-        // leaddata.employementStatus = event.target.value
-        // setleadData({
-        //     ...leaddata,
-        //     [event.target.name]: event.target.value
-        // })
+    }
+
+    const handleReferralName = (event) => {
+        setReferralName(event.target.value)
     }
 
     const handleAddLead = (event) => {
         event.preventDefault();
         console.log(leaddata)
-        if (leaddata.employementStatus === "Other") {
+        if (leaddata.employementStatus === "Other" && leaddata.source === "Referral") {
             const payload = {
                 ...leaddata,
-                employementStatus: otherStatus
+                employementStatus: otherStatus,
+                source: referralName
+            }
+            console.log(payload)
+            addLead(payload)
+                .then((response) => {
+                    toast.success(response.data.msg, {
+                        position: "top-center",
+                        autoClose: 3000
+                    })
+                    closeAddLeadModal();
+                    window.location.reload(false);
+                }
+                )
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
+                })
+        }
+        else if (leaddata.employementStatus === "Other") {
+            const payload = {
+                ...leaddata,
+                employementStatus: otherStatus,
+            }
+            console.log(payload)
+            addLead(payload)
+                .then((response) => {
+                    toast.success(response.data.msg, {
+                        position: "top-center",
+                        autoClose: 3000
+                    })
+                    closeAddLeadModal();
+                    window.location.reload(false);
+                }
+                )
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
+                })
+        }
+        else if (leaddata.source === "Referral") {
+            const payload = {
+                ...leaddata,
+                source: referralName
             }
             console.log(payload)
             addLead(payload)
@@ -108,13 +156,13 @@ const AddLead = ({ closeAddLeadModal }) => {
                                 onChange={handleChange} required />
                         </div>
                         <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">Address</p>
-                            <input type="text" className="input-box-width w-100" id="address" name="address"
+                            <p className="text-start input-field-label">City</p>
+                            <input type="text" className="input-box-width w-100" id="city" name="city"
                                 onChange={handleChange} required />
                         </div>
                         <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">City</p>
-                            <input type="text" className="input-box-width w-100" id="city" name="city"
+                            <p className="text-start input-field-label">Full Address</p>
+                            <input type="text" className="input-box-width w-100" id="address" name="address"
                                 onChange={handleChange} required />
                         </div>
                         <div className="col-sm-4 mb-3">
@@ -125,7 +173,7 @@ const AddLead = ({ closeAddLeadModal }) => {
                         <div className="col-sm-4 mb-3">
                             <p className="text-start select-field-label">Employment Status</p>
                             <select className="input-box-width w-100" name="employementStatus" required
-                                onChange={leaddata.employementStatus === "Other" ? null : handleChange}>
+                                onChange={handleChange}>
                                 <option value="">Select Employment</option>
                                 {employmentStatus.map((item) => {
                                     return (
@@ -160,19 +208,36 @@ const AddLead = ({ closeAddLeadModal }) => {
 
 
                         <div className="col-sm-4 mb-3">
-                            <p className="text-start input-field-label">Referral Name</p>
-                            <input type="text" className="input-box-width w-100" id="referralName" name="referralName"
-                                onChange={handleChange}
-                                required />
+                            <p className="text-start input-field-label">Source</p>
+                            <select className="input-box-width w-100" name="source" required
+                                onChange={handleChange}>
+                                <option value="">Select Source</option>
+                                {Source.map((item) => {
+                                    return (
+                                        <option value={item}>{item}</option>
+                                    )
+                                })}
+                            </select>
                         </div>
+
+                        {leaddata.source === "Referral" ?
+
+                            <div className="col-sm-4 mb-3">
+                                <p className="text-start input-field-label">Referral Name</p>
+                                <input type="text" className="input-box-width w-100" id="referralName" name="referralName"
+                                    onChange={handleReferralName}
+                                    required />
+                            </div>
+                            : null}
+
                         <div className="col-sm-4 mb-3">
                             <p className="text-start input-field-label">Comments</p>
-                            <textarea className="input-box-width" rows={5} cols={30} id="comments" name="comments"
+                            <textarea className="input-box-width" rows={5} cols={20} id="comments" name="comments"
                                 onChange={handleChange}
                                 required />
                         </div>
                     </div>
-
+                    
                     <button className='add-student-form-button' type='submit'>
                         <p className='add-student-form-button-text'>Submit</p>
                     </button>
