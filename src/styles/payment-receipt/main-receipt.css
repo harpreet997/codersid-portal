@@ -1,6 +1,7 @@
 .main-receipt-card {
     box-sizing: border-box;
     width: 647px;
+    height: 1000px;
     align-items: center;
     margin-left: 25%;
     /* margin-top: 8.5%; */
@@ -126,7 +127,7 @@
     margin-left: 21px;
     margin-top: 20px;
     margin-right: 20px;
-    height: 189px;
+    height: 229px;
 }
 
 
@@ -370,6 +371,34 @@
     opacity: 0.5;
     padding-left: 17px;
     margin-left: 41px;
+    margin-right: 10px;
+}
+
+.main-receipt-sac-name {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.8;
+    padding-left: 0px;
+}
+
+.main-receipt-sac-value {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.5;
+    padding-left: 17px;
+    margin-left: 31px;
     margin-right: 10px;
 }
 

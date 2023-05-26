@@ -115,6 +115,13 @@ const handleBack = () => {
                     </div>
                     <div className="main-receipt-horizontal-line-4"></div>
                     <div className="d-flex justify-content-around">
+                        <p className="main-receipt-sac-name">SAC</p>
+                        <p className="main-receipt-sac-value">999293</p>
+                        <p className="main-receipt-gst-amount"></p>
+                        <p className="main-receipt-gst-amount-value"></p>
+                    </div>
+                    <div className="main-receipt-horizontal-line-4"></div>
+                    <div className="d-flex justify-content-around">
                         <p className="main-receipt-total-amount">Total Amount</p>
                         <p className="main-receipt-total-amount-value">&#8377; {data.Amount}</p>
                     </div>
