@@ -9,7 +9,7 @@ import ListIcon from '../../assets/ListIcon.png';
 import PaymentIcon from '../../assets/PaymentIcon.png';
 import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
 import FinanceIcon from '../../assets/FinanceIcon.png';
-import LeadsIcon from '../../assets/LeadsIcon.png';
+import LeadImage from '../../assets/LeadImage.png';
 import '../../styles/sidebar/sidebar.css';
 
 const Sidebar = () => {
@@ -83,7 +83,7 @@ const Sidebar = () => {
 
            
                 <div className='d-flex'>
-                    <img className='master-text-icon' src={LeadsIcon} alt="LeadsIcon" />
+                    <img className='master-text-icon' src={LeadImage} alt="LeadImage" />
                     <p className='sidebar-item-3' onClick={handleLeads}>Leads</p>
                     <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                 </div>

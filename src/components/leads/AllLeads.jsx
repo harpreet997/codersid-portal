@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Pagination from '../pagination/Pagination';
 import { getAllLeads } from '../../getdata/getdata';
 import { headers } from '../../headers';
-import LeadsIcon from '../../assets/LeadsIcon.png';
+import LeadImage from '../../assets/LeadImage.png';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { BsInfoCircle } from 'react-icons/bs';
@@ -80,7 +80,7 @@ const AllLeads = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Leads<img className='studentlist-icon' src={LeadsIcon} alt="LeadsIcon" /></p>
+                    <p className='studentlist-card-text'>Leads<img className='studentlist-icon' src={LeadImage} alt="LeadImage" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button me-1'>
