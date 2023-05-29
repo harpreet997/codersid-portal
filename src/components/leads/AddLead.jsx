@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { addLead } from "../../postdata/postdata";
+import moment from 'moment';
 import '../../styles/leads/addlead.css';
 
 const AddLead = ({ closeAddLeadModal }) => {
@@ -15,7 +16,11 @@ const AddLead = ({ closeAddLeadModal }) => {
         employementStatus: "",
         comments: "",
         status: "",
-        source: ""
+        source: "",
+        // comments: {
+        //     comment: "",
+        //     commentAt: moment().format('MMMM Do YYYY, h:mm:ss a')
+        // }
     })
 
     const [otherStatus, setOtherStatus] = useState();
@@ -27,6 +32,22 @@ const AddLead = ({ closeAddLeadModal }) => {
     const handleChange = (event) => {
         setleadData({ ...leaddata, [event.target.name]: event.target.value })
     }
+
+    const handleComment = (event) => {
+        setleadData(
+            { ...leaddata, 
+            [event.target.name]: event.target.value + " " + moment().format('MMMM Do YYYY, h:mm:ss a') })
+    }
+
+    // const handleComment = (event) => {
+    //     setleadData({
+    //         ...leaddata,
+    //         comments: {
+    //             ...leaddata.comments,
+    //             [event.target.name]: event.target.value
+    //         }
+    //     })
+    // }
 
     const handleOtherStatus = (event) => {
         setOtherStatus(event.target.value)
@@ -233,7 +254,7 @@ const AddLead = ({ closeAddLeadModal }) => {
                         <div className="col-sm-4 mb-3">
                             <p className="text-start input-field-label">Comments</p>
                             <textarea className="input-box-width" rows={5} cols={20} id="comments" name="comments"
-                                onChange={handleChange}
+                                onChange={handleComment}
                                 required />
                         </div>
                     </div>

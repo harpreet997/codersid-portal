@@ -1,5 +1,6 @@
 import { Modal } from "react-bootstrap";
 import { useLocation, useNavigate } from 'react-router-dom';
+import {TfiComments} from 'react-icons/tfi';
 import '../../styles/expense/expensedetails.css';
 
 const ViewLeadDetails = () => {
@@ -179,9 +180,14 @@ const ViewLeadDetails = () => {
                     <div className='d-flex flex-column studentid-value'>
                                 {data.comments.map((item) => {
                                     return (
-                                        <ul>
-                                            <li>{item}</li>
-                                        </ul>
+                                        <>
+                                            {/* <div className="d-flex">
+                                            <p>{item.comment}</p>
+                                            <p className="ms-2">{item.commentAt}</p>
+                                            </div> */}
+                                            <p><TfiComments style={{width: 40, height: 20}}/>{item}</p>
+                                            
+                                        </>
                                     )
                                 })}
                             </div>

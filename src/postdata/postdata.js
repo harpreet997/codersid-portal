@@ -71,3 +71,8 @@ export const editLead = (id, editleaddata) => {
     return axios.patch(`${baseUrl}/api/leads/${id}`, editleaddata)
 } 
 
+
+export const addWalkin = (walkindata) => {
+    return axios.post('http://localhost:4000/api/walkins', walkindata)
+} 
+

@@ -32,3 +32,7 @@ export const getAllPayments = (headers) => {
 export const getAllLeads = (headers) => {
     return axios.get(`${baseUrl}/api/leads`, {headers})
 }
+
+export const getAllWalkins = (headers) => {
+    return axios.get('http://localhost:4000/api/walkins', {headers})
+}

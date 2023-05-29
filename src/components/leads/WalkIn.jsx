@@ -17,7 +17,6 @@ import '../../styles/leads/lead.css';
 
 
 const DirectWalkIn = () => {
-    const [leadList, setLeadList] = useState([]);
     const [allleadList, setAllLeadList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
@@ -34,11 +33,6 @@ const DirectWalkIn = () => {
         setEditLeadModal(id)
     };
 
-
-    const handleLeadDetailsModal = (id) => {
-        setLeadDetailsModal(id)
-    };
-
     const handleDetails = (item) => {
         navigate('/lead-details', { state: { item } })
     }
@@ -53,7 +47,7 @@ const DirectWalkIn = () => {
                 const walkInLead = response.data.Leads.filter((item) => {
                     return item.status === "Walk In"
                 })
-                // setLeadList(walkInLead);
+               
                 setAllLeadList(walkInLead)
                 setLoader(false)
             })
@@ -84,7 +78,7 @@ const DirectWalkIn = () => {
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button me-1'>
-                        <CSVLink data={leadList} headers={headers1} filename='WalkIn_Records.csv'
+                        <CSVLink data={allleadList} headers={headers1} filename='WalkIn_Records.csv'
                             className='add-student-button-text text-decoration-none'>Export Data</CSVLink>
                     </button>
                 </div>

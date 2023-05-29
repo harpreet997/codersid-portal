@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { editLead } from "../../postdata/postdata";
+import moment from "moment";
 import '../../styles/leads/addlead.css';
 
 const EditLead = ({ data, id, closeEditLeadModal }) => {
@@ -27,23 +28,13 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
         setEditleadData({ ...editleaddata, [event.target.name]: event.target.value })
     }
 
-    // const previousdata = [editleaddata.comments]
-    // previousdata.push('Test')
-
-    // const previousdata = editleaddata.comments;
-    // previousdata.push('test');
-    // console.log(previousdata)
-console.log(editleaddata.comments[2]);
-console.log(data.comments[data.comments.length-1])
-
     const handleComment = (event) => {
-        setComment(event.target.value)
+        setComment(event.target.value + " " + moment().format('MMMM Do YYYY, h:mm:ss a'))
         setIsComment(true)
     }
 
     const handleUpdateLead = (event) => {
         event.preventDefault();
-        // const previousdata = [editleaddata.comments]
         if(isComment === true)
         {
         const payload = {
