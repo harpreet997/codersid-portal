@@ -161,13 +161,16 @@ const FinalMakePayment = () => {
             [event.target.name]: event.target.value
         })
         if (paymentrecord.PaymentType === "Registration fee") {
-            paymentdata.registration.registrationPaymentStatus = "Paid"
+            paymentdata.registration.registrationPaymentStatus = "Paid";
+            paymentdata.registration.registrationDate = mindate
         }
         if (paymentrecord.PaymentType === "Installment 1") {
-            paymentdata.secondInstallment.secondInstallmentPaymentStatus = "Paid"
+            paymentdata.secondInstallment.secondInstallmentPaymentStatus = "Paid";
+            paymentdata.secondInstallment.secondInstallmentDate = mindate
         }
         if (paymentrecord.PaymentType === "Installment 2") {
-            paymentdata.thirdInstallment.thirdInstallmentPaymentStatus = "Paid"
+            paymentdata.thirdInstallment.thirdInstallmentPaymentStatus = "Paid";
+            paymentdata.thirdInstallment.thirdInstallmentDate = mindate
         }
         if (paymentrecord.PaymentType === "Installment 3"){
             paymentdata.fourthInstallment.fourthInstallmentPaymentStatus = "Paid"      
@@ -188,13 +191,16 @@ const FinalMakePayment = () => {
         event.preventDefault();
 
         if (paymentrecord.PaymentType === "Registration fee") {
-            paymentdata.registration.registrationPaymentStatus = "Paid"
+            paymentdata.registration.registrationPaymentStatus = "Paid";
+            paymentdata.registration.registrationDate = mindate
         }
         if (paymentrecord.PaymentType === "Installment 1") {
-            paymentdata.secondInstallment.secondInstallmentPaymentStatus = "Paid"
+            paymentdata.secondInstallment.secondInstallmentPaymentStatus = "Paid";
+            paymentdata.secondInstallment.secondInstallmentDate = mindate
         }
         if (paymentrecord.PaymentType === "Installment 2") {
-            paymentdata.thirdInstallment.thirdInstallmentPaymentStatus = "Paid"
+            paymentdata.thirdInstallment.thirdInstallmentPaymentStatus = "Paid";
+            paymentdata.thirdInstallment.thirdInstallmentDate = mindate
         }
         if (paymentrecord.PaymentType === "Installment 3"){
             paymentdata.fourthInstallment.fourthInstallmentPaymentStatus = "Paid"      
