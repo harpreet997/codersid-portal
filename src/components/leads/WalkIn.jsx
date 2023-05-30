@@ -110,7 +110,7 @@ const DirectWalkIn = () => {
                                         <td>{item.source}</td>
                                         <td>
                                             <div className="d-flex">
-                                                <Tippy content={<span>{item.comments}</span>}>
+                                                <Tippy content={<span>{item.comments[item.comments.length-1].comment}</span>}>
                                                     <button className='info-button'>
                                                         <BsInfoCircle className='info-button-icon' />
                                                     </button>

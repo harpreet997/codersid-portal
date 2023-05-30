@@ -15,7 +15,6 @@ import ExpenseManagement from '../expense/ExpenseManagement';
 import StudentDetails from '../student/StudentDetails';
 import ExpenseDetails from '../expense/ExpenseDetails';
 import SignIn from '../login/SignIn';
-import FinalMakePayment from '../payment/FinalMakePayment';
 import UpdateStudent from '../student/UpdateStudent';
 import UpdateExpense from '../expense/UpdateExpense';
 import FinanceRecord from '../finance/FinanceRecord';
@@ -46,7 +45,6 @@ const MainRouter = () => {
                     <Route path='/update-expense' element={<UpdateExpense />} />
                     <Route path='/expense-details' element={<ExpenseDetails />} />
                     <Route path='/payment' element={<Payment/>} />
-                    <Route path='/make-payment' element={<FinalMakePayment />} />
                     <Route path='/payment-receipt' element={<MainPaymentReceipt />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />

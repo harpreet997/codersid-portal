@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { addCourse } from '../../postdata/postdata';
-import { toast } from "react-toastify";
 import { getAllCourses } from '../../getdata/getdata';
-import Pagination from '../pagination/Pagination';
-import { BallTriangle } from 'react-loader-spinner';
+import { addCourse, deleteCourse } from '../../postdata/postdata';
 import { headers } from '../../headers';
-import { deleteCourse } from '../../postdata/postdata';
+import { toast } from "react-toastify";
+import { BallTriangle } from 'react-loader-spinner';
+import Pagination from '../pagination/Pagination';
 import AddCourseLogo from '../../assets/AddCourse.png';
 import '../../styles/course/course.css';
 
@@ -21,11 +20,14 @@ const AddCourse = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = courselist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(courselist.length / recordsPerPage)
+    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
+        setLoader(true);
         getAllCourses(headers)
             .then((response) => {
                 setCourseList(response.data.Courses);
+                setLoader(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -129,37 +131,38 @@ const AddCourse = () => {
                 </tbody>
 
             </table>
-            {
-                currentRecords.length === 0 ?
-                    <div className='d-flex justify-content-center'>
-                        <BallTriangle
-                            height={250}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
-                    </div>
-                    : null
-            }
-            {
-                currentRecords.length > 0 ?
-                    <div className="text-center">
-                        <Pagination
-                            nPages={nPages}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                        />
-                    </div>
+            {loader ?
+                <div className="d-flex justify-content-center">
+                    <BallTriangle
+                        height={250}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                </div> : null}
 
-                    : null
+            {!loader && currentRecords.length === 0 ?
+                <div className='d-flex justify-content-center'>
+                    <p className='fs-4'>No Data Found</p>
+                </div>
+                : null}
+
+            {currentRecords.length > 0 ?
+                <div className="text-center">
+                    <Pagination
+                        nPages={nPages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
+                </div>
+
+                : null
             }
         </div >
-
-
     );
 }
 

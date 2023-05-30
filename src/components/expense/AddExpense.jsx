@@ -5,7 +5,6 @@ import { headers } from '../../headers';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 
-
 const AddExpense = () => {
     const [categorydata, setCategoryData] = useState([]);
     const [expensedata, setExpenseData] = useState({

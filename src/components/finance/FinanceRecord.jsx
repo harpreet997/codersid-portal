@@ -72,9 +72,6 @@ let options = {
 }
 
 const FinanceRecord = () => {
-    const [data, setData] = useState([])
-    const [option, setOption] = useState({})
-    const [monthWise, setMonthWise] = useState({})
     const [series, setSeries] = useState([])
     const [studentlist, setStudentList] = useState([]);
     const [expensedata, setExpenseData] = useState([]);

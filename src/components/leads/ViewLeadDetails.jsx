@@ -181,11 +181,13 @@ const ViewLeadDetails = () => {
                                 {data.comments.map((item) => {
                                     return (
                                         <>
-                                            {/* <div className="d-flex">
+                                        
+                                            <div className="d-flex">
+                                            <TfiComments style={{width: 40, height: 20, marginTop: 15}}/>
                                             <p>{item.comment}</p>
                                             <p className="ms-2">{item.commentAt}</p>
-                                            </div> */}
-                                            <p><TfiComments style={{width: 40, height: 20}}/>{item}</p>
+                                            </div>
+                                            {/* <p><TfiComments style={{width: 40, height: 20}}/>{item}</p> */}
                                             
                                         </>
                                     )

@@ -14,12 +14,15 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
         city: data.city,
         education: data.education,
         employementStatus: data.employementStatus,
-        comments: data.comments,
+        comments: {
+            comment: data.comments,
+            commentAt: moment().format('MMMM Do YYYY, h:mm:ss a')
+        },
         status: data.status,
         source: data.source
     })
 
-    const [comment, setComment] = useState();
+    const [newcomment, setNewComment] = useState();
     const [isComment, setIsComment] = useState(false);
 
     const Status = ['Followup', 'Cold Reach out', 'Converted', 'Not Interested/ Permanently Lost', 'Walk In']
@@ -29,55 +32,64 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
     }
 
     const handleComment = (event) => {
-        setComment(event.target.value + " " + moment().format('MMMM Do YYYY, h:mm:ss a'))
+        setNewComment(event.target.value)
         setIsComment(true)
     }
 
     const handleUpdateLead = (event) => {
         event.preventDefault();
-        if(isComment === true)
-        {
-        const payload = {
-            ...editleaddata,
-            comments: [...editleaddata.comments, comment]
-        }
-        console.log(payload)
-        console.log(editleaddata)
-
-        editLead(id, payload)
-            .then((response) => {
-                toast.success(response.data.msg, {
-                    position: "top-center",
-                    autoClose: 3000
-                })
-                closeEditLeadModal();
-                window.location.reload(false);
+        if (isComment === true) {
+            const newCommentObj = {
+                comment: newcomment,
+                commentAt: moment().format('MMMM Do YYYY, h:mm:ss a')
             }
-            )
-            .catch((error) => {
-                toast.error(error.response.data.msg, {
-                    position: "top-center",
-                    autoClose: 2000
+            const previousComment = data.comments;
+            previousComment.push(newCommentObj);
+            const payload = {
+                ...editleaddata,
+                comments: previousComment
+            }
+
+            console.log(payload);
+            editLead(id, payload)
+                .then((response) => {
+                    toast.success(response.data.msg, {
+                        position: "top-center",
+                        autoClose: 3000
+                    })
+                    closeEditLeadModal();
+                    window.location.reload(false);
+                }
+                )
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
                 })
-            })
         }
         else {
-            editLead(id, editleaddata)
-            .then((response) => {
-                toast.success(response.data.msg, {
-                    position: "top-center",
-                    autoClose: 3000
-                })
-                closeEditLeadModal();
-                window.location.reload(false);
+            const previousComment = data.comments;
+            const payload = {
+                ...editleaddata,
+                comments: previousComment
             }
-            )
-            .catch((error) => {
-                toast.error(error.response.data.msg, {
-                    position: "top-center",
-                    autoClose: 2000
+            editLead(id, payload)
+                .then((response) => {
+                    toast.success(response.data.msg, {
+                        position: "top-center",
+                        autoClose: 3000
+                    })
+                    closeEditLeadModal();
+                    window.location.reload(false);
+                }
+                )
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
                 })
-            })
         }
     }
 
@@ -107,8 +119,8 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
                         </div>
                         <div className="mt-3">
                             <p className="text-start input-field-label">Comments</p>
-                            <textarea className="input-box-width w-100" rows={5} cols={30} id="comments" name="comments"
-                                defaultValue={data.comments[data.comments.length-1]} onChange={handleComment}
+                            <textarea className="input-box-width w-100" rows={5} cols={30} id="newcomment" name="newcomment"
+                                defaultValue={data.comments[data.comments.length - 1].comment} onChange={handleComment}
                                 required />
                         </div>
                     </div>

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { addBatch } from '../../postdata/postdata';
-import { toast } from "react-toastify";
+import { useState, useEffect } from 'react';
+import { addBatch, deleteBatch } from '../../postdata/postdata';
 import { getAllBatches } from '../../getdata/getdata';
-import Pagination from '../pagination/Pagination';
-import { BallTriangle } from 'react-loader-spinner';
 import { headers } from '../../headers';
-import { deleteBatch } from '../../postdata/postdata';
+import { toast } from "react-toastify";
+import { BallTriangle } from 'react-loader-spinner';
+import Pagination from '../pagination/Pagination';
 import AddBatchIcon from '../../assets/AddBatch.png'
 import '../../styles/batch/batch.css';
 
@@ -20,11 +19,14 @@ const AddBatch = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = batchlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(batchlist.length / recordsPerPage)
+    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
+        setLoader(true);
         getAllBatches(headers)
             .then((response) => {
                 setBatchList(response.data.Batches);
+                setLoader(false)
             })
             .catch((error) => {
                 console.log(error);
@@ -120,23 +122,27 @@ const AddBatch = () => {
                 </tbody>
             </table>
 
-            {currentRecords.length === 0 ?
+            {loader ?
+                <div className="d-flex justify-content-center">
+                    <BallTriangle
+                        height={250}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                </div> : null}
+
+            {!loader && currentRecords.length === 0 ?
                 <div className='d-flex justify-content-center'>
-                    {batchlist.length !== 0 ?
-                        <p className='fs-4'>No Data Found</p>
-                        :
-                        <BallTriangle
-                            height={250}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />}
+                    <p className='fs-4'>No Data Found</p>
                 </div>
                 : null}
+
+
             {currentRecords.length > 0 ?
                 <div className="text-center">
                     <Pagination
@@ -145,11 +151,8 @@ const AddBatch = () => {
                         setCurrentPage={setCurrentPage}
                     />
                 </div>
-
                 : null}
         </div>
-
-
     );
 }
 

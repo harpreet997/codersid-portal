@@ -13,8 +13,6 @@ const ExpenseDetails = ({ data }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                
-                    {/* <p className='view-student-details-heading'>Expense Details</p> */}
                     <div className="d-flex ">
                         <div className='view-expense-details-modal-box'>
                             <div className="d-flex justify-content-between">

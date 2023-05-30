@@ -14,13 +14,13 @@ const AddLead = ({ closeAddLeadModal }) => {
         city: "",
         education: "",
         employementStatus: "",
-        comments: "",
+        // comments: "",
         status: "",
         source: "",
-        // comments: {
-        //     comment: "",
-        //     commentAt: moment().format('MMMM Do YYYY, h:mm:ss a')
-        // }
+        comments: {
+            comment: "",
+            commentAt: moment().format('MMMM Do YYYY, h:mm:ss a')
+        }
     })
 
     const [otherStatus, setOtherStatus] = useState();
@@ -33,21 +33,21 @@ const AddLead = ({ closeAddLeadModal }) => {
         setleadData({ ...leaddata, [event.target.name]: event.target.value })
     }
 
-    const handleComment = (event) => {
-        setleadData(
-            { ...leaddata, 
-            [event.target.name]: event.target.value + " " + moment().format('MMMM Do YYYY, h:mm:ss a') })
-    }
-
     // const handleComment = (event) => {
-    //     setleadData({
-    //         ...leaddata,
-    //         comments: {
-    //             ...leaddata.comments,
-    //             [event.target.name]: event.target.value
-    //         }
-    //     })
+    //     setleadData(
+    //         { ...leaddata, 
+    //         [event.target.name]: event.target.value + " " + moment().format('MMMM Do YYYY, h:mm:ss a') })
     // }
+
+    const handleComment = (event) => {
+        setleadData({
+            ...leaddata,
+            comments: {
+                ...leaddata.comments,
+                [event.target.name]: event.target.value
+            }
+        })
+    }
 
     const handleOtherStatus = (event) => {
         setOtherStatus(event.target.value)
@@ -253,7 +253,7 @@ const AddLead = ({ closeAddLeadModal }) => {
 
                         <div className="col-sm-4 mb-3">
                             <p className="text-start input-field-label">Comments</p>
-                            <textarea className="input-box-width" rows={5} cols={20} id="comments" name="comments"
+                            <textarea className="input-box-width" rows={5} cols={20} id="comment" name="comment"
                                 onChange={handleComment}
                                 required />
                         </div>

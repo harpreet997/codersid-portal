@@ -23,11 +23,15 @@ const AddUser = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = userlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(userlist.length / recordsPerPage)
+    const [loader, setLoader] = useState(false);
+
 
     useEffect(() => {
+        setLoader(true);
         getAllUsers(headers)
             .then((response) => {
                 setUserList(response.data.Users);
+                setLoader(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -137,20 +141,25 @@ const AddUser = () => {
                     </tbody>
 
                 </table>
-                {currentRecords.length === 0 ?
-                    <div className='d-flex justify-content-center'>
-                        <BallTriangle
-                            height={250}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
-                    </div>
-                    : null}
+                {loader ?
+                <div className="d-flex justify-content-center">
+                    <BallTriangle
+                        height={250}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                </div> : null}
+
+            {!loader && currentRecords.length === 0 ?
+                <div className='d-flex justify-content-center'>
+                    <p className='fs-4'>No Data Found</p>
+                </div>
+                : null}
             </div>
             {currentRecords.length > 0 ?
                 <div className="text-center">

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
-import ExpenseDetails from '../../components/expense/ExpenseDetails';
 import { BallTriangle } from 'react-loader-spinner';
-import Pagination from '../pagination/Pagination';
 import { getAllExpenses } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { useNavigate } from 'react-router-dom';
+import Pagination from '../pagination/Pagination';
+import ExpenseDetails from '../../components/expense/ExpenseDetails';
+import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
 import '../../styles/expense/expensemanagement.css';
 
 const ExpenseManagement = () => {
