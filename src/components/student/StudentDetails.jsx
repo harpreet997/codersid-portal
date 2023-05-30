@@ -240,7 +240,7 @@ const StudentDetails = () => {
                         </tr>
                         <tr>
                             <td>3rd Installment Fees</td>
-                            {(data.fourthInstallment.fourthInstallmentDate < date && data.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ?
+                            {(data.BalanceAmount && data.fourthInstallment.fourthInstallmentDate < date && data.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ?
                                 <td style={{ backgroundColor: "orange" }}>
                                     {data.BalanceAmount ? data.fourthInstallment.fourthInstallmentDate : "NA"}
                                     <span className='fs-6 fw-bold ms-2'>(Overdue)</span></td>

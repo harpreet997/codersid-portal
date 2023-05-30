@@ -14,7 +14,6 @@ const AddLead = ({ closeAddLeadModal }) => {
         city: "",
         education: "",
         employementStatus: "",
-        // comments: "",
         status: "",
         source: "",
         comments: {
@@ -32,12 +31,6 @@ const AddLead = ({ closeAddLeadModal }) => {
     const handleChange = (event) => {
         setleadData({ ...leaddata, [event.target.name]: event.target.value })
     }
-
-    // const handleComment = (event) => {
-    //     setleadData(
-    //         { ...leaddata, 
-    //         [event.target.name]: event.target.value + " " + moment().format('MMMM Do YYYY, h:mm:ss a') })
-    // }
 
     const handleComment = (event) => {
         setleadData({

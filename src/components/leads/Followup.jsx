@@ -10,7 +10,6 @@ import { Modal } from "react-bootstrap";
 import { BallTriangle } from 'react-loader-spinner';
 import { CSVLink } from "react-csv";
 import EditLead from './EditLead';
-import LeadDetails from './LeadDetails';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/student/studentlist.css';
 import '../../styles/leads/lead.css';
@@ -21,7 +20,6 @@ const Followup = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const [editleadmodal, setEditLeadModal] = useState(false);
-    const [leaddetailsmodal, setLeadDetailsModal] = useState(false);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = leadList.slice(indexOfFirstRecord, indexOfLastRecord);
@@ -33,16 +31,11 @@ const Followup = () => {
         setEditLeadModal(id)
     };
 
-    const handleLeadDetailsModal = (id) => {
-        setLeadDetailsModal(id)
-    };
-
     const handleDetails = (item) => {
         navigate('/lead-details', { state: { item } })
     }
 
     const closeEditLeadModal = () => setEditLeadModal(false);
-    const closeLeadDetailsModal = () => setLeadDetailsModal(false);
 
     useEffect(() => {
         setLoader(true);
@@ -132,9 +125,6 @@ const Followup = () => {
                                         </div>
                                         <Modal show={editleadmodal === item._id ? true : false} onHide={closeEditLeadModal}>
                                             <EditLead data={item} id={item._id} closeEditLeadModal={closeEditLeadModal} />
-                                        </Modal>
-                                        <Modal show={leaddetailsmodal === item._id ? true : false} onHide={closeLeadDetailsModal}>
-                                            <LeadDetails data={item} id={item._id} closeLeadDetailsModal={closeLeadDetailsModal} />
                                         </Modal>
                                     </td>
                                 </tr>

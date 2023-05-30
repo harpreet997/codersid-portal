@@ -1,6 +1,5 @@
-import { Modal } from "react-bootstrap";
 import { useLocation, useNavigate } from 'react-router-dom';
-import {TfiComments} from 'react-icons/tfi';
+import { TfiComments } from 'react-icons/tfi';
 import '../../styles/expense/expensedetails.css';
 
 const ViewLeadDetails = () => {
@@ -21,88 +20,6 @@ const ViewLeadDetails = () => {
                     <p className='view-student-details-back-button-text'>Back</p>
                 </button>
             </div>
-            {/* <div className="d-flex">
-                <div className='view-expense-details-modal-box'>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>
-                            Name</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.name}</p>
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Contact</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.contactdetails}</p>
-
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Email</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.emailid}</p>
-
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>City</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.city}</p>
-
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Address</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.address}</p>
-
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Education</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.education}</p>
-
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Employment Status</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.employementStatus}</p>
-
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Status</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.status}</p>
-
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Source</p>
-                        <div className='view-line1'></div>
-                        <p className='studentid-value'>{data.source}</p>
-
-                    </div>
-                    <div className='student-details-horizontal-line'></div>
-                    <div className="d-flex justify-content-between">
-                        <p className='view-student-details-list-heading-1'>Comments</p>
-                        <div className='view-line1'></div>
-                        <div className='d-flex flex-column studentid-value'>
-                            {data.comments.map((item) => {
-                                return (
-                                    <>
-                                        <p>{item}</p>
-                                    </>
-                                )
-                            })}
-                        </div>
-
-                    </div>
-                </div>
-            </div> */}
-
             <div className="d-flex scroll">
                 <div className='view-student-details-primary-box'>
                     <div className="d-flex justify-content-between">
@@ -178,21 +95,18 @@ const ViewLeadDetails = () => {
                     <p className='view-student-details-middle-heading me-4 '>Comments</p>
                     <div className='view-line1'></div>
                     <div className='d-flex flex-column studentid-value'>
-                                {data.comments.map((item) => {
-                                    return (
-                                        <>
-                                        
-                                            <div className="d-flex">
-                                            <TfiComments style={{width: 40, height: 20, marginTop: 15}}/>
-                                            <p>{item.comment}</p>
-                                            <p className="ms-2">{item.commentAt}</p>
-                                            </div>
-                                            {/* <p><TfiComments style={{width: 40, height: 20}}/>{item}</p> */}
-                                            
-                                        </>
-                                    )
-                                })}
-                            </div>
+                        {data.comments.map((item) => {
+                            return (
+                                <>
+                                    <div className="d-flex">
+                                        <TfiComments style={{ width: 40, height: 20, marginTop: 15 }} />
+                                        <p>{item.comment}</p>
+                                        <p className="ms-2">{item.commentAt}</p>
+                                    </div>
+                                </>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
