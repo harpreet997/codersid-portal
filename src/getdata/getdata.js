@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseUrl } from "../baseurl";
+import { baseUrl, secondbaseUrl } from "../baseurl";
 
 export const getAllStudents = (headers) => {
     return axios.get(`${baseUrl}/api/students`, {headers})
@@ -23,6 +23,10 @@ export const getAllCategories = (headers) => {
 
 export const getAllExpenses = (headers) => {
     return axios.get(`${baseUrl}/api/expense`, {headers})
+}
+
+export const getAllNewExpenses = () => {
+    return axios.get(`${secondbaseUrl}/api/expenses`)
 }
 
 export const getAllPayments = (headers) => {

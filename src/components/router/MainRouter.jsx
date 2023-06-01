@@ -9,14 +9,18 @@ import AddCourse from '../course/AddCourse';
 import PaymentRecord from '../paymentrecord/PaymentRecord';
 import StudentList from '../student/StudentList';
 import AddExpense from '../expense/AddExpense';
+import UpdatedAddExpense from '../expense/UpdatedAddExpense';
 import AddExpenseCategory from '../expense/AddExpenseCategory';
 import MainPaymentReceipt from '../paymentrecord/MainPaymentReceipt';
 import ExpenseManagement from '../expense/ExpenseManagement';
+import UpdatedExpenseManagement from '../expense/UpdatedExpenseManagement';
 import StudentDetails from '../student/StudentDetails';
 import ExpenseDetails from '../expense/ExpenseDetails';
+import UpdatedExpenseDetails from '../expense/UpdatedExpenseDetails';
 import SignIn from '../login/SignIn';
 import UpdateStudent from '../student/UpdateStudent';
 import UpdateExpense from '../expense/UpdateExpense';
+import UpdatedEditExpense from '../expense/UpdatedEditExpense';
 import FinanceRecord from '../finance/FinanceRecord';
 import AllLeads from '../leads/AllLeads';
 import Followup from '../leads/Followup';
@@ -40,10 +44,14 @@ const MainRouter = () => {
                     <Route path='/add-batch' element={<AddBatch />} />
                     <Route path='/add-course' element={<AddCourse />} />
                     <Route path='/add-expense-category' element={<AddExpenseCategory />} />
-                    <Route path='/manage-expense' element={<ExpenseManagement />} />
+                    {/* <Route path='/manage-expense' element={<ExpenseManagement />} />
                     <Route path='/add-expense' element={<AddExpense />} />
                     <Route path='/update-expense' element={<UpdateExpense />} />
-                    <Route path='/expense-details' element={<ExpenseDetails />} />
+                    <Route path='/expense-details' element={<ExpenseDetails />} /> */}
+                    <Route path='/manage-expense' element={<UpdatedExpenseManagement />} />
+                    <Route path='/add-expense' element={<UpdatedAddExpense />} />
+                    <Route path='/update-expense' element={<UpdatedEditExpense />} />
+                    <Route path='/expense-details' element={<UpdatedExpenseDetails />} />
                     <Route path='/payment' element={<Payment/>} />
                     <Route path='/payment-receipt' element={<MainPaymentReceipt />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />

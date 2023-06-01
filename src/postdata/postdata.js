@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseUrl } from "../baseurl";
+import { baseUrl, secondbaseUrl } from "../baseurl";
 
 
 export const login = (logindata) => {
@@ -47,8 +47,16 @@ export const addExpense = (expensedata) => {
     return axios.post(`${baseUrl}/api/expense`, expensedata)
 } 
 
+export const addNewExpense = (formdata) => {
+    return axios.post(`${secondbaseUrl}/api/expenses`, formdata)
+} 
+
 export const updateExpense = (id, expensedata) => {
     return axios.patch(`${baseUrl}/api/expense/${id}`, expensedata)
+} 
+
+export const updateNewExpense = (id, formdata) => {
+    return axios.patch(`${secondbaseUrl}/api/expenses/${id}`, formdata)
 } 
 
 export const deleteCategory = (id) => {
