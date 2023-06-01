@@ -44,14 +44,14 @@ const MainRouter = () => {
                     <Route path='/add-batch' element={<AddBatch />} />
                     <Route path='/add-course' element={<AddCourse />} />
                     <Route path='/add-expense-category' element={<AddExpenseCategory />} />
-                    {/* <Route path='/manage-expense' element={<ExpenseManagement />} />
+                    <Route path='/manage-expense' element={<ExpenseManagement />} />
                     <Route path='/add-expense' element={<AddExpense />} />
                     <Route path='/update-expense' element={<UpdateExpense />} />
-                    <Route path='/expense-details' element={<ExpenseDetails />} /> */}
-                    <Route path='/manage-expense' element={<UpdatedExpenseManagement />} />
+                    <Route path='/expense-details' element={<ExpenseDetails />} />
+                    {/* <Route path='/manage-expense' element={<UpdatedExpenseManagement />} />
                     <Route path='/add-expense' element={<UpdatedAddExpense />} />
                     <Route path='/update-expense' element={<UpdatedEditExpense />} />
-                    <Route path='/expense-details' element={<UpdatedExpenseDetails />} />
+                    <Route path='/expense-details' element={<UpdatedExpenseDetails />} /> */}
                     <Route path='/payment' element={<Payment/>} />
                     <Route path='/payment-receipt' element={<MainPaymentReceipt />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />
