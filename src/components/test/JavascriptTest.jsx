@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import { getAllTests } from "../../getdata/getdata";
 import { headers } from "../../headers";
+import { BallTriangle } from 'react-loader-spinner';
 
 const JavascriptTest = () => {
     const [testlist, setTestList] = useState([]);
+    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
+        setLoader(true);
         getAllTests(headers)
             .then((response) => {
                 const categoryName = response.data.Tests.filter((item) => {
                     return item.category === "Javascript"
                 })
                 setTestList(categoryName[0].questionslist);
+                setLoader(false);
 
             })
 
@@ -44,6 +48,20 @@ const JavascriptTest = () => {
                     </div>
                 )
             })}
+
+            {loader ?
+                <div className="d-flex justify-content-center">
+                    <BallTriangle
+                        height={250}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                </div> : null}
 
         </div >
     );
