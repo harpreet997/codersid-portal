@@ -9,6 +9,9 @@ const Header = () => {
 
     const logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('role');
+        localStorage.removeItem('walkin');
         toast.success("Logging out", {
             position: "top-center",
             autoClose: 1000

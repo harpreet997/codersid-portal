@@ -38,5 +38,13 @@ export const getAllLeads = (headers) => {
 }
 
 export const getAllWalkins = (headers) => {
-    return axios.get('http://localhost:4000/api/walkins', {headers})
+    return axios.get(`${baseUrl}/api/walkins`, {headers})
+}
+
+export const getAllQuestions = (headers) => {
+    return axios.get(`${baseUrl}/api/questions`, {headers})
+}
+
+export const getAllTests = (headers) => {
+    return axios.get(`${baseUrl}/api/tests`, {headers})
 }

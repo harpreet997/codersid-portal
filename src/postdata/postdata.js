@@ -81,6 +81,19 @@ export const editLead = (id, editleaddata) => {
 
 
 export const addWalkin = (walkindata) => {
-    return axios.post('http://localhost:4000/api/walkins', walkindata)
+    return axios.post(`${baseUrl}/api/walkins`, walkindata)
 } 
+
+export const addQuestion = (questiondata) => {
+    return axios.post(`${baseUrl}/api/questions`, questiondata)
+} 
+
+export const addTest = (testdata) => {
+    return axios.post(`${baseUrl}/api/tests`, testdata)
+} 
+
+export const deleteAllQuestions = () => {
+    return axios.delete(`${baseUrl}/api/questions`)
+} 
+
 

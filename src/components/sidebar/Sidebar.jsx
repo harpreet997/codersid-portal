@@ -16,7 +16,9 @@ const Sidebar = () => {
     const [showMaster, setShowMaster] = useState(true);
     const [showPayment, setShowPayment] = useState(true);
     const [showLeads, setShowLeads] = useState(true);
+    const [showTest, setShowTest] = useState(true);
     const role = localStorage.getItem('role');
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const handleMaster = () => {
         setShowMaster(!showMaster)
@@ -28,6 +30,10 @@ const Sidebar = () => {
 
     const handleLeads = () => {
         setShowLeads(!showLeads)
+    }
+
+    const handleTest = () => {
+        setShowTest(!showTest)
     }
 
     return (
@@ -47,7 +53,7 @@ const Sidebar = () => {
                 <NavLink className='sidebar-item-2' to='/students-list'>CodersID Students</NavLink>
             </div>
 
-            {role === 'admin' ?
+            {role === 'admin' || user[0].permission.includes('Master') ?
                 <>
                     <div className='d-flex'>
                         <img className='master-text-icon' src={MasterIcon} alt="MasterIcon" />
@@ -81,71 +87,109 @@ const Sidebar = () => {
                 </>
                 : null}
 
-           
-                <div className='d-flex'>
-                    <img className='lead-icon' src={LeadImage} alt="LeadImage" />
-                    <p className='sidebar-item-3' onClick={handleLeads}>Leads</p>
-                    <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
-                </div>
-                {
-                    showLeads ?
-                        <>
-                            <div className="d-flex">
-                                <img className='list-icon' src={ListIcon} alt="ListIcon" />
-                                <NavLink className='add-batch-text' to='/all-leads'>All Leads</NavLink>
-                            </div>
-                            <div className="d-flex">
-                                <img className='list-icon-2' src={ListIcon} alt="ListIcon" />
-                                <NavLink className='add-user-text' to='/followup'>Followup</NavLink>
-                            </div>
-                            <div className="d-flex">
-                                <img className='list-icon-3' src={ListIcon} alt="ListIcon" />
-                                <NavLink className='add-course-text' to='/cold-reach-out'>Cold Reach out</NavLink>
-                            </div>
-                            <div className="d-flex">
-                                <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
-                                <NavLink className='add-expense-text' to='/convered-leads'>Converted</NavLink>
-                            </div>
-                            <div className="d-flex">
-                                <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
-                                <NavLink className='add-expense-text' to='/lost-leads'>Not Interested/ Permanently Lost.</NavLink>
-                            </div>
-                            <div className="d-flex">
-                                <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
-                                <NavLink className='add-expense-text' to='/walk-in'>Walk-Ins</NavLink>
-                            </div>
-                        </>
-                        : null
-                }
+            {role === 'admin' || user[0].permission.includes('Leads') ?
+                <>
+                    <div className='d-flex'>
+                        <img className='lead-icon' src={LeadImage} alt="LeadImage" />
+                        <p className='sidebar-item-3' onClick={handleLeads}>Leads</p>
+                        <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
+                    </div>
+                    {
+                        showLeads ?
+                            <>
+                                <div className="d-flex">
+                                    <img className='list-icon' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='add-batch-text' to='/all-leads'>All Leads</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-2' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='add-user-text' to='/followup'>Followup</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-3' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='add-course-text' to='/cold-reach-out'>Cold Reach out</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='add-expense-text' to='/convered-leads'>Converted</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='add-expense-text' to='/lost-leads'>Not Interested/ Permanently Lost.</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='add-expense-text' to='/walk-in'>Walk-Ins</NavLink>
+                                </div>
+                            </>
+                            : null
+                    }
+                </>
+                : null}
 
-            <div className='d-flex'>
-                <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
-                <p className='payment-text' onClick={handlePayment}>Payment</p>
-                <img className='payment-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
-            </div>
-            {
-                showPayment ?
-                    <>
-                        <div className="d-flex">
-                            <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
-                            <NavLink className='payment-records' to='/payment-records'>Payment Records</NavLink>
-                        </div>
-                        <div className="d-flex">
-                            <img className='list-icon-6' src={ListIcon} alt="ListIcon" />
-                            <NavLink className='payfee' to='/payment'>Pay Fee</NavLink>
-                        </div>
-                    </>
-                    : null
-            }
-            <div className="d-flex">
-                <img className='sidebar-expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" />
-                <NavLink className='expense-management' to='/manage-expense'>Manage Expense</NavLink>
-            </div>
-            {role === "admin" ?
+
+
+            {role === 'admin' || user[0].permission.includes('Payment') ?
+                <>
+                    <div className='d-flex'>
+                        <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
+                        <p className='payment-text' onClick={handlePayment}>Payment</p>
+                        <img className='payment-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
+                    </div>
+                    {
+                        showPayment ?
+                            <>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/payment-records'>Payment Records</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-6' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payfee' to='/payment'>Pay Fee</NavLink>
+                                </div>
+                            </>
+                            : null
+                    }
+                </>
+                : null}
+
+            {role === 'admin' || user[0].permission.includes('Manage Expense') ?
+                <div className="d-flex">
+                    <img className='sidebar-expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" />
+                    <NavLink className='expense-management' to='/manage-expense'>Manage Expense</NavLink>
+                </div>
+                : null}
+
+            {role === "admin" || user[0].permission.includes('Finance') ?
                 <div className="d-flex">
                     <img className='sidebar-expense-manage-icon' src={FinanceIcon} alt="FinanceIcon" />
                     <NavLink className='expense-management' to='/finance'>Finance</NavLink>
                 </div> : null}
+
+            {role === 'admin' || user[0].permission.includes('Test') ?
+                <>
+                    <div className='d-flex'>
+                        <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
+                        <p className='payment-text' onClick={handleTest}>Test</p>
+                        <img className='payment-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
+                    </div>
+                    {
+                        showTest ?
+                            <>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/create-test'>Create Test</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/all-tests'>All Test</NavLink>
+                                </div>
+
+                            </>
+                            : null
+                    }
+                </>
+                : null}
         </div>
     );
 }

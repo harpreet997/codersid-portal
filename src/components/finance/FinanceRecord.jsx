@@ -37,22 +37,22 @@ let options = {
         title: {
             text: 'Months',
             style: {
-                fontSize:  '14px',
-                fontWeight:  'bold',
-                fontFamily:  'Poppins',
-                color:  '#263238'
-              },
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: 'Poppins',
+                color: '#263238'
+            },
         }
     },
     yaxis: {
         title: {
             text: 'Rupees',
             style: {
-                fontSize:  '14px',
-                fontWeight:  'bold',
-                fontFamily:  'Poppins',
-                color:  '#263238'
-              },
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: 'Poppins',
+                color: '#263238'
+            },
         },
         min: 0
     },
@@ -87,30 +87,34 @@ const FinanceRecord = () => {
         return sales = sales + parseInt(item.Amount);
 
     })
+
     
+
     let grandtotalSales = totalSales[studentlist.length - 1]
-    if(studentlist.length === 0 )
-    {
+    if (studentlist.length === 0) {
         grandtotalSales = 0
     }
-    
+
     const totalExpenses = expensedata.map((item) => {
         return expenses = expenses + parseInt(item.Amount);
 
     })
     let grandtotalExpenses = totalExpenses[expensedata.length - 1];
-    if(expensedata.length === 0 )
-    {
+    if (expensedata.length === 0) {
         grandtotalExpenses = 0
     }
-    console.log(grandtotalExpenses)
+    
 
+    console.log(salesvalue);
+    console.log(expensevalue);
+    console.log(grandtotalSales);
+    console.log(grandtotalExpenses);
 
     const calculateProfit = () => {
-        if (salesvalue === 0) {
-            return grandtotalSales - salesvalue
+        if (studentlist.length === 0) {
+            return salesvalue - grandtotalExpenses
         }
-        else if (expensevalue === 0 ) {
+        else if (expensedata.length === 0) {
             return grandtotalSales - expensevalue
         }
         else {
@@ -119,7 +123,8 @@ const FinanceRecord = () => {
     }
 
     const profit = calculateProfit();
-
+    //http://localhost:4000/api/paymentrecords
+    //https://codersid-backend.vercel.app/api/paymentrecords
     useEffect(() => {
         axios.get("https://codersid-backend.vercel.app/api/paymentrecords").then((res) => {
             setStudentList(res.data.Payments)
@@ -208,6 +213,7 @@ const FinanceRecord = () => {
         if (expenserecords.length === 0) {
             setExpenseRecords(0)
         }
+
         setStudentList(salesdata);
         setExpenseData(expenserecords);
         let sale = dataprocess("sale", salesdata);
@@ -226,7 +232,7 @@ const FinanceRecord = () => {
     const handleToDate = (event) => {
         const toDate = event.target.value
         let salesdata = allstudentlist.filter((item, i) => {
-            return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate 
+            return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate
         })
         let expenserecords = allexpensedata.filter((item, i) => {
             return item.createdAt.substring(0, 10) >= fromdate && item.createdAt.substring(0, 10) <= toDate;
@@ -290,6 +296,8 @@ const FinanceRecord = () => {
                 <div className="finance-card">
                     <div className="card-body">
                         <p className="fs-4 fw-bold">&#x20B9; {profit}/-</p>
+                        {/* <p className="fs-4 fw-bold">&#x20B9; {studentlist.length === 0 || expensedata.length === 0 ? salesvalue - expensevalue :
+                            grandtotalSales - grandtotalExpenses}</p> */}
                         <p className="fs-5">{profit < 0 ? "Loss" : "Profits"}</p>
                     </div>
                 </div>

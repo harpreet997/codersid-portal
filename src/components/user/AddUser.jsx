@@ -14,8 +14,11 @@ const AddUser = () => {
     const [userdata, setUserdata] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        permission: ""
     });
+
+    const [permission, setPermission] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
@@ -25,6 +28,7 @@ const AddUser = () => {
     const nPages = Math.ceil(userlist.length / recordsPerPage)
     const [loader, setLoader] = useState(false);
 
+    const permissionlist = ['Master', 'Leads', 'Payment', 'Manage Expense', 'Finance']
 
     useEffect(() => {
         setLoader(true);
@@ -45,9 +49,27 @@ const AddUser = () => {
         })
     }
 
+    const handlePermission = (event) => {
+        var permissionlist = [...permission]
+        if (event.target.checked) {
+            permissionlist = [...permission, event.target.value]
+
+        }
+        else {
+            permissionlist.splice(permission.indexOf(event.target.value), 1);
+        }
+        setPermission(permissionlist)
+    }
+
+    // console.log(permission)
+
     const AddUser = (event) => {
         event.preventDefault();
-        addUser(userdata)
+        const payload = {
+            ...userdata,
+            permission: permission
+        }
+        addUser(payload)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -109,18 +131,27 @@ const AddUser = () => {
                             onChange={handleChange} required />
                     </div>
                 </div>
+                {permissionlist.map((item) => {
+                    return (
+                        <>
+                            <input type="checkbox" id="permission" name="permission" value={item} onChange={handlePermission} />
+                            <label className='ms-2 me-4 text-start fs-6' for="permission">{item}</label>
+                        </>
+                    )
+                })}
                 <button className='add-user-button' type='submit'>
                     <p className='add-user-button-text'>Submit
                     </p></button>
 
             </form>
-            <div className="scroll">
+            <div className="mt-3 scroll">
                 <table className="table">
                     <thead className='text-center'>
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Password</th>
+                            {/* <th scope="col">Permission</th> */}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -131,6 +162,7 @@ const AddUser = () => {
                                     <td>{item.name}</td>
                                     <td>{item.email}</td>
                                     <td>{item.password}</td>
+                                    {/* <td>{item.permission}</td> */}
                                     <td>
                                         <button className='delete-button' onClick={() => DeleteUser(item._id)}>
                                             <p className='delete-button-text'>Delete</p>
@@ -142,24 +174,24 @@ const AddUser = () => {
 
                 </table>
                 {loader ?
-                <div className="d-flex justify-content-center">
-                    <BallTriangle
-                        height={250}
-                        width={300}
-                        radius={5}
-                        color="#10D1E3"
-                        ariaLabel="ball-triangle-loading"
-                        wrapperClassName=''
-                        wrapperStyle=""
-                        visible={true}
-                    />
-                </div> : null}
+                    <div className="d-flex justify-content-center">
+                        <BallTriangle
+                            height={250}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
+                    </div> : null}
 
-            {!loader && currentRecords.length === 0 ?
-                <div className='d-flex justify-content-center'>
-                    <p className='fs-4'>No Data Found</p>
-                </div>
-                : null}
+                {!loader && currentRecords.length === 0 ?
+                    <div className='d-flex justify-content-center'>
+                        <p className='fs-4'>No Data Found</p>
+                    </div>
+                    : null}
             </div>
             {currentRecords.length > 0 ?
                 <div className="text-center">

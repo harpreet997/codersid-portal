@@ -29,6 +29,8 @@ import ConvertedLead from '../leads/ConvertedLead';
 import LostLead from '../leads/LostLead';
 import WalkIn from '../../components/leads/WalkIn';
 import ViewLeadDetails from '../leads/ViewLeadDetails';
+import CreateTest from '../test/CreateTest';
+import AllTests from '../test/AllTests';
 
 const MainRouter = () => {
     return (
@@ -64,6 +66,8 @@ const MainRouter = () => {
                     <Route path='/lost-leads' element={<LostLead />} />
                     <Route path='/walk-in' element={<WalkIn />} />
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
+                    <Route path='/create-test' element={<CreateTest />} />
+                    <Route path='/all-tests' element={<AllTests />} />
                 </Route>
                 <Route path="/" element={<SignIn />} />
             </Routes>
