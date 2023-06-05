@@ -32,6 +32,10 @@ import ViewLeadDetails from '../leads/ViewLeadDetails';
 import CreateTest from '../test/CreateTest';
 import AllTests from '../test/AllTests';
 import NewQuestions from '../questions/NewQuestion';
+import ReactTest from '../test/ReactTest';
+import NodeTest from '../test/NodeTest';
+import JavascriptTest from '../test/JavascriptTest';
+import AllAssessment from '../test/AllAssessment';
 
 const MainRouter = () => {
     return (
@@ -68,7 +72,11 @@ const MainRouter = () => {
                     <Route path='/walk-in' element={<WalkIn />} />
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
                     <Route path='/create-test' element={<CreateTest />} />
-                    <Route path='/all-tests' element={<AllTests />} />
+                    {/* <Route path='/all-tests' element={<AllTests />} /> */}
+                    <Route path='/all-tests' element={<AllAssessment/>}/>
+                    <Route path='/react-test' element={<ReactTest />} />
+                    <Route path='/node-test' element={<NodeTest />} />
+                    <Route path='/javascript-test' element={<JavascriptTest />} />
                     {/* <Route path='/create-question' element={<NewQuestions />} /> */}
                 </Route>
                 <Route path="/" element={<SignIn />} />

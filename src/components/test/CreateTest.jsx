@@ -12,8 +12,11 @@ const CreateTest = () => {
     const [testmodal, setTestModal] = useState(false);
     const [testdata, setTestData] = useState({
         testname: "",
+        category: "",
         questionslist: []
     })
+
+    const assessmentCategory = ['Node JS', 'React JS', 'MERN STACK', 'Javascript'];
 
     useEffect(() => {
         getAllQuestions(headers)
@@ -62,7 +65,7 @@ const CreateTest = () => {
                     autoClose: 2000
                 })
             })
-            deleteAllQuestions()
+        deleteAllQuestions()
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -75,7 +78,7 @@ const CreateTest = () => {
                     autoClose: 2000
                 })
             })
-            window.location.reload(false);
+        window.location.reload(false);
     }
 
 
@@ -99,14 +102,27 @@ const CreateTest = () => {
             {questionlist.length > 0
                 ?
                 <form onSubmit={AddTest}>
-                    <div className='d-flex'>
-                        <div>
-                            <p className="text-start">Test Name</p>
-                            <input type="text" className="add-batch-input"
+                    <div className='row'>
+                        <div className='col-sm-4'>
+                            <p className="text-start">Assessment Name</p>
+                            <input type="text" className="add-batch-input w-100"
                                 id="testname" name="testname"
                                 onChange={handleChange} required />
                         </div>
-                        <div>
+                        <div className='col-sm-4'>
+                            <p className="text-start">Assessment Category</p>
+                            <select className="add-batch-input mt-1 w-100"
+                                id="category" name="category"
+                                onChange={handleChange} required>
+                                <option value="">Select Category</option>
+                                {assessmentCategory.map((category) => {
+                                    return (
+                                        <option value={category}>{category}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                        <div className='col-sm-4'>
                             <button className='add-batch-button' type='submit'>
                                 <p className='add-batch-button-text'>Submit</p>
                             </button>
@@ -116,7 +132,7 @@ const CreateTest = () => {
                 : <div className="text-center">
                     <p className='fs-4'>No Test Found</p>
                 </div>
-                }
+            }
 
             {questionlist.map((item) => {
                 return (

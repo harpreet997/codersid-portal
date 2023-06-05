@@ -170,7 +170,7 @@ const Sidebar = () => {
                 <>
                     <div className='d-flex'>
                         <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
-                        <p className='payment-text' onClick={handleTest}>Test</p>
+                        <p className='payment-text' onClick={handleTest}>Assessment</p>
                         <img className='payment-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                     </div>
                     {
@@ -178,11 +178,23 @@ const Sidebar = () => {
                             <>
                                 <div className="d-flex">
                                     <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
-                                    <NavLink className='payment-records' to='/create-test'>Create Test</NavLink>
+                                    <NavLink className='payment-records' to='/create-test'>Create Assessment</NavLink>
                                 </div>
                                 <div className="d-flex">
                                     <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
-                                    <NavLink className='payment-records' to='/all-tests'>All Test</NavLink>
+                                    <NavLink className='payment-records' to='/all-tests'>All Assessments</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/react-test'>React Assessment</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/node-test'>Node Assessment</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/javascript-test'>Javascript Assessment</NavLink>
                                 </div>
                             </>
                             : null
