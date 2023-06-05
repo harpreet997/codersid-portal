@@ -13,10 +13,10 @@ import LeadImage from '../../assets/LeadImage.png';
 import '../../styles/sidebar/sidebar.css';
 
 const Sidebar = () => {
-    const [showMaster, setShowMaster] = useState(true);
-    const [showPayment, setShowPayment] = useState(true);
-    const [showLeads, setShowLeads] = useState(true);
-    const [showTest, setShowTest] = useState(true);
+    const [showMaster, setShowMaster] = useState(false);
+    const [showPayment, setShowPayment] = useState(false);
+    const [showLeads, setShowLeads] = useState(false);
+    const [showTest, setShowTest] = useState(false);
     const role = localStorage.getItem('role');
     const user = JSON.parse(localStorage.getItem('user'));
 
