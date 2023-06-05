@@ -184,7 +184,6 @@ const Sidebar = () => {
                                     <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
                                     <NavLink className='payment-records' to='/all-tests'>All Test</NavLink>
                                 </div>
-
                             </>
                             : null
                     }

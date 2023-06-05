@@ -72,13 +72,13 @@ const AllTests = () => {
                             return (
                                 <div className="mt-2 mb-2">
                                     <p>Q{item.id}. {item.question}</p>
-                                    <input type="checkbox" name="option1" value={item.option1} />
+                                    <input type="radio" id={item.option1} name={item.question} value={item.option1} />
                                     <label className='ms-2 text-start fs-6' htmlFor="option1">{item.option1}</label><br />
-                                    <input type="checkbox" name="option1" value={item.option2} />
+                                    <input type="radio" id={item.option2} name={item.question} value={item.option2} />
                                     <label className='ms-2 text-start fs-6' htmlFor="option2">{item.option2}</label><br />
-                                    <input type="checkbox" name="option1" value={item.option3} />
+                                    <input type="radio" id={item.option3} name={item.question} value={item.option3} />
                                     <label className='ms-2 text-start fs-6' htmlFor="option3">{item.option3}</label><br />
-                                    <input type="checkbox" name="option1" value={item.option4} />
+                                    <input type="radio" id={item.option4} name={item.question} value={item.option4} />
                                     <label className='ms-2 text-start fs-6' htmlFor="option4">{item.option4}</label>
                                 </div>
                             )

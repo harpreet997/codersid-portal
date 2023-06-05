@@ -31,6 +31,7 @@ import WalkIn from '../../components/leads/WalkIn';
 import ViewLeadDetails from '../leads/ViewLeadDetails';
 import CreateTest from '../test/CreateTest';
 import AllTests from '../test/AllTests';
+import NewQuestions from '../questions/NewQuestion';
 
 const MainRouter = () => {
     return (
@@ -68,6 +69,7 @@ const MainRouter = () => {
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
                     <Route path='/create-test' element={<CreateTest />} />
                     <Route path='/all-tests' element={<AllTests />} />
+                    {/* <Route path='/create-question' element={<NewQuestions />} /> */}
                 </Route>
                 <Route path="/" element={<SignIn />} />
             </Routes>
