@@ -30,12 +30,10 @@ import LostLead from '../leads/LostLead';
 import WalkIn from '../../components/leads/WalkIn';
 import ViewLeadDetails from '../leads/ViewLeadDetails';
 import CreateTest from '../test/CreateTest';
-import AllTests from '../test/AllTests';
-import NewQuestions from '../questions/NewQuestion';
-import ReactTest from '../test/ReactTest';
-import NodeTest from '../test/NodeTest';
-import JavascriptTest from '../test/JavascriptTest';
 import AllAssessment from '../test/AllAssessment';
+import Performance from '../test/Performance';
+import AddAssessmentCategory from '../test/AddAssessmentCategory';
+import QuestionDetails from '../test/QuestionDetails';
 
 const MainRouter = () => {
     return (
@@ -72,12 +70,10 @@ const MainRouter = () => {
                     <Route path='/walk-in' element={<WalkIn />} />
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
                     <Route path='/create-test' element={<CreateTest />} />
-                    {/* <Route path='/all-tests' element={<AllTests />} /> */}
                     <Route path='/all-tests' element={<AllAssessment/>}/>
-                    <Route path='/react-test' element={<ReactTest />} />
-                    <Route path='/node-test' element={<NodeTest />} />
-                    <Route path='/javascript-test' element={<JavascriptTest />} />
-                    {/* <Route path='/create-question' element={<NewQuestions />} /> */}
+                    <Route path='/performance' element={<Performance />}/>
+                    <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
+                    <Route path='/question-details' element={<QuestionDetails />}/>
                 </Route>
                 <Route path="/" element={<SignIn />} />
             </Routes>

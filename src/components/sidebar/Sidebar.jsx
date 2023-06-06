@@ -80,6 +80,10 @@ const Sidebar = () => {
                                     <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
                                     <NavLink className='add-expense-text' to='/add-expense-category'>Add Expense Category</NavLink>
                                 </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='add-expense-text' to='/add-assessment-category'>Add Assessment Category</NavLink>
+                                </div>
                             </>
                             : null
                     }
@@ -186,6 +190,10 @@ const Sidebar = () => {
                                 </div>
                                 <div className="d-flex">
                                     <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/performance'>Performance</NavLink>
+                                </div>
+                                {/* <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
                                     <NavLink className='payment-records' to='/react-test'>React Assessment</NavLink>
                                 </div>
                                 <div className="d-flex">
@@ -195,7 +203,7 @@ const Sidebar = () => {
                                 <div className="d-flex">
                                     <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
                                     <NavLink className='payment-records' to='/javascript-test'>Javascript Assessment</NavLink>
-                                </div>
+                                </div> */}
                             </>
                             : null
                     }

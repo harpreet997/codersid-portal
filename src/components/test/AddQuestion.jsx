@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { addQuestion } from "../../postdata/postdata";
 
-const AddQuestion = ({ CloseTestModal }) => {
+const AddQuestion = ({ CloseTestModal, setQuestionList, questionlist }) => {
     const [questiondata, setQuestionData] = useState({
         question: "",
         option1: "",
@@ -13,8 +13,6 @@ const AddQuestion = ({ CloseTestModal }) => {
         answer: ""
     })
 
-
-    const answerlist = ['option1', 'option2', 'option3', 'option4']
     const handleChange = (event) => {
         setQuestionData({
             ...questiondata,
@@ -24,22 +22,38 @@ const AddQuestion = ({ CloseTestModal }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        addQuestion(questiondata)
-            .then((response) => {
-                toast.success(response.data.msg, {
-                    position: "top-center",
-                    autoClose: 3000
-                })
-                CloseTestModal();
-                window.location.reload(false);
-            }
-            )
-            .catch((error) => {
-                toast.error(error.response.data.msg, {
-                    position: "top-center",
-                    autoClose: 2000
-                })
+        if(questionlist.some(item => item.question === questiondata.question))
+        {
+            toast.error("Question already exists", {
+                position: "top-center",
+                autoClose: 1000
             })
+        }
+        else {
+            setQuestionList(prev => [...prev, questiondata])
+            toast.success("Question created successfully", {
+                            position: "top-center",
+                            autoClose: 1000
+                        })
+            CloseTestModal();
+        }
+        
+        // addQuestion(questiondata)
+        //     .then((response) => {
+        //         toast.success(response.data.msg, {
+        //             position: "top-center",
+        //             autoClose: 3000
+        //         })
+        //         CloseTestModal();
+                
+        //     }
+        //     )
+        //     .catch((error) => {
+        //         toast.error(error.response.data.msg, {
+        //             position: "top-center",
+        //             autoClose: 2000
+        //         })
+        //     })
     }
     return (
         <>
@@ -93,11 +107,6 @@ const AddQuestion = ({ CloseTestModal }) => {
                                     <option value={questiondata.option4}>{questiondata.option4}</option>
                                 </>
                             }
-                            {/* {answerlist.map((item) => {
-                                return (
-                                    <option value={item}>{item}</option>
-                                )
-                            })} */}
                         </select>
                         <div className="text-center">
                             <button type="submit" className="mt-3 mb-3 btn btn-primary">Add Question</button>

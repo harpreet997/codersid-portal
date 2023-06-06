@@ -96,4 +96,12 @@ export const deleteAllQuestions = () => {
     return axios.delete(`${baseUrl}/api/questions`)
 } 
 
+export const addAssessmentCategory = (assessmentcategorydata) => {
+    return axios.post(`${baseUrl}/api/assessmentCategory`, assessmentcategorydata)
+} 
+
+export const deleteAssessmentCategory = (id) => {
+    return axios.delete(`${baseUrl}/api/assessmentCategory/${id}`)
+} 
+
 

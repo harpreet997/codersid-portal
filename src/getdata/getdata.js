@@ -48,3 +48,7 @@ export const getAllQuestions = (headers) => {
 export const getAllTests = (headers) => {
     return axios.get(`${baseUrl}/api/tests`, {headers})
 }
+
+export const getAllAssessmentCategory = (headers) => {
+    return axios.get(`${baseUrl}/api/assessmentCategory`, {headers})
+}

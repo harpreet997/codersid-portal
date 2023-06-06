@@ -4,10 +4,11 @@ import { getAllQuestions } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import AddQuestion from '../test/AddQuestion';
 import { addTest, deleteAllQuestions } from '../../postdata/postdata';
+import { getAllAssessmentCategory } from '../../getdata/getdata';
 import { toast } from "react-toastify";
 
-
 const CreateTest = () => {
+    const [assessmentcategorylist, setAssessmentCategoryList] = useState([]);
     const [questionlist, setQuestionList] = useState([]);
     const [testmodal, setTestModal] = useState(false);
     const [testdata, setTestData] = useState({
@@ -15,18 +16,28 @@ const CreateTest = () => {
         category: "",
         questionslist: []
     })
-
-    const assessmentCategory = ['Node JS', 'React JS', 'MERN STACK', 'Javascript'];
-
+    
     useEffect(() => {
-        getAllQuestions(headers)
+        getAllAssessmentCategory(headers)
             .then((response) => {
-                setQuestionList(response.data.Questions);
+                setAssessmentCategoryList(response.data.AssessmentCategories);
             })
             .catch((error) => {
                 console.log(error);
             })
+
+        getAllQuestions(headers)
+            .then((response) => {
+                setQuestionList(response.data.Questions);
+                
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        
     }, []);
+
+    console.log(questionlist)
 
     const OpenTestModal = () => {
         setTestModal(true);
@@ -56,7 +67,7 @@ const CreateTest = () => {
                     position: "top-center",
                     autoClose: 3000
                 })
-                // window.location.reload(false);
+                
             }
             )
             .catch((error) => {
@@ -65,12 +76,14 @@ const CreateTest = () => {
                     autoClose: 2000
                 })
             })
-        deleteAllQuestions()
+        setTimeout(() => {
+            deleteAllQuestions()
             .then((response) => {
-                toast.success(response.data.msg, {
-                    position: "top-center",
-                    autoClose: 3000
-                })
+                // toast.success(response.data.msg, {
+                //     position: "top-center",
+                //     autoClose: 3000
+                // })
+                window.location.reload(false);
             })
             .catch((error) => {
                 toast.error(error.response.data.msg, {
@@ -78,7 +91,7 @@ const CreateTest = () => {
                     autoClose: 2000
                 })
             })
-        window.location.reload(false);
+        }, 1000);
     }
 
 
@@ -95,7 +108,7 @@ const CreateTest = () => {
                         <p className='add-student-button-text'>Add Question + </p>
                     </button>
                     <Modal show={testmodal ? true : false} onHide={CloseTestModal}>
-                        <AddQuestion CloseTestModal={CloseTestModal} />
+                        <AddQuestion CloseTestModal={CloseTestModal} setQuestionList={setQuestionList} questionlist={questionlist}/>
                     </Modal>
                 </div>
             </div>
@@ -115,9 +128,9 @@ const CreateTest = () => {
                                 id="category" name="category"
                                 onChange={handleChange} required>
                                 <option value="">Select Category</option>
-                                {assessmentCategory.map((category) => {
+                                {assessmentcategorylist.map((category) => {
                                     return (
-                                        <option value={category}>{category}</option>
+                                        <option value={category.assessmentcategoryName}>{category.assessmentcategoryName}</option>
                                     )
                                 })}
                             </select>
@@ -137,19 +150,17 @@ const CreateTest = () => {
             {questionlist.map((item) => {
                 return (
                     <div className='mt-4'>
-                        <p>Q{item.id}. {item.question}</p>
-                        <input type="checkbox" name="option1" id="option1" value={item.option1} />
-                        <label className='ms-2 text-start fs-6' for="option1">{item.option1}</label><br />
-                        <input type="checkbox" name="option2" id="option2" value={item.option2} />
-                        <label className='ms-2 text-start fs-6' for="option2">{item.option2}</label><br />
-                        <input type="checkbox" name="option3" id="option3" value={item.option3} />
-                        <label className='ms-2 text-start fs-6' for="option3">{item.option3}</label><br />
-                        <input type="checkbox" name="option4" id="option4" value={item.option4} />
-                        <label className='ms-2 text-start fs-6' for="option4">{item.option4}</label>
+                        <p className='fw-bold'>Q{item.id}. {item.question}</p>
+                        <ul>
+                            <li>{item.option1}</li>
+                            <li>{item.option2}</li>
+                            <li>{item.option3}</li>
+                            <li>{item.option4}</li>
+                        </ul>
+                        <p>Answer : {item.answer}</p>
                     </div>
                 )
             })}
-
         </div>
     );
 }
