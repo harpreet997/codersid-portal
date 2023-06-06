@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Pagination from '../pagination/Pagination';
+// import Pagination from '../pagination/Pagination';
 
 const QuestionDetails = () => {
     const location = useLocation();
@@ -27,7 +27,7 @@ const QuestionDetails = () => {
                     <p className='view-student-details-back-button-text'>Back</p>
                 </button>
             </div>
-            {/* <p className='ms-2 fw-bold fs-4'>{data.testname}</p> */}
+            
             {questionlist.map((item) => {
                         return (
                             <div className="ms-2 mt-2 mb-2" key={item._id}>

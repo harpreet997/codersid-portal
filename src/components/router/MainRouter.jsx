@@ -33,6 +33,7 @@ import CreateTest from '../test/CreateTest';
 import AllAssessment from '../test/AllAssessment';
 import Performance from '../test/Performance';
 import AddAssessmentCategory from '../test/AddAssessmentCategory';
+import Assessment from '../test/Assessment';
 import QuestionDetails from '../test/QuestionDetails';
 
 const MainRouter = () => {
@@ -70,7 +71,8 @@ const MainRouter = () => {
                     <Route path='/walk-in' element={<WalkIn />} />
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
                     <Route path='/create-test' element={<CreateTest />} />
-                    <Route path='/all-tests' element={<AllAssessment/>}/>
+                    {/* <Route path='/all-tests' element={<AllAssessment/>}/> */}
+                    <Route path='/all-tests' element={<Assessment/>}/>
                     <Route path='/performance' element={<Performance />}/>
                     <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
                     <Route path='/question-details' element={<QuestionDetails />}/>
