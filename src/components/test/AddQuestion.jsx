@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { addQuestion } from "../../postdata/postdata";
 
 const AddQuestion = ({ CloseTestModal, setQuestionList, questionlist }) => {
     const [questiondata, setQuestionData] = useState({
@@ -37,23 +36,6 @@ const AddQuestion = ({ CloseTestModal, setQuestionList, questionlist }) => {
                         })
             CloseTestModal();
         }
-        
-        // addQuestion(questiondata)
-        //     .then((response) => {
-        //         toast.success(response.data.msg, {
-        //             position: "top-center",
-        //             autoClose: 3000
-        //         })
-        //         CloseTestModal();
-                
-        //     }
-        //     )
-        //     .catch((error) => {
-        //         toast.error(error.response.data.msg, {
-        //             position: "top-center",
-        //             autoClose: 2000
-        //         })
-        //     })
     }
     return (
         <>

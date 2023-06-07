@@ -55,7 +55,10 @@ const Assessment = () => {
     const handleQuestionDetails = (item) => {
         // console.log(item);
         // console.log(item.questionslist)
+        localStorage.setItem('item', JSON.stringify(item));
+        localStorage.setItem('questionlist', JSON.stringify(item.questionslist))
         navigate('/question-details', { state: { item } })
+        
     }
 
     return (

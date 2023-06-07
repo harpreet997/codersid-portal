@@ -12,6 +12,8 @@ const Header = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('role');
         localStorage.removeItem('walkin');
+        localStorage.removeItem('item');
+        localStorage.removeItem('questionlist');
         toast.success("Logging out", {
             position: "top-center",
             autoClose: 1000

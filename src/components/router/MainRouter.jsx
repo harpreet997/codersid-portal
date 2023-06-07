@@ -35,6 +35,8 @@ import Performance from '../test/Performance';
 import AddAssessmentCategory from '../test/AddAssessmentCategory';
 import Assessment from '../test/Assessment';
 import QuestionDetails from '../test/QuestionDetails';
+import LiveTest from '../test/LiveTest';
+import AssessmentList from '../test/AssessmentList';
 
 const MainRouter = () => {
     return (
@@ -76,8 +78,11 @@ const MainRouter = () => {
                     <Route path='/performance' element={<Performance />}/>
                     <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
                     <Route path='/question-details' element={<QuestionDetails />}/>
+                    
                 </Route>
                 <Route path="/" element={<SignIn />} />
+                <Route path='/assessment-list' element={<AssessmentList />}/>
+                <Route path='/assessment-test/:id' element={<LiveTest />}/>
             </Routes>
         </>
     )

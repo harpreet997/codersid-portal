@@ -104,4 +104,8 @@ export const deleteAssessmentCategory = (id) => {
     return axios.delete(`${baseUrl}/api/assessmentCategory/${id}`)
 } 
 
+export const addTestPerformance = (testPerformancedata) => {
+    return axios.post(`${baseUrl}/api/testPerformance`, testPerformancedata)
+} 
+
 

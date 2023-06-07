@@ -1,22 +1,28 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import Pagination from '../pagination/Pagination';
+import Pagination from '../pagination/Pagination';
 
 const QuestionDetails = () => {
     const location = useLocation();
-    const data = location.state.item;
+    // console.log(location)
+    // const data = location.state.item;
     const navigate = useNavigate();
     const handleBack = () => {
         navigate('/all-tests');
+        localStorage.removeItem('questionlist');
+        localStorage.removeItem('item');
     }
 
-    const questionlist = data.questionslist;
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [recordsPerPage] = useState(10);
-    // const indexOfLastRecord = currentPage * recordsPerPage;
-    // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    // const currentRecords = questionlist.slice(indexOfFirstRecord, indexOfLastRecord);
-    // const nPages = Math.ceil(questionlist.length / recordsPerPage)
+    const data = JSON.parse(localStorage.getItem('item'))
+    const questionlist = JSON.parse(localStorage.getItem('questionlist'))
+    console.log(questionlist)
+    // const questionlist = data.questionslist
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(5);
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const currentRecords = questionlist.slice(indexOfFirstRecord, indexOfLastRecord);
+    const nPages = Math.ceil(questionlist.length / recordsPerPage)
     
 
     return ( 
@@ -28,7 +34,7 @@ const QuestionDetails = () => {
                 </button>
             </div>
             
-            {questionlist.map((item) => {
+            {currentRecords.map((item) => {
                         return (
                             <div className="ms-2 mt-2 mb-2" key={item._id}>
                                 <p className='fw-bold'>Q{item.id}. {item.question}</p>
@@ -42,7 +48,7 @@ const QuestionDetails = () => {
                             </div>
                         )
                     })}
-            {/* {currentRecords.length > 0 ?
+            {currentRecords.length > 0 ?
                 <div className="text-center">
                     <Pagination
                         nPages={nPages}
@@ -51,7 +57,7 @@ const QuestionDetails = () => {
                     />
                 </div>
 
-                : null} */}
+                : null}
         </div>
      );
 }

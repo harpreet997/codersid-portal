@@ -52,3 +52,11 @@ export const getAllTests = (headers) => {
 export const getAllAssessmentCategory = (headers) => {
     return axios.get(`${baseUrl}/api/assessmentCategory`, {headers})
 }
+
+export const getSingleTest = (id) => {
+    return axios.get(`${baseUrl}/api/tests/${id}`)
+}
+
+export const getAllTestPerformance = (headers) => {
+    return axios.get(`${baseUrl}/api/testPerformance`, {headers})
+}
