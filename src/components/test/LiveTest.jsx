@@ -46,7 +46,7 @@ const LiveTest = () => {
 
 
     console.log(questionslist);
-    
+
     const ShowTest = (event) => {
         event.preventDefault();
         if (testperformancelist.some(item => item.studentid === studentid)) {
@@ -85,15 +85,15 @@ const LiveTest = () => {
 
     const addScore = (value, answer) => {
         if (value === answer) {
-            score++;
+            setScore((score) => score + 1);
         }
-        localStorage.setItem('score', score);
+        // localStorage.setItem('score', score);
     }
 
     const generateScore = (event) => {
         event.preventDefault();
         setResult(true);
-        setScore(JSON.parse(localStorage.getItem('score')));
+        // setScore(JSON.parse(localStorage.getItem('score')));
         const payload = {
             studentid: studentid,
             Studentname: studentname,
