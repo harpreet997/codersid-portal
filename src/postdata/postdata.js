@@ -113,6 +113,11 @@ export const addExpiryDate = (id, payload) => {
 } 
 
 
+export const addStudentPerformanceRecord = (id, performancePayload) => {
+    return axios.post(`http://localhost:4000/api/students/${id}`, performancePayload)
+} 
+
+
 
 
 

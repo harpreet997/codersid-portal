@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getSingleTest, getAllTestPerformance, getAllStudents } from '../../getdata/getdata';
-import { addTestPerformance } from '../../postdata/postdata';
+import { addStudentPerformanceRecord } from '../../postdata/postdata';
 import { headers } from '../../headers';
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,9 +12,11 @@ const LiveTest = () => {
     const [questionslist, setQuestionsList] = useState([]);
     const [studentlist, setStudentList] = useState([]);
     const [showquestions, setShowQuestions] = useState(false);
+    const [studentdata, setStudentData] = useState([]);
     const [testname, setTestName] = useState('');
     const [category, setTestCategory] = useState('');
     const [studentid, setStudentId] = useState('');
+    const [generatedid, setGeneratedId] = useState('');
     const [studentname, setStudentName] = useState('');
     const [batchname, setBatchName] = useState('');
     const [result, setResult] = useState(false);
@@ -26,6 +28,8 @@ const LiveTest = () => {
     const currentRecords = questionslist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(questionslist.length / recordsPerPage)
     let value = '';
+
+    
 
     useEffect(() => {
         getAllTestPerformance(headers)
@@ -49,7 +53,14 @@ const LiveTest = () => {
 
     const ShowTest = (event) => {
         event.preventDefault();
-        if (testperformancelist.some(item => item.studentid === studentid)) {
+        // if (testperformancelist.some(item => item.studentid === studentid)) {
+        //     toast.error("Test already given", {
+        //         position: "top-center",
+        //         autoClose: 2000
+        //     })
+        //     window.location.reload(false);
+        // }
+        if (studentdata.some((item) => item.testId === id)) {
             toast.error("Test already given", {
                 position: "top-center",
                 autoClose: 2000
@@ -103,8 +114,14 @@ const LiveTest = () => {
             score: score
         }
 
-        
-            addTestPerformance(payload)
+        const performancePayload = {
+            testId: id,
+            testname: testname,
+            category: category,
+            score: score
+        }
+
+        addStudentPerformanceRecord(generatedid, performancePayload)
                 .then((response) => {
                     toast.success("Test submitted successfully", {
                         position: "top-center",
@@ -118,6 +135,21 @@ const LiveTest = () => {
                         autoClose: 2000
                     })
                 })
+        
+            // addTestPerformance(payload)
+            //     .then((response) => {
+            //         toast.success("Test submitted successfully", {
+            //             position: "top-center",
+            //             autoClose: 3000
+            //         })
+            //     }
+            //     )
+            //     .catch((error) => {
+            //         toast.error(error.response.data.msg, {
+            //             position: "top-center",
+            //             autoClose: 2000
+            //         })
+            //     })
             setTimeout(() => {
                 localStorage.removeItem('score');
                 toast.success("Thank you for giving the test", {
@@ -136,11 +168,14 @@ const LiveTest = () => {
             const data = studentlist.filter((item) => {
                 return item.id === Number(event.target.value);
             })
+            console.log(data);
+            setStudentData(data);
             if (data.length > 0) {
                 toast.success("Details Fetched successfully", {
                     position: "top-center",
                     autoClose: 1000
                 })
+                setGeneratedId(data[0]._id);
                 setStudentId(data[0].id);
                 setStudentName(data[0].studentname);
                 setBatchName(data[0].batchname)
