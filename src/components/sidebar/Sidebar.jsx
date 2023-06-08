@@ -48,10 +48,12 @@ const Sidebar = () => {
                 <NavLink className='sidebar-item-1' to='/dashboard'>Dashboard</NavLink>
 
             </div>
-            <div className='d-flex'>
-                <img className='codersid-students-icon' src={StudentIcon} alt="StudentIcon" />
-                <NavLink className='sidebar-item-2' to='/students-list'>CodersID Students</NavLink>
-            </div>
+            {role === 'admin' || user[0].permission.includes('CodersID Students') ?
+                <div className='d-flex'>
+                    <img className='codersid-students-icon' src={StudentIcon} alt="StudentIcon" />
+                    <NavLink className='sidebar-item-2' to='/students-list'>CodersID Students</NavLink>
+                </div>
+                : null}
 
             {role === 'admin' || user[0].permission.includes('Master') ?
                 <>
@@ -70,7 +72,7 @@ const Sidebar = () => {
                                 </div>
                                 <div className="d-flex">
                                     <img className='list-icon-2' src={ListIcon} alt="ListIcon" />
-                                    <NavLink className='add-user-text' to='/add-user'>Add User</NavLink>
+                                    <NavLink className='add-user-text' to='/user-list'>Add User</NavLink>
                                 </div>
                                 <div className="d-flex">
                                     <img className='list-icon-3' src={ListIcon} alt="ListIcon" />
@@ -170,7 +172,7 @@ const Sidebar = () => {
                     <NavLink className='expense-management' to='/finance'>Finance</NavLink>
                 </div> : null}
 
-            {role === 'admin' || user[0].permission.includes('Test') ?
+            {role === 'admin' || user[0].permission.includes('Assessment') ?
                 <>
                     <div className='d-flex'>
                         <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />

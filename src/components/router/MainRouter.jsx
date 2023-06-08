@@ -3,6 +3,7 @@ import Dashboard from '../dashboard/Dashboard';
 import AddStudent from '../student/AddStudent';
 import ProtectedRoutes from '../protectedroutes/ProtectedRoutes';
 import AddUser from '../user/AddUser';
+import UserList from '../user/UserList';
 import AddBatch from '../batch/AddBatch';
 import Payment from '../payment/Payment';
 import AddCourse from '../course/AddCourse';
@@ -48,6 +49,7 @@ const MainRouter = () => {
                     <Route path='/students-details' element={<StudentDetails />} />
                     <Route path='/add-student' element={<AddStudent />} />
                     <Route path='/update-student' element={<UpdateStudent />} />
+                    <Route path='/user-list' element={<UserList />} />
                     <Route path='/add-user' element={<AddUser />} />
                     <Route path='/add-batch' element={<AddBatch />} />
                     <Route path='/add-course' element={<AddCourse />} />

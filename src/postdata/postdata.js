@@ -108,4 +108,11 @@ export const addTestPerformance = (testPerformancedata) => {
     return axios.post(`${baseUrl}/api/testPerformance`, testPerformancedata)
 } 
 
+export const addExpiryDate = (id, payload) => {
+    return axios.post(`${baseUrl}/api/tests/${id}`, payload)
+} 
+
+
+
+
 

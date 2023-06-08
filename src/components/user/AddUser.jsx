@@ -1,46 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../postdata/postdata';
 import { toast } from "react-toastify";
-import { getAllUsers } from '../../getdata/getdata';
-import Pagination from '../pagination/Pagination';
-import { BallTriangle } from 'react-loader-spinner';
-import { headers } from '../../headers';
-import { deleteUser } from '../../postdata/postdata';
-import AddUserLogo from '../../assets/AddUser.png'
-import '../../styles/user/user.css';
+import '../../styles/student/addstudent.css';
+import '../../styles/dashboard/dashboard.css';
 
 const AddUser = () => {
-    const [userlist, setUserList] = useState([])
     const [userdata, setUserdata] = useState({
         name: "",
         email: "",
         password: "",
         permission: ""
     });
-
     const [permission, setPermission] = useState([]);
+    const navigate = useNavigate();
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [recordsPerPage] = useState(10);
-    const indexOfLastRecord = currentPage * recordsPerPage;
-    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = userlist.slice(indexOfFirstRecord, indexOfLastRecord);
-    const nPages = Math.ceil(userlist.length / recordsPerPage)
-    const [loader, setLoader] = useState(false);
-
-    const permissionlist = ['Master', 'Leads', 'Payment', 'Manage Expense', 'Finance']
-
-    useEffect(() => {
-        setLoader(true);
-        getAllUsers(headers)
-            .then((response) => {
-                setUserList(response.data.Users);
-                setLoader(false);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, []);
+    const permissionlist = ['CodersID Students', 'Master', 'Leads', 'Payment', 'Manage Expense', 'Finance', 'Assessment']
 
     const handleChange = (event) => {
         setUserdata({
@@ -61,7 +36,9 @@ const AddUser = () => {
         setPermission(permissionlist)
     }
 
-    // console.log(permission)
+    const handleBack = () => {
+        navigate("/user-list");
+    }
 
     const AddUser = (event) => {
         event.preventDefault();
@@ -75,7 +52,7 @@ const AddUser = () => {
                     position: "top-center",
                     autoClose: 3000
                 })
-                window.location.reload(false);
+                navigate("/user-list");
             }
             )
             .catch((error) => {
@@ -86,123 +63,46 @@ const AddUser = () => {
             })
     }
 
-    const DeleteUser = (id) => {
-        deleteUser(id)
-            .then((response) => {
-                toast.success(response.data.msg, {
-                    position: "top-center",
-                    autoClose: 2000
-                })
-                window.location.reload(false);
-            })
-            .catch((error) => {
-                toast.error(error.response.data.msg, {
-                    position: "top-center",
-                    autoClose: 2000
-                })
-            })
-    }
-
     return (
         <div className="card">
-            <div className='d-flex'>
-                <p className='add-user-card-text'>Add User</p>
-                <img className='add-user-icon' src={AddUserLogo} alt="AddUserLogo" />
-            </div>
+            <p className='add-student-heading-text'>Add User</p>
 
             <form onSubmit={AddUser}>
-                <div className="row mb-2">
-                    <div className="col-sm-4">
-                        <p className="text-start">Name</p>
-                        <input type="text" className="add-user-input w-100" id="name" name="name"
-
+                <div className='mt-5 row'>
+                    <div className="col-sm-4 mb-3">
+                        <p className="text-start input-field-label">Name</p>
+                        <input type="text" className="input-box-width w-100" id="name" name="name"
                             onChange={handleChange} required />
                     </div>
-                    <div className="col-sm-4">
-                        <p className="text-start">Email Address</p>
-                        <input type="email" className="add-user-input w-100" id="email" name="email"
 
+                    <div className="col-sm-4 mb-3">
+                        <p className="text-start input-field-label">Email Address</p>
+                        <input type="email" className="input-box-width w-100" id="email" name="email"
                             onChange={handleChange} required />
                     </div>
-                    <div className="col-sm-4">
-                        <p className="text-start">Password</p>
-                        <input type="password" className="add-user-input w-100" id="password" name="password"
-
+                    <div className="col-sm-4 mb-3">
+                        <p className="text-start input-field-label">Password</p>
+                        <input type="password" className="input-box-width w-100" id="password" name="password"
                             onChange={handleChange} required />
                     </div>
+                    
                 </div>
                 {permissionlist.map((item) => {
                     return (
                         <>
-                            <input type="checkbox" id="permission" name="permission" value={item} onChange={handlePermission} />
+                            <input type="checkbox" id="permission" name="permission" value={item} onChange={handlePermission}/>
                             <label className='ms-2 me-4 text-start fs-6' for="permission">{item}</label>
                         </>
                     )
-                })}
-                <button className='add-user-button' type='submit'>
-                    <p className='add-user-button-text'>Submit
-                    </p></button>
-
+                })}<br/>
+                <button className='add-student-form-button me-2' type='button' onClick={handleBack}>
+                    <p className='add-student-form-button-text'>Back</p>
+                </button>
+                <button className='add-student-form-button' type='submit'>
+                    <p className='add-student-form-button-text'>Submit</p>
+                </button>
             </form>
-            <div className="mt-3 scroll">
-                <table className="table">
-                    <thead className='text-center'>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Password</th>
-                            {/* <th scope="col">Permission</th> */}
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody className='text-center'>
-                        {currentRecords.map((item, i) => {
-                            return (
-                                <tr key={i}>
-                                    <td>{item.name}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.password}</td>
-                                    {/* <td>{item.permission}</td> */}
-                                    <td>
-                                        <button className='delete-button' onClick={() => DeleteUser(item._id)}>
-                                            <p className='delete-button-text'>Delete</p>
-                                        </button></td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
 
-                </table>
-                {loader ?
-                    <div className="d-flex justify-content-center">
-                        <BallTriangle
-                            height={250}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
-                    </div> : null}
-
-                {!loader && currentRecords.length === 0 ?
-                    <div className='d-flex justify-content-center'>
-                        <p className='fs-4'>No Data Found</p>
-                    </div>
-                    : null}
-            </div>
-            {currentRecords.length > 0 ?
-                <div className="text-center">
-                    <Pagination
-                        nPages={nPages}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                    />
-                </div>
-
-                : null}
         </div>
 
 

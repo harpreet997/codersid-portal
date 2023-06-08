@@ -13,6 +13,7 @@ const AddStudent = () => {
         batchname: "",
         course: "",
         emailid: "",
+        referralName: "",
         contactdetails: "",
         address: "",
         totalfees: "",
@@ -238,6 +239,12 @@ const AddStudent = () => {
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Enter Email Address</p>
                         <input type="email" className="input-box-width w-100" id="emailid" name="emailid"
+
+                            onChange={handleChange} required />
+                    </div>
+                    <div className="col-sm-4 mb-3">
+                        <p className="text-start input-field-label">Enter Referral Name</p>
+                        <input type="email" className="input-box-width w-100" id="referralName" name="referralName"
 
                             onChange={handleChange} required />
                     </div>

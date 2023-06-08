@@ -1,46 +1,33 @@
 import { useState, useEffect } from 'react';
-import { getAllBatches, getSingleTest, getAllTestPerformance } from '../../getdata/getdata';
+import { getSingleTest, getAllTestPerformance, getAllStudents } from '../../getdata/getdata';
 import { addTestPerformance } from '../../postdata/postdata';
 import { headers } from '../../headers';
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Pagination from '../pagination/Pagination';
 
 const LiveTest = () => {
-    const [batchlist, setBatchList] = useState([]);
+    const { id } = useParams();
     const [testperformancelist, setTestPerformanceList] = useState([]);
     const [questionslist, setQuestionsList] = useState([]);
-    const { id } = useParams();
+    const [studentlist, setStudentList] = useState([]);
     const [showquestions, setShowQuestions] = useState(false);
     const [testname, setTestName] = useState('');
     const [category, setTestCategory] = useState('');
+    const [studentid, setStudentId] = useState('');
+    const [studentname, setStudentName] = useState('');
+    const [batchname, setBatchName] = useState('');
     const [result, setResult] = useState(false);
-    let [score, setScore] = useState(0);
-    let value = '';
-    const [testPerformancedata, setTestPerformanceData] = useState({
-        studentid: "",
-        Studentname: "",
-        batchname: "",
-        testname: testname,
-        category: category,
-        score: score
-    })
-    const navigate = useNavigate();
+    let [score, setScore] = useState(0);  
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = questionslist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(questionslist.length / recordsPerPage)
+    let value = '';
 
     useEffect(() => {
-        getAllBatches(headers)
-            .then((response) => {
-                setBatchList(response.data.Batches);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
         getAllTestPerformance(headers)
             .then((response) => {
                 setTestPerformanceList(response.data.TestPerformances);
@@ -48,29 +35,52 @@ const LiveTest = () => {
             .catch((error) => {
                 console.log(error);
             })
-    }, []);
-
-
-    const handleChange = (event) => {
-        setTestPerformanceData({
-            ...testPerformancedata,
-            [event.target.name]: event.target.value
-        })
-    }
-
-    const ShowTest = (event) => {
-        event.preventDefault();
-        getSingleTest(id)
+        getAllStudents(headers)
             .then((response) => {
-                setQuestionsList(response.data.id.questionslist);
-                setTestName(response.data.id.testname);
-                setTestCategory(response.data.id.category);
-                setShowQuestions(true);
+                setStudentList(response.data.Students);
             })
             .catch((error) => {
                 console.log(error);
             })
+    }, []);
 
+
+    console.log(questionslist);
+    
+    const ShowTest = (event) => {
+        event.preventDefault();
+        if (testperformancelist.some(item => item.studentid === studentid)) {
+            toast.error("Test already given", {
+                position: "top-center",
+                autoClose: 2000
+            })
+            window.location.reload(false);
+        }
+        else {
+            getSingleTest(id)
+                .then((response) => {
+                    const date = new Date();
+                    console.log(date);
+                    console.log(response.data.id.expiryDate);
+                    if (date < new Date(response.data.id.expiryDate)) {
+                        setQuestionsList(response.data.id.questionslist);
+                        setTestName(response.data.id.testname);
+                        setTestCategory(response.data.id.category);
+                        setShowQuestions(true);
+                    }
+                    else {
+                        toast.error("Test link Invalid", {
+                            position: "top-center",
+                            autoClose: 2000
+                        })
+                        window.location.reload(false);
+                    }
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
     }
 
     const addScore = (value, answer) => {
@@ -85,25 +95,18 @@ const LiveTest = () => {
         setResult(true);
         setScore(JSON.parse(localStorage.getItem('score')));
         const payload = {
-            ...testPerformancedata,
+            studentid: studentid,
+            Studentname: studentname,
+            batchname: batchname,
             testname: testname,
             category: category,
             score: score
         }
+
         
-        if (testperformancelist.some(item => item.Studentname === testPerformancedata.Studentname)) {
-            toast.error("Test already given", {
-                position: "top-center",
-                autoClose: 2000
-            })
-            setTimeout(() => {
-                navigate('/assessment-list')
-            }, 2000)
-        }
-        else {
             addTestPerformance(payload)
                 .then((response) => {
-                    toast.success(response.data.msg, {
+                    toast.success("Test submitted successfully", {
                         position: "top-center",
                         autoClose: 3000
                     })
@@ -123,49 +126,63 @@ const LiveTest = () => {
                 })
             }, 2000)
             setTimeout(() => {
-                navigate('/assessment-list')
+                window.location.reload(false);
             }, 3000)
-        }
+        
     }
 
-    const handleBack = () => {
-        navigate('/assessment-list');
+    const handleFindStudent = (event) => {
+        setTimeout(() => {
+            const data = studentlist.filter((item) => {
+                return item.id === Number(event.target.value);
+            })
+            if (data.length > 0) {
+                toast.success("Details Fetched successfully", {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                setStudentId(data[0].id);
+                setStudentName(data[0].studentname);
+                setBatchName(data[0].batchname)
+
+            }
+            else {
+                toast.error("Invalid ID", {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                setTimeout(() => {
+                    window.location.reload(false);
+                }, 0)
+                
+            }
+        }, 1000)
+
     }
 
-    // console.log(currentRecords.length);
-    // console.log(questionslist.length);
+
 
     return (
         <div>
             <div className="d-flex justify-content-between">
                 <p className='studentlist-card-text ps-3'>Assessment</p>
-                <button className='view-student-details-back-button me-2' onClick={handleBack}>
-                    <p className='view-student-details-back-button-text'>Back</p>
-                </button>
             </div>
             <form onSubmit={ShowTest}>
                 <div className='ms-2 me-2 mt-5 row'>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Student ID</p>
                         <input type="number" className="input-box-width w-100" min={1} id="studentid" name="studentid"
-                            onChange={handleChange} required />
+                            onChange={handleFindStudent} required />
                     </div>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Student Name</p>
                         <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
-                            onChange={handleChange} required />
+                            value={studentname} readOnly />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start select-field-label">Select Batch</p>
-                        <select className="input-box-width w-100" name="batchname"
-                            onChange={handleChange} required >
-                            <option value="">Select Batch</option>
-                            {batchlist.map((item) => {
-                                return (
-                                    <option value={item.batchName}>{item.batchName}</option>
-                                )
-                            })}
-                        </select>
+                        <p className="text-start input-field-label">Batch Name</p>
+                        <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
+                            value={batchname} readOnly />
                     </div>
                 </div>
                 <button className='ms-2 add-student-form-button' type='submit'>
