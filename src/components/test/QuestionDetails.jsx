@@ -84,11 +84,11 @@ const QuestionDetails = () => {
                     }}>
                         <p className='add-student-button-text'>Test Link</p>
                     </button>
-                    <button className='add-student-button' onClick={() => {
+                    <button className={showEnable ? 'enable-link-button': 'disable-link-button'} onClick={() => {
                         enableLink(data._id)
                     }}>
                         <p className='add-student-button-text'>
-                            Enable Link {showEnable ? <span class="green-dot"></span> : <span class="red-dot"></span>}</p>
+                            Enable Link </p>
                     </button>
                 </div>
             </div>
