@@ -3,7 +3,7 @@
     margin-left: 20px;
     margin-top: 15px;
     width: 90%;
-    height: 100px;
+    height: 160px;
     margin-right: 5px;
     border: 1px solid #F3F3F3;
     box-shadow: 2px 2px 15px rgba(188, 188, 188, 0.2);
@@ -14,7 +14,7 @@
     padding: 5px;
     margin-left: 20px;
     margin-top: 15px;
-    width: 90%;
+    width: 30%;
     height: 80px;
     margin-right: 5px;
     border: 1px solid #F3F3F3;
@@ -123,3 +123,15 @@
     border-radius: 17.3122px;
     margin-top: 10px;
 }
+
+
+.question-details-back-button {
+    width: 100px;
+    height: 35px;
+    background: #10D1E3;
+    border: 1px solid #AEF8FF;
+    box-sizing: border-box;
+    border-radius: 17.3122px;
+    margin-top: 10px;
+}
+

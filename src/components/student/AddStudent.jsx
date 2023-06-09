@@ -243,7 +243,7 @@ const AddStudent = () => {
                             onChange={handleChange} required />
                     </div>
                     <div className="col-sm-4 mb-3">
-                        <p className="text-start input-field-label">Enter Referral Name</p>
+                        <p className="text-start input-field-label">Enter Incentive Of</p>
                         <input type="text" className="input-box-width w-100" id="referralName" name="referralName"
 
                             onChange={handleChange} required />

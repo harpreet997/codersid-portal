@@ -33,14 +33,14 @@ const QuestionDetails = () => {
 
     const [showEnable, setShowEnable] = useState(data.hasOwnProperty('expiryDate'));
 
-    const copy = async (id) => {
-        await navigator.clipboard.writeText(`${primaryUrl}/assessment-test/${id}`);
-        // await navigator.clipboard.writeText(`http://localhost:3000/assessment-test/${id}`);
-        toast.success("Test Link Copied", {
-            position: "top-center",
-            autoClose: 1000
-        })
-    }
+    // const copy = async (id) => {
+    //     await navigator.clipboard.writeText(`${primaryUrl}/assessment-test/${id}`);
+    //     // await navigator.clipboard.writeText(`http://localhost:3000/assessment-test/${id}`);
+    //     toast.success("Test Link Copied", {
+    //         position: "top-center",
+    //         autoClose: 1000
+    //     })
+    // }
 
     const enableLink = (id) => {
         const payload = {
@@ -79,17 +79,17 @@ const QuestionDetails = () => {
                     <button className='view-student-details-back-button me-2' onClick={handleBack}>
                         <p className='view-student-details-back-button-text'>Back</p>
                     </button>
-                    <button className='add-student-button me-2' onClick={() => {
+                    {/* <button className='add-student-button me-2' onClick={() => {
                         copy(data._id)
                     }}>
                         <p className='add-student-button-text'>Test Link</p>
-                    </button>
-                    <button className={showEnable ? 'enable-link-button': 'disable-link-button'} onClick={() => {
+                    </button> */}
+                    {/* <button className={showEnable ? 'enable-link-button': 'disable-link-button'} onClick={() => {
                         enableLink(data._id)
                     }}>
                         <p className='add-student-button-text'>
                             Enable Link </p>
-                    </button>
+                    </button> */}
                 </div>
             </div>
 

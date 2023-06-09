@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllTests } from '../../getdata/getdata';
+import { getAllTests, getAllAssessmentCategory } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { BallTriangle } from 'react-loader-spinner';
-import { getAllAssessmentCategory } from '../../getdata/getdata';
-import JsLogo from '../../assets/JsLogo.png';
+import { toast } from "react-toastify";
+import { primaryUrl } from '../../baseurl';
+import { addExpiryDate } from '../../postdata/postdata';
+import { Switch } from 'antd';
 import MernLogo from '../../assets/MernLogo.png';
-import NodeJSLogo from '../../assets/NodeJSLogo.jpg';
 import ReactLogo from '../../assets/ReactLogo.png';
+import NodeJSLogo from '../../assets/NodeJSLogo.jpg';
+import JsLogo from '../../assets/JsLogo.png';
 import '../../styles/assessment/assessmentlist.css';
 
 const Assessment = () => {
@@ -20,6 +23,13 @@ const Assessment = () => {
     const [testlist, setTestlist] = useState([]);
     const [allcategory, setAllCategory] = useState(true);
     const [category, setCategory] = useState(false);
+    const date = new Date();
+    date.setDate(date.getDate() + 2);
+    const expiryDate = date.toString()
+    // const [showEnable, setShowEnable] = useState(data.hasOwnProperty('expiryDate'));
+
+
+    const images = [ReactLogo, NodeJSLogo, JsLogo, MernLogo];
 
     const handleActive = (categoryname) => {
         setAllTests(false);
@@ -58,7 +68,37 @@ const Assessment = () => {
         localStorage.setItem('item', JSON.stringify(item));
         localStorage.setItem('questionlist', JSON.stringify(item.questionslist))
         navigate('/question-details', { state: { item } })
-        
+
+    }
+
+    const copy = async (id) => {
+        await navigator.clipboard.writeText(`${primaryUrl}/assessment-test/${id}`);
+        // await navigator.clipboard.writeText(`http://localhost:3000/assessment-test/${id}`);
+        toast.success("Test Link Copied", {
+            position: "top-center",
+            autoClose: 1000
+        })
+    }
+
+    const enableLink = (id) => {
+        const payload = {
+            expiryDate: expiryDate
+        }
+        addExpiryDate(id, payload)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                // setShowEnable(true);
+                window.location.reload(false);
+            })
+            .catch((error) => {
+                toast.success(error, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+            })
     }
 
     return (
@@ -73,7 +113,7 @@ const Assessment = () => {
                     }}>
                     <div className="card-body">
                         <p className="fs-5 fw-bold text-center">All Assessments</p>
-                        {/* <div className='text-center'><img src={MernLogo} alt="MernLogo" style={{ width: 70, borderRadius: "50%" }} /></div> */}
+                        <div className='text-center'><img src={MernLogo} alt="MernLogo" style={{ width: 70, borderRadius: "50%" }} /></div>
                     </div>
                 </div>
                 {assessmentcategorylist.map((item) => {
@@ -85,8 +125,10 @@ const Assessment = () => {
                                 setAllCategory(false);
                             }}>
                             <div className="card-body">
-                                <p className="fs-5 fw-bold text-center">{item.assessmentcategoryName} Assessment</p>
-                                {/* <div className='text-center'><img src={MernLogo} alt="MernLogo" style={{ width: 70, borderRadius: "50%" }} /></div> */}
+                                <p className="fs-5 fw-bold text-center">{item.assessmentcategoryName} </p>
+                                <div className='text-center'>
+                                    <img src={MernLogo} alt="MernLogo" style={{ width: 70, borderRadius: "50%" }} />
+                                </div>
                             </div>
                         </div>
                     )
@@ -95,42 +137,69 @@ const Assessment = () => {
 
             {alltests ?
                 <>
-                    <div className="row">
-                        {alltestlist.map((item) => {
-                            return (
-                                <div className="col-sm-3">
-                                    <div className="assessment-name-card pointer" key={item._id} onClick={() => {
-                                        handleQuestionDetails(item)
-                                    }}>
-                                        <div className="card-body">
-                                            <p className="fs-5 text-center">{item.testname}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <table className="table">
+                        <thead className='text-center'>
+                            <tr>
+                                <th scope="col">Assessment Name</th>
+                                <th scope="col">Assessment Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+
+                        </thead>
+                        <tbody className='text-center'>
+                            {alltestlist.map((item, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
+                                        <td>{item.category}</td>
+                                        <td><button className='test-link-button me-2' onClick={() => {
+                                            copy(item._id)
+                                        }}>
+                                            <p className='test-link-button-text'>Test Link</p>
+                                        </button>
+                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
+                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
                 </>
                 : null}
 
 
             {active ?
                 <>
-                    <div className="row">
-                        {testlist.map((item) => {
-                            return (
-                                <div className="col-sm-3">
-                                    <div className="assessment-name-card pointer" key={item._id} onClick={() => {
-                                        handleQuestionDetails(item)
-                                    }}>
-                                        <div className="card-body">
-                                            <p className="fs-5 text-center">{item.testname}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <table className="table">
+                        <thead className='text-center'>
+                            <tr>
+                                <th scope="col">Assessment Name</th>
+                                <th scope="col">Assessment Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+
+                        </thead>
+                        <tbody className='text-center'>
+
+                            {testlist.map((item) => {
+                                return (
+                                    <tr key={item._id}>
+                                        <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
+                                        <td>{item.category}</td>
+                                        <td><button className='test-link-button me-2' onClick={() => {
+                                            copy(item._id)
+                                        }}>
+                                            <p className='test-link-button-text'>Test Link</p>
+                                        </button>
+                                        {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
+                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
                 </>
                 : null}
 

@@ -7,6 +7,10 @@ import JsLogo from '../../assets/JsLogo.png';
 import MernLogo from '../../assets/MernLogo.png';
 import NodeJSLogo from '../../assets/NodeJSLogo.jpg';
 import ReactLogo from '../../assets/ReactLogo.png';
+import { addExpiryDate } from '../../postdata/postdata';
+import { toast } from "react-toastify";
+import { primaryUrl } from '../../baseurl';
+import { Switch } from 'antd';
 import '../../styles/assessment/assessmentlist.css';
 
 const AllAssessment = () => {
@@ -15,8 +19,12 @@ const AllAssessment = () => {
     const [reacttest, setReactTest] = useState(false);
     const [nodetest, setNodeTest] = useState(false);
     const [javascripttest, setJavascriptTest] = useState(false);
+    const [merntest, setMernTest] = useState(false);
     const [loader, setLoader] = useState(false);
     const navigate = useNavigate();
+    const date = new Date();
+    date.setDate(date.getDate() + 2);
+    const expiryDate = date.toString()
 
     const reacttestlist = alltestlist.filter((item) => {
         return item.category === "React JS"
@@ -27,6 +35,10 @@ const AllAssessment = () => {
     })
     const javascripttestlist = alltestlist.filter((item) => {
         return item.category === "Javascript"
+    })
+
+    const merntestlist = alltestlist.filter((item) => {
+        return item.category === "MERN Stack"
     })
 
     useEffect(() => {
@@ -41,7 +53,38 @@ const AllAssessment = () => {
     const handleQuestionDetails = (item) => {
         console.log(item);
         console.log(item.questionslist)
+        localStorage.setItem('item', JSON.stringify(item));
+        localStorage.setItem('questionlist', JSON.stringify(item.questionslist))
         navigate('/question-details', { state: { item } })
+    }
+
+    const copy = async (id) => {
+        await navigator.clipboard.writeText(`${primaryUrl}/assessment-test/${id}`);
+        // await navigator.clipboard.writeText(`http://localhost:3000/assessment-test/${id}`);
+        toast.success("Test Link Copied", {
+            position: "top-center",
+            autoClose: 1000
+        })
+    }
+
+    const enableLink = (id) => {
+        const payload = {
+            expiryDate: expiryDate
+        }
+        addExpiryDate(id, payload)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                window.location.reload(false);
+            })
+            .catch((error) => {
+                toast.success(error, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+            })
     }
 
     return (
@@ -53,6 +96,7 @@ const AllAssessment = () => {
                         setReactTest(false);
                         setNodeTest(false);
                         setJavascriptTest(false);
+                        setMernTest(false);
                     }}>
                     <div className="card-body">
                         <p className="fs-5 fw-bold text-center">All Assessments</p>
@@ -65,6 +109,7 @@ const AllAssessment = () => {
                         setReactTest(true);
                         setNodeTest(false);
                         setJavascriptTest(false);
+                        setMernTest(false);
                     }}>
                     <div className="card-body">
                         <p className="fs-5 fw-bold text-center">React Assessment</p>
@@ -77,6 +122,7 @@ const AllAssessment = () => {
                         setReactTest(false);
                         setNodeTest(true);
                         setJavascriptTest(false);
+                        setMernTest(false);
                     }}>
                     <div className="card-body">
                         <p className="fs-5 fw-bold text-center">Node Assessment</p>
@@ -89,130 +135,192 @@ const AllAssessment = () => {
                         setReactTest(false);
                         setNodeTest(false);
                         setJavascriptTest(true);
+                        setMernTest(false);
                     }}>
                     <div className="card-body">
-                        <p className="fs-5 fw-bold text-center">Javascript Assessment</p>
+                        <p className="fs-5 fw-bold text-center">JS Assessment</p>
                         <div className='text-center'><img src={JsLogo} alt="JsLogo" style={{ width: 70, borderRadius: "50%" }} /></div>
+                    </div>
+                </div>
+                <div className="finance-card" style={merntest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
+                    onClick={() => {
+                        setAllTests(false);
+                        setReactTest(false);
+                        setNodeTest(false);
+                        setJavascriptTest(false);
+                        setMernTest(true)
+                    }}>
+                    <div className="card-body">
+                        <p className="fs-5 fw-bold text-center">MERN Assessment</p>
+                        <div className='text-center'><img src={MernLogo} alt="MernLogo" style={{ width: 70, borderRadius: "50%" }} /></div>
                     </div>
                 </div>
             </div>
 
             {alltests ?
                 <>
-                    {/* {alltestlist.map((item, index) => {
-                        return (
-                            <div key={index}>
-                                {item.questionslist.map((question) => {
-                                    return (
-                                        <div className="mt-2 mb-2" key={question._id}>
-                                            <p className='fw-bold'>Q. {question.question}</p>
-                                            <ul>
-                                                <li>{question.option1}</li>
-                                                <li>{question.option2}</li>
-                                                <li>{question.option3}</li>
-                                                <li>{question.option4}</li>
-                                            </ul>
-                                            <p>Answer : {question.answer}</p>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        );
-                    })} */}
-                    <div className="row">
-                        {alltestlist.map((item) => {
-                            return (
-                                <div className="col-sm-3">
-                                    <div className="assessment-name-card pointer" key={item._id} onClick={() => {
-                                        handleQuestionDetails(item)
-                                    }}>
-                                        <div className="card-body">
-                                            <p className="fs-5 fw-bold text-center">{item.testname}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <table className="table">
+                        <thead className='text-center'>
+                            <tr>
+                                <th scope="col">Assessment Name</th>
+                                <th scope="col">Assessment Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
 
-
+                        </thead>
+                        <tbody className='text-center'>
+                            {alltestlist.map((item) => {
+                                return (
+                                    <tr key={item._id}>
+                                        <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
+                                        <td>{item.category}</td>
+                                        <td><button className='test-link-button me-2' onClick={() => {
+                                            copy(item._id)
+                                        }}>
+                                            <p className='test-link-button-text'>Test Link</p>
+                                        </button>
+                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
+                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
                 </>
                 : null}
 
 
             {reacttest ?
                 <>
-                    <div className="row">
-                        {reacttestlist.map((item) => {
-                            return (
-                                <div className="col-sm-3">
-                                    <div className="assessment-name-card pointer" key={item._id} onClick={() => {
-                                        handleQuestionDetails(item)
-                                    }}>
-                                        <div className="card-body">
-                                            <p className="fs-5 fw-bold text-center">{item.testname}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <table className="table">
+                        <thead className='text-center'>
+                            <tr>
+                                <th scope="col">Assessment Name</th>
+                                <th scope="col">Assessment Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+
+                        </thead>
+                        <tbody className='text-center'>
+                            {reacttestlist.map((item) => {
+                                return (
+                                    <tr key={item._id}>
+                                        <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
+                                        <td>{item.category}</td>
+                                        <td><button className='test-link-button me-2' onClick={() => {
+                                            copy(item._id)
+                                        }}>
+                                            <p className='test-link-button-text'>Test Link</p>
+                                        </button>
+                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
+                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
                 </>
                 : null}
 
 
             {nodetest ?
                 <>
-                    <div className="row">
-                        {nodetestlist.map((item) => {
-                            return (
-                                <div className="col-sm-3">
-                                    <div className="assessment-name-card pointer" key={item._id} onClick={() => {
-                                        handleQuestionDetails(item)
-                                    }}>
-                                        <div className="card-body">
-                                            <p className="fs-5 fw-bold text-center">{item.testname}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <table className="table">
+                        <thead className='text-center'>
+                            <tr>
+                                <th scope="col">Assessment Name</th>
+                                <th scope="col">Assessment Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
 
+                        </thead>
+                        <tbody className='text-center'>
+                            {nodetestlist.map((item) => {
+                                return (
+                                    <tr key={item._id}>
+                                        <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
+                                        <td>{item.category}</td>
+                                        <td><button className='test-link-button me-2' onClick={() => {
+                                            copy(item._id)
+                                        }}>
+                                            <p className='test-link-button-text'>Test Link</p>
+                                        </button>
+                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
+                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
                 </>
                 : null}
 
             {javascripttest ?
                 <>
-                    {/* {javascripttestlist[0].questionslist.map((item) => {
-                        return (
-                            <div className="mt-2 mb-2" key={item._id}>
-                                <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                                <ul>
-                                    <li>{item.option1}</li>
-                                    <li>{item.option2}</li>
-                                    <li>{item.option3}</li>
-                                    <li>{item.option4}</li>
-                                </ul>
-                                <p>Answer : {item.answer}</p>
-                            </div>
-                        )
-                    })} */}
-                    <div className="row">
-                        {javascripttestlist.map((item) => {
-                            return (
-                                <div className="col-sm-3">
-                                    <div className="assessment-name-card pointer" key={item._id} onClick={() => {
-                                        handleQuestionDetails(item)
-                                    }}>
-                                        <div className="card-body">
-                                            <p className="fs-5 fw-bold text-center">{item.testname}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <table className="table">
+                        <thead className='text-center'>
+                            <tr>
+                                <th scope="col">Assessment Name</th>
+                                <th scope="col">Assessment Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+
+                        </thead>
+                        <tbody className='text-center'>
+                            {javascripttestlist.map((item) => {
+                                return (
+                                    <tr key={item._id}>
+                                        <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
+                                        <td>{item.category}</td>
+                                        <td><button className='test-link-button me-2' onClick={() => {
+                                            copy(item._id)
+                                        }}>
+                                            <p className='test-link-button-text'>Test Link</p>
+                                        </button>
+                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
+                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </>
+                : null}
+
+            {merntest ?
+                <>
+                    <table className="table">
+                        <thead className='text-center'>
+                            <tr>
+                                <th scope="col">Assessment Name</th>
+                                <th scope="col">Assessment Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+
+                        </thead>
+                        <tbody className='text-center'>
+                            {merntestlist.map((item) => {
+                                return (
+                                    <tr key={item._id}>
+                                        <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
+                                        <td>{item.category}</td>
+                                        <td><button className='test-link-button me-2' onClick={() => {
+                                            copy(item._id)
+                                        }}>
+                                            <p className='test-link-button-text'>Test Link</p>
+                                        </button>
+                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
+                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
                 </>
                 : null}
 
@@ -230,11 +338,12 @@ const AllAssessment = () => {
                     />
                 </div> : null}
 
-            {/* {!loader && currentRecords.length === 0 ?
-                <div className='d-flex justify-content-center'>
-                    <p className='fs-4'>No Data Found</p>
+            {reacttest && reacttestlist.length === 0 || nodetest && nodetestlist.length === 0 || javascripttest && javascripttestlist.length === 0 || 
+            merntest && merntestlist.length === 0 ?
+                <div className='text-center'>
+                    <p className='mt-4 fs-4'>No Assessment Found</p>
                 </div>
-                : null} */}
+                : null}
         </div>
     );
 }

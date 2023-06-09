@@ -75,8 +75,8 @@ const MainRouter = () => {
                     <Route path='/walk-in' element={<WalkIn />} />
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
                     <Route path='/create-test' element={<CreateTest />} />
-                    {/* <Route path='/all-tests' element={<AllAssessment/>}/> */}
-                    <Route path='/all-tests' element={<Assessment/>}/>
+                    <Route path='/all-tests' element={<AllAssessment/>}/>
+                    {/* <Route path='/all-tests' element={<Assessment/>}/> */}
                     <Route path='/performance' element={<Performance />}/>
                     <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
                     <Route path='/question-details' element={<QuestionDetails />}/>
