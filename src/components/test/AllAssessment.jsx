@@ -338,8 +338,9 @@ const AllAssessment = () => {
                     />
                 </div> : null}
 
-            {reacttest && reacttestlist.length === 0 || nodetest && nodetestlist.length === 0 || javascripttest && javascripttestlist.length === 0 || 
-            merntest && merntestlist.length === 0 ?
+            {(reacttest && reacttestlist.length === 0) || (nodetest && nodetestlist.length === 0) || 
+            (javascripttest && javascripttestlist.length === 0) || 
+            (merntest && merntestlist.length === 0) ?
                 <div className='text-center'>
                     <p className='mt-4 fs-4'>No Assessment Found</p>
                 </div>

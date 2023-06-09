@@ -29,8 +29,6 @@ const LiveTest = () => {
     const nPages = Math.ceil(questionslist.length / recordsPerPage)
     let value = '';
 
-    
-
     useEffect(() => {
         getAllTestPerformance(headers)
             .then((response) => {
@@ -49,17 +47,8 @@ const LiveTest = () => {
     }, []);
 
 
-    console.log(questionslist);
-
     const ShowTest = (event) => {
         event.preventDefault();
-        // if (testperformancelist.some(item => item.studentid === studentid)) {
-        //     toast.error("Test already given", {
-        //         position: "top-center",
-        //         autoClose: 2000
-        //     })
-        //     window.location.reload(false);
-        // }
         if (studentdata.some((item) => item.testId === id)) {
             toast.error("Test already given", {
                 position: "top-center",
@@ -98,22 +87,12 @@ const LiveTest = () => {
         if (value === answer) {
             setScore((score) => score + 1);
         }
-        // localStorage.setItem('score', score);
     }
 
     const generateScore = (event) => {
         event.preventDefault();
         setResult(true);
-        // setScore(JSON.parse(localStorage.getItem('score')));
-        const payload = {
-            studentid: studentid,
-            Studentname: studentname,
-            batchname: batchname,
-            testname: testname,
-            category: category,
-            score: score
-        }
-
+    
         const performancePayload = {
             testId: id,
             testname: testname,
@@ -136,20 +115,6 @@ const LiveTest = () => {
                     })
                 })
         
-            // addTestPerformance(payload)
-            //     .then((response) => {
-            //         toast.success("Test submitted successfully", {
-            //             position: "top-center",
-            //             autoClose: 3000
-            //         })
-            //     }
-            //     )
-            //     .catch((error) => {
-            //         toast.error(error.response.data.msg, {
-            //             position: "top-center",
-            //             autoClose: 2000
-            //         })
-            //     })
             setTimeout(() => {
                 localStorage.removeItem('score');
                 toast.success("Thank you for giving the test", {

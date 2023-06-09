@@ -8,9 +8,6 @@ import { primaryUrl } from '../../baseurl';
 import { addExpiryDate } from '../../postdata/postdata';
 import { Switch } from 'antd';
 import MernLogo from '../../assets/MernLogo.png';
-import ReactLogo from '../../assets/ReactLogo.png';
-import NodeJSLogo from '../../assets/NodeJSLogo.jpg';
-import JsLogo from '../../assets/JsLogo.png';
 import '../../styles/assessment/assessmentlist.css';
 
 const Assessment = () => {
@@ -26,10 +23,7 @@ const Assessment = () => {
     const date = new Date();
     date.setDate(date.getDate() + 2);
     const expiryDate = date.toString()
-    // const [showEnable, setShowEnable] = useState(data.hasOwnProperty('expiryDate'));
-
-
-    const images = [ReactLogo, NodeJSLogo, JsLogo, MernLogo];
+    
 
     const handleActive = (categoryname) => {
         setAllTests(false);
