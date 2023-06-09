@@ -194,18 +194,6 @@ const Sidebar = () => {
                                     <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
                                     <NavLink className='payment-records' to='/performance'>Performance</NavLink>
                                 </div>
-                                {/* <div className="d-flex">
-                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
-                                    <NavLink className='payment-records' to='/react-test'>React Assessment</NavLink>
-                                </div>
-                                <div className="d-flex">
-                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
-                                    <NavLink className='payment-records' to='/node-test'>Node Assessment</NavLink>
-                                </div>
-                                <div className="d-flex">
-                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
-                                    <NavLink className='payment-records' to='/javascript-test'>Javascript Assessment</NavLink>
-                                </div> */}
                             </>
                             : null
                     }

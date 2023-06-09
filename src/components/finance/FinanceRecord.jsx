@@ -123,8 +123,7 @@ const FinanceRecord = () => {
     }
 
     const profit = calculateProfit();
-    //http://localhost:4000/api/paymentrecords
-    //https://codersid-backend.vercel.app/api/paymentrecords
+    
     useEffect(() => {
         axios.get("https://codersid-backend.vercel.app/api/paymentrecords").then((res) => {
             setStudentList(res.data.Payments)
@@ -296,8 +295,6 @@ const FinanceRecord = () => {
                 <div className="finance-card">
                     <div className="card-body">
                         <p className="fs-4 fw-bold">&#x20B9; {profit}/-</p>
-                        {/* <p className="fs-4 fw-bold">&#x20B9; {studentlist.length === 0 || expensedata.length === 0 ? salesvalue - expensevalue :
-                            grandtotalSales - grandtotalExpenses}</p> */}
                         <p className="fs-5">{profit < 0 ? "Loss" : "Profits"}</p>
                     </div>
                 </div>

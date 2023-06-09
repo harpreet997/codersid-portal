@@ -58,29 +58,26 @@ const handleBack = () => {
                     <div className="d-flex justify-content-between">
                         <p className="main-receipt-no">Receipt No :</p>
                         <p className="main-receipt-no-value">CI/{data._id.slice(-3, -1)}</p>
-                        {/* <div className="main-receipt-vertical-line"></div> */}
+                        
                         <p className="main-receipt-student-id">Student ID :</p>
                         <p className="pe-2 main-receipt-student-id-value">{`CODERSID-${id}`}</p>
                     </div>
                     <div className="main-receipt-horizontal-line-1"></div>
                     <div className="d-flex justify-content-between">
                         <p className="main-receipt-student-name">Name :</p>
-                        <p className="main-receipt-student-value">{data.StudentName}</p>
-                        {/* <div className="main-receipt-vertical-line-2"></div> */}
+                        <p className="main-receipt-student-value">{data.StudentName}</p>                 
                         <p className="main-receipt-contact-number">Contact No.</p>
                         <p className="pe-2 main-receipt-contact-value">{data.contactdetails}</p>
                     </div>
                 </div>
                 <div className="main-second-receipt-box">
                     <div className="d-flex justify-content-between">
-                        <p className="main-receipt-payment-mode">Mode of Payment :</p>
-                        {/* <div className="main-receipt-vertical-line-3"></div> */}
+                        <p className="main-receipt-payment-mode">Mode of Payment :</p>            
                         <p className="pe-2 main-receipt-payment-mode-value">{data.PaymentMode}</p>
                     </div>
                     <div className="main-receipt-horizontal-line-2"></div>
                     <div className="d-flex justify-content-between">
                         <p className="main-receipt-payment-mode">Type of Payment :</p>
-                        {/* <div className="main-receipt-vertical-line-4"></div> */}
                         <p className="pe-2 main-receipt-payment-mode-value">{data.PaymentType}</p>
                     </div>
                 </div>
