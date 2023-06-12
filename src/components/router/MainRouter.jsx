@@ -38,6 +38,7 @@ import Assessment from '../test/Assessment';
 import QuestionDetails from '../test/QuestionDetails';
 import LiveTest from '../test/LiveTest';
 import AssessmentList from '../test/AssessmentList';
+import CreateNewTest from '../test/CreateNewTest';
 
 const MainRouter = () => {
     return (
@@ -75,6 +76,7 @@ const MainRouter = () => {
                     <Route path='/walk-in' element={<WalkIn />} />
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
                     <Route path='/create-test' element={<CreateTest />} />
+                    {/* <Route path='/create-test' element={<CreateNewTest />} /> */}
                     <Route path='/all-tests' element={<AllAssessment/>}/>
                     {/* <Route path='/all-tests' element={<Assessment/>}/> */}
                     <Route path='/performance' element={<Performance />}/>

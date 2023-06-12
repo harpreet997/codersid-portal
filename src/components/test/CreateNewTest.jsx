@@ -7,7 +7,7 @@ import { addTest, deleteAllQuestions } from '../../postdata/postdata';
 import { getAllAssessmentCategory } from '../../getdata/getdata';
 import { toast } from "react-toastify";
 
-const CreateTest = () => {
+const CreateNewTest = () => {
     const [assessmentcategorylist, setAssessmentCategoryList] = useState([]);
     const [questionlist, setQuestionList] = useState([]);
     const [testmodal, setTestModal] = useState(false);
@@ -17,7 +17,7 @@ const CreateTest = () => {
         questionslist: [],
         expiryDate: "",
     })
-    
+
     useEffect(() => {
         getAllAssessmentCategory(headers)
             .then((response) => {
@@ -30,12 +30,12 @@ const CreateTest = () => {
         getAllQuestions(headers)
             .then((response) => {
                 setQuestionList(response.data.Questions);
-                
+
             })
             .catch((error) => {
                 console.log(error);
             })
-        
+
     }, []);
 
     console.log(questionlist)
@@ -68,7 +68,7 @@ const CreateTest = () => {
                     position: "top-center",
                     autoClose: 3000
                 })
-                
+
             }
             )
             .catch((error) => {
@@ -79,19 +79,19 @@ const CreateTest = () => {
             })
         setTimeout(() => {
             deleteAllQuestions()
-            .then((response) => {
-                // toast.success(response.data.msg, {
-                //     position: "top-center",
-                //     autoClose: 3000
-                // })
-                window.location.reload(false);
-            })
-            .catch((error) => {
-                toast.error(error.response.data.msg, {
-                    position: "top-center",
-                    autoClose: 2000
+                .then((response) => {
+                    // toast.success(response.data.msg, {
+                    //     position: "top-center",
+                    //     autoClose: 3000
+                    // })
+                    window.location.reload(false);
                 })
-            })
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
+                })
         }, 1000);
     }
 
@@ -109,7 +109,7 @@ const CreateTest = () => {
                         <p className='add-student-button-text'>Add Question + </p>
                     </button>
                     <Modal show={testmodal ? true : false} onHide={CloseTestModal}>
-                        <AddQuestion CloseTestModal={CloseTestModal} setQuestionList={setQuestionList} questionlist={questionlist}/>
+                        <AddQuestion CloseTestModal={CloseTestModal} setQuestionList={setQuestionList} questionlist={questionlist} />
                     </Modal>
                 </div>
             </div>
@@ -150,15 +150,24 @@ const CreateTest = () => {
 
             {questionlist.map((item) => {
                 return (
-                    <div className='mt-4'>
-                        <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                        <ul>
-                            <li>{item.option1}</li>
-                            <li>{item.option2}</li>
-                            <li>{item.option3}</li>
-                            <li>{item.option4}</li>
-                        </ul>
-                        <p>Answer : {item.answer}</p>
+                    <div className='d-flex justify-content-between'>
+                        <div className='mt-4 d-flex justify-content-start'>
+                            <div>
+                                <p className='fw-bold'>Q{item.id}. {item.question}</p>
+                                <ul>
+                                    <li>{item.option1}</li>
+                                    <li>{item.option2}</li>
+                                    <li>{item.option3}</li>
+                                    <li>{item.option4}</li>
+                                </ul>
+                                <p>Answer : {item.answer}</p>
+                            </div>
+                        </div>
+                            <div className='d-flex justify-content-end'>
+                                <button className='add-student-button' style={{ height: 40, marginTop: 40 }}>Edit</button>
+                                <button className='add-student-button' style={{ height: 40, marginTop: 40 }}>Delete</button>
+                            </div>
+                        
                     </div>
                 )
             })}
@@ -166,4 +175,4 @@ const CreateTest = () => {
     );
 }
 
-export default CreateTest;
+export default CreateNewTest;

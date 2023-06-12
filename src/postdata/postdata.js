@@ -88,6 +88,14 @@ export const addQuestion = (questiondata) => {
     return axios.post(`${baseUrl}/api/questions`, questiondata)
 } 
 
+export const editQuestion = (id, data) => {
+    return axios.patch(`${baseUrl}/api/questions/${id}`, data)
+} 
+
+export const deleteQuestion = (id) => {
+    return axios.delete(`${baseUrl}/api/questions/${id}`)
+}
+
 export const addTest = (testdata) => {
     return axios.post(`${baseUrl}/api/tests`, testdata)
 } 

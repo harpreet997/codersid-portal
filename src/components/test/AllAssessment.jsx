@@ -89,7 +89,27 @@ const AllAssessment = () => {
         }
         addExpiryDate(id, payload)
             .then((response) => {
-                toast.success(response.data.msg, {
+                toast.success("Test Link Enabled Successfully", {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                window.location.reload(false);
+            })
+            .catch((error) => {
+                toast.success(error, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+            })
+    }
+
+    const disableLink = (id) => {
+        const payload = {
+            expiryDate: ""
+        }
+        addExpiryDate(id, payload)
+            .then((response) => {
+                toast.success("Test Link Disabled Successfully", {
                     position: "top-center",
                     autoClose: 1000
                 })
@@ -195,8 +215,12 @@ const AllAssessment = () => {
                                         }}>
                                             <p className='test-link-button-text'>Test Link</p>
                                         </button>
-                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
-                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                            {/* {item.hasOwnProperty('expiryDate') ? <Switch defaultChecked={!(item.expiryDate === "")} 
+                                            onChange={() => disableLink(item._id)} />
+                                                : <Switch onChange={() => enableLink(item._id)} />} */}
+                                            {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                                onChange={() => disableLink(item._id)} />
+                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
@@ -229,8 +253,9 @@ const AllAssessment = () => {
                                         }}>
                                             <p className='test-link-button-text'>Test Link</p>
                                         </button>
-                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
-                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                                onChange={() => disableLink(item._id)} />
+                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
@@ -263,8 +288,9 @@ const AllAssessment = () => {
                                         }}>
                                             <p className='test-link-button-text'>Test Link</p>
                                         </button>
-                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
-                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                                onChange={() => disableLink(item._id)} />
+                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
@@ -296,8 +322,9 @@ const AllAssessment = () => {
                                         }}>
                                             <p className='test-link-button-text'>Test Link</p>
                                         </button>
-                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
-                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                                onChange={() => disableLink(item._id)} />
+                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
@@ -329,8 +356,9 @@ const AllAssessment = () => {
                                         }}>
                                             <p className='test-link-button-text'>Test Link</p>
                                         </button>
-                                            {item.hasOwnProperty('expiryDate') ? <Switch checked onChange={() => enableLink(item._id)} />
-                                                : <Switch onChange={() => enableLink(item._id)} />}
+                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                                onChange={() => disableLink(item._id)} />
+                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
