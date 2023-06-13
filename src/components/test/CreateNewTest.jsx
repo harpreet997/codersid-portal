@@ -3,22 +3,34 @@ import { Modal } from 'react-bootstrap';
 import { getAllQuestions } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import AddQuestion from '../test/AddQuestion';
-import { addTest, deleteAllQuestions } from '../../postdata/postdata';
+import { addTest, deleteAllQuestions, deleteQuestion } from '../../postdata/postdata';
 import { getAllAssessmentCategory } from '../../getdata/getdata';
 import { toast } from "react-toastify";
+import EditQuestion from './EditQuestion';
+import { BallTriangle } from 'react-loader-spinner';
+import Pagination from '../pagination/Pagination';
 
 const CreateNewTest = () => {
     const [assessmentcategorylist, setAssessmentCategoryList] = useState([]);
     const [questionlist, setQuestionList] = useState([]);
     const [testmodal, setTestModal] = useState(false);
+    const [editquestionmodal, setEditQuestionModal] = useState(false);
     const [testdata, setTestData] = useState({
         testname: "",
         category: "",
         questionslist: [],
         expiryDate: "",
     })
+    const [loader, setLoader] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(5);
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const currentRecords = questionlist.slice(indexOfFirstRecord, indexOfLastRecord);
+    const nPages = Math.ceil(questionlist.length / recordsPerPage)
 
     useEffect(() => {
+        setLoader(true);
         getAllAssessmentCategory(headers)
             .then((response) => {
                 setAssessmentCategoryList(response.data.AssessmentCategories);
@@ -30,7 +42,7 @@ const CreateNewTest = () => {
         getAllQuestions(headers)
             .then((response) => {
                 setQuestionList(response.data.Questions);
-
+                setLoader(false)
             })
             .catch((error) => {
                 console.log(error);
@@ -38,7 +50,6 @@ const CreateNewTest = () => {
 
     }, []);
 
-    console.log(questionlist)
 
     const OpenTestModal = () => {
         setTestModal(true);
@@ -47,6 +58,12 @@ const CreateNewTest = () => {
     const CloseTestModal = () => {
         setTestModal(false);
     }
+
+    const handleQuestionModal = (id) => {
+        setEditQuestionModal(id)
+    };
+
+    const handleClose = () => setEditQuestionModal(false);
 
     const handleChange = (event) => {
         setTestData({
@@ -80,10 +97,6 @@ const CreateNewTest = () => {
         setTimeout(() => {
             deleteAllQuestions()
                 .then((response) => {
-                    // toast.success(response.data.msg, {
-                    //     position: "top-center",
-                    //     autoClose: 3000
-                    // })
                     window.location.reload(false);
                 })
                 .catch((error) => {
@@ -96,6 +109,23 @@ const CreateNewTest = () => {
     }
 
 
+
+    const DeleteQuestion = (id) => {
+        deleteQuestion(id)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 2000
+                })
+                window.location.reload(false);
+            })
+            .catch((error) => {
+                toast.error(error.response.data.msg, {
+                    position: "top-center",
+                    autoClose: 2000
+                })
+            })
+    }
 
 
     return (
@@ -143,34 +173,84 @@ const CreateNewTest = () => {
                         </div>
                     </div>
                 </form>
-                : <div className="text-center">
-                    <p className='fs-4'>No Test Found</p>
-                </div>
+                : null
             }
 
-            {questionlist.map((item) => {
-                return (
-                    <div className='d-flex justify-content-between'>
-                        <div className='mt-4 d-flex justify-content-start'>
-                            <div>
-                                <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                                <ul>
-                                    <li>{item.option1}</li>
-                                    <li>{item.option2}</li>
-                                    <li>{item.option3}</li>
-                                    <li>{item.option4}</li>
-                                </ul>
-                                <p>Answer : {item.answer}</p>
-                            </div>
-                        </div>
-                            <div className='d-flex justify-content-end'>
-                                <button className='add-student-button' style={{ height: 40, marginTop: 40 }}>Edit</button>
-                                <button className='add-student-button' style={{ height: 40, marginTop: 40 }}>Delete</button>
-                            </div>
-                        
-                    </div>
-                )
-            })}
+
+            <table className="table batch-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Questions</th>
+                        <th className='ps-3' scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {questionlist.map((item) => {
+                        return (
+                            <tr>
+                                <td>
+                                    <p className='fw-bold'>Q{item.id}. {item.question}</p>
+                                    <ul>
+                                        <li>{item.option1}</li>
+                                        <li>{item.option2}</li>
+                                        <li>{item.option3}</li>
+                                        <li>{item.option4}</li>
+                                    </ul>
+                                    <p>Answer : {item.answer}</p>
+
+                                </td>
+                                <td>
+                                    <div className='d-flex align-items-center' style={{marginTop: 150}}>
+                                        <button className='edit-question-button'
+                                            onClick={() => handleQuestionModal(item._id)}>
+                                            <p className='edit-question-button-text'>Edit</p></button>
+                                        <button className='edit-question-button'
+                                            onClick={() => DeleteQuestion(item._id)}>
+                                            <p className='edit-question-button-text'>Delete</p>
+                                        </button>
+                                        <Modal show={editquestionmodal === item._id ? true : false} onHide={handleClose}>
+                                            <EditQuestion data={item} handleClose={handleClose} questionlist={questionlist} />
+                                        </Modal>
+                                    </div>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+
+            </table>
+
+            {loader ?
+                <div className="d-flex justify-content-center">
+                    <BallTriangle
+                        height={250}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                </div> : null}
+
+            {!loader && currentRecords.length === 0 ?
+                <div className='d-flex justify-content-center'>
+                    <p className='fs-4'>No Question Found</p>
+                </div>
+                : null}
+
+            {currentRecords.length > 0 ?
+                <div className="text-center">
+                    <Pagination
+                        nPages={nPages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
+                </div>
+
+                : null
+            }
         </div>
     );
 }

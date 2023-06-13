@@ -88,8 +88,8 @@ export const addQuestion = (questiondata) => {
     return axios.post(`${baseUrl}/api/questions`, questiondata)
 } 
 
-export const editQuestion = (id, data) => {
-    return axios.patch(`${baseUrl}/api/questions/${id}`, data)
+export const editQuestion = (id, editquestiondata) => {
+    return axios.patch(`${baseUrl}/api/questions/${id}`, editquestiondata)
 } 
 
 export const deleteQuestion = (id) => {
@@ -121,8 +121,8 @@ export const addExpiryDate = (id, payload) => {
 } 
 
 
-export const addStudentPerformanceRecord = (id, performancePayload) => {
-    return axios.post(`${baseUrl}/api/students/${id}`, performancePayload)
+export const addStudentPerformanceRecord = (id, payload) => {
+    return axios.post(`${baseUrl}/api/students/${id}`, payload)
 } 
 
 

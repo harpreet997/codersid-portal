@@ -49,7 +49,7 @@ const LiveTest = () => {
 
     const ShowTest = (event) => {
         event.preventDefault();
-        if (studentdata.some((item) => item.testId === id)) {
+        if (studentdata[0].testRecords.some((item) => item.testId === id)) {
             toast.error("Test already given", {
                 position: "top-center",
                 autoClose: 2000
@@ -89,6 +89,8 @@ const LiveTest = () => {
         }
     }
 
+    // console.log(studentdata[0].testRecords);
+
     const generateScore = (event) => {
         event.preventDefault();
         setResult(true);
@@ -97,10 +99,19 @@ const LiveTest = () => {
             testId: id,
             testname: testname,
             category: category,
-            score: score
+            score: score,
+            totalMarks: questionslist.length
         }
 
-        addStudentPerformanceRecord(generatedid, performancePayload)
+        const testRecords = studentdata[0].testRecords
+        testRecords.push(performancePayload)
+
+        const payload = {
+            ...studentdata,
+            testRecords: testRecords
+        }
+
+        addStudentPerformanceRecord(generatedid, payload)
                 .then((response) => {
                     toast.success("Test submitted successfully", {
                         position: "top-center",
@@ -144,7 +155,6 @@ const LiveTest = () => {
                 setStudentId(data[0].id);
                 setStudentName(data[0].studentname);
                 setBatchName(data[0].batchname)
-
             }
             else {
                 toast.error("Invalid ID", {
@@ -157,6 +167,8 @@ const LiveTest = () => {
                 
             }
         }, 1000)
+
+        
 
     }
 

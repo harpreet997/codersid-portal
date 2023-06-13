@@ -32,13 +32,14 @@ import WalkIn from '../../components/leads/WalkIn';
 import ViewLeadDetails from '../leads/ViewLeadDetails';
 import CreateTest from '../test/CreateTest';
 import AllAssessment from '../test/AllAssessment';
-import Performance from '../test/Performance';
+import StudentPerformance from '../test/StudentPerformance';
 import AddAssessmentCategory from '../test/AddAssessmentCategory';
 import Assessment from '../test/Assessment';
 import QuestionDetails from '../test/QuestionDetails';
 import LiveTest from '../test/LiveTest';
 import AssessmentList from '../test/AssessmentList';
 import CreateNewTest from '../test/CreateNewTest';
+import ScoreCard from '../test/ScoreCard';
 
 const MainRouter = () => {
     return (
@@ -75,14 +76,14 @@ const MainRouter = () => {
                     <Route path='/lost-leads' element={<LostLead />} />
                     <Route path='/walk-in' element={<WalkIn />} />
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
-                    <Route path='/create-test' element={<CreateTest />} />
-                    {/* <Route path='/create-test' element={<CreateNewTest />} /> */}
+                    {/* <Route path='/create-test' element={<CreateTest />} /> */}
+                    <Route path='/create-test' element={<CreateNewTest />} />
                     <Route path='/all-tests' element={<AllAssessment/>}/>
                     {/* <Route path='/all-tests' element={<Assessment/>}/> */}
-                    <Route path='/performance' element={<Performance />}/>
+                    <Route path='/performance' element={<StudentPerformance />}/>
                     <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
                     <Route path='/question-details' element={<QuestionDetails />}/>
-                    
+                    <Route path='/score-card' element={<ScoreCard />}/>
                 </Route>
                 <Route path="/" element={<SignIn />} />
                 <Route path='/assessment-list' element={<AssessmentList />}/>

@@ -134,3 +134,23 @@
     margin-top: 10px;
 }
 
+.edit-question-button {
+    box-sizing: border-box;
+    width: 100px;
+    height: 35px;
+    background: #10D1E3;
+    border: 1px solid #AEF8FF;
+    border-radius: 17.3122px;
+    /* margin-top: 10px; */
+}
+
+.edit-question-button-text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
