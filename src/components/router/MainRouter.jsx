@@ -32,14 +32,16 @@ import WalkIn from '../../components/leads/WalkIn';
 import ViewLeadDetails from '../leads/ViewLeadDetails';
 import CreateTest from '../test/CreateTest';
 import AllAssessment from '../test/AllAssessment';
-import StudentPerformance from '../test/StudentPerformance';
+import StudentPerformance from '../studentperformance/StudentPerformance';
 import AddAssessmentCategory from '../test/AddAssessmentCategory';
 import Assessment from '../test/Assessment';
-import QuestionDetails from '../test/QuestionDetails';
+import QuestionDetails from '../question/QuestionDetails';
 import LiveTest from '../test/LiveTest';
 import AssessmentList from '../test/AssessmentList';
 import CreateNewTest from '../test/CreateNewTest';
-import ScoreCard from '../test/ScoreCard';
+import ScoreCard from '../studentperformance/ScoreCard';
+import NewQuestion from '../question/NewQuestion';
+import EditNewQuestion from '../question/EditNewQuestion';
 
 const MainRouter = () => {
     return (
@@ -78,6 +80,8 @@ const MainRouter = () => {
                     <Route path='/lead-details' element={<ViewLeadDetails />} />
                     {/* <Route path='/create-test' element={<CreateTest />} /> */}
                     <Route path='/create-test' element={<CreateNewTest />} />
+                    <Route path='/create-question' element={<NewQuestion />} />
+                    <Route path='/edit-question' element={<EditNewQuestion />} />
                     <Route path='/all-tests' element={<AllAssessment/>}/>
                     {/* <Route path='/all-tests' element={<Assessment/>}/> */}
                     <Route path='/performance' element={<StudentPerformance />}/>

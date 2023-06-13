@@ -9,6 +9,9 @@ import { toast } from "react-toastify";
 import EditQuestion from './EditQuestion';
 import { BallTriangle } from 'react-loader-spinner';
 import Pagination from '../pagination/Pagination';
+import StudentIcon from '../../assets/Studentlist.png';
+import AssessmentIcon from '../../assets/AssessmentIcon.png';
+import { useNavigate } from 'react-router-dom';
 
 const CreateNewTest = () => {
     const [assessmentcategorylist, setAssessmentCategoryList] = useState([]);
@@ -27,7 +30,8 @@ const CreateNewTest = () => {
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = questionlist.slice(indexOfFirstRecord, indexOfLastRecord);
-    const nPages = Math.ceil(questionlist.length / recordsPerPage)
+    const nPages = Math.ceil(questionlist.length / recordsPerPage);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoader(true);
@@ -59,8 +63,8 @@ const CreateNewTest = () => {
         setTestModal(false);
     }
 
-    const handleQuestionModal = (id) => {
-        setEditQuestionModal(id)
+    const handleQuestionModal = (item) => {
+        navigate('/edit-question', { state: { item } })
     };
 
     const handleClose = () => setEditQuestionModal(false);
@@ -108,6 +112,10 @@ const CreateNewTest = () => {
         }, 1000);
     }
 
+    const NewQuestion = () => {
+        navigate('/create-question')
+    }
+
 
 
     const DeleteQuestion = (id) => {
@@ -132,10 +140,11 @@ const CreateNewTest = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Create Test</p>
+                    <p className='studentlist-card-text'>Create Assessment
+                    <img className='studentlist-icon' src={AssessmentIcon} alt="AssessmentIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
-                    <button className='add-student-button' onClick={OpenTestModal}>
+                    <button className='add-student-button' onClick={NewQuestion}>
                         <p className='add-student-button-text'>Add Question + </p>
                     </button>
                     <Modal show={testmodal ? true : false} onHide={CloseTestModal}>
@@ -202,7 +211,7 @@ const CreateNewTest = () => {
                                 <td>
                                     <div className='d-flex align-items-center' style={{marginTop: 150}}>
                                         <button className='edit-question-button'
-                                            onClick={() => handleQuestionModal(item._id)}>
+                                            onClick={() => handleQuestionModal(item)}>
                                             <p className='edit-question-button-text'>Edit</p></button>
                                         <button className='edit-question-button'
                                             onClick={() => DeleteQuestion(item._id)}>
