@@ -30,7 +30,7 @@ const LiveTest = () => {
     let value = '';
     let [studentResponse, setStudentResponse] = useState([]);
     let [responseQuestionList, setResponseQuestionList] = useState([]);
-
+    var flag=0;
 
     useEffect(() => {
         getAllTestPerformance(headers)
@@ -88,12 +88,19 @@ const LiveTest = () => {
     }
 
     const addScore = (value, answer) => {
-            if (value === answer) {
+            if (value === answer && flag === 0) {
                 setScore((score) => score + 1);
-                studentResponse.push(value)
+                studentResponse.push(value);
+                flag = 1;
+            }
+            else if(value !== answer && flag === 1) 
+            {
+                setScore((score) => score - 1);
+                studentResponse.push(value);
+                flag = 0;
             }
             else {
-                studentResponse.push(value)
+                setScore(0);
             }
        
     }
