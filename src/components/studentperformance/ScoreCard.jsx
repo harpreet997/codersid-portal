@@ -17,6 +17,7 @@ const ScoreCard = () => {
     const id = location.state.item.id;
     const testRecords = data.testRecords;
     let [totalMarks, setTotalMarks] = useState();
+    let [cgpa, setCgpa] = useState();
 
 
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ const ScoreCard = () => {
         }
         console.log(totalMarks)
         setTotalMarks(totalMarks)
+        setCgpa((totalMarks / testRecords.length).toFixed(1))
     }
 
 
@@ -82,7 +84,7 @@ const ScoreCard = () => {
                         <p className="score-card-student-name">Batch Name :</p>
                         <p className="score-card-batch-value">{data.batchname}</p>
                         <p className="score-card-cgpa">CGPA.</p>
-                        <p className="pe-2 score-card-cgpa-value">{(totalMarks / testRecords.length).toFixed(1)}</p>
+                        <p className="pe-2 score-card-cgpa-value">{cgpa}</p>
                     </div>
                 </div>
 
@@ -140,7 +142,7 @@ const ScoreCard = () => {
                 <div className="d-flex justify-content-end">
                     <p className='total-cgpa-text'>CGPA</p>
                     <div className='total-cgpa-border'>
-                        <p className='total-cgpa-border-value'>{(totalMarks / testRecords.length).toFixed(1)}</p>
+                        <p className='total-cgpa-border-value'>{cgpa}</p>
                     </div>
                 </div>
 

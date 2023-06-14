@@ -42,6 +42,7 @@ import CreateNewTest from '../test/CreateNewTest';
 import ScoreCard from '../studentperformance/ScoreCard';
 import NewQuestion from '../question/NewQuestion';
 import EditNewQuestion from '../question/EditNewQuestion';
+import StudentResponse from '../studentperformance/StudentResponse';
 
 const MainRouter = () => {
     return (
@@ -85,6 +86,7 @@ const MainRouter = () => {
                     <Route path='/all-tests' element={<AllAssessment/>}/>
                     {/* <Route path='/all-tests' element={<Assessment/>}/> */}
                     <Route path='/performance' element={<StudentPerformance />}/>
+                    <Route path='/student-response' element={<StudentResponse />}/>
                     <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
                     <Route path='/question-details' element={<QuestionDetails />}/>
                     <Route path='/score-card' element={<ScoreCard />}/>

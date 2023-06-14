@@ -20,7 +20,7 @@ const LiveTest = () => {
     const [studentname, setStudentName] = useState('');
     const [batchname, setBatchName] = useState('');
     const [result, setResult] = useState(false);
-    let [score, setScore] = useState(0);  
+    let [score, setScore] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
@@ -28,6 +28,9 @@ const LiveTest = () => {
     const currentRecords = questionslist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(questionslist.length / recordsPerPage)
     let value = '';
+    let [studentResponse, setStudentResponse] = useState([]);
+    let [responseQuestionList, setResponseQuestionList] = useState([]);
+
 
     useEffect(() => {
         getAllTestPerformance(headers)
@@ -60,13 +63,14 @@ const LiveTest = () => {
             getSingleTest(id)
                 .then((response) => {
                     const date = new Date();
-                    console.log(date);
-                    console.log(response.data.id.expiryDate);
                     if (date < new Date(response.data.id.expiryDate)) {
                         setQuestionsList(response.data.id.questionslist);
                         setTestName(response.data.id.testname);
                         setTestCategory(response.data.id.category);
                         setShowQuestions(true);
+                        for (let i = 0; i <= response.data.id.questionslist.length; i++) {
+                            responseQuestionList.push(response.data.id.questionslist[i].question)
+                        }
                     }
                     else {
                         toast.error("Test link Invalid", {
@@ -84,32 +88,47 @@ const LiveTest = () => {
     }
 
     const addScore = (value, answer) => {
-        if (value === answer) {
-            setScore((score) => score + 1);
-        }
+            if (value === answer) {
+                setScore((score) => score + 1);
+                studentResponse.push(value)
+            }
+            else {
+                studentResponse.push(value)
+            }
+       
     }
-
-    // console.log(studentdata[0].testRecords);
 
     const generateScore = (event) => {
         event.preventDefault();
         setResult(true);
-    
+
         const performancePayload = {
             testId: id,
             testname: testname,
             category: category,
             score: score,
-            totalMarks: questionslist.length
+            totalMarks: questionslist.length,
         }
 
+        const responsePayload = {
+            questionName: responseQuestionList,
+            response: studentResponse
+        }
+
+        
+
         const testRecords = studentdata[0].testRecords
+        const testResponse = studentdata[0].testResponse
         testRecords.push(performancePayload)
+        testResponse.push(responsePayload)
 
         const payload = {
             ...studentdata,
-            testRecords: testRecords
+            testRecords: testRecords,
+            testResponse: testResponse
         }
+
+        
 
         addStudentPerformanceRecord(generatedid, payload)
                 .then((response) => {
@@ -125,7 +144,7 @@ const LiveTest = () => {
                         autoClose: 2000
                     })
                 })
-        
+
             setTimeout(() => {
                 localStorage.removeItem('score');
                 toast.success("Thank you for giving the test", {
@@ -136,7 +155,7 @@ const LiveTest = () => {
             setTimeout(() => {
                 window.location.reload(false);
             }, 3000)
-        
+
     }
 
     const handleFindStudent = (event) => {
@@ -144,7 +163,6 @@ const LiveTest = () => {
             const data = studentlist.filter((item) => {
                 return item.id === Number(event.target.value);
             })
-            console.log(data);
             setStudentData(data);
             if (data.length > 0) {
                 toast.success("Details Fetched successfully", {
@@ -164,11 +182,11 @@ const LiveTest = () => {
                 setTimeout(() => {
                     window.location.reload(false);
                 }, 0)
-                
+
             }
         }, 1000)
 
-        
+
 
     }
 

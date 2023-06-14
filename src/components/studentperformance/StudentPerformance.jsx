@@ -27,6 +27,12 @@ const StudentPerformance = () => {
         navigate('/score-card', { state: { item } })
     }
 
+    const handleStudentResponse = (item) => {
+        localStorage.setItem('response', JSON.stringify(item));
+        navigate('/student-response', { state: { item } })
+        
+    }
+
     useEffect(() => {
         getAllStudents(headers)
             .then((response) => {
@@ -72,6 +78,8 @@ const StudentPerformance = () => {
         { label: "Batch", key: 'batchname' },
         
     ]
+
+    
 
     return (
         <div className="card">
@@ -132,7 +140,7 @@ const StudentPerformance = () => {
                             return (
                                 <tr key={i}>
                                     <td>{`CODERSID-${item.id}`}</td>
-                                    <td>{item.studentname}</td>
+                                    <td className='pointer' onClick={() => handleStudentResponse(item)}>{item.studentname}</td>
                                     <td>{item.batchname}</td>
                                     <td><button className='score-card-button' onClick={() => {
                                         handleDetails(item)
