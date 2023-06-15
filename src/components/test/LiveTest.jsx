@@ -146,31 +146,31 @@ const LiveTest = () => {
 
         console.log(payload)
 
-        // addStudentPerformanceRecord(generatedid, payload)
-        //         .then((response) => {
-        //             toast.success("Test submitted successfully", {
-        //                 position: "top-center",
-        //                 autoClose: 3000
-        //             })
-        //         }
-        //         )
-        //         .catch((error) => {
-        //             toast.error(error.response.data.msg, {
-        //                 position: "top-center",
-        //                 autoClose: 2000
-        //             })
-        //         })
+        addStudentPerformanceRecord(generatedid, payload)
+                .then((response) => {
+                    toast.success("Test submitted successfully", {
+                        position: "top-center",
+                        autoClose: 3000
+                    })
+                }
+                )
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
+                })
 
-        //     setTimeout(() => {
-        //         localStorage.removeItem('score');
-        //         toast.success("Thank you for giving the test", {
-        //             position: "top-center",
-        //             autoClose: 3000
-        //         })
-        //     }, 2000)
-        //     setTimeout(() => {
-        //         window.location.reload(false);
-        //     }, 3000)
+            setTimeout(() => {
+                localStorage.removeItem('score');
+                toast.success("Thank you for giving the test", {
+                    position: "top-center",
+                    autoClose: 3000
+                })
+            }, 2000)
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 3000)
 
     }
 
