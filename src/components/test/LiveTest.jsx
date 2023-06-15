@@ -68,9 +68,13 @@ const LiveTest = () => {
                         setTestName(response.data.id.testname);
                         setTestCategory(response.data.id.category);
                         setShowQuestions(true);
-                        for (let i = 0; i <= response.data.id.questionslist.length; i++) {
-                            responseQuestionList.push(response.data.id.questionslist[i].question)
-                        }
+                        // for (let i = 0; i <= response.data.id.questionslist.length; i++) {
+                        //     console.log(response.data.id.questionslist)
+                        //     responseQuestionList.push(response.data.id.questionslist[i].question)
+                        // }
+                        {response.data.id.questionslist.map((item) => {
+                            responseQuestionList.push(item.question)
+                        })}
                     }
                     else {
                         toast.error("Test link Invalid", {
@@ -100,8 +104,13 @@ const LiveTest = () => {
                 flag = 0;
             }
             else {
-                setScore(0);
+                setScore(score);
+                studentResponse.push(value);
             }
+
+            console.log(score);
+            console.log(flag);
+            console.log(studentResponse);
        
     }
 
@@ -113,6 +122,9 @@ const LiveTest = () => {
             questionName: responseQuestionList,
             response: studentResponse
         }
+
+
+        console.log(responsePayload);
 
         const performancePayload = {
             testId: id,
@@ -134,31 +146,31 @@ const LiveTest = () => {
 
         console.log(payload)
 
-        addStudentPerformanceRecord(generatedid, payload)
-                .then((response) => {
-                    toast.success("Test submitted successfully", {
-                        position: "top-center",
-                        autoClose: 3000
-                    })
-                }
-                )
-                .catch((error) => {
-                    toast.error(error.response.data.msg, {
-                        position: "top-center",
-                        autoClose: 2000
-                    })
-                })
+        // addStudentPerformanceRecord(generatedid, payload)
+        //         .then((response) => {
+        //             toast.success("Test submitted successfully", {
+        //                 position: "top-center",
+        //                 autoClose: 3000
+        //             })
+        //         }
+        //         )
+        //         .catch((error) => {
+        //             toast.error(error.response.data.msg, {
+        //                 position: "top-center",
+        //                 autoClose: 2000
+        //             })
+        //         })
 
-            setTimeout(() => {
-                localStorage.removeItem('score');
-                toast.success("Thank you for giving the test", {
-                    position: "top-center",
-                    autoClose: 3000
-                })
-            }, 2000)
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 3000)
+        //     setTimeout(() => {
+        //         localStorage.removeItem('score');
+        //         toast.success("Thank you for giving the test", {
+        //             position: "top-center",
+        //             autoClose: 3000
+        //         })
+        //     }, 2000)
+        //     setTimeout(() => {
+        //         window.location.reload(false);
+        //     }, 3000)
 
     }
 

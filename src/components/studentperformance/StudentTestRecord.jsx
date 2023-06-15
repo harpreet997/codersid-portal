@@ -58,8 +58,8 @@ const StudentTestRecord = () => {
                         {currentRecords.map((item, i) => {
                             return (
                                 <tr key={i}>
-                                    <td className='pointer'>{item.testname}</td>
-                                    <td className='pointer'>{item.category}</td>
+                                    <td>{item.testname}</td>
+                                    <td>{item.category}</td>
                                     <td><button className='score-card-button' onClick={() => {
                                         handleDetails(item)
                                     }}>
