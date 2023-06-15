@@ -109,33 +109,30 @@ const LiveTest = () => {
         event.preventDefault();
         setResult(true);
 
+        const responsePayload = {
+            questionName: responseQuestionList,
+            response: studentResponse
+        }
+
         const performancePayload = {
             testId: id,
             testname: testname,
             category: category,
             score: score,
             totalMarks: questionslist.length,
+            testResponse: responsePayload
         }
-
-        const responsePayload = {
-            questionName: responseQuestionList,
-            response: studentResponse
-        }
-
-        
 
         const testRecords = studentdata[0].testRecords
-        const testResponse = studentdata[0].testResponse
         testRecords.push(performancePayload)
-        testResponse.push(responsePayload)
+        
 
         const payload = {
             ...studentdata,
             testRecords: testRecords,
-            testResponse: testResponse
         }
 
-        
+        console.log(payload)
 
         addStudentPerformanceRecord(generatedid, payload)
                 .then((response) => {

@@ -28,8 +28,8 @@ const StudentPerformance = () => {
     }
 
     const handleStudentResponse = (item) => {
-        localStorage.setItem('response', JSON.stringify(item));
-        navigate('/student-response', { state: { item } })
+        localStorage.setItem('testRecords', JSON.stringify(item));
+        navigate('/test-records', { state: { item } })
         
     }
 
