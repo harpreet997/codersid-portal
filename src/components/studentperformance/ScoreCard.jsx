@@ -84,7 +84,7 @@ const ScoreCard = () => {
                         <p className="score-card-student-name">Batch Name :</p>
                         <p className="score-card-batch-value">{data.batchname}</p>
                         <p className="score-card-cgpa">CGPA.</p>
-                        <p className="pe-2 score-card-cgpa-value">{cgpa}</p>
+                        <p className="pe-2 score-card-cgpa-value">{testRecords.length === 0 ? 0:  cgpa}</p>
                     </div>
                 </div>
 
@@ -142,7 +142,7 @@ const ScoreCard = () => {
                 <div className="d-flex justify-content-end">
                     <p className='total-cgpa-text'>CGPA</p>
                     <div className='total-cgpa-border'>
-                        <p className='total-cgpa-border-value'>{cgpa}</p>
+                        <p className='total-cgpa-border-value'>{testRecords.length === 0 ? 0:  cgpa}</p>
                     </div>
                 </div>
 

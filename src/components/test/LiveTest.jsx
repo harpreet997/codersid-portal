@@ -30,7 +30,8 @@ const LiveTest = () => {
     let value = '';
     let [studentResponse, setStudentResponse] = useState([]);
     let [responseQuestionList, setResponseQuestionList] = useState([]);
-    var flag=0;
+    let [answerlist, setAnswerlist] = useState([]);
+    let flag = 0;
 
     useEffect(() => {
         getAllTestPerformance(headers)
@@ -72,9 +73,11 @@ const LiveTest = () => {
                         //     console.log(response.data.id.questionslist)
                         //     responseQuestionList.push(response.data.id.questionslist[i].question)
                         // }
-                        {response.data.id.questionslist.map((item) => {
-                            responseQuestionList.push(item.question)
-                        })}
+                        {
+                            response.data.id.questionslist.map((item) => {
+                                answerlist.push(item.answer)
+                            })
+                        }
                     }
                     else {
                         toast.error("Test link Invalid", {
@@ -91,31 +94,51 @@ const LiveTest = () => {
         }
     }
 
-    const addScore = (value, answer) => {
-            if (value === answer && flag === 0) {
-                setScore((score) => score + 1);
-                studentResponse.push(value);
-                flag = 1;
-            }
-            else if(value !== answer && flag === 1) 
-            {
-                setScore((score) => score - 1);
-                studentResponse.push(value);
-                flag = 0;
-            }
-            else {
-                setScore(score);
-                studentResponse.push(value);
-            }
+    const addScore = (value, answer, index, question) => {
+        console.log("Index", index);
+        if (value === answer && flag === 0) {
+            console.log("first condition");
+            // score = score + 1;
+            // setScore(score);
+            // studentResponse.push(value);
+            responseQuestionList.splice(index, 0, question);
+            studentResponse.splice(index, 0, value);
+            flag = 1;
+        }
+        else if (value !== answer && flag === 1) {
+            console.log("second condition");
+            // score = score - 1;
+            // setScore(score);
+            // studentResponse.push(value);
+            responseQuestionList.splice(index, 0, question);
+            studentResponse.splice(index, 0, value);
+            flag = 0;
+        }
+        else {
+            console.log("third condition");
+            // setScore(score);
+            // studentResponse.push(value);
+            responseQuestionList.splice(index, 0, question);
+            studentResponse.splice(index, 0, value);
+        }
 
-            console.log(score);
-            console.log(flag);
-            console.log(studentResponse);
-       
+        
+        console.log(flag);
+        console.log(responseQuestionList)
+        console.log(studentResponse);
+        console.log(answerlist);
+
     }
+
+
 
     const generateScore = (event) => {
         event.preventDefault();
+
+        let finalresult = studentResponse.filter((data) => answerlist
+            .includes(data));
+        console.log(finalresult.length);
+        setScore(finalresult.length)
         setResult(true);
 
         const responsePayload = {
@@ -137,40 +160,40 @@ const LiveTest = () => {
 
         const testRecords = studentdata[0].testRecords
         testRecords.push(performancePayload)
-        
+
 
         const payload = {
             ...studentdata,
             testRecords: testRecords,
         }
 
-        console.log(payload)
+        // console.log(payload)
 
-        addStudentPerformanceRecord(generatedid, payload)
-                .then((response) => {
-                    toast.success("Test submitted successfully", {
-                        position: "top-center",
-                        autoClose: 3000
-                    })
-                }
-                )
-                .catch((error) => {
-                    toast.error(error.response.data.msg, {
-                        position: "top-center",
-                        autoClose: 2000
-                    })
-                })
+        // addStudentPerformanceRecord(generatedid, payload)
+        //         .then((response) => {
+        //             toast.success("Test submitted successfully", {
+        //                 position: "top-center",
+        //                 autoClose: 3000
+        //             })
+        //         }
+        //         )
+        //         .catch((error) => {
+        //             toast.error(error.response.data.msg, {
+        //                 position: "top-center",
+        //                 autoClose: 2000
+        //             })
+        //         })
 
-            setTimeout(() => {
-                localStorage.removeItem('score');
-                toast.success("Thank you for giving the test", {
-                    position: "top-center",
-                    autoClose: 3000
-                })
-            }, 2000)
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 3000)
+        //     setTimeout(() => {
+        //         localStorage.removeItem('score');
+        //         toast.success("Thank you for giving the test", {
+        //             position: "top-center",
+        //             autoClose: 3000
+        //         })
+        //     }, 2000)
+        //     setTimeout(() => {
+        //         window.location.reload(false);
+        //     }, 3000)
 
     }
 
@@ -244,7 +267,7 @@ const LiveTest = () => {
                     </div>
                     <form onSubmit={generateScore}>
                         {
-                            currentRecords.map((item) => {
+                            currentRecords.map((item, index) => {
                                 return (
 
                                     <div className="ms-2 mt-2 mb-2" key={item._id}>
@@ -252,25 +275,25 @@ const LiveTest = () => {
                                         <input type="radio" id={item.option1} name={item.question} value={item.option1} required
                                             onClick={() => {
                                                 value = item.option1;
-                                                addScore(value, item.answer);
+                                                addScore(value, item.answer, index, item.question);
                                             }} />
                                         <label className='ms-2 text-start fs-6' htmlFor="option1">{item.option1}</label><br />
                                         <input type="radio" id={item.option2} name={item.question} value={item.option2} required
                                             onClick={() => {
                                                 value = item.option2;
-                                                addScore(value, item.answer);
+                                                addScore(value, item.answer, index, item.question);
                                             }} />
                                         <label className='ms-2 text-start fs-6' htmlFor="option2">{item.option2}</label><br />
                                         <input type="radio" id={item.option3} name={item.question} value={item.option3} required
                                             onClick={() => {
                                                 value = item.option3;
-                                                addScore(value, item.answer);
+                                                addScore(value, item.answer, index, item.question);
                                             }} />
                                         <label className='ms-2 text-start fs-6' htmlFor="option3">{item.option3}</label><br />
                                         <input type="radio" id={item.option4} name={item.question} value={item.option4} required
                                             onClick={() => {
                                                 value = item.option4;
-                                                addScore(value, item.answer);
+                                                addScore(value, item.answer, index, item.question);
                                             }} />
                                         <label className='ms-2 text-start fs-6' htmlFor="option4">{item.option4}</label>
                                     </div>
