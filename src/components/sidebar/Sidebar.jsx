@@ -17,6 +17,7 @@ const Sidebar = () => {
     const [showPayment, setShowPayment] = useState(false);
     const [showLeads, setShowLeads] = useState(false);
     const [showTest, setShowTest] = useState(false);
+    const [showFeedback, setShowFeedback] = useState(false);
     const role = localStorage.getItem('role');
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -36,6 +37,10 @@ const Sidebar = () => {
         setShowTest(!showTest)
     }
 
+    const handleFeedback = () => {
+        setShowFeedback(!showFeedback)
+    }
+
     return (
         <div className="sidebar ">
             <div className="d-flex">
@@ -46,7 +51,6 @@ const Sidebar = () => {
             <div className='d-flex'>
                 <img className='dashboard-text-icon' src={DashboardIcon} alt="DashboardIcon" />
                 <NavLink className='sidebar-item-1' to='/dashboard'>Dashboard</NavLink>
-
             </div>
             {role === 'admin' || user[0].permission.includes('CodersID Students') ?
                 <div className='d-flex'>
@@ -86,6 +90,10 @@ const Sidebar = () => {
                                     <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
                                     <NavLink className='add-expense-text' to='/add-assessment-category'>Add Assessment Category</NavLink>
                                 </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-4' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='add-expense-text' to='/feedback-category'>Feedback Category</NavLink>
+                                </div>
                             </>
                             : null
                     }
@@ -97,8 +105,8 @@ const Sidebar = () => {
                 <>
                     <div className='d-flex'>
                         <img className='lead-icon' src={LeadImage} alt="LeadImage" />
-                        <p className='sidebar-item-3' onClick={handleLeads}>Leads</p>
-                        <img className='master-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
+                        <p className='sidebar-item-4' onClick={handleLeads}>Leads</p>
+                        <img className='lead-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                     </div>
                     {
                         showLeads ?
@@ -177,7 +185,7 @@ const Sidebar = () => {
                     <div className='d-flex'>
                         <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
                         <p className='payment-text' onClick={handleTest}>Assessment</p>
-                        <img className='payment-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
+                        <img className='assessment-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                     </div>
                     {
                         showTest ?
@@ -193,6 +201,35 @@ const Sidebar = () => {
                                 <div className="d-flex">
                                     <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
                                     <NavLink className='payment-records' to='/performance'>Student Performance</NavLink>
+                                </div>
+                            </>
+                            : null
+                    }
+                </>
+                : null}
+
+
+            {role === 'admin' || user[0].permission.includes('Feedbacks') ?
+                <>
+                    <div className='d-flex'>
+                        <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
+                        <p className='payment-text' onClick={handleFeedback}>Feedbacks</p>
+                        <img className='feedback-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
+                    </div>
+                    {
+                        showFeedback ?
+                            <>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/create-feedback'>Create Feedback</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/all-feedback'>All Feedbacks</NavLink>
+                                </div>
+                                <div className="d-flex">
+                                    <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
+                                    <NavLink className='payment-records' to='/performance'>Student Feedbacks</NavLink>
                                 </div>
                             </>
                             : null

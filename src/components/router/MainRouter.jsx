@@ -36,6 +36,7 @@ import StudentPerformance from '../studentperformance/StudentPerformance';
 import AddAssessmentCategory from '../test/AddAssessmentCategory';
 import Assessment from '../test/Assessment';
 import QuestionDetails from '../question/QuestionDetails';
+import QuestionDetail from '../feedback/QuestionDetails';
 import LiveTest from '../test/LiveTest';
 import AssessmentList from '../test/AssessmentList';
 import CreateNewTest from '../test/CreateNewTest';
@@ -44,6 +45,10 @@ import NewQuestion from '../question/NewQuestion';
 import EditNewQuestion from '../question/EditNewQuestion';
 import StudentResponse from '../studentperformance/StudentResponse';
 import StudentTestRecord from '../studentperformance/StudentTestRecord';
+import CreateFeedback from '../feedback/CreateFeedback';
+import AllFeddback from '../feedback/AllFeddback';
+import FeedbackCategory from '../feedback/FeedbackCategory';
+import Feedback from '../feedback/Feedback';
 
 const MainRouter = () => {
     return (
@@ -92,10 +97,15 @@ const MainRouter = () => {
                     <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
                     <Route path='/question-details' element={<QuestionDetails />}/>
                     <Route path='/score-card' element={<ScoreCard />}/>
+                    <Route path='/create-feedback' element={<CreateFeedback />}/>
+                    <Route path='/all-feedback' element={<AllFeddback />}/>
+                    <Route path='/feedback-category' element={<FeedbackCategory />}/>
+                    <Route path='/feedback-question-details' element={<QuestionDetail />}/>
                 </Route>
                 <Route path="/" element={<SignIn />} />
                 <Route path='/assessment-list' element={<AssessmentList />}/>
                 <Route path='/assessment-test/:id' element={<LiveTest />}/>
+                <Route path='/feedback-link/:id' element={<Feedback />}/>
             </Routes>
         </>
     )

@@ -125,6 +125,23 @@ export const addStudentPerformanceRecord = (id, payload) => {
     return axios.post(`${baseUrl}/api/students/${id}`, payload)
 } 
 
+export const addFeedbackCategory = (payload)=>{
+    return axios.post(`${baseUrl}/api/createFeedbackCategory`,payload)
+}
+
+export const deleteFeedbackCategory = (id) => {
+    return axios.delete(`${baseUrl}/api/deleteFeedbackCategory/${id}`)
+} 
+
+
+export const createFeedback = (payload)=>{
+    return axios.post(`${baseUrl}/api/createFeedback`,payload)
+}
+
+export const updateFeedback = (id, payload) => {
+    return axios.post(`${baseUrl}/api/getSingleFeedback/${id}`, payload)
+} 
+
 
 
 

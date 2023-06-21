@@ -51,12 +51,12 @@
     color: #2F2F2F;
     text-decoration: none;
     margin-top: 27px;
-    margin-left: 21px;
+    margin-left: 25px;
     opacity: 0.8;
 }
 
 .dashboard-text-icon {
-    margin-left: 3px;
+    margin-left: 5px;
     margin-top: 43px;
     width: 18px;
     height: 18px;
@@ -99,6 +99,20 @@
     cursor: pointer;
 }
 
+.sidebar-item-4 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #2F2F2F;
+    text-decoration: none;
+    margin-top: 0px;
+    margin-left: 25px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 .master-text-icon {
     margin-left: 5px;
     margin-top: 22px;
@@ -117,10 +131,18 @@
 
 .lead-icon {
     margin-left: 5px;
-    margin-top: 22px;
+    margin-top: 8px;
     width: 16px;
     height: 16px;
     opacity: 0.8;
+}
+
+.lead-arrow-icon {
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+    margin-left: 110px;
+    margin-top: 15.27px;
 }
 
 .list-icon {
@@ -210,7 +232,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 20px;
     display: flex;
     align-items: center;
     color: #2F2F2F;
@@ -221,7 +243,7 @@
 }
 
 .payment-icon {
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: 4px;
     width: 20px;
     height: 20px;
@@ -299,6 +321,22 @@
     height: 20px;
     opacity: 0.8;
     color: #2F2F2F;
+}
+
+.assessment-arrow-icon {
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+    margin-left: 60px;
+    margin-top: 23.27px;
+}
+
+.feedback-arrow-icon {
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+    margin-left: 70px;
+    margin-top: 23.27px;
 }
 
 

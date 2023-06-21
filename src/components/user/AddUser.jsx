@@ -15,7 +15,7 @@ const AddUser = () => {
     const [permission, setPermission] = useState([]);
     const navigate = useNavigate();
 
-    const permissionlist = ['CodersID Students', 'Master', 'Leads', 'Payment', 'Manage Expense', 'Finance', 'Assessment']
+    const permissionlist = ['CodersID Students', 'Master', 'Leads', 'Payment', 'Manage Expense', 'Finance', 'Assessment', 'Feedbacks']
 
     const handleChange = (event) => {
         setUserdata({
@@ -65,7 +65,7 @@ const AddUser = () => {
 
     return (
         <div className="card">
-            <p className='add-student-heading-text'>Add User</p>
+            <p className='add-user-card-text'>Add User</p>
 
             <form onSubmit={AddUser}>
                 <div className='mt-5 row'>

@@ -60,3 +60,15 @@ export const getSingleTest = (id) => {
 export const getAllTestPerformance = (headers) => {
     return axios.get(`${baseUrl}/api/testPerformance`, {headers})
 }
+
+export const getfeedbackCategory = (headers)=>{
+    return axios.get(`${baseUrl}/api/feedbackCategory`, {headers})
+}
+
+export const getAllFeedback=(headers)=>{
+    return axios.get(`${baseUrl}/api/getAllFeedback`,{headers})
+}
+
+export const getSingleFeedback=(id)=>{
+    return axios.get(`${baseUrl}/api/getSingleFeedback/${id}`)
+}
