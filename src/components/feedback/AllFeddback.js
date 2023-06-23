@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllFeedback } from '../../getdata/getdata';
+import { getAllFeedback, getfeedbackCategory} from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { BallTriangle } from 'react-loader-spinner';
 import { updateFeedback } from '../../postdata/postdata';
@@ -8,12 +8,15 @@ import { toast } from "react-toastify";
 import { primaryUrl } from '../../baseurl';
 import { Switch } from 'antd';
 import Pagination from '../pagination/Pagination';
+import FeedbackIcon from '../../assets/FeedbackIcon.png'
 import '../../styles/assessment/assessmentlist.css';
 import '../../styles/feedback/feedback.css';
 
 const AllFeddback = () => {
     const [alltestlist, setAllTestList] = useState([]);
     const [testlist, setTestList] = useState([]);
+    const [feedbackcategorylist, setFeedbackCategoryList] = useState([]);
+    const [feedbackName, setSearchFeedbackName] = useState('');
     const [categoryType, setCategoryType] = useState("all");
     const [allCategory, setAllCategory] = useState([])
     const [loader, setLoader] = useState(false)
@@ -37,6 +40,15 @@ const AllFeddback = () => {
                 let allcategory = response.data.map(v => (v.category))
                 setAllCategory([...new Set(allcategory)])
                 setLoader(false)
+            })
+
+        getfeedbackCategory(headers)
+            .then((response) => {
+                setFeedbackCategoryList(response.data);
+                setLoader(false);
+            })
+            .catch((error) => {
+                console.log(error);
             })
     }, []);
 
@@ -108,9 +120,56 @@ const AllFeddback = () => {
         }
     }
 
+
+    const handleCategorySelect = (event) => {
+        const category = event.target.value;
+        console.log(category)
+        if (category === 'All Category') {
+            setTestList(alltestlist);
+        }
+        else {
+            let data = alltestlist.filter((item, i) => {
+                return item.category === category;
+            })
+            console.log(data);
+            if (data.length > 0) {
+                setTestList(data);
+            }
+            else {
+                setTestList([])
+            }
+        }
+    }
+
     return (
         <div className="card">
-            <div className="d-flex">
+            <div className="d-flex justify-content-start">
+                <p className='studentlist-card-text'>All Feedback
+                    <img className='studentlist-icon' src={FeedbackIcon} alt="FeedbackIcon" /></p>
+            </div>
+
+            <div className="row mt-3">
+                <div className="col-sm-6">
+                    <p className="text-start select-field-label">Select Feedback Category</p>
+                    <select className="student-list-input-width mb-2 w-100" name="category" id="category" onChange={handleCategorySelect}>
+                        <option value="All Category">All Category</option>
+                        {feedbackcategorylist.map((item) => {
+                            return (
+                                <option value={item.categoryName} >{item.categoryName}</option>
+                            )
+
+                        })}
+                    </select>
+                </div>
+                <div className="col-sm-6">
+                    <p className="text-start input-field-label">Feedback Name</p>
+                    <input type="text" className="student-list-input-width w-100" id="name" name="name"
+                        onChange={(e) => setSearchFeedbackName(e.target.value)} />
+                </div>
+
+            </div>
+
+            {/* <div className="d-flex">
                 <div className="feedback-name-card" style={categoryType === "all" ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
                     onClick={() => filterFeedback("all")}
                 >
@@ -132,7 +191,7 @@ const AllFeddback = () => {
                         </div>
                     ))
                 }
-            </div>
+            </div> */}
 
 
 
@@ -147,7 +206,14 @@ const AllFeddback = () => {
 
                     </thead>
                     <tbody className='text-center'>
-                        {currentRecords.map((item) => {
+                        {currentRecords.filter((val) => {
+                            if (feedbackName === "") {
+                                return val;
+                            }
+                            else if (val.name.toLowerCase().includes(feedbackName.toLowerCase())) {
+                                return val;
+                            }
+                        }).map((item) => {
                             return (
                                 <tr key={item._id}>
                                     <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.name}</td>
@@ -168,19 +234,26 @@ const AllFeddback = () => {
                 </table>
             </>
 
-            {loader ?
-                <div className="d-flex justify-content-center">
-                    <BallTriangle
-                        height={250}
-                        width={300}
-                        radius={5}
-                        color="#10D1E3"
-                        ariaLabel="ball-triangle-loading"
-                        wrapperClassName=''
-                        wrapperStyle=""
-                        visible={true}
-                    />
-                </div> : null}
+            {currentRecords.length === 0 ?
+                    <div className='d-flex justify-content-center'>
+                        {alltestlist.length !== 0 ?
+                            <p className='fs-4'>No Data Found</p>
+                            :
+                            <BallTriangle
+                                height={250}
+                                width={300}
+                                radius={5}
+                                color="#10D1E3"
+                                ariaLabel="ball-triangle-loading"
+                                wrapperClassName=''
+                                wrapperStyle=""
+                                visible={true}
+                            />
+                        }
+                    </div>
+                    : null}
+
+            
 
             {allCategory && currentRecords.length > 0 ?
                 <div className="text-center">
