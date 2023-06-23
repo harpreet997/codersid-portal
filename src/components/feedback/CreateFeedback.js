@@ -5,7 +5,7 @@
  import { headers } from '../../headers';
  import { createFeedback } from '../../postdata/postdata';
  import { getfeedbackCategory } from '../../getdata/getdata';
- import { toast } from "react-toastify";
+ import FeedbackIcon from '../../assets/FeedbackIcon.png';
  
  const CreateFeedback = () => {
      const [feedbackcategorylist, setFeedbackCategoryList] = useState([]);
@@ -80,7 +80,8 @@
          <div className="card">
              <div className="d-flex align-items-start justify-content-between">
                  <div className="d-flex justify-content-start">
-                     <p className='studentlist-card-text'>Create Feedback Form</p>
+                     <p className='studentlist-card-text'>Create Feedback Form
+                     <img className='studentlist-icon' src={FeedbackIcon} alt="FeedbackIcon" /></p>
                  </div>
                  <div className="d-flex justify-content-end">
                      <button className='add-student-button' onClick={()=>setFeedbackModal(true)}>

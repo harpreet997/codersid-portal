@@ -72,3 +72,11 @@ export const getAllFeedback=(headers)=>{
 export const getSingleFeedback=(id)=>{
     return axios.get(`${baseUrl}/api/getSingleFeedback/${id}`)
 }
+
+export const getAllStudentFeedback=(headers)=>{
+    return axios.get(`${baseUrl}/api/studentfeedback`,{headers})
+}
+
+export const getSingleStudentFeedback=(id)=>{
+    return axios.get(`${baseUrl}/api/studentfeedback/${id}`)
+}

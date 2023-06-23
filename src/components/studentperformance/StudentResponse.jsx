@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
 
 const StudentResponse = () => {
-    const data = JSON.parse(localStorage.getItem('response'))
+    const data = JSON.parse(localStorage.getItem('testResponse'))
 
     // console.log(data.testResponse)
     // console.log(data.testResponse.questionName)
@@ -32,15 +32,20 @@ const StudentResponse = () => {
                     </button>
                 </div>
             </div>
-            {data.testResponse.questionName.length > 0
-            ?
-            <div className="ms-2 mt-2 mb-2" >
-                {data.testResponse.questionName.map((question) => <p className='fw-bold'>Q. {question}</p>)}
-                {data.testResponse.response.map((answer) => <p>Ans. {answer}</p>)}
-            </div>
-            : <div className='text-center'>
-                <p className='fs-4'>No Data Found</p>
-            </div>}
+            {data.length > 0
+                ?
+                <div className="ms-2 mt-2 mb-2" >
+                    {data.map((item) =>
+                        <>
+                            <p className='fw-bold'>Q. {item.question}</p>
+                            <p >{item.response}</p>
+                        </>
+                    )}
+
+                </div>
+                : <div className='text-center'>
+                    <p className='fs-4'>No Data Found</p>
+                </div>}
 
 
 

@@ -142,6 +142,10 @@ export const updateFeedback = (id, payload) => {
     return axios.post(`${baseUrl}/api/getSingleFeedback/${id}`, payload)
 } 
 
+export const addStudentFeedback = (payload)=>{
+    return axios.post(`${baseUrl}/api/studentfeedback`,payload)
+}
+
 
 
 

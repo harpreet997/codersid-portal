@@ -49,6 +49,10 @@ import CreateFeedback from '../feedback/CreateFeedback';
 import AllFeddback from '../feedback/AllFeddback';
 import FeedbackCategory from '../feedback/FeedbackCategory';
 import Feedback from '../feedback/Feedback';
+import StudentFeedback from '../feedback/StudentFeedback';
+import StudentFeedbackResponse from '../feedback/StudentFeedbackResponse';
+import FeedbackResponse from '../feedback/FeedbackResponse';
+import NewCreateFeedback from '../feedback/NewCreateFeedback';
 
 const MainRouter = () => {
     return (
@@ -98,9 +102,13 @@ const MainRouter = () => {
                     <Route path='/question-details' element={<QuestionDetails />}/>
                     <Route path='/score-card' element={<ScoreCard />}/>
                     <Route path='/create-feedback' element={<CreateFeedback />}/>
+                    {/* <Route path='/create-feedback' element={<NewCreateFeedback />}/> */}
                     <Route path='/all-feedback' element={<AllFeddback />}/>
                     <Route path='/feedback-category' element={<FeedbackCategory />}/>
                     <Route path='/feedback-question-details' element={<QuestionDetail />}/>
+                    <Route path='/feedbacks' element={<StudentFeedback />}/>
+                    <Route path='/student-feedbacks' element={<StudentFeedbackResponse />}/>
+                    <Route path='/feedback-response' element={<FeedbackResponse />}/>
                 </Route>
                 <Route path="/" element={<SignIn />} />
                 <Route path='/assessment-list' element={<AssessmentList />}/>

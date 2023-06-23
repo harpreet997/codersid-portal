@@ -17,8 +17,10 @@ const StudentTestRecord = () => {
     const navigate = useNavigate();
 
     const handleDetails = (item) => {
-        localStorage.setItem('response', JSON.stringify(item));
-        navigate('/student-response', { state: { item } })
+        const data = item.testResponse;
+        console.log(data);
+        localStorage.setItem('testResponse', JSON.stringify(data));
+        navigate('/student-response', { state: { data } })
     }
 
     const handleBack = () => {

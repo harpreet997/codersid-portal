@@ -36,7 +36,7 @@ const StudentDetails = () => {
     return (
         <div className="card">
             <div className="d-flex justify-content-between">
-                <p className='view-student-details-heading ps-2'>CodersID Students Details</p>
+                <p className='add-user-card-text ps-2'>CodersID Students Details</p>
                 <button className='view-student-details-back-button me-2' onClick={handleBack}>
                     <p className='view-student-details-back-button-text'>Back</p>
                 </button>

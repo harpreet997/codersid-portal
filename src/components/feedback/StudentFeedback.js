@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllFeedback } from '../../getdata/getdata';
+import { getAllFeedback, getAllStudentFeedback } from '../../getdata/getdata';
 import { headers } from '../../headers';
-import { BallTriangle } from 'react-loader-spinner';
-import { updateFeedback } from '../../postdata/postdata';
-import { toast } from "react-toastify";
-import { primaryUrl } from '../../baseurl';
-import { Switch } from 'antd';
 import Pagination from '../pagination/Pagination';
+import { BallTriangle } from 'react-loader-spinner';
 import '../../styles/assessment/assessmentlist.css';
 import '../../styles/feedback/feedback.css';
 
-const AllFeddback = () => {
+const StudentFeedback = () => {
     const [alltestlist, setAllTestList] = useState([]);
     const [testlist, setTestList] = useState([]);
+    const [studentfeedbacklist, setStudentFeedbackList] = useState([]);
     const [categoryType, setCategoryType] = useState("all");
     const [allCategory, setAllCategory] = useState([])
     const [loader, setLoader] = useState(false)
@@ -24,9 +21,6 @@ const AllFeddback = () => {
     const nPages = Math.ceil(testlist.length / recordsPerPage);
     const currentRecords = testlist?.length > 0 ? testlist.slice(indexOfFirstRecord, indexOfLastRecord) : [];
     const navigate = useNavigate();
-    const date = new Date();
-    date.setDate(date.getDate() + 2);
-    const expiryDate = date.toString()
 
     useEffect(() => {
         setLoader(true);
@@ -38,62 +32,24 @@ const AllFeddback = () => {
                 setAllCategory([...new Set(allcategory)])
                 setLoader(false)
             })
+        getAllStudentFeedback(headers)
+            .then((response) => {
+                setStudentFeedbackList(response.data.StudentFeedbacks);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
     }, []);
 
-    const handleQuestionDetails = (item) => {
-        console.log(item);
-        console.log(item.questionslist)
-        localStorage.setItem('item', JSON.stringify(item));
-        localStorage.setItem('questionlist', JSON.stringify(item.questionslist))
-        navigate('/feedback-question-details', { state: { item } })
-    }
-
-    const copy = async (id) => {
-        await navigator.clipboard.writeText(`${primaryUrl}/feedback-link/${id}`);
-        toast.success("Feedback Link Copied", {
-            position: "top-center",
-            autoClose: 1000
+    const handleStudentDetails = (id) => {
+        console.log(id);
+        const data = studentfeedbacklist.filter((item) => {
+            return item.feedbackid === id
         })
-    }
-
-    const enableLink = (id) => {
-        const payload = {
-            expiryDate: expiryDate
-        }
-        updateFeedback(id, payload)
-            .then((response) => {
-                toast.success("Feedback Link Enabled Successfully", {
-                    position: "top-center",
-                    autoClose: 1000
-                })
-                window.location.reload(false);
-            })
-            .catch((error) => {
-                toast.success(error, {
-                    position: "top-center",
-                    autoClose: 1000
-                })
-            })
-    }
-
-    const disableLink = (id) => {
-        const payload = {
-            expiryDate: ""
-        }
-        updateFeedback(id, payload)
-            .then((response) => {
-                toast.success("Feedback Link Disabled Successfully", {
-                    position: "top-center",
-                    autoClose: 1000
-                })
-                window.location.reload(false);
-            })
-            .catch((error) => {
-                toast.success(error, {
-                    position: "top-center",
-                    autoClose: 1000
-                })
-            })
+        console.log(data);
+        localStorage.setItem('studentFeedbackRecords', JSON.stringify(data));
+        navigate('/student-feedbacks', { state: { data } })
     }
 
     const filterFeedback = (type) => {
@@ -116,7 +72,6 @@ const AllFeddback = () => {
                 >
                     <div className="card-body text-center">
                         <p className="fs-5 fw-bold">All Feedback</p>
-
                     </div>
                 </div>
 
@@ -150,16 +105,12 @@ const AllFeddback = () => {
                         {currentRecords.map((item) => {
                             return (
                                 <tr key={item._id}>
-                                    <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.name}</td>
+                                    <td>{item.name}</td>
                                     <td>{item.category}</td>
-                                    <td><button className='feedback-link-button me-2' onClick={() => {
-                                        copy(item._id)
-                                    }}>
-                                        <p className='feedback-link-button-text'>Feedback Link</p>
+                                    <td><button className='feedback-link-button me-2' onClick={() => handleStudentDetails(item._id)}>
+                                        <p className='feedback-link-button-text'>View Records</p>
                                     </button>
-                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
-                                            onChange={() => disableLink(item._id)} />
-                                            : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
+
                                     </td>
                                 </tr>
                             )
@@ -192,9 +143,8 @@ const AllFeddback = () => {
                 </div>
 
                 : null}
-
         </div>
     );
 }
 
-export default AllFeddback;
+export default StudentFeedback;

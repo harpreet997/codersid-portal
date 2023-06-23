@@ -10,6 +10,7 @@ import PaymentIcon from '../../assets/PaymentIcon.png';
 import ExpenseManageIcon from '../../assets/ExpenseManageIcon.png';
 import FinanceIcon from '../../assets/FinanceIcon.png';
 import LeadImage from '../../assets/LeadImage.png';
+import FeedbackIcon from '../../assets/FeedbackIcon.png';
 import '../../styles/sidebar/sidebar.css';
 
 const Sidebar = () => {
@@ -212,7 +213,7 @@ const Sidebar = () => {
             {role === 'admin' || user[0].permission.includes('Feedbacks') ?
                 <>
                     <div className='d-flex'>
-                        <img className='payment-icon' src={PaymentIcon} alt="PaymentIcon" />
+                        <img className='payment-icon' src={FeedbackIcon} alt="FeedbackIcon" />
                         <p className='payment-text' onClick={handleFeedback}>Feedbacks</p>
                         <img className='feedback-arrow-icon' src={MasterArrowIcon} alt="MasterArrowIcon" />
                     </div>
@@ -229,7 +230,7 @@ const Sidebar = () => {
                                 </div>
                                 <div className="d-flex">
                                     <img className='list-icon-5' src={ListIcon} alt="ListIcon" />
-                                    <NavLink className='payment-records' to='/performance'>Student Feedbacks</NavLink>
+                                    <NavLink className='payment-records' to='/feedbacks'>Student Feedbacks</NavLink>
                                 </div>
                             </>
                             : null
