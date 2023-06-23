@@ -48,8 +48,8 @@ const Feedback = () => {
 
     const handleFindStudent = (event) => {
         setTimeout(() => {
-            const data = studentfeedbacklist.filter((item) => {
-                return item.studentid === Number(event.target.value);
+            const data = studentlist.filter((item) => {
+                return item.id === Number(event.target.value);
             })
             console.log(data);
             setStudentData(data);
@@ -79,7 +79,13 @@ const Feedback = () => {
 
     const ShowTest = (event) => {
         event.preventDefault();
-        if (studentdata[0].feedbackid === id) {
+        console.log(studentid);
+
+        const data = studentfeedbacklist.filter((item) => {
+            return item.feedbackid === id && item.studentname === studentname
+        })
+        console.log(data);
+        if (data.length > 0) {
             toast.error("Feedback already given", {
                 position: "top-center",
                 autoClose: 2000
