@@ -80,3 +80,7 @@ export const getAllStudentFeedback=(headers)=>{
 export const getSingleStudentFeedback=(id)=>{
     return axios.get(`${baseUrl}/api/studentfeedback/${id}`)
 }
+
+export const getAllFeedbackQuestions = (headers) => {
+    return axios.get(`${baseUrl}/api/feedbackquestion`, {headers})
+}

@@ -84,43 +84,21 @@ const ScoreCard = () => {
                         <p className="score-card-student-name">Batch Name :</p>
                         <p className="score-card-batch-value">{data.batchname}</p>
                         <p className="score-card-cgpa">CGPA.</p>
-                        <p className="pe-2 score-card-cgpa-value">{testRecords.length === 0 ? 0:  cgpa}</p>
+                        <p className="pe-2 score-card-cgpa-value">{testRecords.length === 0 ? 0 : cgpa}</p>
                     </div>
                 </div>
-
-                {/* <div className="main-fourth-receipt-box">
-                    <div className="d-flex justify-content-between">
-                        <p className="test-name-header">Test Name</p>
-                        <p className="test-name-header">Total Marks</p>
-                        <p className="test-name-header">Achieved Marks</p>
-                    </div>
-                    <div className="main-receipt-horizontal-line-3"></div>
-                    {testRecords.map((item) => {
-                        return (
-                            <>
-                                <div key={item._id} className="d-flex justify-content-between">
-                                    <p className="test-name-value">{item.testname}</p>
-                                    <p className="total-marks-value">{item.totalMarks}</p>
-                                    <p className="test-name-value">{item.score}</p>
-
-                                </div>
-                                <div className="main-receipt-horizontal-line-4"></div>
-                            </>
-                        )
-                    })}
-
-                </div> */}
-
+                
                 <div className="score-card-box">
-                    <table className="table" >
-                        <thead className='text-center'>
-                            <tr>
-                                <th scope="col"><p className='test-name-header'>Test Name</p></th>
-                                <th scope="col"><p className='test-name-header'>Total Marks</p></th>
-                                <th scope="col"><p className='test-name-header'>Achieved Marks</p></th>
-                            </tr>
-                        </thead>
-                        {testRecords.length > 0 ?
+                    {testRecords.length > 0 ?
+                        <table className="table" >
+                            <thead className='text-center'>
+                                <tr>
+                                    <th scope="col"><p className='test-name-header'>Test Name</p></th>
+                                    <th scope="col"><p className='test-name-header'>Total Marks</p></th>
+                                    <th scope="col"><p className='test-name-header'>Achieved Marks</p></th>
+                                </tr>
+                            </thead>
+
 
                             <tbody className='text-center'>
                                 {testRecords.map((item) => {
@@ -133,16 +111,16 @@ const ScoreCard = () => {
                                     )
                                 })}
                             </tbody>
-                            : <div className='text-center'>
-                                <p>No Test Found</p>
-                            </div>}
-                    </table>
+                        </table>
+                        : <div className='text-center'>
+                            <p>No Test Found</p>
+                        </div>}
                 </div>
 
                 <div className="d-flex justify-content-end">
                     <p className='total-cgpa-text'>CGPA</p>
                     <div className='total-cgpa-border'>
-                        <p className='total-cgpa-border-value'>{testRecords.length === 0 ? 0:  cgpa}</p>
+                        <p className='total-cgpa-border-value'>{testRecords.length === 0 ? 0 : cgpa}</p>
                     </div>
                 </div>
 

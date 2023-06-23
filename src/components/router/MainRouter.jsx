@@ -101,8 +101,8 @@ const MainRouter = () => {
                     <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
                     <Route path='/question-details' element={<QuestionDetails />}/>
                     <Route path='/score-card' element={<ScoreCard />}/>
-                    <Route path='/create-feedback' element={<CreateFeedback />}/>
-                    {/* <Route path='/create-feedback' element={<NewCreateFeedback />}/> */}
+                    {/* <Route path='/create-feedback' element={<CreateFeedback />}/> */}
+                    <Route path='/create-feedback' element={<NewCreateFeedback />}/>
                     <Route path='/all-feedback' element={<AllFeddback />}/>
                     <Route path='/feedback-category' element={<FeedbackCategory />}/>
                     <Route path='/feedback-question-details' element={<QuestionDetail />}/>

@@ -1,24 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
-import { getAllQuestions } from '../../getdata/getdata';
+import { getAllFeedbackQuestions, getfeedbackCategory } from '../../getdata/getdata';
 import { headers } from '../../headers';
-import AddQuestion from '../test/AddQuestion';
-import { addTest, deleteAllQuestions, deleteQuestion } from '../../postdata/postdata';
-import { getAllAssessmentCategory } from '../../getdata/getdata';
+import { addFeedbackQuestion, createFeedback, deleteAllFeedbackQuestions, deleteFeedbackQuestion } from '../../postdata/postdata';
 import { toast } from "react-toastify";
-import EditQuestion from '../test/EditQuestion';
+import EditFeedbackQuestion from './EditFeedbackQuestion';
 import { BallTriangle } from 'react-loader-spinner';
 import Pagination from '../pagination/Pagination';
 import FeedbackIcon from '../../assets/FeedbackIcon.png';
-import { useNavigate } from 'react-router-dom';
 
 const NewCreateFeedback = () => {
-    const [assessmentcategorylist, setAssessmentCategoryList] = useState([]);
+    const [question, setFeedbackQuestion] = useState('');
+    const [feedbackcategorylist, setFeedbackCategoryList] = useState([]);
     const [questionlist, setQuestionList] = useState([]);
-    const [testmodal, setTestModal] = useState(false);
-    const [editquestionmodal, setEditQuestionModal] = useState(false);
-    const [testdata, setTestData] = useState({
-        testname: "",
+    const [feedbackmodal, setfeebackModal] = useState(false);
+    const [editfeedbackmodal, setEditfeebackModal] = useState(false);
+    const [feedbackdata, setFeedbackData] = useState({
+        name: "",
         category: "",
         questionslist: [],
         expiryDate: "",
@@ -30,21 +28,21 @@ const NewCreateFeedback = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = questionlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(questionlist.length / recordsPerPage);
-    const navigate = useNavigate();
+    
 
     useEffect(() => {
         setLoader(true);
-        getAllAssessmentCategory(headers)
+        getfeedbackCategory(headers)
             .then((response) => {
-                setAssessmentCategoryList(response.data.AssessmentCategories);
+                setFeedbackCategoryList(response.data);
             })
             .catch((error) => {
                 console.log(error);
             })
 
-        getAllQuestions(headers)
+        getAllFeedbackQuestions(headers)
             .then((response) => {
-                setQuestionList(response.data.Questions);
+                setQuestionList(response.data.FeedbackQuestions);
                 setLoader(false)
             })
             .catch((error) => {
@@ -54,35 +52,61 @@ const NewCreateFeedback = () => {
     }, []);
 
 
-    const OpenTestModal = () => {
-        setTestModal(true);
+    const OpenFeedbackModal = () => {
+        setfeebackModal(true);
     }
 
-    const CloseTestModal = () => {
-        setTestModal(false);
+    const CloseFeedbackModal = () => {
+        setfeebackModal(false);
     }
 
-    const handleQuestionModal = (item) => {
-        navigate('/edit-question', { state: { item } })
-    };
+    const OpenEditFeedbackModal = (id) => {
+        setEditfeebackModal(id);
+    }
 
-    const handleClose = () => setEditQuestionModal(false);
+    const CloseEditFeedbackModal = () => {
+        setEditfeebackModal(false);
+    }
+
+    const handleEditClose = () => setEditfeebackModal(false);
 
     const handleChange = (event) => {
-        setTestData({
-            ...testdata,
+        setFeedbackData({
+            ...feedbackdata,
             [event.target.name]: event.target.value
         })
     }
 
-    const AddTest = (event) => {
+    const AddFeedbackQuestion = (event) => {
         event.preventDefault();
         const payload = {
-            ...testdata,
+            question: question
+        }
+        addFeedbackQuestion(payload)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                CloseFeedbackModal();
+                window.location.reload(false);
+            })
+            .catch((error) => {
+                toast.error(error.response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+            })
+    }
+
+    const AddFeedback = (event) => {
+        event.preventDefault();
+        const payload = {
+            ...feedbackdata,
             questionslist: questionlist
         }
         console.log(payload);
-        addTest(payload)
+        createFeedback(payload)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -98,7 +122,7 @@ const NewCreateFeedback = () => {
                 })
             })
         setTimeout(() => {
-            deleteAllQuestions()
+            deleteAllFeedbackQuestions()
                 .then((response) => {
                     window.location.reload(false);
                 })
@@ -111,14 +135,8 @@ const NewCreateFeedback = () => {
         }, 1000);
     }
 
-    const NewQuestion = () => {
-        navigate('/create-question')
-    }
-
-
-
     const DeleteQuestion = (id) => {
-        deleteQuestion(id)
+        deleteFeedbackQuestion(id)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
@@ -139,37 +157,56 @@ const NewCreateFeedback = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                <p className='studentlist-card-text'>Create Feedback Form
-                <img className='studentlist-icon' src={FeedbackIcon} alt="FeedbackIcon" /></p>
+                    <p className='studentlist-card-text'>Create Feedback Form
+                        <img className='studentlist-icon' src={FeedbackIcon} alt="FeedbackIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
-                    <button className='add-student-button' onClick={NewQuestion}>
+                    <button className='add-student-button' onClick={OpenFeedbackModal}>
                         <p className='add-student-button-text'>Add Question + </p>
                     </button>
-                    <Modal show={testmodal ? true : false} onHide={CloseTestModal}>
-                        <AddQuestion CloseTestModal={CloseTestModal} setQuestionList={setQuestionList} questionlist={questionlist} />
+                    <Modal show={feedbackmodal ? true : false} onHide={CloseFeedbackModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title className="text-black">
+                                <p className='view-expense-details-modal-heading'>
+                                    Add Question
+                                </p>
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <form onSubmit={AddFeedbackQuestion}>
+                                <p className='make-payment-email-address'>Feedback Question</p>
+                                <input className='student-name-input-field form-control' type="text"
+                                    id="question"
+                                    name="question"
+                                    onChange={(event) => setFeedbackQuestion(event.target.value)}
+                                    required />
+                                <div className="text-center">
+                                    <button type="submit" className="mt-3 mb-3 btn btn-primary">Add Question</button>
+                                </div>
+                            </form>
+                        </Modal.Body>
                     </Modal>
                 </div>
             </div>
             {questionlist.length > 0
                 ?
-                <form onSubmit={AddTest}>
+                <form onSubmit={AddFeedback}>
                     <div className='row'>
                         <div className='col-sm-4'>
-                            <p className="text-start">Assessment Name</p>
+                            <p className="text-start">Feedback Name</p>
                             <input type="text" className="add-batch-input w-100"
-                                id="testname" name="testname"
+                                id="name" name="name"
                                 onChange={handleChange} required />
                         </div>
                         <div className='col-sm-4'>
-                            <p className="text-start">Assessment Category</p>
+                            <p className="text-start">Feedback Category</p>
                             <select className="add-batch-input mt-1 w-100"
                                 id="category" name="category"
                                 onChange={handleChange} required>
                                 <option value="">Select Category</option>
-                                {assessmentcategorylist.map((category) => {
+                                {feedbackcategorylist.map((category) => {
                                     return (
-                                        <option value={category.assessmentcategoryName}>{category.assessmentcategoryName}</option>
+                                        <option value={category.categoryName}>{category.categoryName}</option>
                                     )
                                 })}
                             </select>
@@ -188,7 +225,7 @@ const NewCreateFeedback = () => {
             <table className="table batch-table">
                 <thead>
                     <tr>
-                        <th scope="col">Questions</th>
+                        <th scope="col">Feedback Questions</th>
                         <th className='ps-3' scope="col">Action</th>
                     </tr>
                 </thead>
@@ -198,26 +235,18 @@ const NewCreateFeedback = () => {
                             <tr>
                                 <td>
                                     <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                                    <ul>
-                                        <li>{item.option1}</li>
-                                        <li>{item.option2}</li>
-                                        <li>{item.option3}</li>
-                                        <li>{item.option4}</li>
-                                    </ul>
-                                    <p>Answer : {item.answer}</p>
-
                                 </td>
                                 <td>
-                                    <div className='d-flex align-items-center' style={{marginTop: 150}}>
-                                        <button className='edit-question-button'
-                                            onClick={() => handleQuestionModal(item)}>
-                                            <p className='edit-question-button-text'>Edit</p></button>
-                                        <button className='edit-question-button'
+                                    <div className='d-flex align-items-center' style={{ marginTop: 5 }}>
+                                        <button className='details-button'
+                                            onClick={() => OpenEditFeedbackModal(item._id)}>
+                                            <p className='details-button-text'>Update</p></button>
+                                        <button className='ms-2 details-button'
                                             onClick={() => DeleteQuestion(item._id)}>
-                                            <p className='edit-question-button-text'>Delete</p>
+                                            <p className='details-button-text'>Delete</p>
                                         </button>
-                                        <Modal show={editquestionmodal === item._id ? true : false} onHide={handleClose}>
-                                            <EditQuestion data={item} handleClose={handleClose} questionlist={questionlist} />
+                                        <Modal show={editfeedbackmodal === item._id ? true : false} onHide={handleEditClose}>
+                                            <EditFeedbackQuestion data={item} id={item._id} CloseEditFeedbackModal={CloseEditFeedbackModal}/>
                                         </Modal>
                                     </div>
                                 </td>
@@ -244,7 +273,7 @@ const NewCreateFeedback = () => {
 
             {!loader && currentRecords.length === 0 ?
                 <div className='d-flex justify-content-center'>
-                    <p className='fs-4'>No Question Found</p>
+                    <p className='fs-4'>No Feedback Found</p>
                 </div>
                 : null}
 

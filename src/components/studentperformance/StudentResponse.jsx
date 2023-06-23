@@ -1,23 +1,12 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Pagination from '../pagination/Pagination';
+
 
 const StudentResponse = () => {
     const data = JSON.parse(localStorage.getItem('testResponse'))
-
-    // console.log(data.testResponse)
-    // console.log(data.testResponse.questionName)
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [recordsPerPage] = useState(5);
-    // const indexOfLastRecord = currentPage * recordsPerPage;
-    // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    // const currentRecords = testResponse.slice(indexOfFirstRecord, indexOfLastRecord);
-    // const nPages = Math.ceil(testResponse.length / recordsPerPage);
     const navigate = useNavigate();
 
     const handleBack = () => {
         navigate('/test-records');
-        // localStorage.removeItem('response');
     }
 
     return (
@@ -46,19 +35,6 @@ const StudentResponse = () => {
                 : <div className='text-center'>
                     <p className='fs-4'>No Data Found</p>
                 </div>}
-
-
-
-
-            {/* {currentRecords.length > 0 ?
-                <div className="text-center">
-                    <Pagination
-                        nPages={nPages}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                    />
-                </div>
-                : null} */}
         </div>
     );
 }

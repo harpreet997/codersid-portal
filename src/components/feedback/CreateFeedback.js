@@ -18,8 +18,6 @@
          expiryDate: "",
      })
      const [question,setQuestion] = useState("")
-     const [name,setName] = useState("")
-     const [Category,setCategory]= useState("")
      
      useEffect(() => {
         getfeedbackCategory(headers)

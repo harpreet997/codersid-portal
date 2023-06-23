@@ -8,7 +8,6 @@ import Pagination from '../pagination/Pagination';
 
 const Feedback = () => {
     const { id } = useParams();
-    const [rating, setRating] = useState(0);
     const [questionslist, setQuestionsList] = useState([]);
     const [studentlist, setStudentList] = useState([]);
     const [studentfeedbacklist, setStudentFeedbackList] = useState([]);
@@ -17,7 +16,6 @@ const Feedback = () => {
     const [feedbackname, setFeedbackName] = useState('');
     const [feedbackcategory, setFeedbackCategory] = useState('');
     const [studentid, setStudentId] = useState('');
-    const [generatedid, setGeneratedId] = useState('');
     const [studentname, setStudentName] = useState('');
     const [batchname, setBatchName] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -58,7 +56,6 @@ const Feedback = () => {
                     position: "top-center",
                     autoClose: 1000
                 })
-                setGeneratedId(data[0]._id);
                 setStudentId(data[0].id);
                 setStudentName(data[0].studentname);
                 setBatchName(data[0].batchname)
