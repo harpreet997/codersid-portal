@@ -120,6 +120,10 @@ export const addExpiryDate = (id, payload) => {
     return axios.post(`${baseUrl}/api/tests/${id}`, payload)
 } 
 
+export const deleteAssessment = (id) => {
+    return axios.delete(`${baseUrl}/api/tests/${id}`)
+} 
+
 
 export const addStudentPerformanceRecord = (id, payload) => {
     return axios.post(`${baseUrl}/api/students/${id}`, payload)
@@ -140,6 +144,10 @@ export const createFeedback = (payload)=>{
 
 export const updateFeedback = (id, payload) => {
     return axios.post(`${baseUrl}/api/getSingleFeedback/${id}`, payload)
+} 
+
+export const deleteFeedback = (id) => {
+    return axios.delete(`${baseUrl}/api/deleteFeedback/${id}`)
 } 
 
 export const addStudentFeedback = (payload)=>{

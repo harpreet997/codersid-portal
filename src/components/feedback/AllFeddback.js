@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllFeedback, getfeedbackCategory} from '../../getdata/getdata';
+import { getAllFeedback, getfeedbackCategory } from '../../getdata/getdata';
 import { headers } from '../../headers';
 import { BallTriangle } from 'react-loader-spinner';
-import { updateFeedback } from '../../postdata/postdata';
+import { updateFeedback, deleteFeedback } from '../../postdata/postdata';
 import { toast } from "react-toastify";
 import { primaryUrl } from '../../baseurl';
 import { Switch } from 'antd';
@@ -141,6 +141,23 @@ const AllFeddback = () => {
         }
     }
 
+    const DeleteFeedback = (id) => {
+        deleteFeedback(id)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                window.location.reload(false);
+            })
+            .catch((error) => {
+                toast.success(error.response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+            })
+    }
+
     return (
         <div className="card">
             <div className="d-flex justify-content-start">
@@ -218,11 +235,17 @@ const AllFeddback = () => {
                                 <tr key={item._id}>
                                     <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.name}</td>
                                     <td>{item.category}</td>
-                                    <td><button className='feedback-link-button me-2' onClick={() => {
-                                        copy(item._id)
-                                    }}>
-                                        <p className='feedback-link-button-text'>Feedback Link</p>
-                                    </button>
+                                    <td>
+                                        <button className='test-link-button me-2' onClick={() => {
+                                            DeleteFeedback(item._id)
+                                        }}>
+                                            <p className='test-link-button-text'>Delete</p>
+                                        </button>
+                                        <button className='feedback-link-button me-2' onClick={() => {
+                                            copy(item._id)
+                                        }}>
+                                            <p className='feedback-link-button-text'>Feedback Link</p>
+                                        </button>
                                         {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
                                             onChange={() => disableLink(item._id)} />
                                             : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
@@ -235,25 +258,25 @@ const AllFeddback = () => {
             </>
 
             {currentRecords.length === 0 ?
-                    <div className='d-flex justify-content-center'>
-                        {alltestlist.length !== 0 ?
-                            <p className='fs-4'>No Data Found</p>
-                            :
-                            <BallTriangle
-                                height={250}
-                                width={300}
-                                radius={5}
-                                color="#10D1E3"
-                                ariaLabel="ball-triangle-loading"
-                                wrapperClassName=''
-                                wrapperStyle=""
-                                visible={true}
-                            />
-                        }
-                    </div>
-                    : null}
+                <div className='d-flex justify-content-center'>
+                    {alltestlist.length !== 0 ?
+                        <p className='fs-4'>No Data Found</p>
+                        :
+                        <BallTriangle
+                            height={250}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
+                    }
+                </div>
+                : null}
 
-            
+
 
             {allCategory && currentRecords.length > 0 ?
                 <div className="text-center">

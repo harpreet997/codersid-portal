@@ -7,7 +7,7 @@ import JsLogo from '../../assets/JsLogo.png';
 import MernLogo from '../../assets/MernLogo.png';
 import NodeJSLogo from '../../assets/NodeJSLogo.jpg';
 import ReactLogo from '../../assets/ReactLogo.png';
-import { addExpiryDate } from '../../postdata/postdata';
+import { addExpiryDate, deleteAssessment } from '../../postdata/postdata';
 import { toast } from "react-toastify";
 import { primaryUrl } from '../../baseurl';
 import { Switch } from 'antd';
@@ -123,6 +123,24 @@ const AllAssessment = () => {
             })
     }
 
+
+    const DeleteAssessment = (id) => {
+        deleteAssessment(id)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                window.location.reload(false);
+            })
+            .catch((error) => {
+                toast.success(error.response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+            })
+    }
+
     return (
         <div className="card">
             <div className="d-flex">
@@ -210,17 +228,21 @@ const AllAssessment = () => {
                                     <tr key={item._id}>
                                         <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
                                         <td>{item.category}</td>
-                                        <td><button className='test-link-button me-2' onClick={() => {
-                                            copy(item._id)
-                                        }}>
-                                            <p className='test-link-button-text'>Test Link</p>
-                                        </button>
-                                            {/* {item.hasOwnProperty('expiryDate') ? <Switch defaultChecked={!(item.expiryDate === "")} 
-                                            onChange={() => disableLink(item._id)} />
-                                                : <Switch onChange={() => enableLink(item._id)} />} */}
+                                        <td>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                DeleteAssessment(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Delete</p>
+                                            </button>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                copy(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Test Link</p>
+                                            </button>
+
                                             {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
                                                 onChange={() => disableLink(item._id)} />
-                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
+                                                : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
@@ -248,14 +270,20 @@ const AllAssessment = () => {
                                     <tr key={item._id}>
                                         <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
                                         <td>{item.category}</td>
-                                        <td><button className='test-link-button me-2' onClick={() => {
-                                            copy(item._id)
-                                        }}>
-                                            <p className='test-link-button-text'>Test Link</p>
-                                        </button>
-                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                        <td>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                DeleteAssessment(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Delete</p>
+                                            </button>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                copy(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Test Link</p>
+                                            </button>
+                                            {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
                                                 onChange={() => disableLink(item._id)} />
-                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
+                                                : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
@@ -283,14 +311,20 @@ const AllAssessment = () => {
                                     <tr key={item._id}>
                                         <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
                                         <td>{item.category}</td>
-                                        <td><button className='test-link-button me-2' onClick={() => {
-                                            copy(item._id)
-                                        }}>
-                                            <p className='test-link-button-text'>Test Link</p>
-                                        </button>
-                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                        <td>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                DeleteAssessment(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Delete</p>
+                                            </button>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                copy(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Test Link</p>
+                                            </button>
+                                            {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
                                                 onChange={() => disableLink(item._id)} />
-                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
+                                                : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
@@ -317,14 +351,20 @@ const AllAssessment = () => {
                                     <tr key={item._id}>
                                         <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
                                         <td>{item.category}</td>
-                                        <td><button className='test-link-button me-2' onClick={() => {
-                                            copy(item._id)
-                                        }}>
-                                            <p className='test-link-button-text'>Test Link</p>
-                                        </button>
-                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                        <td>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                DeleteAssessment(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Delete</p>
+                                            </button>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                copy(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Test Link</p>
+                                            </button>
+                                            {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
                                                 onChange={() => disableLink(item._id)} />
-                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
+                                                : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
@@ -351,14 +391,20 @@ const AllAssessment = () => {
                                     <tr key={item._id}>
                                         <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.testname}</td>
                                         <td>{item.category}</td>
-                                        <td><button className='test-link-button me-2' onClick={() => {
-                                            copy(item._id)
-                                        }}>
-                                            <p className='test-link-button-text'>Test Link</p>
-                                        </button>
-                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                        <td>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                DeleteAssessment(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Delete</p>
+                                            </button>
+                                            <button className='test-link-button me-2' onClick={() => {
+                                                copy(item._id)
+                                            }}>
+                                                <p className='test-link-button-text'>Test Link</p>
+                                            </button>
+                                            {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
                                                 onChange={() => disableLink(item._id)} />
-                                                : <Switch defaultChecked={!(item.expiryDate === "") } onChange={() => enableLink(item._id)} />}
+                                                : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
                                         </td>
                                     </tr>
                                 )
