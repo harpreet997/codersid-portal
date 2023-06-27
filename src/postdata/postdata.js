@@ -174,6 +174,14 @@ export const deleteNewFeedbackQuestion = (id)=>{
     return axios.delete(`${baseUrl}/api/deleteFeedbackQuestion/${id}`)
 }
 
+export const addNewFeedbackQuestion = (id, payload)=>{
+    return axios.post(`${baseUrl}/api/addNewFeedbackQuestion/${id}`, payload)
+}
+
+export const addNewAssessmentQuestion = (id, payload)=>{
+    return axios.post(`${baseUrl}/api/tests/addquestion/${id}`, payload)
+}
+
 export const deleteAllFeedbackQuestions = () => {
     return axios.delete(`${baseUrl}/api/feedbackquestion`)
 } 

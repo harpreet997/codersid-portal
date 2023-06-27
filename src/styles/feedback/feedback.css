@@ -29,3 +29,14 @@
     color: #FFFFFF;
     justify-content: center;
 }
+
+
+.feedback-question-details-add-button {
+    width: 200px;
+    height: 35px;
+    background: #10D1E3;
+    border: 1px solid #AEF8FF;
+    box-sizing: border-box;
+    border-radius: 17.3122px;
+    margin-top: 10px;
+}

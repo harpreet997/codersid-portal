@@ -209,13 +209,13 @@ const CreateNewTest = () => {
 
                                 </td>
                                 <td>
-                                    <div className='d-flex align-items-center' style={{marginTop: 150}}>
-                                        <button className='edit-question-button'
+                                    <div className='d-flex align-items-center' >
+                                        <button className='test-link-button me-2'
                                             onClick={() => handleQuestionModal(item)}>
-                                            <p className='edit-question-button-text'>Edit</p></button>
-                                        <button className='edit-question-button'
+                                            <p className='test-link-button-text'>Update</p></button>
+                                        <button className='test-link-button me-2'
                                             onClick={() => DeleteQuestion(item._id)}>
-                                            <p className='edit-question-button-text'>Delete</p>
+                                            <p className='test-link-button-text'>Delete</p>
                                         </button>
                                         <Modal show={editquestionmodal === item._id ? true : false} onHide={handleClose}>
                                             <EditQuestion data={item} handleClose={handleClose} questionlist={questionlist} />

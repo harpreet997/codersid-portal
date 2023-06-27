@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { addQuestion } from '../../postdata/postdata';
+import { addNewAssessmentQuestion } from '../../postdata/postdata';
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const NewQuestion = () => {
+const AddAssessmentQuestion = () => {
+    const location = useLocation();
+    const id = location.state.id;
+    const questionlist = JSON.parse(localStorage.getItem('questionlist'));
+    console.log(id);
     const [questiondata, setQuestionData] = useState({
         question: "",
         option1: "",
@@ -22,19 +26,32 @@ const NewQuestion = () => {
     }
 
     const handleBack = () => {
-        navigate('/create-test')
+        navigate('/question-details')
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        addQuestion(questiondata)
+        const data = questionlist.filter((item) => {
+            return item.question === questiondata.question
+        })
+        if (data.length > 0) {
+            toast.error("Question Already exists", {
+                position: "top-center",
+                autoClose: 1000
+            })
+        }
+        else {
+            const payload = {
+                ...questiondata,
+                id: questionlist.length + 1,
+            }
+            addNewAssessmentQuestion(id, payload)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
                     autoClose: 1000
                 })
-                navigate('/create-test')
+                navigate('/all-tests')
                 window.location.reload(false);
             })
             .catch((error) => {
@@ -43,6 +60,9 @@ const NewQuestion = () => {
                     autoClose: 1000
                 })
             })
+        }
+
+        
     }
 
     return (
@@ -105,4 +125,4 @@ const NewQuestion = () => {
     );
 }
 
-export default NewQuestion;
+export default AddAssessmentQuestion;

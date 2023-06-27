@@ -6,6 +6,7 @@ import Pagination from '../pagination/Pagination';
 
 const QuestionDetails = () => {
     const data = JSON.parse(localStorage.getItem('item'))
+    const id = data._id;
     const questionlist = JSON.parse(localStorage.getItem('questionlist'))
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(5);
@@ -20,6 +21,8 @@ const QuestionDetails = () => {
         localStorage.removeItem('questionlist');
         localStorage.removeItem('item');
     }
+
+    console.log(id);
 
 
     const DeleteAssessmentQuestion = (id) => {
@@ -39,6 +42,10 @@ const QuestionDetails = () => {
             })
     }
 
+    const handleAddQuestionModal = (id) => {
+        navigate('/add-assessment-question', {state: {id}})
+    };
+
     const handleEditQuestionModal = (item) => {
         navigate('/edit-assessment-question', { state: { item } })
     };
@@ -50,6 +57,9 @@ const QuestionDetails = () => {
                     <p className='studentlist-card-text'>{data.testname}</p>
                 </div>
                 <div className="d-flex justify-content-end">
+                     <button className='feedback-question-details-add-button me-2' onClick={() => handleAddQuestionModal(id)}>
+                        <p className='view-student-details-back-button-text'>Add New Question</p>
+                    </button>
                     <button className='view-student-details-back-button me-2' onClick={handleBack}>
                         <p className='view-student-details-back-button-text'>Back</p>
                     </button>
@@ -69,16 +79,6 @@ const QuestionDetails = () => {
                     <tbody>
                         {currentRecords.map((item) => {
                             return (
-                                // <div className="ms-2 mt-2 mb-2" key={item._id}>
-                                //     <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                                //     <ul>
-                                //         <li>{item.option1}</li>
-                                //         <li>{item.option2}</li>
-                                //         <li>{item.option3}</li>
-                                //         <li>{item.option4}</li>
-                                //     </ul>
-                                //     <p>Answer : {item.answer}</p>
-                                // </div>
                                 <tr>
                                     <td>
                                         <p className='fw-bold'>Q{item.id}. {item.question}</p>

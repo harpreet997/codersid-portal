@@ -54,6 +54,7 @@ import StudentFeedbackResponse from '../feedback/StudentFeedbackResponse';
 import FeedbackResponse from '../feedback/FeedbackResponse';
 import NewCreateFeedback from '../feedback/NewCreateFeedback';
 import EditAssessmentQuestion from '../question/EditAssessmentQuestion';
+import AddAssessmentQuestion from '../question/AddAssessmentQuestion';
 
 const MainRouter = () => {
     return (
@@ -93,6 +94,7 @@ const MainRouter = () => {
                     {/* <Route path='/create-test' element={<CreateTest />} /> */}
                     <Route path='/create-test' element={<CreateNewTest />} />
                     <Route path='/create-question' element={<NewQuestion />} />
+                    <Route path='/add-assessment-question' element={<AddAssessmentQuestion />} />
                     <Route path='/edit-question' element={<EditNewQuestion />} />
                     <Route path='/edit-assessment-question' element={<EditAssessmentQuestion />} />
                     <Route path='/all-tests' element={<AllAssessment/>}/>

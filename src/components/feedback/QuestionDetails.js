@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
-import { deleteNewFeedbackQuestion } from '../../postdata/postdata';
+import { deleteNewFeedbackQuestion, addNewFeedbackQuestion } from '../../postdata/postdata';
 import { toast } from "react-toastify";
 import { Modal } from "react-bootstrap";
 import NewEditFeedbackQuestion from './NewEditFeedbackQuestion';
@@ -16,8 +16,19 @@ const QuestionDetail = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = questionlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(questionlist.length / recordsPerPage);
+    const [addfeedbackquestionmodal, setAddfeebackQuestionModal] = useState(false);
     const [editfeedbackquestionmodal, setEditfeebackQuestionModal] = useState(false);
+    const [question, setFeedbackQuestion] = useState('');
     const navigate = useNavigate();
+
+
+    const OpenAddFeedbackQuestionModal = (id) => {
+        setAddfeebackQuestionModal(true);
+    }
+
+    const CloseAddFeedbackQuestionModal = () => {
+        setAddfeebackQuestionModal(false);
+    }
 
     const OpenEditFeedbackQuestionModal = (id) => {
         setEditfeebackQuestionModal(id);
@@ -50,9 +61,44 @@ const QuestionDetail = () => {
             })
     }
 
-    const handleAddNewQuestions = (id) => {
+    const AddNewFeedbackQuestion = (event) => {
+        event.preventDefault();
+        const data = questionlist.filter((item) => {
+            return item.question === question
+        })
 
+        console.log(data);
+        if (data.length > 0) {
+            toast.error("Question Already exists", {
+                position: "top-center",
+                autoClose: 1000
+            })
+        }
+        else {
+        const payload = {
+            question: question,
+            id: questionlist.length + 1,
+        }
+        console.log(payload)
+        addNewFeedbackQuestion(id, payload)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+                CloseAddFeedbackQuestionModal();
+                navigate("/all-feedback");
+                window.location.reload(false);
+            })
+            .catch((error) => {
+                toast.error(error.response.data.msg, {
+                    position: "top-center",
+                    autoClose: 1000
+                })
+            })
+        }
     }
+
 
     return (
         <div className="card">
@@ -61,9 +107,34 @@ const QuestionDetail = () => {
                     <p className='studentlist-card-text'>{data.name}</p>
                 </div>
                 <div className="d-flex justify-content-end">
+                    <button className='feedback-question-details-add-button me-2' onClick={() => OpenAddFeedbackQuestionModal(id)}>
+                        <p className='view-student-details-back-button-text'>Add New Question</p>
+                    </button>
                     <button className='view-student-details-back-button me-2' onClick={handleBack}>
                         <p className='view-student-details-back-button-text'>Back</p>
                     </button>
+                    <Modal show={addfeedbackquestionmodal ? true : false} onHide={CloseAddFeedbackQuestionModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title className="text-black">
+                                <p className='view-expense-details-modal-heading'>
+                                    Add Question
+                                </p>
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <form onSubmit={AddNewFeedbackQuestion}>
+                                <p className='make-payment-email-address'>Feedback Question</p>
+                                <input className='student-name-input-field form-control' type="text"
+                                    id="question"
+                                    name="question"
+                                    onChange={(event) => setFeedbackQuestion(event.target.value)}
+                                    required />
+                                <div className="text-center">
+                                    <button type="submit" className="mt-3 mb-3 btn btn-primary">Add Question</button>
+                                </div>
+                            </form>
+                        </Modal.Body>
+                    </Modal>
                 </div>
             </div>
 
