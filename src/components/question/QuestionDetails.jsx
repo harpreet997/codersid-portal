@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { deleteAssessmentQuestion } from '../../postdata/postdata';
+import { toast } from "react-toastify";
 import Pagination from '../pagination/Pagination';
 
 const QuestionDetails = () => {
@@ -19,6 +21,28 @@ const QuestionDetails = () => {
         localStorage.removeItem('item');
     }
 
+
+    const DeleteAssessmentQuestion = (id) => {
+        deleteAssessmentQuestion(id)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 2000
+                })
+                navigate("/all-tests")
+            })
+            .catch((error) => {
+                toast.error(error.response.data.msg, {
+                    position: "top-center",
+                    autoClose: 2000
+                })
+            })
+    }
+
+    const handleEditQuestionModal = (item) => {
+        navigate('/edit-assessment-question', { state: { item } })
+    };
+
     return (
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
@@ -32,20 +56,56 @@ const QuestionDetails = () => {
                 </div>
             </div>
 
-            {currentRecords.map((item) => {
-                return (
-                    <div className="ms-2 mt-2 mb-2" key={item._id}>
-                        <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                        <ul>
-                            <li>{item.option1}</li>
-                            <li>{item.option2}</li>
-                            <li>{item.option3}</li>
-                            <li>{item.option4}</li>
-                        </ul>
-                        <p>Answer : {item.answer}</p>
-                    </div>
-                )
-            })}
+
+            {questionlist.length > 0
+                ?
+                <table className="table batch-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Feedback Questions</th>
+                            <th className='ps-3' scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {currentRecords.map((item) => {
+                            return (
+                                // <div className="ms-2 mt-2 mb-2" key={item._id}>
+                                //     <p className='fw-bold'>Q{item.id}. {item.question}</p>
+                                //     <ul>
+                                //         <li>{item.option1}</li>
+                                //         <li>{item.option2}</li>
+                                //         <li>{item.option3}</li>
+                                //         <li>{item.option4}</li>
+                                //     </ul>
+                                //     <p>Answer : {item.answer}</p>
+                                // </div>
+                                <tr>
+                                    <td>
+                                        <p className='fw-bold'>Q{item.id}. {item.question}</p>
+                                        <ul>
+                                            <li>{item.option1}</li>
+                                            <li>{item.option2}</li>
+                                            <li>{item.option3}</li>
+                                            <li>{item.option4}</li>
+                                        </ul>
+                                        <p>Answer : {item.answer}</p>
+                                    </td>
+                                    <td>
+                                        <button className='test-link-button me-2' onClick={() => handleEditQuestionModal(item)}>
+                                            <p className='test-link-button-text'>Update</p>
+                                        </button>
+                                        <button className='test-link-button me-2' onClick={() => DeleteAssessmentQuestion(item._id)}>
+                                            <p className='test-link-button-text'>Delete</p>
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+                : <div>
+                    <p className='text-center fs-4'>No Question Found!</p>
+                </div>}
 
             {currentRecords.length > 0 ?
                 <div className="text-center">

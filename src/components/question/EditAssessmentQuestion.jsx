@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { editQuestion } from '../../postdata/postdata';
+import { updateAssessmentQuestion } from '../../postdata/postdata';
 import { toast } from "react-toastify";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const EditNewQuestion = () => {
+const EditAssessmentQuestion = () => {
     const location = useLocation();
     const data = location.state.item;
     const id = data._id
@@ -24,20 +24,27 @@ const EditNewQuestion = () => {
         })
     }
 
+    console.log(id);
+
     const handleBack = () => {
-        navigate('/create-test')
+        navigate('/question-details')
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        editQuestion(id, editquestiondata)
+        const payload = {
+            ...editquestiondata,
+            _id: id,
+            id: data.id
+        }
+        updateAssessmentQuestion(id, payload)
             .then((response) => {
                 toast.success(response.data.msg, {
                     position: "top-center",
                     autoClose: 1000
                 })
-                navigate('/create-test')
+                navigate('/all-tests')
                 window.location.reload(false);
             })
             .catch((error) => {
@@ -111,4 +118,4 @@ const EditNewQuestion = () => {
     );
 }
 
-export default EditNewQuestion;
+export default EditAssessmentQuestion;

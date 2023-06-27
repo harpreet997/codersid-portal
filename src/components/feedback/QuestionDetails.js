@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/Pagination';
+import { deleteNewFeedbackQuestion } from '../../postdata/postdata';
+import { toast } from "react-toastify";
+import { Modal } from "react-bootstrap";
+import NewEditFeedbackQuestion from './NewEditFeedbackQuestion';
 
-const QuestionDetails = () => {
-    const data = JSON.parse(localStorage.getItem('item'))
+const QuestionDetail = () => {
+    const data = JSON.parse(localStorage.getItem('item'));
+    const id = data._id;
     const questionlist = JSON.parse(localStorage.getItem('questionlist'))
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(5);
@@ -11,12 +16,42 @@ const QuestionDetails = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = questionlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(questionlist.length / recordsPerPage);
+    const [editfeedbackquestionmodal, setEditfeebackQuestionModal] = useState(false);
     const navigate = useNavigate();
+
+    const OpenEditFeedbackQuestionModal = (id) => {
+        setEditfeebackQuestionModal(id);
+    }
+
+    const CloseEditFeedbackQuestionModal = () => {
+        setEditfeebackQuestionModal(false);
+    }
 
     const handleBack = () => {
         navigate('/all-feedback');
         localStorage.removeItem('questionlist');
         localStorage.removeItem('item');
+    }
+
+    const DeleteFeedbackQuestion = (id) => {
+        deleteNewFeedbackQuestion(id)
+            .then((response) => {
+                toast.success(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 2000
+                })
+                navigate("/all-feedback")
+            })
+            .catch((error) => {
+                toast.error(error.response.data.msg, {
+                    position: "top-center",
+                    autoClose: 2000
+                })
+            })
+    }
+
+    const handleAddNewQuestions = (id) => {
+
     }
 
     return (
@@ -32,21 +67,44 @@ const QuestionDetails = () => {
                 </div>
             </div>
 
-            {currentRecords.map((item) => {
-                return (
-                    <div className="ms-2 mt-2 mb-2" key={item._id}>
-                        <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                        {/* <ul>
-                            <li>{item.option1}</li>
-                            <li>{item.option2}</li>
-                            <li>{item.option3}</li>
-                            <li>{item.option4}</li>
-                        </ul>
-                        <p>Answer : {item.answer}</p> */}
-                    </div>
-                )
-            })}
+            {questionlist.length > 0
+                ?
+                <table className="table batch-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Feedback Questions</th>
+                            <th className='ps-3' scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
+                        {currentRecords.map((item) => {
+                            return (
+                                <tr>
+
+                                    <td>
+                                        <p className='fw-bold'>Q{item.id}. {item.question}</p>
+                                    </td>
+                                    <td>
+                                        <button className='test-link-button me-2' onClick={() => OpenEditFeedbackQuestionModal(item._id)}>
+                                            <p className='test-link-button-text'>Update</p>
+                                        </button>
+                                        <button className='test-link-button me-2' onClick={() => DeleteFeedbackQuestion(item._id)}>
+                                            <p className='test-link-button-text'>Delete</p>
+                                        </button>
+                                        <Modal show={editfeedbackquestionmodal === item._id ? true : false} onHide={CloseEditFeedbackQuestionModal}>
+                                            <NewEditFeedbackQuestion data={item} id={item._id} index={item.id} CloseEditFeedbackQuestionModal={CloseEditFeedbackQuestionModal} />
+                                        </Modal>
+                                    </td>
+                                </tr>
+                            )
+
+                        })}
+                    </tbody>
+                </table>
+                : <div>
+                    <p className='text-center fs-4'>No Question Found!</p>
+                </div>}
             {currentRecords.length > 0 ?
                 <div className="text-center">
                     <Pagination
@@ -60,4 +118,4 @@ const QuestionDetails = () => {
     );
 }
 
-export default QuestionDetails;
+export default QuestionDetail;

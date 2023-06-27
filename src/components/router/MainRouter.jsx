@@ -10,18 +10,18 @@ import AddCourse from '../course/AddCourse';
 import PaymentRecord from '../paymentrecord/PaymentRecord';
 import StudentList from '../student/StudentList';
 import AddExpense from '../expense/AddExpense';
-import UpdatedAddExpense from '../expense/UpdatedAddExpense';
+// import UpdatedAddExpense from '../expense/UpdatedAddExpense';
 import AddExpenseCategory from '../expense/AddExpenseCategory';
 import MainPaymentReceipt from '../paymentrecord/MainPaymentReceipt';
 import ExpenseManagement from '../expense/ExpenseManagement';
-import UpdatedExpenseManagement from '../expense/UpdatedExpenseManagement';
+// import UpdatedExpenseManagement from '../expense/UpdatedExpenseManagement';
 import StudentDetails from '../student/StudentDetails';
 import ExpenseDetails from '../expense/ExpenseDetails';
-import UpdatedExpenseDetails from '../expense/UpdatedExpenseDetails';
+// import UpdatedExpenseDetails from '../expense/UpdatedExpenseDetails';
 import SignIn from '../login/SignIn';
 import UpdateStudent from '../student/UpdateStudent';
 import UpdateExpense from '../expense/UpdateExpense';
-import UpdatedEditExpense from '../expense/UpdatedEditExpense';
+// import UpdatedEditExpense from '../expense/UpdatedEditExpense';
 import FinanceRecord from '../finance/FinanceRecord';
 import AllLeads from '../leads/AllLeads';
 import Followup from '../leads/Followup';
@@ -30,11 +30,11 @@ import ConvertedLead from '../leads/ConvertedLead';
 import LostLead from '../leads/LostLead';
 import WalkIn from '../../components/leads/WalkIn';
 import ViewLeadDetails from '../leads/ViewLeadDetails';
-import CreateTest from '../test/CreateTest';
+// import CreateTest from '../test/CreateTest';
 import AllAssessment from '../test/AllAssessment';
 import StudentPerformance from '../studentperformance/StudentPerformance';
 import AddAssessmentCategory from '../test/AddAssessmentCategory';
-import Assessment from '../test/Assessment';
+// import Assessment from '../test/Assessment';
 import QuestionDetails from '../question/QuestionDetails';
 import QuestionDetail from '../feedback/QuestionDetails';
 import LiveTest from '../test/LiveTest';
@@ -45,7 +45,7 @@ import NewQuestion from '../question/NewQuestion';
 import EditNewQuestion from '../question/EditNewQuestion';
 import StudentResponse from '../studentperformance/StudentResponse';
 import StudentTestRecord from '../studentperformance/StudentTestRecord';
-import CreateFeedback from '../feedback/CreateFeedback';
+// import CreateFeedback from '../feedback/CreateFeedback';
 import AllFeddback from '../feedback/AllFeddback';
 import FeedbackCategory from '../feedback/FeedbackCategory';
 import Feedback from '../feedback/Feedback';
@@ -53,6 +53,7 @@ import StudentFeedback from '../feedback/StudentFeedback';
 import StudentFeedbackResponse from '../feedback/StudentFeedbackResponse';
 import FeedbackResponse from '../feedback/FeedbackResponse';
 import NewCreateFeedback from '../feedback/NewCreateFeedback';
+import EditAssessmentQuestion from '../question/EditAssessmentQuestion';
 
 const MainRouter = () => {
     return (
@@ -93,6 +94,7 @@ const MainRouter = () => {
                     <Route path='/create-test' element={<CreateNewTest />} />
                     <Route path='/create-question' element={<NewQuestion />} />
                     <Route path='/edit-question' element={<EditNewQuestion />} />
+                    <Route path='/edit-assessment-question' element={<EditAssessmentQuestion />} />
                     <Route path='/all-tests' element={<AllAssessment/>}/>
                     {/* <Route path='/all-tests' element={<Assessment/>}/> */}
                     <Route path='/performance' element={<StudentPerformance />}/>

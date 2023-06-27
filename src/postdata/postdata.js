@@ -166,10 +166,25 @@ export const updateFeedbackQuestion = (id, payload)=>{
     return axios.patch(`${baseUrl}/api/feedbackquestion/${id}`, payload)
 }
 
+export const updateNewFeedbackQuestion = (id, payload)=>{
+    return axios.patch(`${baseUrl}/api/updateFeedback/${id}`, payload)
+}
+
+export const deleteNewFeedbackQuestion = (id)=>{
+    return axios.delete(`${baseUrl}/api/deleteFeedbackQuestion/${id}`)
+}
+
 export const deleteAllFeedbackQuestions = () => {
     return axios.delete(`${baseUrl}/api/feedbackquestion`)
 } 
 
+export const deleteAssessmentQuestion = (id)=>{
+    return axios.delete(`${baseUrl}/api/tests/deletequestion/${id}`)
+}
+
+export const updateAssessmentQuestion = (id, payload)=>{
+    return axios.patch(`${baseUrl}/api/tests/updatequestion/${id}`, payload)
+}
 
 
 
