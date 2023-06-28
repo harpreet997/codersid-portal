@@ -76,7 +76,6 @@ const AllAssessment = () => {
 
     const copy = async (id) => {
         await navigator.clipboard.writeText(`${primaryUrl}/assessment-test/${id}`);
-        // await navigator.clipboard.writeText(`http://localhost:3000/assessment-test/${id}`);
         toast.success("Test Link Copied", {
             position: "top-center",
             autoClose: 1000

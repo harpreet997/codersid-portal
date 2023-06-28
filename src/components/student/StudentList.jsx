@@ -22,6 +22,7 @@ const StudentList = () => {
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
     const navigate = useNavigate();
     const role = localStorage.getItem('role');
+    const [loader, setLoader] = useState(false);
 
     const handleDetails = (item) => {
         navigate('/students-details', { state: { item } })
@@ -32,6 +33,7 @@ const StudentList = () => {
     }
 
     useEffect(() => {
+        setLoader(true);
         getAllStudents(headers)
             .then((response) => {
                 setStudentList(response.data.Students);
@@ -43,6 +45,7 @@ const StudentList = () => {
         getAllBatches(headers)
             .then((response) => {
                 setBatchList(response.data.Batches);
+                setLoader(false)
             })
             .catch((error) => {
                 console.log(error);
@@ -136,6 +139,7 @@ const StudentList = () => {
             </div>
 
             <div className='scroll'>
+
                 <table className="table">
                     <thead className='text-center'>
                         <tr>
@@ -178,7 +182,7 @@ const StudentList = () => {
                                             handleUpdate(item)
                                         }}>
                                             <p className='details-button-text'>Update</p>
-                                        </button>: null}
+                                        </button> : null}
                                     </td>
                                 </tr>
                             )
@@ -186,22 +190,24 @@ const StudentList = () => {
                     </tbody>
                 </table>
 
-                {currentRecords.length === 0 ?
+
+                {loader ?
+                    <div className="d-flex justify-content-center">
+                        <BallTriangle
+                            height={250}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
+                    </div> : null}
+
+                {!loader && currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
-                        {allstudentlist.length !== 0 ?
-                            <p className='fs-4'>No Data Found</p>
-                            :
-                            <BallTriangle
-                                height={250}
-                                width={300}
-                                radius={5}
-                                color="#10D1E3"
-                                ariaLabel="ball-triangle-loading"
-                                wrapperClassName=''
-                                wrapperStyle=""
-                                visible={true}
-                            />
-                        }
+                        <p className='fs-4'>No Data Found</p>
                     </div>
                     : null}
 

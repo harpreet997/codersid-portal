@@ -39,7 +39,6 @@ const AllFeddback = () => {
                 setTestList(response.data);
                 let allcategory = response.data.map(v => (v.category))
                 setAllCategory([...new Set(allcategory)])
-                setLoader(false)
             })
 
         getfeedbackCategory(headers)
@@ -186,32 +185,6 @@ const AllFeddback = () => {
 
             </div>
 
-            {/* <div className="d-flex">
-                <div className="feedback-name-card" style={categoryType === "all" ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
-                    onClick={() => filterFeedback("all")}
-                >
-                    <div className="card-body text-center">
-                        <p className="fs-5 fw-bold">All Feedback</p>
-
-                    </div>
-                </div>
-
-                {
-                    allCategory.map((name) => (
-                        <div className="feedback-name-card" style={categoryType === name ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
-                            onClick={() => filterFeedback(name)}
-                        >
-                            <div className="card-body text-center">
-                                <p className="fs-5 fw-bold ">{name}</p>
-
-                            </div>
-                        </div>
-                    ))
-                }
-            </div> */}
-
-
-
             <>
                 <table className="table">
                     <thead className='text-center'>
@@ -257,26 +230,25 @@ const AllFeddback = () => {
                 </table>
             </>
 
-            {currentRecords.length === 0 ?
+            {loader ?
+                <div className="d-flex justify-content-center">
+                    <BallTriangle
+                        height={250}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                </div> : null}
+
+            {!loader && currentRecords.length === 0 ?
                 <div className='d-flex justify-content-center'>
-                    {alltestlist.length !== 0 ?
-                        <p className='fs-4'>No Data Found</p>
-                        :
-                        <BallTriangle
-                            height={250}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
-                    }
+                    <p className='fs-4'>No Data Found</p>
                 </div>
                 : null}
-
-
 
             {allCategory && currentRecords.length > 0 ?
                 <div className="text-center">

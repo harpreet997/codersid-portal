@@ -21,7 +21,9 @@ const StudentPerformance = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = studentlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(studentlist.length / recordsPerPage)
+    const [loader, setLoader] = useState(false);
     const navigate = useNavigate();
+
 
     const handleDetails = (item) => {
         navigate('/score-card', { state: { item } })
@@ -30,10 +32,11 @@ const StudentPerformance = () => {
     const handleStudentResponse = (item) => {
         localStorage.setItem('testRecords', JSON.stringify(item));
         navigate('/test-records', { state: { item } })
-        
+
     }
 
     useEffect(() => {
+        setLoader(true);
         getAllStudents(headers)
             .then((response) => {
                 setStudentList(response.data.Students);
@@ -45,6 +48,7 @@ const StudentPerformance = () => {
         getAllBatches(headers)
             .then((response) => {
                 setBatchList(response.data.Batches);
+                setLoader(false)
             })
             .catch((error) => {
                 console.log(error);
@@ -76,10 +80,10 @@ const StudentPerformance = () => {
         { label: "Student ID", key: 'id' },
         { label: "Student Name", key: 'studentname' },
         { label: "Batch", key: 'batchname' },
-        
+
     ]
 
-    
+
 
     return (
         <div className="card">
@@ -154,22 +158,24 @@ const StudentPerformance = () => {
                     </tbody>
                 </table>
 
-                {currentRecords.length === 0 ?
+                {loader ?
+                    <div className="d-flex justify-content-center">
+                        <BallTriangle
+                            height={250}
+                            width={300}
+                            radius={5}
+                            color="#10D1E3"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperClassName=''
+                            wrapperStyle=""
+                            visible={true}
+                        />
+                    </div> : null}
+
+
+                {!loader && currentRecords.length === 0 ?
                     <div className='d-flex justify-content-center'>
-                        {allstudentlist.length !== 0 ?
-                            <p className='fs-4'>No Data Found</p>
-                            :
-                            <BallTriangle
-                                height={250}
-                                width={300}
-                                radius={5}
-                                color="#10D1E3"
-                                ariaLabel="ball-triangle-loading"
-                                wrapperClassName=''
-                                wrapperStyle=""
-                                visible={true}
-                            />
-                        }
+                        <p className='fs-4'>No Data Found</p>
                     </div>
                     : null}
 

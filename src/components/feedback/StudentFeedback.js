@@ -33,11 +33,12 @@ const StudentFeedback = () => {
                 setTestList(response.data);
                 let allcategory = response.data.map(v => (v.category))
                 setAllCategory([...new Set(allcategory)])
-                setLoader(false)
+                
             })
         getAllStudentFeedback(headers)
             .then((response) => {
                 setStudentFeedbackList(response.data.StudentFeedbacks);
+                setLoader(false)
             })
             .catch((error) => {
                 console.log(error);
@@ -184,22 +185,23 @@ const StudentFeedback = () => {
                 </table>
             </>
 
-            {currentRecords.length === 0 ?
+            {loader ?
+                <div className="d-flex justify-content-center">
+                    <BallTriangle
+                        height={250}
+                        width={300}
+                        radius={5}
+                        color="#10D1E3"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClassName=''
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                </div> : null}
+
+            {!loader && currentRecords.length === 0 ?
                 <div className='d-flex justify-content-center'>
-                    {alltestlist.length !== 0 ?
-                        <p className='fs-4'>No Data Found</p>
-                        :
-                        <BallTriangle
-                            height={250}
-                            width={300}
-                            radius={5}
-                            color="#10D1E3"
-                            ariaLabel="ball-triangle-loading"
-                            wrapperClassName=''
-                            wrapperStyle=""
-                            visible={true}
-                        />
-                    }
+                    <p className='fs-4'>No Data Found</p>
                 </div>
                 : null}
 
