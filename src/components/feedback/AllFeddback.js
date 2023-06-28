@@ -17,7 +17,6 @@ const AllFeddback = () => {
     const [testlist, setTestList] = useState([]);
     const [feedbackcategorylist, setFeedbackCategoryList] = useState([]);
     const [feedbackName, setSearchFeedbackName] = useState('');
-    const [categoryType, setCategoryType] = useState("all");
     const [allCategory, setAllCategory] = useState([])
     const [loader, setLoader] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
@@ -107,19 +106,6 @@ const AllFeddback = () => {
             })
     }
 
-    const filterFeedback = (type) => {
-        if (type === "all") {
-            setTestList(alltestlist)
-            setCategoryType(type)
-        }
-        else {
-            let test = alltestlist.filter(v => (v.category === type))
-            setTestList(test)
-            setCategoryType(type)
-        }
-    }
-
-
     const handleCategorySelect = (event) => {
         const category = event.target.value;
         console.log(category)
@@ -182,53 +168,52 @@ const AllFeddback = () => {
                     <input type="text" className="student-list-input-width w-100" id="name" name="name"
                         onChange={(e) => setSearchFeedbackName(e.target.value)} />
                 </div>
-
             </div>
 
-            <>
-                <table className="table">
-                    <thead className='text-center'>
-                        <tr>
-                            <th scope="col">Feedback Name</th>
-                            <th scope="col">Feedback Category</th>
-                            <th scope="col">Action</th>
-                        </tr>
 
-                    </thead>
-                    <tbody className='text-center'>
-                        {currentRecords.filter((val) => {
-                            if (feedbackName === "") {
-                                return val;
-                            }
-                            else if (val.name.toLowerCase().includes(feedbackName.toLowerCase())) {
-                                return val;
-                            }
-                        }).map((item) => {
-                            return (
-                                <tr key={item._id}>
-                                    <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.name}</td>
-                                    <td>{item.category}</td>
-                                    <td>
-                                        <button className='test-link-button me-2' onClick={() => {
-                                            DeleteFeedback(item._id)
-                                        }}>
-                                            <p className='test-link-button-text'>Delete</p>
-                                        </button>
-                                        <button className='feedback-link-button me-2' onClick={() => {
-                                            copy(item._id)
-                                        }}>
-                                            <p className='feedback-link-button-text'>Feedback Link</p>
-                                        </button>
-                                        {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
-                                            onChange={() => disableLink(item._id)} />
-                                            : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </>
+            <table className="table">
+                <thead className='text-center'>
+                    <tr>
+                        <th scope="col">Feedback Name</th>
+                        <th scope="col">Feedback Category</th>
+                        <th scope="col">Action</th>
+                    </tr>
+
+                </thead>
+                <tbody className='text-center'>
+                    {currentRecords.filter((val) => {
+                        if (feedbackName === "") {
+                            return val;
+                        }
+                        else if (val.name.toLowerCase().includes(feedbackName.toLowerCase())) {
+                            return val;
+                        }
+                    }).map((item) => {
+                        return (
+                            <tr key={item._id}>
+                                <td className='pointer' onClick={() => handleQuestionDetails(item)}>{item.name}</td>
+                                <td>{item.category}</td>
+                                <td>
+                                    <button className='test-link-button me-2' onClick={() => {
+                                        DeleteFeedback(item._id)
+                                    }}>
+                                        <p className='test-link-button-text'>Delete</p>
+                                    </button>
+                                    <button className='feedback-link-button me-2' onClick={() => {
+                                        copy(item._id)
+                                    }}>
+                                        <p className='feedback-link-button-text'>Feedback Link</p>
+                                    </button>
+                                    {!(item.expiryDate === "") ? <Switch defaultChecked={!(item.expiryDate === "")}
+                                        onChange={() => disableLink(item._id)} />
+                                        : <Switch defaultChecked={!(item.expiryDate === "")} onChange={() => enableLink(item._id)} />}
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+
 
             {loader ?
                 <div className="d-flex justify-content-center">

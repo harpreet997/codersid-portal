@@ -14,7 +14,6 @@ const StudentFeedback = () => {
     const [feedbackcategorylist, setFeedbackCategoryList] = useState([]);
     const [feedbackName, setSearchFeedbackName] = useState('');
     const [studentfeedbacklist, setStudentFeedbackList] = useState([]);
-    const [categoryType, setCategoryType] = useState("all");
     const [allCategory, setAllCategory] = useState([])
     const [loader, setLoader] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +32,7 @@ const StudentFeedback = () => {
                 setTestList(response.data);
                 let allcategory = response.data.map(v => (v.category))
                 setAllCategory([...new Set(allcategory)])
-                
+
             })
         getAllStudentFeedback(headers)
             .then((response) => {
@@ -63,18 +62,6 @@ const StudentFeedback = () => {
         console.log(data);
         localStorage.setItem('studentFeedbackRecords', JSON.stringify(data));
         navigate('/student-feedbacks', { state: { data } })
-    }
-
-    const filterFeedback = (type) => {
-        if (type === "all") {
-            setTestList(alltestlist)
-            setCategoryType(type)
-        }
-        else {
-            let test = alltestlist.filter(v => (v.category === type))
-            setTestList(test)
-            setCategoryType(type)
-        }
     }
 
     const handleCategorySelect = (event) => {
@@ -123,67 +110,41 @@ const StudentFeedback = () => {
                     <input type="text" className="student-list-input-width w-100" id="name" name="name"
                         onChange={(e) => setSearchFeedbackName(e.target.value)} />
                 </div>
-
             </div>
-            {/* <div className="d-flex">
-                <div className="feedback-name-card" style={categoryType === "all" ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
-                    onClick={() => filterFeedback("all")}
-                >
-                    <div className="card-body text-center">
-                        <p className="fs-5 fw-bold">All Feedback</p>
-                    </div>
-                </div>
 
-                {
-                    allCategory.map((name) => (
-                        <div className="feedback-name-card" style={categoryType === name ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
-                            onClick={() => filterFeedback(name)}
-                        >
-                            <div className="card-body text-center">
-                                <p className="fs-5 fw-bold ">{name}</p>
+            <table className="table">
+                <thead className='text-center'>
+                    <tr>
+                        <th scope="col">Feedback Name</th>
+                        <th scope="col">Feedback Category</th>
+                        <th scope="col">Action</th>
+                    </tr>
 
-                            </div>
-                        </div>
-                    ))
-                }
-            </div> */}
+                </thead>
+                <tbody className='text-center'>
+                    {currentRecords.filter((val) => {
+                        if (feedbackName === "") {
+                            return val;
+                        }
+                        else if (val.name.toLowerCase().includes(feedbackName.toLowerCase())) {
+                            return val;
+                        }
+                    }).map((item) => {
+                        return (
+                            <tr key={item._id}>
+                                <td>{item.name}</td>
+                                <td>{item.category}</td>
+                                <td><button className='feedback-link-button me-2' onClick={() => handleStudentDetails(item._id)}>
+                                    <p className='feedback-link-button-text'>View Records</p>
+                                </button>
 
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
 
-
-            <>
-                <table className="table">
-                    <thead className='text-center'>
-                        <tr>
-                            <th scope="col">Feedback Name</th>
-                            <th scope="col">Feedback Category</th>
-                            <th scope="col">Action</th>
-                        </tr>
-
-                    </thead>
-                    <tbody className='text-center'>
-                        {currentRecords.filter((val) => {
-                            if (feedbackName === "") {
-                                return val;
-                            }
-                            else if (val.name.toLowerCase().includes(feedbackName.toLowerCase())) {
-                                return val;
-                            }
-                        }).map((item) => {
-                            return (
-                                <tr key={item._id}>
-                                    <td>{item.name}</td>
-                                    <td>{item.category}</td>
-                                    <td><button className='feedback-link-button me-2' onClick={() => handleStudentDetails(item._id)}>
-                                        <p className='feedback-link-button-text'>View Records</p>
-                                    </button>
-
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </>
 
             {loader ?
                 <div className="d-flex justify-content-center">

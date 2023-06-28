@@ -6,7 +6,6 @@ import { getAllBatches } from '../../getdata/getdata';
 import StudentIcon from '../../assets/Studentlist.png';
 import { useNavigate } from 'react-router-dom';
 import { BallTriangle } from 'react-loader-spinner';
-import { CSVLink } from "react-csv";
 import '../../styles/student/studentlist.css';
 import '../../styles/studentperformance/studentperformance.css';
 
@@ -76,27 +75,12 @@ const StudentPerformance = () => {
         }
     }
 
-    const headers1 = [
-        { label: "Student ID", key: 'id' },
-        { label: "Student Name", key: 'studentname' },
-        { label: "Batch", key: 'batchname' },
-
-    ]
-
-
-
     return (
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
                     <p className='studentlist-card-text'>Student Performance<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" /></p>
                 </div>
-                {/* <div className="d-flex justify-content-end">
-                    <button className='add-student-button me-1'>
-                        <CSVLink data={studentlist} headers={headers1} filename='Student_Performance.csv'
-                            className='add-student-button-text text-decoration-none'>Export Data</CSVLink>
-                    </button>
-                </div> */}
             </div>
 
             <div className="row mt-3">
