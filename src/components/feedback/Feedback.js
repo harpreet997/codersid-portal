@@ -166,30 +166,30 @@ const Feedback = () => {
 
             console.log(studentfeedbackPayload);
 
-            // addStudentFeedback(studentfeedbackPayload)
-            //     .then((response) => {
-            //         toast.success("Feedback submitted successfully", {
-            //             position: "top-center",
-            //             autoClose: 3000
-            //         })
-            //     }
-            //     )
-            //     .catch((error) => {
-            //         toast.error(error.response.data.msg, {
-            //             position: "top-center",
-            //             autoClose: 2000
-            //         })
-            //     })
+            addStudentFeedback(studentfeedbackPayload)
+                .then((response) => {
+                    toast.success("Feedback submitted successfully", {
+                        position: "top-center",
+                        autoClose: 3000
+                    })
+                }
+                )
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
+                })
 
-            // setTimeout(() => {
-            //     toast.success("Thank you for giving your valuable feedback", {
-            //         position: "top-center",
-            //         autoClose: 3000
-            //     })
-            // }, 2000)
-            // setTimeout(() => {
-            //     window.location.reload(false);
-            // }, 3000)
+            setTimeout(() => {
+                toast.success("Thank you for giving your valuable feedback", {
+                    position: "top-center",
+                    autoClose: 3000
+                })
+            }, 2000)
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 3000)
 
         }
     }
