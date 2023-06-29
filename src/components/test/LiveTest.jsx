@@ -175,90 +175,96 @@ const LiveTest = () => {
 
     }
 
-
-
-
-
     return (
         <div>
-            <div className="d-flex justify-content-between">
-                <p className='studentlist-card-text ps-3'>Assessment</p>
-            </div>
-            <form onSubmit={ShowTest}>
-                <div className='ms-2 me-2 mt-5 row'>
-                    <div className="col-sm-4 mb-3">
-                        <p className="text-start input-field-label">Student ID</p>
-                        <input type="number" className="input-box-width w-100" min={1} id="studentid" name="studentid"
-                            onChange={handleFindStudent} required />
-                    </div>
-                    <div className="col-sm-4 mb-3">
-                        <p className="text-start input-field-label">Student Name</p>
-                        <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
-                            value={studentname} readOnly />
-                    </div>
-                    <div className="col-sm-4 mb-3">
-                        <p className="text-start input-field-label">Batch Name</p>
-                        <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
-                            value={batchname} readOnly />
-                    </div>
+            <div className='feedback-link-card'>
+                <div className="d-flex justify-content-between">
+                    <p className='studentlist-card-text ps-3'>Assessment Form</p>
                 </div>
-                <button className='ms-2 add-student-form-button' type='submit'>
-                    <p className='add-student-form-button-text'>Submit</p>
-                </button>
-            </form>
+                <form onSubmit={ShowTest}>
+                    <div className='ms-2 me-2 mt-2 row'>
+                        <div className="col-sm-4 mb-3">
+                            <p className="text-start input-field-label">Student ID</p>
+                            <input type="number" className="input-box-width w-100" min={1} id="studentid" name="studentid"
+                                onChange={handleFindStudent} required />
+                        </div>
+                        <div className="col-sm-4 mb-3">
+                            <p className="text-start input-field-label">Student Name</p>
+                            <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
+                                value={studentname} readOnly />
+                        </div>
+                        <div className="col-sm-4 mb-3">
+                            <p className="text-start input-field-label">Batch Name</p>
+                            <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
+                                value={batchname} readOnly />
+                        </div>
+                    </div>
+                    <button className='ms-2 feedback-details-submit-button' disabled={showquestions} type='submit'>
+                        <p className='add-student-form-button-text'>Submit</p>
+                    </button>
+                </form>
+            </div>
 
             {showquestions ?
-                <div className='ms-2'>
-                    <div className="mt-2">
-                        <p className='fs-5'>Assessment Name : {testname}</p>
-                        <p className='fs-5'>Assessment Category : {category}</p>
-                    </div>
-                    <form onSubmit={generateScore}>
-                        {
-                            currentRecords.map((item, index) => {
-                                return (
+                <div className='mt-3 feedback-link-second-card'>
+                    <div className='ms-2'>
+                        <div className="mt-2">
+                            <div className="d-flex justify-content-start">
+                                <p className='ms-2 fs-5'>Assessment Name : </p>
+                                <p className="mt-1 ms-4">{testname}</p>
+                            </div>
+                            <div className="d-flex justify-content-start">
+                                <p className='ms-2 fs-5'>Assessment Category : </p>
+                                <p className='mt-1 ms-2 me-2'>{category}</p>
+                            </div>
+                        </div>
 
-                                    <div className="ms-2 mt-2 mb-2" key={item._id}>
-                                        <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                                        <input type="radio" id={item.option1} name={item.question} value={item.option1} required
-                                            onClick={() => {
-                                                value = item.option1;
-                                                addScore(value, item.id);
-                                            }} />
-                                        <label className='ms-2 text-start fs-6' htmlFor="option1">{item.option1}</label><br />
-                                        <input type="radio" id={item.option2} name={item.question} value={item.option2} required
-                                            onClick={() => {
-                                                value = item.option2;
-                                                addScore(value, item.id);
-                                            }} />
-                                        <label className='ms-2 text-start fs-6' htmlFor="option2">{item.option2}</label><br />
-                                        <input type="radio" id={item.option3} name={item.question} value={item.option3} required
-                                            onClick={() => {
-                                                value = item.option3;
-                                                addScore(value, item.id);
-                                            }} />
-                                        <label className='ms-2 text-start fs-6' htmlFor="option3">{item.option3}</label><br />
-                                        <input type="radio" id={item.option4} name={item.question} value={item.option4} required
-                                            onClick={() => {
-                                                value = item.option4;
-                                                addScore(value, item.id);
-                                            }} />
-                                        <label className='ms-2 text-start fs-6' htmlFor="option4">{item.option4}</label>
-                                    </div>
-                                )
-                            })
-                        }
-                        <button className="ms-2 generate-score-button" type='submit'>
-                            <p className='generate-score-button-text'>Generate Score</p>
-                        </button>
-                    </form>
+                        <form onSubmit={generateScore}>
+                            {
+                                currentRecords.map((item) => {
+                                    return (
+                                        <div className="ms-2 mt-2 mb-2 me-2 d-inline-block" key={item._id}>
+                                            <p className='fw-bold'>{item.id}. {item.question}</p>
+                                            <input type="radio" id={item.option1} name={item.question} value={item.option1} required
+                                                onClick={() => {
+                                                    value = item.option1;
+                                                    addScore(value, item.id);
+                                                }} />
+                                            <label className='ms-2 text-start fs-6' htmlFor="option1">{item.option1}</label><br />
+                                            <input type="radio" id={item.option2} name={item.question} value={item.option2} required
+                                                onClick={() => {
+                                                    value = item.option2;
+                                                    addScore(value, item.id);
+                                                }} />
+                                            <label className='ms-2 text-start fs-6' htmlFor="option2">{item.option2}</label><br />
+                                            <input type="radio" id={item.option3} name={item.question} value={item.option3} required
+                                                onClick={() => {
+                                                    value = item.option3;
+                                                    addScore(value, item.id);
+                                                }} />
+                                            <label className='ms-2 text-start fs-6' htmlFor="option3">{item.option3}</label><br />
+                                            <input type="radio" id={item.option4} name={item.question} value={item.option4} required
+                                                onClick={() => {
+                                                    value = item.option4;
+                                                    addScore(value, item.id);
+                                                }} />
+                                            <label className='ms-2 text-start fs-6' htmlFor="option4">{item.option4}</label>
+                                        </div>
+                                    )
+                                })
+                            }
+                            <button className="ms-2 submit-feedback-button" type='submit'>
+                                <p className='generate-score-button-text'>Generate Score</p>
+                            </button>
+                        </form>
+                    </div>
                 </div>
                 : null}
 
             {result ? <p className='ms-2 fs-5'>Your score is {score} out of {questionslist.length}</p> : null}
 
             {currentRecords.length > 0 ?
-                <div className="text-center">
+                <div className="mt-2 text-center">
                     <Pagination
                         nPages={nPages}
                         currentPage={currentPage}

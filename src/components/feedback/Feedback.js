@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { getSingleFeedback, getAllStudents, getAllStudentFeedback} from '../../getdata/getdata';
+import { getSingleFeedback, getAllStudents, getAllStudentFeedback } from '../../getdata/getdata';
 import { addStudentFeedback } from '../../postdata/postdata';
 import { headers } from '../../headers';
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Pagination from '../pagination/Pagination';
+import Rating from './Rating';
 
 const Feedback = () => {
     const { id } = useParams();
@@ -24,6 +25,7 @@ const Feedback = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = questionslist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(questionslist.length / recordsPerPage)
+    const [isRating, setIsRating] = useState(false);
 
     useEffect(() => {
         getAllStudents(headers)
@@ -65,7 +67,7 @@ const Feedback = () => {
                     position: "top-center",
                     autoClose: 1000
                 })
-                
+
                 setTimeout(() => {
                     window.location.reload(false);
                 }, 0)
@@ -117,6 +119,7 @@ const Feedback = () => {
     const handleRating = (value, id) => {
         console.log(id);
         console.log("id", value);
+        setIsRating(true);
         const question = questionslist;
         for (let i = 0; i < questionslist.length; i++) {
             if (questionslist[i].id === id) {
@@ -139,140 +142,147 @@ const Feedback = () => {
     const SubmitFeeback = (event) => {
         event.preventDefault();
 
-        const studentfeedbackPayload = {
-            studentname: studentname,
-            batchname: batchname,
-            studentid: studentid,
-            feedbackid: id,
-            feedbackname: feedbackname,
-            feedbackcategory: feedbackcategory,
-            feedbackResponse: questionslist
+
+        const data = questionslist.hasOwnProperty('rating');
+        console.log(data);
+        if (isRating === data) {
+            toast.error("Please give rating", {
+                position: "top-center",
+                autoClose: 2000
+            })
         }
 
+        else {
 
-
-        console.log(studentfeedbackPayload);
-
-        addStudentFeedback(studentfeedbackPayload)
-            .then((response) => {
-                toast.success("Feedback submitted successfully", {
-                    position: "top-center",
-                    autoClose: 3000
-                })
+            const studentfeedbackPayload = {
+                studentname: studentname,
+                batchname: batchname,
+                studentid: studentid,
+                feedbackid: id,
+                feedbackname: feedbackname,
+                feedbackcategory: feedbackcategory,
+                feedbackResponse: questionslist
             }
-            )
-            .catch((error) => {
-                toast.error(error.response.data.msg, {
-                    position: "top-center",
-                    autoClose: 2000
-                })
-            })
 
-        setTimeout(() => {
-            toast.success("Thank you for giving your valuable feedback", {
-                position: "top-center",
-                autoClose: 3000
-            })
-        }, 2000)
-        setTimeout(() => {
-            window.location.reload(false);
-        }, 3000)
+            console.log(studentfeedbackPayload);
 
+            // addStudentFeedback(studentfeedbackPayload)
+            //     .then((response) => {
+            //         toast.success("Feedback submitted successfully", {
+            //             position: "top-center",
+            //             autoClose: 3000
+            //         })
+            //     }
+            //     )
+            //     .catch((error) => {
+            //         toast.error(error.response.data.msg, {
+            //             position: "top-center",
+            //             autoClose: 2000
+            //         })
+            //     })
+
+            // setTimeout(() => {
+            //     toast.success("Thank you for giving your valuable feedback", {
+            //         position: "top-center",
+            //         autoClose: 3000
+            //     })
+            // }, 2000)
+            // setTimeout(() => {
+            //     window.location.reload(false);
+            // }, 3000)
+
+        }
     }
 
-
     return (
-        <div>
-            <div className="d-flex justify-content-between">
-                <p className='studentlist-card-text ps-3'>Feedbacks</p>
-            </div>
-            <form onSubmit={ShowTest}>
-                <div className='ms-2 me-2 mt-5 row'>
-                    <div className="col-sm-4 mb-3">
-                        <p className="text-start input-field-label">Student ID</p>
-                        <input type="number" className="input-box-width w-100" min={1} id="studentid" name="studentid"
-                            onChange={handleFindStudent} required />
-                    </div>
-                    <div className="col-sm-4 mb-3">
-                        <p className="text-start input-field-label">Student Name</p>
-                        <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
-                            value={studentname} readOnly />
-                    </div>
-                    <div className="col-sm-4 mb-3">
-                        <p className="text-start input-field-label">Batch Name</p>
-                        <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
-                            value={batchname} readOnly />
-                    </div>
+        <div >
+            <div className='feedback-link-card'>
+                <div className="d-flex justify-content-between">
+                    <p className='studentlist-card-text ps-3'>Feedback Form</p>
                 </div>
-                <button className='ms-2 add-student-form-button' type='submit'>
-                    <p className='add-student-form-button-text'>Submit</p>
-                </button>
-            </form>
+                <form onSubmit={ShowTest}>
+                    <div className='ms-2 me-2 mt-2 row'>
+                        <div className="col-sm-4 mb-3">
+                            <p className="text-start input-field-label">Student ID</p>
+                            <input type="number" className="input-box-width w-100" min={1} id="studentid" name="studentid"
+                                onChange={handleFindStudent} required />
+                        </div>
+                        <div className="col-sm-4 mb-3">
+                            <p className="text-start input-field-label">Student Name</p>
+                            <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
+                                value={studentname} readOnly />
+                        </div>
+                        <div className="col-sm-4 mb-3">
+                            <p className="text-start input-field-label">Batch Name</p>
+                            <input type="text" className="input-box-width w-100" id="Studentname" name="Studentname"
+                                value={batchname} readOnly />
+                        </div>
+                    </div>
+                    <button className='ms-2 feedback-details-submit-button' disabled={showquestions} type='submit'>
+                        <p className='add-student-form-button-text'>Submit</p>
+                    </button>
+                </form>
+            </div>
 
             {showquestions ?
-                <div className='ms-2'>
-                    <div className="mt-2">
-                        <p className='fs-5'>Feedback Name : {feedbackname}</p>
-                        <p className='fs-5'>Feedback Category : {feedbackcategory}</p>
-                    </div>
-                    <form onSubmit={SubmitFeeback}>
-                        {
-                            currentRecords.map((item, index) => {
-                                return (
+                <div className='mt-3 feedback-link-second-card'>
+                    <div className='ms-2'>
+                        <div className="mt-2">
+                            <div className="d-flex justify-content-start">
+                                <p className='ms-2 fs-5'>Feedback Name : </p>
+                                <p className="mt-1 ms-4">{feedbackname}</p>
+                            </div>
+                            <div className="d-flex justify-content-start">
+                                <p className='ms-2 fs-5'>Feedback Category : </p>
+                                <p className='mt-1 ms-2 me-2'>{feedbackcategory}</p>
+                            </div>
 
-                                    <div className="ms-2 mt-2 mb-2" key={item._id}>
-                                        <p className='fw-bold'>Q{item.id}. {item.question}</p>
-                                        <p>Rating</p>
-                                        <div className="d-flex">
-                                            <input type="radio" id={1} name={item.question} value={1} required
-                                                onClick={(event) => handleRating(event.target.value, item.id)}
-                                            />
-                                            <label className='ms-2 me-2 text-start fs-6' htmlFor="option1"
-                                            >1</label><br />
-                                            <input type="radio" id={1} name={item.question} value={2} required
-                                                onClick={(event) => handleRating(event.target.value, item.id)} />
-                                            <label className='ms-2 me-2 text-start fs-6' htmlFor="option1"
-                                            >2</label><br />
-                                            <input type="radio" id={1} name={item.question} value={3} required
-                                                onClick={(event) => handleRating(event.target.value, item.id)} />
-                                            <label className='ms-2 me-2 text-start fs-6' htmlFor="option1"
-                                            >3</label><br />
-                                            <input type="radio" id={1} name={item.question} value={4} required
-                                                onClick={(event) => handleRating(event.target.value, item.id)} />
-                                            <label className='ms-2 me-2 text-start fs-6' htmlFor="option1"
-                                            >4</label><br />
-                                            <input type="radio" id={1} name={item.question} value={5} required
-                                                onClick={(event) => handleRating(event.target.value, item.id)} />
-                                            <label className='ms-2 me-2 text-start fs-6' htmlFor="option1"
-                                            >5</label><br />
+                        </div>
+
+                        <form onSubmit={SubmitFeeback}>
+                            {
+                                currentRecords.map((item) => {
+                                    return (
+                                        <div className="ms-2 mt-2 mb-2 me-2 d-inline-block" key={item._id} >
+                                            <p className='fw-bold'>{item.id}. {item.question}</p>
+                                            <div className="">
+                                                <Rating handleRating={handleRating} id={item.id} />
+                                                <textarea className="feedback-comment-textbox" name="comment" id="comment"
+                                                    cols="30" rows="3"
+                                                    style={{ borderRadius: 20, paddingLeft: 5 }}
+                                                    required
+                                                    placeholder='Write here your feedback '
+                                                    onChange={(event) => handleComment(event.target.value, item.id)} />
+                                            </div>
                                         </div>
-                                        <p htmlFor="comment">Comment</p>
-                                        <textarea name="comment" id="comment" cols="40" rows="5" required
-                                            onChange={(event) => handleComment(event.target.value, item.id)} />
-                                    </div>
-                                )
-                            })
-                        }
-                        <button className="ms-2 generate-score-button" type='submit'>
-                            <p className='generate-score-button-text'>Submit Feedback</p>
-                        </button>
-                    </form>
-                </div>
-                : null}
+                                    )
+                                })
+                            }
+                            <button className="ms-2 mb-2 submit-feedback-button" type='submit'>
+                                <p className='generate-score-button-text'>Submit Feedback</p>
+                            </button>
+                        </form>
 
-
-
-            {currentRecords.length > 0 ?
-                <div className="text-center">
-                    <Pagination
-                        nPages={nPages}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                    />
+                    </div>
                 </div>
 
                 : null}
-        </div>
+
+
+
+            {
+                currentRecords.length > 0 ?
+                    <div className="mt-2 text-center">
+                        <Pagination
+                            nPages={nPages}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    </div>
+
+                    : null
+            }
+        </div >
     );
 }
 
