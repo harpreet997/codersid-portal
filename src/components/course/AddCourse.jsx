@@ -80,12 +80,12 @@ const AddCourse = () => {
     return (
         <div className="card">
             <div className='d-flex'>
-                <p className='add-course-card-text'>Add Course</p>
+                <p className='ps-2 add-course-card-text'>Add Course</p>
                 <img className='add-course-icon' src={AddCourseLogo} alt="AddCourseLogo" />
             </div>
 
             <form onSubmit={AddCourse}>
-                <div className='row'>
+                <div className='row ps-2'>
                     <div className='col-sm-4'>
                         <p className="text-start">Course Name</p>
                         <input type="text" className="add-course-input w-100"

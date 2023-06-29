@@ -6,6 +6,11 @@ import moment from "moment";
 import '../../styles/leads/addlead.css';
 
 const EditLead = ({ data, id, closeEditLeadModal }) => {
+    const date = new Date();
+
+    console.log(date);
+    date.setDate(date.getDate());
+    
     const [editleaddata, setEditleadData] = useState({
         name: data.name,
         contactdetails: data.contactdetails,
@@ -19,7 +24,8 @@ const EditLead = ({ data, id, closeEditLeadModal }) => {
             commentAt: moment().format('MMMM Do YYYY, h:mm:ss a')
         },
         status: data.status,
-        source: data.source
+        source: data.source, 
+        date: date.toString()
     })
 
     const [newcomment, setNewComment] = useState();

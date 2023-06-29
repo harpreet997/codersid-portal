@@ -12,7 +12,7 @@ const FeedbackResponse = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Feedbacks Response</p>
+                    <p className='ps-2 studentlist-card-text'>Feedbacks Response</p>
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='view-student-details-back-button me-2' onClick={handleBack}>

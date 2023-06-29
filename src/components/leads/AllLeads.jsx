@@ -29,6 +29,25 @@ const AllLeads = () => {
     const [loader, setLoader] = useState(false);
     const navigate = useNavigate();
 
+
+    const allleadsCount = leadList.length;
+    const followupleadsCount = leadList.filter((item) => {
+        return item.status === "Followup"
+    });
+    const coldReachOutleadsCount = leadList.filter((item) => {
+        return item.status === "Cold Reach out"
+    });
+    const convertedleadsCount = leadList.filter((item) => {
+        return item.status === "Converted"
+    });
+    const notInterestedleadsCount = leadList.filter((item) => {
+        return item.status === "Not Interested/ Permanently Lost"
+    });
+    const walkInleadsCount = leadList.filter((item) => {
+        return item.status === "Walk In"
+    });
+
+
     const handleAddLeadModal = () => {
         setAddLeadModal(true)
     };
@@ -73,7 +92,7 @@ const AllLeads = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Leads<img className='leadlist-icon' src={LeadImage} alt="LeadImage" /></p>
+                    <p className='ps-2 studentlist-card-text'>All Leads<img className='leadlist-icon' src={LeadImage} alt="LeadImage" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button me-1'>
@@ -90,6 +109,71 @@ const AllLeads = () => {
                     </Modal>
                 </div>
             </div>
+
+            <div className="d-flex justify-content-between">
+                <div className='ms-2 me-2'>
+                    <p className="fs-5 fw-bold text-center">All Leads</p>
+                    <p className="fs-5 text-center">{allleadsCount}</p>
+                </div>
+                <div className='ms-2 me-2'>
+                    <p className="fs-5 fw-bold text-center">Followup</p>
+                    <p className="fs-5 text-center">{followupleadsCount.length}</p>
+                </div>
+                <div className='ms-2 me-2'>
+                    <p className="fs-5 fw-bold text-center">Cold Reach out</p>
+                    <p className="fs-5 text-center">{coldReachOutleadsCount.length}</p>
+                </div>
+                <div className='ms-2 me-2'>
+                    <p className="fs-5 fw-bold text-center">Converted</p>
+                    <p className="fs-5 text-center">{convertedleadsCount.length}</p>
+                </div>
+                <div className='ms-2 me-2'>
+                    <p className="fs-5 fw-bold text-center">Not interested/Permanently Lost</p>
+                    <p className="fs-5 text-center">{notInterestedleadsCount.length}</p>
+                </div>
+                <div className='ms-2 me-2'>
+                    <p className="fs-5 fw-bold text-center">Walkins</p>
+                    <p className="fs-5 text-center">{walkInleadsCount.length}</p>
+                </div>
+            </div>
+            {/* <div className="d-flex">
+                <div className="leads-details-card">
+                    <div className="card-body">
+                        <p className="fs-5 fw-bold text-center">All Leads</p>
+                        <p className="fs-5 text-center">{allleadsCount}</p>
+                    </div>
+                </div>
+                <div className="leads-details-card">
+                    <div className="card-body">
+                        <p className="fs-5 fw-bold text-center">Followup</p>
+                        <p className="fs-5 text-center">{followupleadsCount.length}</p>
+                    </div>
+                </div>
+                <div className="leads-details-card">
+                    <div className="card-body">
+                        <p className="fs-5 fw-bold text-center">Cold Reach out</p>
+                        <p className="fs-5 text-center">{coldReachOutleadsCount.length}</p>
+                    </div>
+                </div>
+                <div className="leads-details-card">
+                    <div className="card-body">
+                        <p className="fs-5 fw-bold text-center">Converted</p>
+                        <p className="fs-5 text-center">{convertedleadsCount.length}</p>
+                    </div>
+                </div>
+                <div className="leads-details-card">
+                    <div className="card-body">
+                        <p className="fs-5 fw-bold text-center">Not interested</p>
+                        <p className="fs-5 text-center">{notInterestedleadsCount.length}</p>
+                    </div>
+                </div>
+                <div className="leads-details-card">
+                    <div className="card-body">
+                        <p className="fs-5 fw-bold text-center">Walkins</p>
+                        <p className="fs-5 text-center">{walkInleadsCount.length}</p>
+                    </div>
+                </div>
+            </div> */}
 
             <div className='scroll'>
                 <table className="table">
@@ -117,7 +201,7 @@ const AllLeads = () => {
                                     <td>{item.source}</td>
                                     <td>
                                         <div className="d-flex ms-4">
-                                            <Tippy content={<span>{item.comments[item.comments.length-1].comment}</span>}>
+                                            <Tippy content={<span>{item.comments[item.comments.length - 1].comment}</span>}>
                                                 <button className='info-button'>
                                                     <BsInfoCircle className='info-button-icon' />
                                                 </button>

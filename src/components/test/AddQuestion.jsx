@@ -56,7 +56,7 @@ const AddQuestion = ({ CloseTestModal, setQuestionList, questionlist }) => {
         <>
             <Modal.Header closeButton>
                 <Modal.Title className="text-black">
-                    <p className='view-expense-details-modal-heading'>
+                    <p className='ps-2 view-expense-details-modal-heading'>
                         Add Question
                     </p>
                 </Modal.Title>

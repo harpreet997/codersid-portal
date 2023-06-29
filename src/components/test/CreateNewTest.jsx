@@ -140,7 +140,7 @@ const CreateNewTest = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Create Assessment
+                    <p className='ps-2 studentlist-card-text'>Create Assessment
                     <img className='studentlist-icon' src={AssessmentIcon} alt="AssessmentIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
@@ -155,7 +155,7 @@ const CreateNewTest = () => {
             {questionlist.length > 0
                 ?
                 <form onSubmit={AddTest}>
-                    <div className='row'>
+                    <div className='row ps-2'>
                         <div className='col-sm-4'>
                             <p className="text-start">Assessment Name</p>
                             <input type="text" className="add-batch-input w-100"

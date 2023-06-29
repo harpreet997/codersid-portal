@@ -65,9 +65,9 @@ const UpdateExpense = () => {
 
     return (
         <div className='card'>
-            <p className='make-payment-title'>Update Expense</p>
+            <p className='ps-2 add-user-card-text'>Update Expense</p>
             <form onSubmit={AddExpense}>
-                <div className="row">
+                <div className="row ps-2">
                     <div className="col-sm-6">
                         <p className='make-payment-student-name'>Expense Category</p>
                         <select className="student-name-input-field form-select" name="categoryName" required

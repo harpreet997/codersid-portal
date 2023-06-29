@@ -70,7 +70,7 @@ const DirectWalkIn = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Walk-Ins
+                    <p className='ps-2 studentlist-card-text'>Walk-Ins
                         <img className='leadlist-icon' src={LeadImage} alt="LeadImage" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
@@ -91,6 +91,7 @@ const DirectWalkIn = () => {
                             <th scope="col">City</th>
                             <th scope="col">Status</th>
                             <th scope="col">Source</th>
+                            <th scope="col">Walkin Date</th>
                             <th scope="col">Action</th>
                         </tr>
 
@@ -105,6 +106,7 @@ const DirectWalkIn = () => {
                                         <td>{item.city}</td>
                                         <td>{item.status}</td>
                                         <td>{item.source}</td>
+                                        <td>{item.date.substring(0, 15)}</td>
                                         <td>
                                             <div className="d-flex">
                                                 <Tippy content={<span>{item.comments[item.comments.length-1].comment}</span>}>

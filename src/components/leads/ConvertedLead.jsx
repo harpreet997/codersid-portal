@@ -69,7 +69,7 @@ const ConvertedLead = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Converted Leads
+                    <p className='ps-2 studentlist-card-text'>Converted Leads
                     <img className='leadlist-icon' src={LeadImage} alt="LeadImage" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
@@ -90,6 +90,7 @@ const ConvertedLead = () => {
                             <th scope="col">City</th>
                             <th scope="col">Status</th>
                             <th scope="col">Source</th>
+                            <th scope="col">Converted Date</th>
                             <th scope="col">Action</th>
                         </tr>
 
@@ -105,6 +106,7 @@ const ConvertedLead = () => {
                                     <td>{item.city}</td>
                                     <td>{item.status}</td>
                                     <td>{item.source}</td>
+                                    <td>{item.date.substring(0, 15)}</td>
                                     <td>
                                         <div className="d-flex ms-4">
                                             <Tippy content={<span>{item.comments[item.comments.length-1].comment}</span>}>

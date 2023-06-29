@@ -79,12 +79,12 @@ const AddExpenseCategory = () => {
     return (
         <div className="card">
             <div className='d-flex'>
-                <p className='expense-card-text'>Add Expense Category</p>
+                <p className='ps-2 expense-card-text'>Add Expense Category</p>
                 <img className='expense-card-icon' src={ExpenseLogo} alt="ExpenseLogo" />
             </div>
 
             <form onSubmit={AddCategory}>
-                <div className='d-flex'>
+                <div className='d-flex ps-2'>
                     <div>
                         <p className="text-start">Category Name</p>
                         <input type="text" className="add-expense-input"

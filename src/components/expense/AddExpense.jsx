@@ -13,8 +13,12 @@ const AddExpense = () => {
         vendor: "",
         Amount: "",
         invoiceNumber: "",
+        PaidBy: ""
     })
     const navigate = useNavigate();
+
+    const role = localStorage.getItem('role');
+    
 
     useEffect(() => {
         getAllCategories(headers)
@@ -39,29 +43,62 @@ const AddExpense = () => {
 
     const AddExpense = (event) => {
         event.preventDefault();
-        addExpense(expensedata)
-            .then((response) => {
-                toast.success(response.data.msg, {
-                    position: "top-center",
-                    autoClose: 3000
-                })
-                navigate('/manage-expense')
-                window.location.reload(false);
+
+        if (role === 'admin') {
+            const payload = {
+                ...expensedata,
+                PaidBy: role
             }
-            )
-            .catch((error) => {
-                toast.error(error.response.data.msg, {
-                    position: "top-center",
-                    autoClose: 2000
+            addExpense(payload)
+                .then((response) => {
+                    toast.success(response.data.msg, {
+                        position: "top-center",
+                        autoClose: 3000
+                    })
+                    navigate('/manage-expense')
+                    window.location.reload(false);
+                }
+                )
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
                 })
-            })
+        }
+        else {
+            const data = JSON.parse(localStorage.getItem('user'));
+            console.log(data[0].name);
+            const payload = {
+                ...expensedata,
+                PaidBy: data[0].name
+            }
+
+            console.log(payload)
+            addExpense(payload)
+                .then((response) => {
+                    toast.success(response.data.msg, {
+                        position: "top-center",
+                        autoClose: 3000
+                    })
+                    navigate('/manage-expense')
+                    window.location.reload(false);
+                }
+                )
+                .catch((error) => {
+                    toast.error(error.response.data.msg, {
+                        position: "top-center",
+                        autoClose: 2000
+                    })
+                })
+        }
     }
 
     return (
         <div className='card'>
-            <p className='make-payment-title'>Add Expense</p>
+            <p className='ps-2 add-user-card-text'>Add Expense</p>
             <form onSubmit={AddExpense}>
-                <div className="row">
+                <div className="row ps-2">
                     <div className="col-sm-6">
                         <p className='make-payment-student-name'>Expense Category</p>
                         <select className="student-name-input-field form-select" name="categoryName" required

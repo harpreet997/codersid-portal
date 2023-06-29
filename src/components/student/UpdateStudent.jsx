@@ -245,10 +245,10 @@ const UpdateStudent = () => {
 
     return (
         <div className="card">
-            <p className='add-user-card-text'>CodersID Students</p>
+            <p className='ps-2 add-user-card-text'>CodersID Students</p>
 
             <form onSubmit={AddStudent}>
-                <div className='mt-3 row'>
+                <div className='mt-3 row ps-2'>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Student Name</p>
                         <input type="text" className="input-box-width w-100" id="studentname" name="studentname"

@@ -108,13 +108,13 @@ const PaymentRecord = () => {
     return (
         <div className="card">
             <div className='d-flex justify-content-between'>
-                <p className='payment-records-card-text'>Payment Records
+                <p className='ps-2 payment-records-card-text'>Payment Records
                     <img className='payment-records-icon' src={PaymentRecordLogo} alt="PaymentRecordLogo" />
                 </p>
                 <button className='add-student-button'><CSVLink headers={headers1} data={studentlist} filename='Payment_Records.csv'
                         className='add-student-button-text text-decoration-none'>Export Data</CSVLink></button>
             </div>
-            <div className="row mt-4">
+            <div className="row mt-2 ps-2">
                 <div className="col-sm-3">
                     <p className="text-start select-field-label">Select Batch</p>
                     <select className="payment-records-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>

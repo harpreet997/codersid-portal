@@ -67,7 +67,7 @@ const AddAssessmentQuestion = () => {
 
     return (
         <div className='card'>
-            <p className='studentlist-card-text'>Add Question</p>
+            <p className='ps-2 studentlist-card-text'>Add Question</p>
             <form onSubmit={handleSubmit}>
                 <div className="row">
 

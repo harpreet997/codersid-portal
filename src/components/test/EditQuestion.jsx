@@ -43,7 +43,7 @@ const EditQuestion = ({ handleClose, data, questionlist }) => {
         <>
             <Modal.Header closeButton>
                 <Modal.Title className="text-black">
-                    <p className='view-expense-details-modal-heading'>
+                    <p className='ps-2 view-expense-details-modal-heading'>
                         Edit Question
                     </p>
                 </Modal.Title>

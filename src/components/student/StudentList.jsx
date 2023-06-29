@@ -104,7 +104,7 @@ const StudentList = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" /></p>
+                    <p className='ps-2 studentlist-card-text'>CodersID Student<img className='studentlist-icon' src={StudentIcon} alt="StudentIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button me-1'>
@@ -117,7 +117,7 @@ const StudentList = () => {
                 </div>
             </div>
 
-            <div className="row mt-3">
+            <div className="row mt-3 ps-2">
                 <div className="col-sm-6">
                     <p className="text-start select-field-label">Select Batch</p>
                     <select className="student-list-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>

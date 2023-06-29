@@ -81,10 +81,10 @@ const Payment = () => {
     return (
         <div className="card">
             <div className='d-flex'>
-                <p className='payfee-card-text'>Pay Fee</p>
+                <p className='ps-2 payfee-card-text'>Pay Fee</p>
                 <img className='payfee-icon' src={PayFee} alt="PayFee" />
             </div>
-            <div className="row">
+            <div className="row ps-2">
                 <div className="col-sm-6">
                     <p className="text-start select-field-label">Select Batch</p>
                     <select className="pay-fee-input-width mb-2 w-100" name="batchName" id="batchName" onChange={handleBatchSelect}>
@@ -112,7 +112,7 @@ const Payment = () => {
                             <th scope="col">Name</th>
                             <th scope="col">Batch Name</th>
                             <th scope="col">Course</th>
-                            <th scope="col">Email ID</th>
+                            {/* <th scope="col">Email ID</th> */}
                             <th scope="col">Contact Details</th>
                             <th scope="col">Admission Date</th>
                             <th scope="col">Action</th>
@@ -135,7 +135,7 @@ const Payment = () => {
                                     <td>{item.studentname}</td>
                                     <td>{item.batchname}</td>
                                     <td>{item.course}</td>
-                                    <td>{item.emailid}</td>
+                                    {/* <td>{item.emailid}</td> */}
                                     <td>{item.contactdetails}</td>
                                     <td>{item.createdAt.substring(0, 10)}</td>
                                     <td><button className='payfee-payment-button' onClick={() => {

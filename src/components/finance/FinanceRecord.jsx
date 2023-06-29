@@ -262,7 +262,7 @@ const FinanceRecord = () => {
 
     return (
         <div className="card">
-            <div className="row">
+            <div className="row ps-2">
                 <div className="col-sm-5">
                     <p className="text-start select-field-label">Select From Date</p>
                     <input type="date" className="payment-records-input-width w-100" id="fromDate" name="fromDate"

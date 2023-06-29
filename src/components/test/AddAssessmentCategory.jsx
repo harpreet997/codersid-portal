@@ -79,12 +79,12 @@ const AddAssessmentCategory = () => {
     return (
         <div className="card">
             <div className='d-flex'>
-                <p className='expense-card-text'>Add Assessment Category</p>
+                <p className='ps-2 expense-card-text'>Add Assessment Category</p>
                 <img className='expense-card-icon' src={ExpenseLogo} alt="ExpenseLogo" />
             </div>
 
             <form onSubmit={handleAddAssessmentCategory}>
-                <div className='d-flex'>
+                <div className='ps-2 d-flex'>
                     <div>
                         <p className="text-start">Assessment Category Name</p>
                         <input type="text" className="add-expense-input"

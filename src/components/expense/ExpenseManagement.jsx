@@ -57,7 +57,7 @@ const ExpenseManagement = () => {
     return (
         <div className='card'>
             <div className='d-flex justify-content-between'>
-                <p className='expense-management-text'>Expense Management
+                <p className='ps-2 expense-management-text'>Expense Management
                     <img className='expense-manage-icon' src={ExpenseManageIcon} alt="ExpenseManageIcon" /></p>
                 <button className='add-expense-button ml-auto' onClick={handleAddExpense}>
                     <p className='add-expense-button-text'>Add Expense + </p>
@@ -73,6 +73,8 @@ const ExpenseManagement = () => {
                             <th scope="col">Vendor</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Invoice Number</th>
+                            <th scope="col">Expense Date</th>
+                            <th scope="col">Paid By</th>
                             <th scope="col">Action</th>
                         </tr>
 
@@ -86,6 +88,8 @@ const ExpenseManagement = () => {
                                     <td>{item.vendor}</td>
                                     <td>{item.Amount}</td>
                                     <td>{item.invoiceNumber}</td>
+                                    <td>{item.createdAt.substring(0,10)}</td>
+                                    <td>{item.PaidBy}</td>
                                     <td><button className='details-button' onClick={() => {
                                         handleModal(item._id)
                                     }}>

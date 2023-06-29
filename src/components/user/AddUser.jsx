@@ -65,10 +65,10 @@ const AddUser = () => {
 
     return (
         <div className="card">
-            <p className='add-user-card-text'>Add User</p>
+            <p className='ps-2 add-user-card-text'>Add User</p>
 
             <form onSubmit={AddUser}>
-                <div className='mt-5 row'>
+                <div className='mt-2 ps-2 row'>
                     <div className="col-sm-4 mb-3">
                         <p className="text-start input-field-label">Name</p>
                         <input type="text" className="input-box-width w-100" id="name" name="name"
@@ -90,7 +90,7 @@ const AddUser = () => {
                 {permissionlist.map((item) => {
                     return (
                         <>
-                            <input type="checkbox" id="permission" name="permission" value={item} onChange={handlePermission}/>
+                            <input className='ms-2' type="checkbox" id="permission" name="permission" value={item} onChange={handlePermission}/>
                             <label className='ms-2 me-4 text-start fs-6' for="permission">{item}</label>
                         </>
                     )

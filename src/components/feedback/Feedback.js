@@ -142,10 +142,18 @@ const Feedback = () => {
     const SubmitFeeback = (event) => {
         event.preventDefault();
 
+        console.log(questionslist)
 
-        const data = questionslist.hasOwnProperty('rating');
-        console.log(data);
-        if (isRating === data) {
+        for (let i = 0; i < questionslist.length; i++) {
+            if (questionslist[i].hasOwnProperty('rating') === false) {
+                console.log(questionslist[i].hasOwnProperty('rating'))
+                console.log("Set rating", isRating);
+                setIsRating(questionslist[i].hasOwnProperty('rating'));
+                
+            }
+        }
+        
+        if (isRating === false ) {
             toast.error("Please give rating", {
                 position: "top-center",
                 autoClose: 2000
@@ -153,7 +161,6 @@ const Feedback = () => {
         }
 
         else {
-
             const studentfeedbackPayload = {
                 studentname: studentname,
                 batchname: batchname,

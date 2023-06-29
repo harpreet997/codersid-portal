@@ -157,7 +157,7 @@ const NewCreateFeedback = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Create Feedback Form
+                    <p className='ps-2 studentlist-card-text'>Create Feedback Form
                         <img className='studentlist-icon' src={FeedbackIcon} alt="FeedbackIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
@@ -191,7 +191,7 @@ const NewCreateFeedback = () => {
             {questionlist.length > 0
                 ?
                 <form onSubmit={AddFeedback}>
-                    <div className='row'>
+                    <div className='row ps-2'>
                         <div className='col-sm-4'>
                             <p className="text-start">Feedback Name</p>
                             <input type="text" className="add-batch-input w-100"

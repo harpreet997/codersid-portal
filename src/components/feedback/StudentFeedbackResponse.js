@@ -21,7 +21,7 @@ const StudentFeedbackResponse = () => {
         <div className="card">
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='studentlist-card-text'>Student Feedbacks
+                    <p className='ps-2 studentlist-card-text'>Student Feedbacks
                     <img className='studentlist-icon' src={FeedbackIcon} alt="FeedbackIcon" /></p>
                 </div>
                 <div className="d-flex justify-content-end">

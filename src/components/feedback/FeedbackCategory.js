@@ -82,12 +82,12 @@ const FeedbackCategory = () => {
     return (
         <div className="card">
             <div className='d-flex'>
-                <p className='expense-card-text'>Add Feedback Category</p>
+                <p className='ps-2 expense-card-text'>Add Feedback Category</p>
                 <img className='expense-card-icon' src={ExpenseLogo} alt="ExpenseLogo" />
             </div>
 
             <form onSubmit={handleAddAssessmentCategory}>
-                <div className='d-flex'>
+                <div className='d-flex ps-2'>
                     <div>
                         <p className="text-start">Feedback Category Name</p>
                         <input type="text" className="add-expense-input"

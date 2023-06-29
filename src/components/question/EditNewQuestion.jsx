@@ -50,9 +50,9 @@ const EditNewQuestion = () => {
 
     return (
         <div className='card'>
-            <p className='studentlist-card-text'>Edit Question</p>
+            <p className='ps-2 studentlist-card-text'>Edit Question</p>
             <form onSubmit={handleSubmit}>
-                <div className="row">
+                <div className="row ps-2">
 
                     <div className="col-sm-6">
                         <p className='make-payment-email-address'>Question</p>

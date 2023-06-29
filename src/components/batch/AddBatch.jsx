@@ -80,12 +80,12 @@ const AddBatch = () => {
     return (
         <div className="card">
             <div className='d-flex'>
-                <p className='add-batch-card-text'>Add Batch</p>
+                <p className='ps-2 add-batch-card-text'>Add Batch</p>
                 <img className='add-batch-icon' src={AddBatchIcon} alt="AddBatchIcon" />
             </div>
 
             <form onSubmit={AddBatch}>
-                <div className='d-flex'>
+                <div className='d-flex ps-2'>
                     <div>
                         <p className="text-start">Batch Name</p>
                         <input type="text" className="add-batch-input"

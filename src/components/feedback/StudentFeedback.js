@@ -88,11 +88,11 @@ const StudentFeedback = () => {
         <div className="card">
 
             <div className="d-flex justify-content-start">
-                <p className='studentlist-card-text'>All Feedback
+                <p className='ps-2 studentlist-card-text'>All Feedback
                     <img className='studentlist-icon' src={FeedbackIcon} alt="FeedbackIcon" /></p>
             </div>
 
-            <div className="row mt-3">
+            <div className="row mt-3 ps-2">
                 <div className="col-sm-6">
                     <p className="text-start select-field-label">Select Feedback Category</p>
                     <select className="student-list-input-width mb-2 w-100" name="category" id="category" onChange={handleCategorySelect}>

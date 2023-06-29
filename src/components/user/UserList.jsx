@@ -118,8 +118,8 @@ const AddUser = () => {
             </div> */}
             <div className="d-flex align-items-start justify-content-between">
                 <div className="d-flex justify-content-start">
-                    <p className='add-user-card-text'>Users List
-                    <img className='add-user-icon' src={AddUserLogo} alt="AddUserLogo" /></p>
+                    <p className='ps-2 add-user-card-text'>Users List
+                        <img className='add-user-icon' src={AddUserLogo} alt="AddUserLogo" /></p>
                 </div>
                 <div className="d-flex justify-content-end">
                     <button className='add-student-button' onClick={handleAddUser}>
@@ -128,48 +128,13 @@ const AddUser = () => {
                 </div>
             </div>
 
-            {/* <form onSubmit={AddUser}>
-                <div className="row mb-2">
-                    <div className="col-sm-4">
-                        <p className="text-start">Name</p>
-                        <input type="text" className="add-user-input w-100" id="name" name="name"
-
-                            onChange={handleChange} required />
-                    </div>
-                    <div className="col-sm-4">
-                        <p className="text-start">Email Address</p>
-                        <input type="email" className="add-user-input w-100" id="email" name="email"
-
-                            onChange={handleChange} required />
-                    </div>
-                    <div className="col-sm-4">
-                        <p className="text-start">Password</p>
-                        <input type="password" className="add-user-input w-100" id="password" name="password"
-
-                            onChange={handleChange} required />
-                    </div>
-                </div>
-                {permissionlist.map((item) => {
-                    return (
-                        <>
-                            <input type="checkbox" id="permission" name="permission" value={item} onChange={handlePermission} />
-                            <label className='ms-2 me-4 text-start fs-6' for="permission">{item}</label>
-                        </>
-                    )
-                })}
-                <button className='add-user-button' type='submit'>
-                    <p className='add-user-button-text'>Submit
-                    </p></button>
-
-            </form> */}
-            <div className="mt-3 scroll">
+            <div className="mt-2 scroll">
                 <table className="table">
                     <thead className='text-center'>
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Password</th>
-                            {/* <th scope="col">Permission</th> */}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -180,7 +145,6 @@ const AddUser = () => {
                                     <td>{item.name}</td>
                                     <td>{item.email}</td>
                                     <td>{item.password}</td>
-                                    {/* <td>{item.permission}</td> */}
                                     <td>
                                         <button className='delete-button' onClick={() => DeleteUser(item._id)}>
                                             <p className='delete-button-text'>Delete</p>
