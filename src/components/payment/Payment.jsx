@@ -7,7 +7,7 @@ import { BallTriangle } from 'react-loader-spinner';
 import PayFee from '../../assets/PayFee.png';
 import '../../styles/payfee/payfee.css';
 import ModalMakePayment from './ModalMakePayment';
-
+import Tippy from '@tippyjs/react';
 
 const Payment = () => {
     const [paymentlist, setPaymentList] = useState([]);
@@ -28,24 +28,24 @@ const Payment = () => {
     };
 
     const handleClose = () => setModal(false);
-    
+
     useEffect(() => {
         getAllStudents(headers)
-        .then((response) => {
-            const paymentList = response.data.Students.filter((item) => {
-                return (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") ||
-                    (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "") ||
-                    (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ||
-                    (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "NA")
-        
+            .then((response) => {
+                const paymentList = response.data.Students.filter((item) => {
+                    return (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid") ||
+                        (item.BalanceAmount === false && item.thirdInstallment.thirdInstallmentPaymentStatus === "") ||
+                        (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "Not Paid") ||
+                        (item.BalanceAmount === true && item.fourthInstallment.fourthInstallmentPaymentStatus === "NA")
+
+                })
+                setPaymentList(paymentList)
+                setAllPaymentList(paymentList)
             })
-            setPaymentList(paymentList)
-            setAllPaymentList(paymentList)
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    
+            .catch((error) => {
+                console.log(error);
+            })
+
         getAllBatches(headers)
             .then((response) => {
                 setBatchList(response.data.Batches);
@@ -112,7 +112,7 @@ const Payment = () => {
                             <th scope="col">Name</th>
                             <th scope="col">Batch Name</th>
                             <th scope="col">Course</th>
-                            {/* <th scope="col">Email ID</th> */}
+                            <th scope="col">Amount Due</th>
                             <th scope="col">Contact Details</th>
                             <th scope="col">Admission Date</th>
                             <th scope="col">Action</th>
@@ -135,7 +135,23 @@ const Payment = () => {
                                     <td>{item.studentname}</td>
                                     <td>{item.batchname}</td>
                                     <td>{item.course}</td>
-                                    {/* <td>{item.emailid}</td> */}
+                                    {item.registration.registrationPaymentStatus === "Not Paid" ?
+                                       <Tippy content={<span>{"Registration Fees"}</span>}>
+                                       <td>{item.registration.registrationfees}</td></Tippy>  : null}
+                                    {item.registration.registrationPaymentStatus === "Paid" &&
+                                        item.secondInstallment.secondInstallmentPaymentStatus === "Not Paid" &&
+                                        item.registration.registrationPaymentStatus === "Paid" ?
+                                        <Tippy content={<span>{"First Installment Fees"}</span>}>
+                                        <td>{item.secondInstallment.secondInstallmentfees}</td></Tippy> : null}
+                                    {item.registration.registrationPaymentStatus === "Paid" &&
+                                        item.secondInstallment.secondInstallmentPaymentStatus === "Paid" &&
+                                        item.thirdInstallment.thirdInstallmentPaymentStatus === "Not Paid"
+                                        ? 
+                                        <Tippy content={<span>{"Second Installment Fees"}</span>}>
+                                            <td>{item.thirdInstallment.thirdInstallmentfees}</td></Tippy> : null}
+                                    {item.BalanceAmount ? 
+                                   <Tippy content={<span>{"Third Installment Fees"}</span>}> 
+                                   <td>{item.fourthInstallment.fourthInstallmentfees}</td></Tippy> : null}
                                     <td>{item.contactdetails}</td>
                                     <td>{item.createdAt.substring(0, 10)}</td>
                                     <td><button className='payfee-payment-button' onClick={() => {
