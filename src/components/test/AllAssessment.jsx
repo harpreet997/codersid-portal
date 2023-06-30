@@ -143,7 +143,7 @@ const AllAssessment = () => {
     return (
         <div className="card">
             <div className="d-flex">
-                <div className="assessment-name-card" style={alltests ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
+                <div className="" style={alltests ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
                     onClick={() => {
                         setAllTests(true);
                         setReactTest(false);
@@ -156,7 +156,7 @@ const AllAssessment = () => {
                         <div className='text-center'><img src={MernLogo} alt="MernLogo" style={{ width: 70, borderRadius: "50%" }} /></div>
                     </div>
                 </div>
-                <div className="assessment-name-card" style={reacttest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
+                <div className="" style={reacttest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
                     onClick={() => {
                         setAllTests(false);
                         setReactTest(true);
@@ -169,7 +169,7 @@ const AllAssessment = () => {
                         <div className='text-center'><img src={ReactLogo} alt="ReactLogo" style={{ width: 70, borderRadius: "50%" }} /></div>
                     </div>
                 </div>
-                <div className="assessment-name-card" style={nodetest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
+                <div className="" style={nodetest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
                     onClick={() => {
                         setAllTests(false);
                         setReactTest(false);
@@ -182,7 +182,7 @@ const AllAssessment = () => {
                         <div className='text-center'><img src={NodeJSLogo} alt="NodeJSLogo" style={{ width: 70, borderRadius: "50%" }} /></div>
                     </div>
                 </div>
-                <div className="assessment-name-card" style={javascripttest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
+                <div className="" style={javascripttest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
                     onClick={() => {
                         setAllTests(false);
                         setReactTest(false);
@@ -195,7 +195,7 @@ const AllAssessment = () => {
                         <div className='text-center'><img src={JsLogo} alt="JsLogo" style={{ width: 70, borderRadius: "50%" }} /></div>
                     </div>
                 </div>
-                <div className="assessment-name-card" style={merntest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
+                <div className="" style={merntest ? { backgroundColor: "#00B8C9", cursor: 'pointer' } : { cursor: 'pointer' }}
                     onClick={() => {
                         setAllTests(false);
                         setReactTest(false);
