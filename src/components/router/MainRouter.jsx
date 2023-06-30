@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Dashboard from '../dashboard/Dashboard';
 import AddStudent from '../student/AddStudent';
@@ -55,8 +56,58 @@ import FeedbackResponse from '../feedback/FeedbackResponse';
 import NewCreateFeedback from '../feedback/NewCreateFeedback';
 import EditAssessmentQuestion from '../question/EditAssessmentQuestion';
 import AddAssessmentQuestion from '../question/AddAssessmentQuestion';
+import { useIdleTimer } from 'react-idle-timer';
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const MainRouter = () => {
+    const [state, setState] = useState('Active')
+    const [remaining, setRemaining] = useState(0)
+    const [count, setCount] = useState(0)
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRemaining(Math.ceil(getRemainingTime() / 1000))
+        }, 500)
+
+        return () => {
+            clearInterval(interval)
+        }
+    })
+
+    const onActive = () => {
+        setState('Active')
+    }
+
+    const onAction = () => {
+        setCount(count + 1)
+    }
+
+    const onIdle = () => {
+        toast.success("Your session has been expired", {
+            position: "top-center",
+            autoClose: 1000
+        })
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('role');
+        localStorage.removeItem('walkin');
+        localStorage.removeItem('item');
+        localStorage.removeItem('questionlist');
+        localStorage.removeItem('testRecords');
+        localStorage.removeItem('response');
+        navigate('/');
+    }
+
+    const { getRemainingTime } = useIdleTimer({
+        onIdle,
+        onActive,
+        onAction,
+        timeout: 10_0000 * 5,
+        throttle: 500
+    })
+
     return (
         <>
             <Routes>
@@ -79,7 +130,7 @@ const MainRouter = () => {
                     <Route path='/add-expense' element={<UpdatedAddExpense />} />
                     <Route path='/update-expense' element={<UpdatedEditExpense />} />
                     <Route path='/expense-details' element={<UpdatedExpenseDetails />} /> */}
-                    <Route path='/payment' element={<Payment/>} />
+                    <Route path='/payment' element={<Payment />} />
                     <Route path='/payment-receipt' element={<MainPaymentReceipt />} />
                     <Route path='/payment-records' element={<PaymentRecord />} />
                     <Route path='/manage-students' element={<Dashboard />} />
@@ -97,27 +148,27 @@ const MainRouter = () => {
                     <Route path='/add-assessment-question' element={<AddAssessmentQuestion />} />
                     <Route path='/edit-question' element={<EditNewQuestion />} />
                     <Route path='/edit-assessment-question' element={<EditAssessmentQuestion />} />
-                    <Route path='/all-tests' element={<AllAssessment/>}/>
+                    <Route path='/all-tests' element={<AllAssessment />} />
                     {/* <Route path='/all-tests' element={<Assessment/>}/> */}
-                    <Route path='/performance' element={<StudentPerformance />}/>
-                    <Route path='/test-records' element={<StudentTestRecord />}/>
-                    <Route path='/student-response' element={<StudentResponse />}/>
-                    <Route path='/add-assessment-category' element={<AddAssessmentCategory />}/>
-                    <Route path='/question-details' element={<QuestionDetails />}/>
-                    <Route path='/score-card' element={<ScoreCard />}/>
+                    <Route path='/performance' element={<StudentPerformance />} />
+                    <Route path='/test-records' element={<StudentTestRecord />} />
+                    <Route path='/student-response' element={<StudentResponse />} />
+                    <Route path='/add-assessment-category' element={<AddAssessmentCategory />} />
+                    <Route path='/question-details' element={<QuestionDetails />} />
+                    <Route path='/score-card' element={<ScoreCard />} />
                     {/* <Route path='/create-feedback' element={<CreateFeedback />}/> */}
-                    <Route path='/create-feedback' element={<NewCreateFeedback />}/>
-                    <Route path='/all-feedback' element={<AllFeddback />}/>
-                    <Route path='/feedback-category' element={<FeedbackCategory />}/>
-                    <Route path='/feedback-question-details' element={<QuestionDetail />}/>
-                    <Route path='/feedbacks' element={<StudentFeedback />}/>
-                    <Route path='/student-feedbacks' element={<StudentFeedbackResponse />}/>
-                    <Route path='/feedback-response' element={<FeedbackResponse />}/>
+                    <Route path='/create-feedback' element={<NewCreateFeedback />} />
+                    <Route path='/all-feedback' element={<AllFeddback />} />
+                    <Route path='/feedback-category' element={<FeedbackCategory />} />
+                    <Route path='/feedback-question-details' element={<QuestionDetail />} />
+                    <Route path='/feedbacks' element={<StudentFeedback />} />
+                    <Route path='/student-feedbacks' element={<StudentFeedbackResponse />} />
+                    <Route path='/feedback-response' element={<FeedbackResponse />} />
                 </Route>
                 <Route path="/" element={<SignIn />} />
-                <Route path='/assessment-list' element={<AssessmentList />}/>
-                <Route path='/assessment-test/:id' element={<LiveTest />}/>
-                <Route path='/feedback-link/:id' element={<Feedback />}/>
+                <Route path='/assessment-list' element={<AssessmentList />} />
+                <Route path='/assessment-test/:id' element={<LiveTest />} />
+                <Route path='/feedback-link/:id' element={<Feedback />} />
             </Routes>
         </>
     )
