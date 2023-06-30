@@ -74,7 +74,7 @@ const ExpenseManagement = () => {
                             <th scope="col">Amount</th>
                             <th scope="col">Invoice Number</th>
                             <th scope="col">Expense Date</th>
-                            <th scope="col">Paid By</th>
+                            <th scope="col">Recorded By</th>
                             <th scope="col">Action</th>
                         </tr>
 
